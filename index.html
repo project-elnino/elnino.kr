@@ -22,6 +22,36 @@
     </style>
 </head>
 <body>
-    <iframe src="https://project-elnino-sub.hf.space" allowfullscreen></iframe>
+    <iframe id="mainFrame" src="https://project-elnino-sub.hf.space" allowfullscreen></iframe>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 기본 URL
+            const baseUrl = "https://project-elnino-sub.hf.space";
+            
+            // 현재 URL에서 경로와 쿼리 파라미터 가져오기
+            const currentPath = window.location.pathname;
+            const currentSearch = window.location.search;
+            const currentHash = window.location.hash;
+            
+            // 메인 도메인(elnino.kr)의 루트 경로가 아닌 경우에만 처리
+            if (currentPath !== "/" || currentSearch || currentHash) {
+                // iframe의 src 업데이트
+                const iframe = document.getElementById('mainFrame');
+                iframe.src = baseUrl + currentPath + currentSearch + currentHash;
+            }
+            
+            // iframe 내부 링크 클릭시 부모 URL도 업데이트하는 기능 추가
+            window.addEventListener('message', function(event) {
+                if (event.origin === 'https://project-elnino-sub.hf.space') {
+                    // iframe에서 전달된 경로 정보가 있다면 브라우저 URL 업데이트
+                    if (event.data && event.data.path) {
+                        const newPath = event.data.path;
+                        history.pushState(null, '', newPath);
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
