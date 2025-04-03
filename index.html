@@ -22,11 +22,12 @@
     </style>
 </head>
 <body>
-    <iframe id="mainFrame" allowfullscreen></iframe>
+    <!-- 기본 src 값을 설정하여 초기 로드 보장 -->
+    <iframe id="mainFrame" src="https://project-elnino-sub.hf.space" allowfullscreen></iframe>
 
     <script>
-        // 페이지 로드 시 iframe src 설정
-        function updateIframeSrc() {
+        // 페이지 완전히 로드된 후 실행
+        window.onload = function() {
             // 기본 URL
             const baseUrl = "https://project-elnino-sub.hf.space";
             
@@ -35,16 +36,18 @@
             const currentSearch = window.location.search;
             const currentHash = window.location.hash;
             
-            // iframe src 설정
-            const iframe = document.getElementById('mainFrame');
-            iframe.src = baseUrl + currentPath + currentSearch + currentHash;
-        }
-        
-        // 페이지 로드시 실행
-        document.addEventListener('DOMContentLoaded', updateIframeSrc);
-        
-        // URL 변경 감지 (브라우저 히스토리 변경시)
-        window.addEventListener('popstate', updateIframeSrc);
+            // 기본 경로(루트)가 아닌 경우에만 iframe src 업데이트
+            if (currentPath !== "/" && currentPath !== "") {
+                const iframe = document.getElementById('mainFrame');
+                // console.log로 확인용
+                console.log("새 iframe src:", baseUrl + currentPath + currentSearch + currentHash);
+                iframe.src = baseUrl + currentPath + currentSearch + currentHash;
+            } else if (currentSearch || currentHash) {
+                // 경로는 없지만 쿼리나 해시가 있는 경우
+                const iframe = document.getElementById('mainFrame');
+                iframe.src = baseUrl + currentSearch + currentHash;
+            }
+        };
     </script>
 </body>
 </html>
