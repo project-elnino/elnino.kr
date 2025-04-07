@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   basePath: "/elnino.kr",
+  assetPrefix: ".",
 };
 
 export default nextConfig;
