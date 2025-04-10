@@ -22,10 +22,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const pathname = typeof window !== "undefined" ? window.location.pathname : "";
-
-  // 단순히 "/"일 때만 dark variant 사용
-  const topbarVariant = pathname === "/" ? "dark" : "light";
   return (
     <html lang="en">
       <body
