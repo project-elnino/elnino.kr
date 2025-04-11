@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import clsx from "clsx";
+import { useRouter } from "next/navigation";
 
 interface TopbarProps {
   variant?: "light" | "dark";
@@ -8,6 +9,12 @@ interface TopbarProps {
 
 export default function Topbar({ variant = "light" }: TopbarProps) {
   const isDark = variant === "dark";
+  const router = useRouter();
+
+  const handleApplyClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    router.push("/proposal#apply");
+  };
 
   return (
     <header
@@ -31,9 +38,10 @@ export default function Topbar({ variant = "light" }: TopbarProps) {
             </Link>
           </li>
           <li>
-            <Link href="/proposal?apply=true" className="hover:text-blue-500 transition-colors">
+            <a href="/proposal#apply" onClick={handleApplyClick}>
               이용 신청
-            </Link>
+            </a>
+
           </li>
         </ul>
       </nav>

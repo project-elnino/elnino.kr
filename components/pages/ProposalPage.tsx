@@ -12,6 +12,14 @@ export default function ProposalPage({ openOnLoad }: { openOnLoad?: boolean }) {
   const router = useRouter();
 
   useEffect(() => {
+    // location.hash는 정적 export에서도 사용 가능
+    console.log(window.location.hash);
+    if (typeof window !== "undefined" && window.location.hash === "#apply") {
+      setOpen(true);
+    }
+  }, []);
+
+  useEffect(() => {
     if (openOnLoad) {
       setOpen(true);
     }
