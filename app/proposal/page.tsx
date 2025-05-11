@@ -1,7 +1,7 @@
 // app/proposal/page.tsx
 
-import ProposalPage from "@/components/pages/ProposalPage";
+import ProposalSection from "@/components/ProposalSection";
 
 export default function Page() {
-  return <ProposalPage openOnLoad={false} />;
+  return <ProposalSection />;
 }
