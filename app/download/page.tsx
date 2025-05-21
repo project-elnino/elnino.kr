@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { ArrowDownIcon, CheckCircle, ArrowRightIcon, LaptopIcon, AppleIcon } from 'lucide-react'
+import { ArrowDownIcon, CheckCircle, LaptopIcon, AppleIcon } from 'lucide-react'
 
 export default function DownloadPage() {
   return (
@@ -70,17 +70,17 @@ export default function DownloadPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <span className="inline-block px-4 py-1 rounded-full bg-blue-100 text-blue-700 font-medium text-sm mb-4">최신 버전 v2.5.3</span>
+            <span className="inline-block px-4 py-1 rounded-full bg-blue-100 text-blue-700 font-medium text-sm mb-4">최신 버전 v0.0.1</span>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">지금 바로 다운로드하세요</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-10">
-              모든 디바이스에서 사용 가능한 Elnino 실시간 번역 클라이언트를 설치하고 빠르게 시작하세요.
+              Windows에서 사용 가능한 Knoc 클라이언트를 설치하고 빠르게 시작하세요.
             </p>
           </motion.div>
 
           {/* 플랫폼 선택 탭 */}
-          <div className="max-w-4xl mx-auto mb-20">
+          <div className="max-w-4xl mx-auto mb-20 justify-center">
             <Tabs defaultValue="windows" className="w-full">
-              <TabsList className="grid grid-cols-4 mb-8">
+              <TabsList className="grid grid-cols-2 mb-8 justify-center">
                 <TabsTrigger value="windows" className="data-[state=active]:bg-blue-100 data-[state=active]:text-blue-800">
                   <LaptopIcon className="h-5 w-5 mr-2" />
                   Windows
@@ -155,28 +155,13 @@ export default function DownloadPage() {
                           <div className="text-sm text-gray-500 mb-2">
                             <span className="font-medium">파일 크기:</span> 45.8MB | <span className="font-medium">업데이트:</span> 2025.05.21
                           </div>
-                          <Button 
-                            size="lg" 
-                            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-6 rounded-xl"
-                          >
-                            <motion.div
-                              className="flex items-center justify-center w-full"
-                              whileHover={{ scale: 1.03 }}
-                              transition={{ duration: 0.3 }}
-                            >
-                              <ArrowDownIcon className="mr-2 h-5 w-5" />
-                              Windows 설치 파일 다운로드
-                            </motion.div>
-                          </Button>
-                          <div className="text-center">
-                            <Link 
-                              href="/download/windows-manual" 
-                              className="text-blue-600 hover:text-blue-800 text-sm inline-flex items-center"
-                            >
-                              설치 가이드 보기
-                              <ArrowRightIcon className="ml-1 h-3 w-3" />
-                            </Link>
-                          </div>
+                          <a href="https://github.com/project-elnino/elnino.kr/releases/latest/download/knoc-client.exe" download>
+                            <Button size="lg" className="w-full py-6 rounded-xl bg-blue-600 hover:bg-blue-700 text-white">
+                              <motion.div whileHover={{ scale: 1.03 }} className="flex justify-center items-center">
+                                <ArrowDownIcon className="mr-2 h-5 w-5" /> 다운로드
+                              </motion.div>
+                            </Button>
+                          </a>
                         </div>
                       </div>
                     </div>
@@ -258,18 +243,9 @@ export default function DownloadPage() {
                               transition={{ duration: 0.3 }}
                             >
                               <ArrowDownIcon className="mr-2 h-5 w-5" />
-                              Mac OS 설치 파일 다운로드
+                              Mac OS 설치 파일 다운로드(준비 중)
                             </motion.div>
                           </Button>
-                          <div className="text-center">
-                            <Link 
-                              href="/download/macos-manual" 
-                              className="text-blue-600 hover:text-blue-800 text-sm inline-flex items-center"
-                            >
-                              설치 가이드 보기
-                              <ArrowRightIcon className="ml-1 h-3 w-3" />
-                            </Link>
-                          </div>
                         </div>
                       </div>
                     </div>
