@@ -23,6 +23,11 @@ export default function Topbar() {
               이용 신청
             </Link>
           </li>
+          <li>
+            <Link href="/download" className="hover:text-blue-500 transition-colors">
+              다운로드
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>

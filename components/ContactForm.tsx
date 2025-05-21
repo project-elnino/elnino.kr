@@ -13,11 +13,8 @@ import { CalendarIcon, CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 
-interface ContactFormProps {
-  onSuccess?: () => void;
-}
 
-export default function ContactForm({ onSuccess }: ContactFormProps) {
+export default function ContactForm() {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [privacyAgreed, setPrivacyAgreed] = useState(false);
@@ -51,7 +48,6 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
         description: "빠른 시일 내에 연락드리겠습니다.", 
         icon: <CheckCircle2 className="h-5 w-5 text-green-500" /> 
       });
-      onSuccess?.();
     } catch {
       toast.error("서버 오류", { description: "잠시 후 다시 시도해 주세요." });
     } finally { 
