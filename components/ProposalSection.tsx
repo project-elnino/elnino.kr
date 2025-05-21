@@ -208,7 +208,7 @@ function DifferentiatorItem({ item, index }: DifferentiatorItemProps) {
 }
 
 // 특성 아이템 컴포넌트
-function FeatureItem({ feature }: FeatureItemProps) {
+function FeatureItem({ feature, index }: FeatureItemProps) {
   const [expanded, setExpanded] = useState(false);
   
   return (
@@ -397,10 +397,10 @@ export default function ProposalSection() {
               분야별 커스텀 모델로 소규모 회의부터 대규모 컨퍼런스까지
               <br />어떤 환경에서든 완벽한 번역을 경험하세요.
             </p>
-            <div className="flex justify-center gap-4 mb-16">
+            <div className="flex justify-center gap-2 md:gap-4 mb-16">
               <Button 
-                size="lg" 
-                className="bg-white hover:bg-white text-blue-700 text-lg px-8 py-6 rounded-full"
+                size="default" 
+                className="bg-white hover:bg-white text-blue-700 text-xs sm:text-sm md:text-lg px-3 sm:px-5 md:px-8 py-2 sm:py-3 md:py-5 rounded-full"
                 asChild
               >
                 <motion.div
@@ -411,12 +411,12 @@ export default function ProposalSection() {
                     <span className="flex items-center">
                       지금 신청하기
                       <motion.span
-                        className="ml-2 inline-block"
+                        className="ml-1 sm:ml-2 inline-block"
                         animate={{ x: 0 }}
                         whileHover={{ x: 4 }}
                         transition={{ duration: 0.3 }}
                       >
-                        <ArrowRightIcon className="h-5 w-5" />
+                        <ArrowRightIcon className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5" />
                       </motion.span>
                     </span>
                   </Link>
@@ -424,7 +424,8 @@ export default function ProposalSection() {
               </Button>
               <Button 
                 variant="outline" 
-                className="bg-white hover:bg-white text-blue-700 text-lg px-8 py-6 rounded-full"
+                size="default" 
+                className="bg-white hover:bg-white text-blue-700 text-xs sm:text-sm md:text-lg px-3 sm:px-5 md:px-8 py-2 sm:py-3 md:py-5 rounded-full"
                 asChild
               >
                 <motion.div
@@ -432,7 +433,7 @@ export default function ProposalSection() {
                   transition={{ duration: 0.3 }}
                 >
                   <Link href="/contact">
-                    서비스 소개서 다운로드
+                    서비스 소개서
                   </Link>
                 </motion.div>
               </Button>
@@ -597,11 +598,11 @@ export default function ProposalSection() {
             </ul>
           </div>
           
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+          <div className="flex gap-2 md:gap-4 justify-center">
             <Button 
               variant="outline" 
-              size="lg" 
-              className="group bg-white text-blue-700 text-lg px-8 py-6 rounded-full"
+              size="default" 
+              className="group bg-white text-blue-700 text-xs sm:text-sm md:text-lg px-3 sm:px-5 md:px-8 py-2 sm:py-3 md:py-5 rounded-full"
               asChild
             >
               <motion.div
