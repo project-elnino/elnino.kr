@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Elnino",
   description: "Realtime Translation Subtitle",
+  icons: {
+    icon: "/logo.png",
+  },
 };
 
 export default function RootLayout({
