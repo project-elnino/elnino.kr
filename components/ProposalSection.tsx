@@ -208,7 +208,7 @@ function DifferentiatorItem({ item, index }: DifferentiatorItemProps) {
 }
 
 // 특성 아이템 컴포넌트
-function FeatureItem({ feature, index }: FeatureItemProps) {
+function FeatureItem({ feature }: FeatureItemProps) {
   const [expanded, setExpanded] = useState(false);
   
   return (
