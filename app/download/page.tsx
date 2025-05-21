@@ -2,8 +2,12 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { ArrowDownIcon, CheckCircle, ArrowRightIcon, LaptopIcon, AppleIcon } from 'lucide-react'
 
-export default function ContactPage() {
+export default function DownloadPage() {
   return (
     <div className="min-h-screen flex flex-col">
       {/* 상단 섹션: 파란색 배경에 타이틀 - 패딩 증가 */}
@@ -55,10 +59,268 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="bg-white py-14 flex-grow">
-        <div className="container max-w-4xl mx-auto px-6 lg:px-8">
-          download link
-          <br />window
+      {/* 중앙 섹션: 다운로드 링크 및 정보 */}
+      <section className="bg-white py-20 flex-grow">
+        <div className="container max-w-6xl mx-auto px-6 lg:px-8">
+          {/* 주요 다운로드 영역 */}
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <span className="inline-block px-4 py-1 rounded-full bg-blue-100 text-blue-700 font-medium text-sm mb-4">최신 버전 v2.5.3</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">지금 바로 다운로드하세요</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-10">
+              모든 디바이스에서 사용 가능한 Elnino 실시간 번역 클라이언트를 설치하고 빠르게 시작하세요.
+            </p>
+          </motion.div>
+
+          {/* 플랫폼 선택 탭 */}
+          <div className="max-w-4xl mx-auto mb-20">
+            <Tabs defaultValue="windows" className="w-full">
+              <TabsList className="grid grid-cols-4 mb-8">
+                <TabsTrigger value="windows" className="data-[state=active]:bg-blue-100 data-[state=active]:text-blue-800">
+                  <LaptopIcon className="h-5 w-5 mr-2" />
+                  Windows
+                </TabsTrigger>
+                <TabsTrigger value="mac" className="data-[state=active]:bg-blue-100 data-[state=active]:text-blue-800">
+                  <AppleIcon className="h-5 w-5 mr-2" />
+                  Mac OS
+                </TabsTrigger>
+              </TabsList>
+
+              {/* Windows 콘텐츠 */}
+              <TabsContent value="windows" className="mt-0">
+                <Card className="border-0 shadow-lg rounded-2xl overflow-hidden">
+                  <div className="grid md:grid-cols-2 gap-0">
+                    {/* 이미지 섹션 */}
+                    <div className="bg-gradient-to-br from-blue-50 to-white p-8 flex items-center justify-center">
+                      <motion.div 
+                        className="relative"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                      >
+                        <div className="relative w-[280px] h-[200px] bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                          <div className="h-6 bg-gray-100 flex items-center px-2 border-b border-gray-200">
+                            <div className="flex space-x-1.5">
+                              <div className="w-3 h-3 rounded-full bg-red-400"></div>
+                              <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+                              <div className="w-3 h-3 rounded-full bg-green-400"></div>
+                            </div>
+                          </div>
+                          <div className="p-3">
+                            <div className="h-4 w-3/4 bg-blue-100 rounded mb-2"></div>
+                            <div className="h-3 w-full bg-gray-100 rounded mb-1.5"></div>
+                            <div className="h-3 w-full bg-gray-100 rounded mb-1.5"></div>
+                            <div className="h-3 w-4/5 bg-gray-100 rounded mb-3"></div>
+                            <div className="h-16 w-full bg-blue-50 rounded border border-blue-100 flex items-center justify-center">
+                              <div className="text-blue-500 text-center text-xs">Elnino 번역 중...</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="absolute bottom-3 right-3 w-12 h-12 bg-blue-600 rounded-full shadow-lg flex items-center justify-center text-white">
+                          <span className="font-bold">E</span>
+                        </div>
+                      </motion.div>
+                    </div>
+
+                    {/* 다운로드 섹션 */}
+                    <div className="bg-white p-8">
+                      <div className="h-full flex flex-col justify-between">
+                        <div>
+                          <h3 className="text-2xl font-bold text-gray-900 mb-2">Windows 클라이언트</h3>
+                          <p className="text-gray-600 mb-4">
+                            Windows 7 이상의 환경에서 작동합니다. 설치 후 바로 사용이 가능합니다.
+                          </p>
+                          <ul className="space-y-2 mb-6">
+                            <li className="flex items-start">
+                              <CheckCircle className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                              <span className="text-gray-700">실시간 번역 및 자막 지원</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                              <span className="text-gray-700">다국어 변환 및 화면 표시</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                              <span className="text-gray-700">마이크 및 스피커 통합 지원</span>
+                            </li>
+                          </ul>
+                        </div>
+
+                        <div className="space-y-3">
+                          <div className="text-sm text-gray-500 mb-2">
+                            <span className="font-medium">파일 크기:</span> 45.8MB | <span className="font-medium">업데이트:</span> 2025.05.21
+                          </div>
+                          <Button 
+                            size="lg" 
+                            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-6 rounded-xl"
+                          >
+                            <motion.div
+                              className="flex items-center justify-center w-full"
+                              whileHover={{ scale: 1.03 }}
+                              transition={{ duration: 0.3 }}
+                            >
+                              <ArrowDownIcon className="mr-2 h-5 w-5" />
+                              Windows 설치 파일 다운로드
+                            </motion.div>
+                          </Button>
+                          <div className="text-center">
+                            <Link 
+                              href="/download/windows-manual" 
+                              className="text-blue-600 hover:text-blue-800 text-sm inline-flex items-center"
+                            >
+                              설치 가이드 보기
+                              <ArrowRightIcon className="ml-1 h-3 w-3" />
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              </TabsContent>
+
+              {/* Mac OS 콘텐츠 */}
+              <TabsContent value="mac" className="mt-0">
+                <Card className="border-0 shadow-lg rounded-2xl overflow-hidden">
+                  <div className="grid md:grid-cols-2 gap-0">
+                    {/* 이미지 섹션 */}
+                    <div className="bg-gradient-to-br from-blue-50 to-white p-8 flex items-center justify-center">
+                      <motion.div 
+                        className="relative"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                      >
+                        <div className="relative w-[280px] h-[200px] bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                          <div className="h-6 bg-gradient-to-r from-gray-50 to-gray-100 flex items-center px-2 border-b border-gray-200">
+                            <div className="flex space-x-1.5">
+                              <div className="w-3 h-3 rounded-full bg-red-400"></div>
+                              <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+                              <div className="w-3 h-3 rounded-full bg-green-400"></div>
+                            </div>
+                          </div>
+                          <div className="p-3">
+                            <div className="h-4 w-3/4 bg-blue-100 rounded mb-2"></div>
+                            <div className="h-3 w-full bg-gray-100 rounded mb-1.5"></div>
+                            <div className="h-3 w-full bg-gray-100 rounded mb-1.5"></div>
+                            <div className="h-3 w-4/5 bg-gray-100 rounded mb-3"></div>
+                            <div className="h-16 w-full bg-blue-50 rounded border border-blue-100 flex items-center justify-center">
+                              <div className="text-blue-500 text-center text-xs">Elnino 번역 중...</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="absolute bottom-3 right-3 w-12 h-12 bg-blue-600 rounded-full shadow-lg flex items-center justify-center text-white">
+                          <span className="font-bold">E</span>
+                        </div>
+                      </motion.div>
+                    </div>
+
+                    {/* 다운로드 섹션 */}
+                    <div className="bg-white p-8">
+                      <div className="h-full flex flex-col justify-between">
+                        <div>
+                          <h3 className="text-2xl font-bold text-gray-900 mb-2">Mac OS 클라이언트</h3>
+                          <p className="text-gray-600 mb-4">
+                            macOS 10.13 (High Sierra) 이상의 환경에서 작동합니다.
+                          </p>
+                          <ul className="space-y-2 mb-6">
+                            <li className="flex items-start">
+                              <CheckCircle className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                              <span className="text-gray-700">Apple Silicon 및 Intel 칩 모두 지원</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                              <span className="text-gray-700">시스템 설정과 완벽 통합</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                              <span className="text-gray-700">Touch Bar 및 단축키 지원</span>
+                            </li>
+                          </ul>
+                        </div>
+
+                        <div className="space-y-3">
+                          <div className="text-sm text-gray-500 mb-2">
+                            <span className="font-medium">파일 크기:</span> 45.8MB | <span className="font-medium">업데이트:</span> 2025.05.21
+                          </div>
+                          <Button 
+                            size="lg" 
+                            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-6 rounded-xl"
+                          >
+                            <motion.div
+                              className="flex items-center justify-center w-full"
+                              whileHover={{ scale: 1.03 }}
+                              transition={{ duration: 0.3 }}
+                            >
+                              <ArrowDownIcon className="mr-2 h-5 w-5" />
+                              Mac OS 설치 파일 다운로드
+                            </motion.div>
+                          </Button>
+                          <div className="text-center">
+                            <Link 
+                              href="/download/macos-manual" 
+                              className="text-blue-600 hover:text-blue-800 text-sm inline-flex items-center"
+                            >
+                              설치 가이드 보기
+                              <ArrowRightIcon className="ml-1 h-3 w-3" />
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              </TabsContent>
+            </Tabs>
+          </div>
+
+          {/* 설치 과정 안내 */}
+          <motion.div 
+            className="max-w-4xl mx-auto py-10 px-8 rounded-2xl bg-gray-50"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">간단한 설치 과정</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="text-center">
+                <div className="bg-blue-100 text-blue-700 w-12 h-12 rounded-full mx-auto flex items-center justify-center mb-4">
+                  <ArrowDownIcon className="h-6 w-6" />
+                </div>
+                <h4 className="font-semibold text-gray-900 mb-2">1. 다운로드</h4>
+                <p className="text-gray-600 text-sm">
+                  운영체제에 맞는 클라이언트를 다운로드하세요.
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="bg-blue-100 text-blue-700 w-12 h-12 rounded-full mx-auto flex items-center justify-center mb-4">
+                  <LaptopIcon className="h-6 w-6" />
+                </div>
+                <h4 className="font-semibold text-gray-900 mb-2">2. 설치 및 구동</h4>
+                <p className="text-gray-600 text-sm">
+                  안내에 따라 설치하고 실행하세요.
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="bg-blue-100 text-blue-700 w-12 h-12 rounded-full mx-auto flex items-center justify-center mb-4">
+                  <CheckCircle className="h-6 w-6" />
+                </div>
+                <h4 className="font-semibold text-gray-900 mb-2">3. 연결 시작</h4>
+                <p className="text-gray-600 text-sm">
+                  로그인 후 바로 번역 기능을 사용하세요.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
+          
+            
         </div>
       </section>
 
