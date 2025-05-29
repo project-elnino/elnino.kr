@@ -578,7 +578,7 @@ export default function ProposalSection() {
         >
           <h2 className="text-4xl font-bold mb-6">지금 바로 시작하세요</h2>
           <p className="text-xl text-blue-100 max-w-2xl mx-auto mb-10">
-            설치부터 활용까지 전문 담당자가 도와드립니다.
+            설치부터 활용까지 1분 안에 가능합니다.
           </p>
           
           {/* 기대 효과 체크리스트 */}

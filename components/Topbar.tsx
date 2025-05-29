@@ -14,11 +14,6 @@ export default function Topbar() {
         </Link>
         <ul className="flex gap-6 text-sm font-medium text-white">
           <li>
-            <Link href="/proposal" className="hover:text-blue-500 transition-colors">
-              서비스 소개
-            </Link>
-          </li>
-          <li>
             <Link href="/contact" className="hover:text-blue-500 transition-colors">
               이용 신청
             </Link>
