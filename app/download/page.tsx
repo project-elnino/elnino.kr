@@ -308,7 +308,7 @@ export default function DownloadPage() {
               <h3 className="text-xl font-semibold text-white mb-2">Elnino</h3>
               <address className="not-italic">
                 <p>서울특별시 성동구 왕십리로 222</p>
-                <p>이메일: peteryoung04@hanyang.ac.kr</p>
+                <p>이메일: contact@elnino.kr</p>
               </address>
             </div>
             <div className="flex flex-col text-right">
