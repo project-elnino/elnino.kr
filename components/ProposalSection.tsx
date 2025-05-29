@@ -117,16 +117,16 @@ function DifferentiatorItem({ item, index }: DifferentiatorItemProps) {
     <motion.div 
       key={item.id}
       ref={ref}
-      className="flex flex-col lg:flex-row items-center mx-auto relative"
-      initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+      className="flex flex-col lg:flex-row items-center mx-auto relative max-w-6xl"
+      initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
       animate={isInView ? { opacity: 1, x: 0 } : {}}
       transition={{ duration: 0.9, ease: [0.17, 0.55, 0.55, 1], delay: 0.2 }}
     >
       {/* 이미지 컨테이너 */}
-      <div className="lg:w-1/2 px-4 lg:px-12 xl:pl-16 xl:pr-8 mb-12 lg:mb-0 relative">
-        {/* 숫자 - 이미지 컨테이너 외부 배치 */}
+      <div className="lg:w-1/2 px-4 lg:px-8 mb-12 lg:mb-0 relative">
+        {/* 숫자 - 위치 조정 */}
         <div 
-          className="absolute top-3 left-8 text-8xl font-black text-gray-200"
+          className="absolute top-3 left-4 lg:left-8 text-6xl lg:text-8xl font-black text-gray-200 select-none"
           style={{ 
             zIndex: 10,
             pointerEvents: 'none' 
@@ -135,14 +135,14 @@ function DifferentiatorItem({ item, index }: DifferentiatorItemProps) {
           {(index + 1).toString().padStart(2, '0')}
         </div>
         
-        {/* 이미지 박스 */}
-        <div className="relative bg-gradient-to-br from-blue-50 to-white rounded-3xl shadow-xl overflow-hidden aspect-square w-full max-w-lg">
-          {/* 배경 블러 효과 - Framer Motion 사용 */}
+        {/* 이미지 박스 - 오버플로우 제한 */}
+        <div className="relative bg-gradient-to-br from-blue-50 to-white rounded-3xl shadow-xl overflow-hidden aspect-square w-full max-w-lg mx-auto">
+          {/* 배경 블러 효과 - 애니메이션 범위 축소 */}
           <motion.div 
-            className="absolute -top-10 -left-10 w-40 h-40 bg-blue-100 rounded-full filter blur-3xl opacity-30"
+            className="absolute -top-5 -left-5 w-32 h-32 bg-blue-100 rounded-full filter blur-3xl opacity-30"
             animate={{ 
-              x: [0, 10, -5, 0],
-              y: [0, -5, 10, 0]
+              x: [0, 5, -3, 0],
+              y: [0, -3, 5, 0]
             }}
             transition={{ 
               repeat: Infinity, 
@@ -151,10 +151,10 @@ function DifferentiatorItem({ item, index }: DifferentiatorItemProps) {
             }}
           />
           <motion.div 
-            className="absolute bottom-0 right-0 w-60 h-60 bg-blue-100 rounded-full filter blur-3xl opacity-30"
+            className="absolute bottom-0 right-0 w-40 h-40 bg-blue-100 rounded-full filter blur-3xl opacity-30"
             animate={{ 
-              x: [0, -10, 5, 0],
-              y: [0, 5, -10, 0]
+              x: [0, -5, 3, 0],
+              y: [0, 3, -5, 0]
             }}
             transition={{ 
               repeat: Infinity, 
@@ -270,6 +270,19 @@ export default function ProposalSection() {
     restDelta: 0.001
   });
 
+  // 가로 스크롤 방지를 위한 useEffect 추가
+  useEffect(() => {
+    // 페이지 로드 시 가로 스크롤 방지
+    document.documentElement.style.overflowX = 'hidden';
+    document.body.style.overflowX = 'hidden';
+    
+    return () => {
+      // 컴포넌트 언마운트 시 복원
+      document.documentElement.style.overflowX = '';
+      document.body.style.overflowX = '';
+    };
+  }, []);
+
   // 활성 섹션 결정 - CTA 섹션 인식 개선
   useEffect(() => {
     const handleScroll = () => {      
@@ -307,17 +320,17 @@ export default function ProposalSection() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen relative">
+    <div className="flex flex-col min-h-screen relative overflow-x-hidden">
       {/* 스크롤 프로그레스 바 - Framer Motion으로 변경 */}
       <div className="fixed top-0 left-0 w-full h-1 bg-gray-200 z-50">
         <motion.div 
-          className="h-full bg-blue-600"
+          className="h-full bg-blue-600 origin-left"
           style={{ scaleX }}
         ></motion.div>
       </div>
       
-      {/* 사이드 네비게이션 - 3개로 조정 */}
-      <div className="fixed right-8 top-1/2 transform -translate-y-1/2 z-50 hidden lg:block">
+      {/* 사이드 네비게이션 - 위치 조정 */}
+      <div className="fixed right-4 lg:right-8 top-1/2 transform -translate-y-1/2 z-50 hidden lg:block">
         <div className="flex flex-col items-center space-y-6">
           <button 
             onClick={() => scrollToSection(heroRef)}
@@ -347,15 +360,15 @@ export default function ProposalSection() {
         ref={heroRef}
         className="relative min-h-screen flex items-center bg-gradient-to-br from-blue-900 via-blue-700 to-blue-500 text-white overflow-hidden"
       >
-        {/* 배경 애니메이션 요소 - Framer Motion으로 변환 */}
-        <div className="absolute inset-0">
+        {/* 배경 애니메이션 요소 - 위치와 크기 조정 */}
+        <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-full bg-grid-pattern opacity-20"></div>
           <motion.div 
-            className="absolute top-20 left-10 w-64 h-64 bg-blue-800 rounded-full filter blur-3xl opacity-20"
+            className="absolute top-20 left-5 w-48 h-48 lg:w-64 lg:h-64 bg-blue-800 rounded-full filter blur-3xl opacity-20"
             animate={{ 
-              x: [0, 30, -20, 0],
-              y: [0, -20, 20, 0],
-              scale: [1, 1.1, 0.9, 1]
+              x: [0, 15, -10, 0],
+              y: [0, -10, 10, 0],
+              scale: [1, 1.05, 0.95, 1]
             }}
             transition={{ 
               repeat: Infinity, 
@@ -364,11 +377,11 @@ export default function ProposalSection() {
             }}
           />
           <motion.div 
-            className="absolute bottom-20 right-10 w-80 h-80 bg-blue-600 rounded-full filter blur-3xl opacity-20"
+            className="absolute bottom-20 right-5 w-60 h-60 lg:w-80 lg:h-80 bg-blue-600 rounded-full filter blur-3xl opacity-20"
             animate={{ 
-              x: [0, -30, 20, 0],
-              y: [0, 20, -20, 0],
-              scale: [1, 0.9, 1.1, 1]
+              x: [0, -15, 10, 0],
+              y: [0, 10, -10, 0],
+              scale: [1, 0.95, 1.05, 1]
             }}
             transition={{ 
               repeat: Infinity, 
@@ -380,7 +393,7 @@ export default function ProposalSection() {
         </div>
         
         <motion.div 
-          className="container mx-auto px-4 relative z-10 py-16"
+          className="container mx-auto px-4 relative z-10 py-16 max-w-6xl"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -389,34 +402,34 @@ export default function ProposalSection() {
             <span className="inline-block px-4 py-1 rounded-full bg-white/10 text-blue-100 font-medium text-sm mb-6 backdrop-blur-sm">
               AI 실시간 번역 서비스
             </span>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               언어 장벽 없는<br />세상을 만듭니다
             </h1>
             <div className="h-1 w-24 bg-blue-300 mx-auto mb-8"></div>
-            <p className="text-xl md:text-2xl leading-relaxed mb-10 text-blue-100">
+            <p className="text-lg md:text-xl lg:text-2xl leading-relaxed mb-10 text-blue-100">
               분야별 커스텀 모델로 소규모 회의부터 대규모 컨퍼런스까지
               <br />어떤 환경에서든 완벽한 번역을 경험하세요.
             </p>
-            <div className="flex justify-center gap-2 md:gap-4 mb-16">
+            <div className="flex flex-col sm:flex-row justify-center gap-2 md:gap-4 mb-16">
               <Button 
                 size="default" 
-                className="bg-white hover:bg-white text-blue-700 text-xs sm:text-sm md:text-lg px-3 sm:px-5 md:px-8 py-2 sm:py-3 md:py-5 rounded-full"
+                className="bg-white hover:bg-white text-blue-700 text-sm md:text-lg px-5 md:px-8 py-3 md:py-5 rounded-full"
                 asChild
               >
                 <motion.div
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.3 }}
                 >
                   <Link href="/contact">
-                    <span className="flex items-center">
+                    <span className="flex items-center justify-center">
                       지금 신청하기
                       <motion.span
-                        className="ml-1 sm:ml-2 inline-block"
+                        className="ml-2 inline-block"
                         animate={{ x: 0 }}
-                        whileHover={{ x: 4 }}
+                        whileHover={{ x: 3 }}
                         transition={{ duration: 0.3 }}
                       >
-                        <ArrowRightIcon className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5" />
+                        <ArrowRightIcon className="h-4 w-4 md:h-5 md:w-5" />
                       </motion.span>
                     </span>
                   </Link>
@@ -425,11 +438,11 @@ export default function ProposalSection() {
               <Button 
                 variant="outline" 
                 size="default" 
-                className="bg-white hover:bg-white text-blue-700 text-xs sm:text-sm md:text-lg px-3 sm:px-5 md:px-8 py-2 sm:py-3 md:py-5 rounded-full"
+                className="bg-white hover:bg-white text-blue-700 text-sm md:text-lg px-5 md:px-8 py-3 md:py-5 rounded-full"
                 asChild
               >
                 <motion.div
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.3 }}
                 >
                   <Link href="/contact">
@@ -439,7 +452,7 @@ export default function ProposalSection() {
               </Button>
             </div>
             
-            {/* 스크롤 다운 인디케이터 - 위치 더 위로 조정 */}
+            {/* 스크롤 다운 인디케이터 */}
             <motion.div 
               className="absolute bottom-9 left-1/2 transform -translate-x-1/2"
               animate={{ y: [0, 10, 0] }}
@@ -476,9 +489,9 @@ export default function ProposalSection() {
       {/* 차별화 포인트 섹션 */}
       <section 
         ref={featuresRef}
-        className="py-24 bg-white"
+        className="py-24 bg-white overflow-hidden"
       >
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 max-w-7xl">
           <motion.div className="text-center mb-20"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -503,9 +516,9 @@ export default function ProposalSection() {
       {/* 일반 특성 섹션 - 2x2 그리드 + 상호작용 패널 */}
       <section 
         ref={commonRef}
-        className="py-24 bg-gray-50"
+        className="py-24 bg-gray-50 overflow-hidden"
       >
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 max-w-6xl">
           <motion.div className="text-center mb-20"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -520,7 +533,7 @@ export default function ProposalSection() {
           </motion.div>
 
           <motion.div 
-            className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto"
+            className="grid md:grid-cols-2 gap-8"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
@@ -538,14 +551,14 @@ export default function ProposalSection() {
         ref={ctaRef}
         className="py-24 bg-gradient-to-br from-blue-700 to-indigo-800 text-white relative overflow-hidden"
       >
-        {/* 배경 요소 - Framer Motion 사용 */}
+        {/* 배경 요소 - 크기와 위치 조정 */}
         <div className="absolute inset-0 overflow-hidden">
           <motion.div 
-            className="absolute top-0 right-0 w-96 h-96 bg-blue-600 rounded-full filter blur-3xl opacity-20"
+            className="absolute top-0 right-0 w-72 h-72 lg:w-96 lg:h-96 bg-blue-600 rounded-full filter blur-3xl opacity-20"
             animate={{ 
-              x: [0, -20, 10, 0],
-              y: [0, 10, -15, 0],
-              scale: [1, 1.05, 0.95, 1]
+              x: [0, -10, 5, 0],
+              y: [0, 5, -8, 0],
+              scale: [1, 1.02, 0.98, 1]
             }}
             transition={{ 
               repeat: Infinity, 
@@ -554,11 +567,11 @@ export default function ProposalSection() {
             }}
           />
           <motion.div 
-            className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-700 rounded-full filter blur-3xl opacity-20"
+            className="absolute bottom-0 left-0 w-72 h-72 lg:w-96 lg:h-96 bg-indigo-700 rounded-full filter blur-3xl opacity-20"
             animate={{ 
-              x: [0, 20, -10, 0],
-              y: [0, -10, 15, 0],
-              scale: [1, 0.95, 1.05, 1]
+              x: [0, 10, -5, 0],
+              y: [0, -5, 8, 0],
+              scale: [1, 0.98, 1.02, 1]
             }}
             transition={{ 
               repeat: Infinity, 
@@ -570,7 +583,7 @@ export default function ProposalSection() {
         </div>
         
         <motion.div 
-          className="container mx-auto px-4 text-center relative z-10"
+          className="container mx-auto px-4 text-center relative z-10 max-w-4xl"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
@@ -598,15 +611,15 @@ export default function ProposalSection() {
             </ul>
           </div>
           
-          <div className="flex gap-2 md:gap-4 justify-center">
+          <div className="flex justify-center">
             <Button 
               variant="outline" 
               size="default" 
-              className="group bg-white text-blue-700 text-xs sm:text-sm md:text-lg px-3 sm:px-5 md:px-8 py-2 sm:py-3 md:py-5 rounded-full"
+              className="group bg-white text-blue-700 text-sm md:text-lg px-5 md:px-8 py-3 md:py-5 rounded-full"
               asChild
             >
               <motion.div
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               >
                 <Link href="/contact">
@@ -620,16 +633,16 @@ export default function ProposalSection() {
 
       {/* 고정 버튼 - 상단으로 스크롤 */}
       <motion.div 
-        className="fixed bottom-8 right-8 z-50"
-        whileHover={{ scale: 1.1 }}
+        className="fixed bottom-4 right-4 lg:bottom-8 lg:right-8 z-50"
+        whileHover={{ scale: 1.05 }}
         transition={{ duration: 0.3 }}
       >
         <button 
           onClick={() => scrollToSection(heroRef)}
-          className="bg-white p-4 rounded-full shadow-lg text-blue-600 hover:bg-blue-50"
+          className="bg-white p-3 lg:p-4 rounded-full shadow-lg text-blue-600 hover:bg-blue-50 transition-colors"
           aria-label="맨 위로 이동"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 lg:h-6 lg:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
           </svg>
         </button>
