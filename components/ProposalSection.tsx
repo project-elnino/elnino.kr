@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { motion, useInView, useScroll, useSpring } from 'framer-motion'
 import { Button } from "@/components/ui/button"
-import { ArrowRightIcon, ChevronRight, CheckCircle, ChevronDown } from "lucide-react"
+import { ArrowRightIcon, ChevronRight, CheckCircle, ChevronDown, Globe } from "lucide-react"
 
 // 데이터 타입 정의
 interface Stat {
@@ -74,8 +74,8 @@ const commonFeatures: Feature[] = [
   {
     icon: "⚡",
     title: "빠른 속도",
-    description: "업계 최고 수준의 지연 시간 0.5초 이내 번역 제공",
-    details: "AI 최적화 알고리즘으로 발화자의 말을 실시간으로 분석하여 최소한의 지연으로 번역합니다. 일반 번역 서비스 대비 최대 70% 빠른 속도를 경험하세요."
+    description: "발화 직후 즉시 번역되어 자연스러운 대화 흐름 유지하며며 번역 제공",
+    details: "AI 최적화 알고리즘으로 발화자의 말을 실시간으로 분석하여 최소한의 지연으로 번역합니다. 전후 맥락을 고려하여 번역하는 기술로 매끄러운 대화를 경험하세요."
   },
   {
     icon: "🗣️",
@@ -85,9 +85,9 @@ const commonFeatures: Feature[] = [
   },
   {
     icon: "🌐",
-    title: "실시간 번역",
-    description: "발화 직후 즉시 번역되어 자연스러운 대화 흐름 유지",
-    details: "전후 맥락을 고려하여 번역을 시작하는 기술로 매끄러운 대화 경험을 제공합니다. 실시간 자막 표시로 참가자들의 이해도를 높입니다."
+    title: "언어 조사 불필요",
+    description: "참가자의 언어를 본인이이 직접 선택 가능",
+    details: "참가자의 언어를 참가자가 직접 선택하여 사용 언어를 조사할 필요 없습니다. 사전 조사 없이 빠르게 시작할 수 있습니다."
   },
   {
     icon: "💰",
@@ -410,7 +410,7 @@ export default function ProposalSection() {
               분야별 커스텀 모델로 소규모 회의부터 대규모 컨퍼런스까지
               <br />어떤 환경에서든 완벽한 번역을 경험하세요.
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-2 md:gap-4 mb-16">
+            <div className="flex flex-col sm:flex-row justify-center gap-2 md:gap-4 mb-8">
               <Button 
                 size="default" 
                 className="bg-white hover:bg-white text-blue-700 text-sm md:text-lg px-5 md:px-8 py-3 md:py-5 rounded-full"
@@ -448,6 +448,28 @@ export default function ProposalSection() {
                   <Link href="/contact">
                     서비스 소개서
                   </Link>
+                </motion.div>
+              </Button>
+            </div>
+            
+            {/* 통역방 입장하기 버튼 - 중앙에 추가 */}
+            <div className="flex justify-center mb-16">
+              <Button 
+                variant="outline" 
+                size="default" 
+                className="bg-transparent border-2 border-white/30 hover:bg-white/10 text-white text-sm md:text-lg px-5 md:px-8 py-3 md:py-5 rounded-full backdrop-blur-sm"
+                asChild
+              >
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <a href="https://cloud.elnino.kr/" target="_blank" rel="noopener noreferrer">
+                    <span className="flex items-center justify-center">
+                      <Globe className="h-4 w-4 md:h-5 md:w-5 mr-2" />
+                      통역방 입장하기
+                    </span>
+                  </a>
                 </motion.div>
               </Button>
             </div>
