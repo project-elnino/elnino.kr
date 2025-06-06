@@ -155,7 +155,7 @@ export default function DownloadPage() {
                           <div className="text-sm text-gray-500 mb-2">
                             <span className="font-medium">파일 크기:</span> 45.8MB | <span className="font-medium">업데이트:</span> 2025.05.21
                           </div>
-                          <a href="https://github.com/project-elnino/elnino.kr/releases/latest/download/knoc-client.exe" download>
+                          <a href="https://github.com/project-elnino/elnino.kr/releases/latest/download/KnocSetup.exe" download>
                             <Button size="lg" className="w-full py-6 rounded-xl bg-blue-600 hover:bg-blue-700 text-white">
                               <motion.div whileHover={{ scale: 1.03 }} className="flex justify-center items-center">
                                 <ArrowDownIcon className="mr-2 h-5 w-5" /> 다운로드
