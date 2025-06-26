@@ -1,10 +1,10 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, useScroll, useSpring } from 'framer-motion'
-import { ArrowLeft, Mail, Github, Award, Users, Rocket, ChevronDown } from 'lucide-react'
+import { ArrowLeft, Mail, Github, Award, Users, ChevronDown } from 'lucide-react'
 //import { Button } from "@/components/ui/button"
 
 // 팀원 데이터 타입

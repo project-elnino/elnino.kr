@@ -2,7 +2,6 @@
 
 import ContactForm from '@/components/ContactForm'
 import { motion } from 'framer-motion'
-import Link from 'next/link'
 
 export default function ContactPage() {
   return (
