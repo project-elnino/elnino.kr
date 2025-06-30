@@ -74,25 +74,25 @@ const commonFeatures: Feature[] = [
     icon: "⚡",
     title: "빠른 속도",
     description: "발화 직후 즉시 번역되어 자연스러운 대화 흐름 유지하며 번역 제공",
-    details: "AI 최적화 알고리즘으로 발화자의 말을 실시간으로 분석하여 최소한의 지연으로 번역합니다. 전후 맥락을 고려하여 번역하는 기술로 매끄러운 대화를 경험하세요."
+    details: "AI 최적화 알고리즘으로 최소한의 지연으로 번역합니다. 전후 맥락을 고려한 매끄러운 대화를 경험하세요."
   },
   {
     icon: "🗣️",
     title: "101개 언어 지원",
     description: "전 세계 주요 언어는 물론 소수 언어까지 폭넓게 지원",
-    details: "영어, 중국어, 스페인어 등 주요 언어는 물론 아이슬란드어, 스와힐리어 같은 희소 언어까지 지원합니다. 모든 언어는 양방향 번역이 가능합니다."
+    details: "영어와 중국어를 비롯한 언어부터 희소 언어까지 지원합니다. 모든 언어는 양방향 번역이 가능하며 지속적으로 업데이트됩니다."
   },
   {
     icon: "🌐",
     title: "언어 조사 불필요",
     description: "참가자의 언어를 본인이 직접 선택 가능",
-    details: "참가자의 언어를 참가자가 직접 선택하여 사용 언어를 조사할 필요 없습니다. 사전 조사 없이 빠르게 시작할 수 있습니다."
+    details: "발화자와 참가자가 직접 자신의 언어를 선택합니다. 사전 조사 없이 회의 시작 직전에도 빠른 설정이 가능합니다."
   },
   {
     icon: "💰",
     title: "합리적 가격",
     description: "합리적 요금제로 비용 효율성 극대화",
-    details: "월 구독제로 합리적 가격으로 최고의 경험을 제공합니다."
+    details: "월 구독제로 합리적이고 투명한 과금 체계를 제공합니다. 기업 규모나 사용자 수에 따른 다양한 요금제를 선택할 수 있습니다."
   }
 ]
 
@@ -171,49 +171,31 @@ function DifferentiatorItem({ item, index }: DifferentiatorItemProps) {
 }
 
 // 특성 아이템 컴포넌트
-function FeatureItem({ feature }: FeatureItemProps) {
-  const [expanded, setExpanded] = useState(false);
-  
+function FeatureItem({ feature, index }: FeatureItemProps) {
   return (
     <motion.div 
-      className="bg-white rounded-2xl shadow-md overflow-hidden"
-      whileHover={{ scale: expanded ? 1.02 : 1.01 }}
-      animate={{ 
-        scale: expanded ? 1.02 : 1,
-        zIndex: expanded ? 10 : 1
-      }}
+      className="bg-white rounded-2xl shadow-md overflow-hidden h-full flex flex-col"
+      whileHover={{ scale: 1.01 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="p-8">
-        <div className="w-14 h-14 flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-200 text-blue-600 rounded-2xl text-2xl mb-6 shadow-sm">
+      {/* 상단 컨텐츠 영역 */}
+      <div className="p-6 flex-1">
+        <div className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-200 text-blue-600 rounded-xl text-xl mb-4 shadow-sm">
           {feature.icon}
         </div>
-        <h3 className="text-2xl font-semibold text-gray-900 mb-3">{feature.title}</h3>
-        <p className="text-gray-700 mb-4">{feature.description}</p>
-        
-        <button 
-          onClick={() => setExpanded(!expanded)}
-          className="flex items-center text-blue-600 font-medium hover:text-blue-700 transition-colors"
-        >
-          {expanded ? '간략히 보기' : '자세히 보기'} 
-          <ChevronRight className={`ml-1 h-4 w-4 transition-transform ${expanded ? 'rotate-90' : ''}`} />
-        </button>
+        <h3 className="text-xl font-semibold text-gray-900 mb-2">{feature.title}</h3>
+        <p className="text-gray-700 text-sm">{feature.description}</p>
       </div>
       
-      {/* 확장 패널 - Framer Motion 사용 */}
-      <motion.div 
-        className="bg-blue-50 overflow-hidden"
-        initial={false}
-        animate={{ 
-          height: expanded ? "auto" : 0,
-          opacity: expanded ? 1 : 0,
-          paddingTop: expanded ? "1rem" : "0",
-          paddingBottom: expanded ? "1rem" : "0",
-        }}
-        transition={{ duration: 0.4, ease: "easeInOut" }}
-      >
-        <p className="px-8 text-gray-700">{feature.details}</p>
-      </motion.div>
+      {/* 구분선 - 모든 카드에서 동일한 위치 */}
+      <div className="px-6">
+        <div className="h-px bg-gray-200"></div>
+      </div>
+      
+      {/* 상세 내용 */}
+      <div className="bg-blue-50 px-6 py-4">
+        <p className="text-gray-700 text-sm leading-relaxed">{feature.details}</p>
+      </div>
     </motion.div>
   );
 }
@@ -527,7 +509,7 @@ export default function ProposalSection() {
       {/* 일반 특성 섹션 - 2x2 그리드 + 상호작용 패널 */}
       <section 
         ref={commonRef}
-        className="py-24 bg-white overflow-hidden"
+        className="pt-24 pb-8 bg-white overflow-hidden"
       >
         <div className="container mx-auto px-4 max-w-6xl">
           <motion.div className="text-center mb-20"
@@ -544,7 +526,7 @@ export default function ProposalSection() {
           </motion.div>
 
           <motion.div 
-            className="grid md:grid-cols-2 gap-8"
+            className="grid md:grid-cols-2 gap-x-8 gap-y-4 items-stretch"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
