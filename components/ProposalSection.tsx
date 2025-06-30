@@ -622,8 +622,7 @@ export default function ProposalSection() {
             <ul className="space-y-3">
               {[
                 '국제 회의 참여율 향상',
-                '참가자 이해도 증진',
-                '글로벌 고객 만족도 증가'
+                '참가자 이해도 증진'
               ].map((item, i) => (
                 <li key={i} className="flex items-start">
                   <CheckCircle className="h-5 w-5 text-green-300 mr-2 flex-shrink-0 mt-1" />
