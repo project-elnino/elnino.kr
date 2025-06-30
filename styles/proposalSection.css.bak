@@ -1,0 +1,4 @@
+/* ProposalSection 컴포넌트용 글로벌 스타일 */
+html {
+  scroll-behavior: smooth;
+}

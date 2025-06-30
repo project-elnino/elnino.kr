@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState, useRef } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { motion, useInView, useScroll, useSpring } from 'framer-motion'
 import { Button } from "@/components/ui/button"
@@ -13,29 +12,28 @@ interface Stat {
   value: string;
 }
 
+// 차별화 포인트 데이터 타입에서 imageUrl 제거
 interface Differentiator {
   id: string;
   title: string;
   description: string;
-  imageUrl: string;
   highlight: string;
   stats: Stat[];
 }
 
 interface Feature {
   icon: string;
-  title: string;
+  title:string;
   description: string;
   details: string;
 }
 
-// 차별화 포인트 데이터
+// 차별화 포인트 데이터에서 imageUrl 제거
 const differentiators: Differentiator[] = [
   {
     id: "boosting-model",
     title: "단어 & 맥락 부스팅 모델",
     description: "특정 산업과 분야에 특화된 AI 모델로 키워드와 문맥을 동시에 부스팅합니다. 의학, 법률, IT, 금융 등 전문 분야에서 최대 99%의 정확도를 보장합니다.",
-    imageUrl: "/images/easy-setup.png",
     highlight: "타사 대비 향상된 정확도",
     stats: [
       { label: "정확도", value: "99%" },
@@ -47,7 +45,6 @@ const differentiators: Differentiator[] = [
     id: "scalable-solution",
     title: "다양한 규모 지원",
     description: "5인 소규모 회의부터 5,000명 이상의 대규모 컨퍼런스까지 모든 환경에서 안정적인 성능을 제공합니다. 네트워크 상태에 따라 자동으로 최적화됩니다.",
-    imageUrl: "/images/scalable-solution.png",
     highlight: "최대 5,000명 동시 접속 지원",
     stats: [
       { label: "최대 참가자", value: "5,000+" },
@@ -59,7 +56,6 @@ const differentiators: Differentiator[] = [
     id: "easy-setup",
     title: "간편 설치 & 사용",
     description: "프로그램 설치 만으로 시스템 구축이 완료됩니다. 발표자는 노트북 한 대, 참가자는 스마트폰만으로 원활한 번역 서비스를 이용할 수 있습니다.",
-    imageUrl: "/images/easy-setup.png",
     highlight: "설치 소요시간 단 1분",
     stats: [
       { label: "설치 단계", value: "1단계" },
@@ -108,97 +104,61 @@ interface FeatureItemProps {
   index: number;
 }
 
-// 차별화 포인트 아이템 컴포넌트
+// --- [수정된 부분] 차별화 포인트 아이템 컴포넌트 ---
+// 이미지를 사용하지 않는 카드 디자인으로 변경
 function DifferentiatorItem({ item, index }: DifferentiatorItemProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
-  
+
   return (
-    <motion.div 
-      key={item.id}
+    <motion.div
       ref={ref}
-      className="flex flex-col lg:flex-row items-center mx-auto relative max-w-6xl"
-      initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-      animate={isInView ? { opacity: 1, x: 0 } : {}}
-      transition={{ duration: 0.9, ease: [0.17, 0.55, 0.55, 1], delay: 0.2 }}
+      className="max-w-4xl mx-auto" // 좌우 분할 레이아웃 제거, 중앙 정렬 컨테이너로 변경
+      initial={{ opacity: 0, y: 50 }} // 애니메이션을 위로 떠오르는 효과로 변경
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.8, ease: [0.17, 0.55, 0.55, 1] }}
     >
-      {/* 이미지 컨테이너 */}
-      <div className="lg:w-1/2 px-4 lg:px-8 mb-12 lg:mb-0 relative">
-        {/* 숫자 - 위치 조정 */}
-        <div 
-          className="absolute top-3 left-4 lg:left-8 text-6xl lg:text-8xl font-black text-gray-200 select-none"
-          style={{ 
-            zIndex: 10,
-            pointerEvents: 'none' 
-          }}
-        >
+      <div className="relative bg-gradient-to-br from-blue-50 via-white to-indigo-50 rounded-3xl shadow-lg border border-gray-100 p-8 md:p-12 overflow-hidden">
+        {/* 배경에 큰 숫자로 디자인 요소 추가 */}
+        <div className="absolute top-4 right-8 text-8xl md:text-9xl font-black text-gray-200/80 select-none z-0">
           {(index + 1).toString().padStart(2, '0')}
         </div>
-        
-        {/* 이미지 박스 - 오버플로우 제한 */}
-        <div className="relative bg-gradient-to-br from-blue-50 to-white rounded-3xl shadow-xl overflow-hidden aspect-square w-full max-w-lg mx-auto">
-          {/* 배경 블러 효과 - 애니메이션 범위 축소 */}
-          <motion.div 
-            className="absolute -top-5 -left-5 w-32 h-32 bg-blue-100 rounded-full filter blur-3xl opacity-30"
-            animate={{ 
-              x: [0, 5, -3, 0],
-              y: [0, -3, 5, 0]
-            }}
-            transition={{ 
-              repeat: Infinity, 
-              duration: 10,
-              ease: "easeInOut"
-            }}
-          />
-          <motion.div 
-            className="absolute bottom-0 right-0 w-40 h-40 bg-blue-100 rounded-full filter blur-3xl opacity-30"
-            animate={{ 
-              x: [0, -5, 3, 0],
-              y: [0, 3, -5, 0]
-            }}
-            transition={{ 
-              repeat: Infinity, 
-              duration: 10,
-              ease: "easeInOut",
-              delay: 1
-            }}
-          />
-          
-          {/* 이미지 */}
-          <div className="p-8 flex items-center justify-center h-full relative">
-            <Image 
-              src={item.imageUrl} 
-              alt={item.title}
-              width={400}
-              height={400}
-              className="object-contain transform transition-transform duration-700 hover:scale-105"
-            />
-          </div>
-        </div>
-      </div>
-      
-      {/* 텍스트 영역 */}
-      <div className="lg:w-1/2 px-4 lg:px-8">
-        <div className="max-w-lg mx-auto lg:mx-0">
-          <h3 className="text-3xl font-bold text-gray-900 mb-4 flex items-center">
+
+        {/* 배경에 은은하게 움직이는 블러 효과 추가 */}
+        <motion.div
+          className="absolute -top-10 -left-10 w-40 h-40 bg-blue-100 rounded-full filter blur-3xl opacity-50"
+          animate={{ x: [0, 10, -5, 0], y: [0, -5, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 12, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute -bottom-10 -right-10 w-40 h-40 bg-indigo-100 rounded-full filter blur-3xl opacity-50"
+          animate={{ x: [0, -10, 5, 0], y: [0, 5, -10, 0] }}
+          transition={{ repeat: Infinity, duration: 12, ease: "easeInOut", delay: 2 }}
+        />
+
+        {/* 텍스트 컨텐츠 영역 */}
+        <div className="relative z-10">
+          <h3 className="text-3xl font-bold text-gray-900 mb-4">
             {item.title}
           </h3>
           <div className="h-1 w-16 bg-blue-500 mb-6"></div>
-          <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+          <p className="text-lg text-gray-700 mb-8 leading-relaxed max-w-3xl">
             {item.description}
           </p>
-          
-          {/* 통계 정보 - 3열 그리드 */}
-          <div className="grid grid-cols-3 gap-4 mb-8">
+
+          {/* 통계 정보 - 그리드 레이아웃 */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8 max-w-lg">
             {item.stats.map((stat, i) => (
-              <div key={i} className="bg-gray-50 rounded-xl p-4 text-center transform transition-transform hover:translate-y-[-5px] shadow-sm hover:shadow-md">
-                <p className="text-blue-600 font-bold text-xl mb-1">{stat.value}</p>
+              <div key={i} className="bg-white/70 backdrop-blur-sm rounded-xl p-4 text-center transform transition-transform hover:-translate-y-1 shadow-sm hover:shadow-md border border-gray-200/50">
+                <p className="text-blue-600 font-bold text-2xl mb-1">{stat.value}</p>
                 <p className="text-gray-600 text-sm">{stat.label}</p>
               </div>
             ))}
           </div>
-          
-          <div className="inline-block px-4 py-2 bg-blue-50 text-blue-700 font-medium rounded-lg shadow-sm">
+
+          {/* 하이라이트 정보 */}
+          <div className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-800 font-semibold rounded-lg shadow-sm">
+            <CheckCircle className="inline-block h-5 w-5 mr-2 text-blue-600" />
             {item.highlight}
           </div>
         </div>
@@ -240,14 +200,16 @@ function FeatureItem({ feature }: FeatureItemProps) {
       {/* 확장 패널 - Framer Motion 사용 */}
       <motion.div 
         className="bg-blue-50 overflow-hidden"
+        initial={false}
         animate={{ 
           height: expanded ? "auto" : 0,
           opacity: expanded ? 1 : 0,
-          padding: expanded ? "1rem 2rem" : "0 2rem"
+          paddingTop: expanded ? "1rem" : "0",
+          paddingBottom: expanded ? "1rem" : "0",
         }}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.4, ease: "easeInOut" }}
       >
-        <p className="text-gray-700">{feature.details}</p>
+        <p className="px-8 text-gray-700">{feature.details}</p>
       </motion.div>
     </motion.div>
   );
@@ -286,7 +248,6 @@ export default function ProposalSection() {
   // 활성 섹션 결정 - CTA 섹션 인식 개선
   useEffect(() => {
     const handleScroll = () => {      
-      // 현재 활성 섹션 결정
       const scrollPosition = window.scrollY + 100
       const windowHeight = window.innerHeight
       const bodyHeight = document.body.scrollHeight
@@ -511,7 +472,7 @@ export default function ProposalSection() {
       {/* 차별화 포인트 섹션 */}
       <section 
         ref={featuresRef}
-        className="py-24 bg-white overflow-hidden"
+        className="py-24 bg-gray-50 overflow-hidden"
       >
         <div className="container mx-auto px-4 max-w-7xl">
           <motion.div className="text-center mb-20"
@@ -527,7 +488,7 @@ export default function ProposalSection() {
             </p>
           </motion.div>
 
-          <div className="space-y-40">
+          <div className="space-y-24">
             {differentiators.map((item, index) => (
               <DifferentiatorItem key={item.id} item={item} index={index} />
             ))}
@@ -538,7 +499,7 @@ export default function ProposalSection() {
       {/* 일반 특성 섹션 - 2x2 그리드 + 상호작용 패널 */}
       <section 
         ref={commonRef}
-        className="py-24 bg-gray-50 overflow-hidden"
+        className="py-24 bg-white overflow-hidden"
       >
         <div className="container mx-auto px-4 max-w-6xl">
           <motion.div className="text-center mb-20"
@@ -559,7 +520,7 @@ export default function ProposalSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.2, staggerChildren: 0.1 }}
           >
             {commonFeatures.map((feature, index) => (
               <FeatureItem key={index} feature={feature} index={index} />
@@ -632,23 +593,15 @@ export default function ProposalSection() {
             </ul>
           </div>
           
+          {/* --- [수정된 부분] 버튼: Link를 a 태그로 변경 --- */}
           <div className="flex justify-center">
-            <Button 
-              variant="outline" 
-              size="default" 
-              className="group bg-white text-blue-700 text-sm md:text-lg px-5 md:px-8 py-3 md:py-5 rounded-full"
-              asChild
-            >
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.3 }}
-              >
-                <Link href="/contact">
-                  도입 문의하기
-                </Link>
-              </motion.div>
-            </Button>
+            <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
+              <a href="/contact" className="group bg-white text-blue-700 text-sm md:text-lg px-5 md:px-8 py-3 md:py-5 rounded-full inline-flex items-center justify-center font-semibold shadow-sm">
+                도입 문의하기
+              </a>
+            </motion.div>
           </div>
+          {/* --- [수정 완료] --- */}
         </motion.div>
       </section>
 
@@ -673,6 +626,9 @@ export default function ProposalSection() {
         .bg-grid-pattern {
           background-image: radial-gradient(rgba(255, 255, 255, 0.15) 2px, transparent 2px);
           background-size: 30px 30px;
+        }
+        html {
+          scroll-behavior: smooth;
         }
       `}</style>
     </div>
