@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
 import { motion, useInView, useScroll, useSpring } from 'framer-motion'
 import { Button } from "@/components/ui/button"
-import { ArrowRightIcon, ChevronRight, CheckCircle, ChevronDown, Globe, X } from "lucide-react"
+import { ArrowRightIcon,  CheckCircle, ChevronDown, Globe, X } from "lucide-react"
 
 // 서비스 소개서 URL - 이 부분을 실제 URL로 변경하세요
 const SERVICE_INTRODUCTION_URL = "https://gamma.app/embed/wmsjc2q5wzsaqjw";
@@ -171,7 +171,7 @@ function DifferentiatorItem({ item, index }: DifferentiatorItemProps) {
 }
 
 // 특성 아이템 컴포넌트
-function FeatureItem({ feature, index }: FeatureItemProps) {
+function FeatureItem({ feature }: FeatureItemProps) {
   return (
     <motion.div 
       className="bg-white rounded-2xl shadow-md overflow-hidden h-full flex flex-col"
@@ -606,9 +606,9 @@ export default function ProposalSection() {
           {/* --- [수정된 부분] 버튼: Link를 a 태그로 변경 --- */}
           <div className="flex justify-center">
             <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
-              <a href="/contact" className="group bg-white text-blue-700 text-sm md:text-lg px-5 md:px-8 py-3 md:py-5 rounded-full inline-flex items-center justify-center font-semibold shadow-sm">
+              <Link href="/contact" className="group bg-white text-blue-700 text-sm md:text-lg px-5 md:px-8 py-3 md:py-5 rounded-full inline-flex items-center justify-center font-semibold shadow-sm">
                 도입 문의하기
-              </a>
+              </Link>
             </motion.div>
           </div>
           {/* --- [수정 완료] --- */}
