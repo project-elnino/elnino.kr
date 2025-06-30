@@ -4,7 +4,10 @@ import { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
 import { motion, useInView, useScroll, useSpring } from 'framer-motion'
 import { Button } from "@/components/ui/button"
-import { ArrowRightIcon, ChevronRight, CheckCircle, ChevronDown, Globe } from "lucide-react"
+import { ArrowRightIcon, ChevronRight, CheckCircle, ChevronDown, Globe, X } from "lucide-react"
+
+// 서비스 소개서 URL - 이 부분을 실제 URL로 변경하세요
+const SERVICE_INTRODUCTION_URL = "https://gamma.app/embed/wmsjc2q5wzsaqjw";
 
 // 데이터 타입 정의
 interface Stat {
@@ -217,6 +220,8 @@ function FeatureItem({ feature }: FeatureItemProps) {
 
 export default function ProposalSection() {
   const [activeSection, setActiveSection] = useState<string>("hero")
+  const [showIntroduction, setShowIntroduction] = useState(false)
+  const [iframeLoading, setIframeLoading] = useState(true)
   
   // 섹션 참조 생성
   const heroRef = useRef<HTMLElement>(null)
@@ -244,6 +249,28 @@ export default function ProposalSection() {
       document.body.style.overflowX = '';
     };
   }, []);
+
+  // 모달이 열렸을 때 스크롤 방지 및 ESC 키 핸들러
+  useEffect(() => {
+    if (showIntroduction) {
+      // 스크롤 방지
+      document.body.style.overflow = 'hidden';
+      
+      // ESC 키 핸들러
+      const handleEsc = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          setShowIntroduction(false);
+        }
+      };
+      
+      window.addEventListener('keydown', handleEsc);
+      
+      return () => {
+        document.body.style.overflow = '';
+        window.removeEventListener('keydown', handleEsc);
+      };
+    }
+  }, [showIntroduction]);
 
   // 활성 섹션 결정 - CTA 섹션 인식 개선
   useEffect(() => {
@@ -396,21 +423,22 @@ export default function ProposalSection() {
                   </Link>
                 </motion.div>
               </Button>
-              <Button 
-                variant="outline" 
-                size="default" 
-                className="bg-white hover:bg-white text-blue-700 text-sm md:text-lg px-5 md:px-8 py-3 md:py-5 rounded-full"
-                asChild
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
               >
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
+                <Button 
+                  variant="outline" 
+                  size="default" 
+                  className="bg-white hover:bg-white text-blue-700 text-sm md:text-lg px-5 md:px-8 py-3 md:py-5 rounded-full"
+                  onClick={() => {
+                    setShowIntroduction(true);
+                    setIframeLoading(true);
+                  }}
                 >
-                  <Link href="/contact">
-                    서비스 소개서
-                  </Link>
-                </motion.div>
-              </Button>
+                  서비스 소개서
+                </Button>
+              </motion.div>
             </div>
             
             {/* 통역방 입장하기 버튼 - 중앙에 추가 */}
@@ -621,6 +649,57 @@ export default function ProposalSection() {
           </svg>
         </button>
       </motion.div>
+
+      {/* 서비스 소개서 iframe 모달 */}
+      {showIntroduction && (
+        <motion.div 
+          className="fixed inset-0 bg-black/80 z-[100] flex items-center justify-center p-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setShowIntroduction(false)}
+        >
+          <motion.div 
+            className="bg-white rounded-lg w-full max-w-6xl h-[90vh] relative overflow-hidden"
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* 헤더 */}
+            <div className="absolute top-0 left-0 right-0 bg-white border-b border-gray-200 p-4 flex justify-between items-center z-10">
+              <h3 className="text-xl font-semibold text-gray-900">서비스 소개서</h3>
+              <button 
+                onClick={() => setShowIntroduction(false)}
+                className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                aria-label="닫기"
+              >
+                <X className="h-5 w-5 text-gray-600" />
+              </button>
+            </div>
+            
+            {/* iframe 컨테이너 */}
+            <div className="pt-16 h-full">
+              {/* 로딩 인디케이터 */}
+              {iframeLoading && (
+                <div className="absolute inset-0 flex items-center justify-center bg-white pt-16">
+                  <div className="text-center">
+                    <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+                    <p className="mt-4 text-gray-600">로딩 중...</p>
+                  </div>
+                </div>
+              )}
+              <iframe 
+                src={SERVICE_INTRODUCTION_URL}
+                className="w-full h-full border-0"
+                title="서비스 소개서"
+                allowFullScreen
+                onLoad={() => setIframeLoading(false)}
+              />
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
 
       <style jsx global>{`
         .bg-grid-pattern {
