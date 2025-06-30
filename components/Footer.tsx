@@ -26,12 +26,6 @@ export default function Footer() {
               >
                 개인정보처리방침
               </Link>
-              <Link 
-                href="/team" 
-                className="hover:text-white transition-colors"
-              >
-                회사소개
-              </Link>
             </nav>
             <p>© 2025 Elnino. All rights reserved.</p>
           </div>
