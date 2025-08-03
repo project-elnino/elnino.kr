@@ -27,7 +27,7 @@ export default function DownloadPage() {
     icon: Monitor,
     color: '#0078D4',
     version: 'v0.0.1',
-    releaseDate: '2025.07.26',
+    releaseDate: '2025.07.30',
     fileSize: '108 MB',
     downloadUrl: 'https://github.com/project-elnino/elnino.kr/releases/latest/download/KnocSetup.exe',
     requirements: 'Windows 7 이상 • 4GB RAM • 200MB 저장공간'
