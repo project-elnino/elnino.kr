@@ -5,19 +5,18 @@ import Link from 'next/link'
 import { motion, useInView, useScroll, useSpring } from 'framer-motion'
 import { Button } from "@/components/ui/button"
 import { ArrowRightIcon,  CheckCircle, ChevronDown, Globe, X } from "lucide-react"
-import Topbar from "@/components/Topbar"
-import Footer from "@/components/Footer"
+import Topbar from "@/components/en/Topbar"
+import Footer from "@/components/en/Footer"
 
-// 서비스 소개서 URL - 이 부분을 실제 URL로 변경하세요
+// Service introduction URL
 const SERVICE_INTRODUCTION_URL = "https://gamma.app/embed/wmsjc2q5wzsaqjw";
 
-// 데이터 타입 정의
+// Data type definitions
 interface Stat {
   label: string;
   value: string;
 }
 
-// 차별화 포인트 데이터 타입에서 imageUrl 제거
 interface Differentiator {
   id: string;
   title: string;
@@ -33,72 +32,72 @@ interface Feature {
   details: string;
 }
 
-// 차별화 포인트 데이터에서 imageUrl 제거
+// Differentiator data
 const differentiators: Differentiator[] = [
   {
     id: "boosting-model",
-    title: "단어 & 맥락 부스팅 모델",
-    description: "특정 산업과 분야에 특화된 AI 모델로 키워드와 문맥을 동시에 부스팅합니다. 의학, 법률, IT, 금융 등 전문 분야에서 최대 99%의 정확도를 보장합니다.",
-    highlight: "타사 대비 향상된 정확도",
+    title: "Word & Context Boosting Model",
+    description: "AI model specialized for specific industries and fields, boosting both keywords and context simultaneously. Guarantees up to 99% accuracy in professional fields such as medicine, law, IT, and finance.",
+    highlight: "Enhanced accuracy compared to competitors",
     stats: [
-      { label: "정확도", value: "99%" },
-      { label: "지원 분야", value: "10+" },
-      { label: "커스텀 가능", value: "Yes" }
+      { label: "Accuracy", value: "99%" },
+      { label: "Supported Fields", value: "10+" },
+      { label: "Customizable", value: "Yes" }
     ]
   },
   {
     id: "scalable-solution",
-    title: "다양한 규모 지원",
-    description: "5인 소규모 회의부터 5,000명 이상의 대규모 컨퍼런스까지 모든 환경에서 안정적인 성능을 제공합니다. 네트워크 상태에 따라 자동으로 최적화됩니다.",
-    highlight: "최대 5,000명 동시 접속 지원",
+    title: "Support for Various Scales",
+    description: "Provides stable performance in all environments, from small 5-person meetings to large conferences with over 5,000 participants. Automatically optimizes according to network conditions.",
+    highlight: "Supports up to 5,000 simultaneous connections",
     stats: [
-      { label: "최대 참가자", value: "5,000+" },
-      { label: "최소 참가자", value: "1명" },
-      { label: "네트워크 자동 최적화", value: "Yes" }
+      { label: "Max Participants", value: "5,000+" },
+      { label: "Min Participants", value: "1" },
+      { label: "Auto Network Optimization", value: "Yes" }
     ]
   },
   {
     id: "easy-setup",
-    title: "간편 설치 & 사용",
-    description: "프로그램 설치 만으로 시스템 구축이 완료됩니다. 발표자는 노트북 한 대, 참가자는 스마트폰만으로 원활한 번역 서비스를 이용할 수 있습니다.",
-    highlight: "설치 소요시간 단 1분",
+    title: "Easy Installation & Use",
+    description: "System setup is complete with just program installation. Presenters need only a laptop, and participants can enjoy smooth translation services with just their smartphones.",
+    highlight: "Installation takes only 1 minute",
     stats: [
-      { label: "설치 단계", value: "1단계" },
-      { label: "필요 장비", value: "노트북 1대" },
-      { label: "기술 지원", value: "24/7" }
+      { label: "Installation Steps", value: "1 Step" },
+      { label: "Required Equipment", value: "1 Laptop" },
+      { label: "Technical Support", value: "24/7" }
     ]
   }
 ]
 
-// 일반 특성 데이터
+// Common features data
 const commonFeatures: Feature[] = [
   {
     icon: "⚡",
-    title: "빠른 속도",
-    description: "발화 직후 즉시 번역되어 자연스러운 대화 흐름 유지하며 번역 제공",
-    details: "AI 최적화 알고리즘으로 최소한의 지연으로 번역합니다. 전후 맥락을 고려한 매끄러운 대화를 경험하세요."
+    title: "Fast Speed",
+    description: "Immediate translation after speech maintains natural conversation flow",
+    details: "Experience smooth conversations with minimal delay using AI-optimized algorithms. Enjoy seamless dialogue considering context before and after."
   },
   {
     icon: "🗣️",
-    title: "101개 언어 지원",
-    description: "전 세계 주요 언어는 물론 소수 언어까지 폭넓게 지원",
-    details: "영어와 중국어를 비롯한 언어부터 희소 언어까지 지원합니다. 모든 언어는 양방향 번역이 가능하며 지속적으로 업데이트됩니다."
+    title: "101 Languages Support",
+    description: "Wide support from major world languages to minority languages",
+    details: "Supports languages from English and Chinese to rare languages. All languages support bidirectional translation and are continuously updated."
   },
   {
     icon: "🌐",
-    title: "언어 조사 불필요",
-    description: "참가자의 언어를 본인이 직접 선택 가능",
-    details: "발화자와 참가자가 직접 자신의 언어를 선택합니다. 사전 조사 없이 회의 시작 직전에도 빠른 설정이 가능합니다."
+    title: "No Language Survey Needed",
+    description: "Participants can select their own language directly",
+    details: "Speakers and participants select their own languages directly. Quick setup is possible even right before the meeting without prior surveys."
   },
   {
     icon: "💰",
-    title: "합리적 가격",
-    description: "합리적 요금제로 비용 효율성 극대화",
-    details: "월 구독제로 합리적이고 투명한 과금 체계를 제공합니다. 기업 규모나 사용자 수에 따른 다양한 요금제를 선택할 수 있습니다."
+    title: "Reasonable Pricing",
+    description: "Maximize cost efficiency with reasonable pricing plans",
+    details: "Provides reasonable and transparent billing with monthly subscriptions. Choose from various pricing plans based on company size or number of users."
   }
 ]
 
-// 컴포넌트 Props 타입 정의
+// Component Props type definitions
 interface DifferentiatorItemProps {
   item: Differentiator;
   index: number;
@@ -109,8 +108,7 @@ interface FeatureItemProps {
   index: number;
 }
 
-// --- [수정된 부분] 차별화 포인트 아이템 컴포넌트 ---
-// 이미지를 사용하지 않는 카드 디자인으로 변경
+// Differentiator item component
 function DifferentiatorItem({ item, index }: DifferentiatorItemProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
@@ -118,18 +116,18 @@ function DifferentiatorItem({ item, index }: DifferentiatorItemProps) {
   return (
     <motion.div
       ref={ref}
-      className="max-w-4xl mx-auto" // 좌우 분할 레이아웃 제거, 중앙 정렬 컨테이너로 변경
-      initial={{ opacity: 0, y: 50 }} // 애니메이션을 위로 떠오르는 효과로 변경
+      className="max-w-4xl mx-auto"
+      initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, ease: [0.17, 0.55, 0.55, 1] }}
     >
       <div className="relative bg-gradient-to-br from-blue-50 via-white to-indigo-50 rounded-3xl shadow-lg border border-gray-100 p-8 md:p-12 overflow-hidden">
-        {/* 배경에 큰 숫자로 디자인 요소 추가 */}
+        {/* Background large number design element */}
         <div className="absolute top-4 right-8 text-8xl md:text-9xl font-black text-gray-200/80 select-none z-0">
           {(index + 1).toString().padStart(2, '0')}
         </div>
 
-        {/* 배경에 은은하게 움직이는 블러 효과 추가 */}
+        {/* Background blur effects */}
         <motion.div
           className="absolute -top-10 -left-10 w-40 h-40 bg-blue-100 rounded-full filter blur-3xl opacity-50"
           animate={{ x: [0, 10, -5, 0], y: [0, -5, 10, 0] }}
@@ -141,7 +139,7 @@ function DifferentiatorItem({ item, index }: DifferentiatorItemProps) {
           transition={{ repeat: Infinity, duration: 12, ease: "easeInOut", delay: 2 }}
         />
 
-        {/* 텍스트 컨텐츠 영역 */}
+        {/* Text content area */}
         <div className="relative z-10">
           <h3 className="text-3xl font-bold text-gray-900 mb-4">
             {item.title}
@@ -151,7 +149,7 @@ function DifferentiatorItem({ item, index }: DifferentiatorItemProps) {
             {item.description}
           </p>
 
-          {/* 통계 정보 - 그리드 레이아웃 */}
+          {/* Statistics - grid layout */}
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8 max-w-lg">
             {item.stats.map((stat, i) => (
               <div key={i} className="bg-white/70 backdrop-blur-sm rounded-xl p-4 text-center transform transition-transform hover:-translate-y-1 shadow-sm hover:shadow-md border border-gray-200/50">
@@ -161,7 +159,7 @@ function DifferentiatorItem({ item, index }: DifferentiatorItemProps) {
             ))}
           </div>
 
-          {/* 하이라이트 정보 */}
+          {/* Highlight info */}
           <div className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-800 font-semibold rounded-lg shadow-sm">
             <CheckCircle className="inline-block h-5 w-5 mr-2 text-blue-600" />
             {item.highlight}
@@ -172,7 +170,7 @@ function DifferentiatorItem({ item, index }: DifferentiatorItemProps) {
   );
 }
 
-// 특성 아이템 컴포넌트
+// Feature item component
 function FeatureItem({ feature }: FeatureItemProps) {
   return (
     <motion.div 
@@ -180,7 +178,7 @@ function FeatureItem({ feature }: FeatureItemProps) {
       whileHover={{ scale: 1.01 }}
       transition={{ duration: 0.3 }}
     >
-      {/* 상단 컨텐츠 영역 */}
+      {/* Top content area */}
       <div className="p-6 flex-1">
         <div className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-200 text-blue-600 rounded-xl text-xl mb-4 shadow-sm">
           {feature.icon}
@@ -189,12 +187,12 @@ function FeatureItem({ feature }: FeatureItemProps) {
         <p className="text-gray-700 text-sm">{feature.description}</p>
       </div>
       
-      {/* 구분선 - 모든 카드에서 동일한 위치 */}
+      {/* Divider line */}
       <div className="px-6">
         <div className="h-px bg-gray-200"></div>
       </div>
       
-      {/* 상세 내용 */}
+      {/* Detail content */}
       <div className="bg-blue-50 px-6 py-4">
         <p className="text-gray-700 text-sm leading-relaxed">{feature.details}</p>
       </div>
@@ -207,13 +205,13 @@ export default function ProposalSection() {
   const [showIntroduction, setShowIntroduction] = useState(false)
   const [iframeLoading, setIframeLoading] = useState(true)
   
-  // 섹션 참조 생성
+  // Section references
   const heroRef = useRef<HTMLElement>(null)
   const featuresRef = useRef<HTMLElement>(null)
   const commonRef = useRef<HTMLElement>(null)
   const ctaRef = useRef<HTMLElement>(null)
 
-  // 스크롤 프로그레스 - Framer Motion으로 변경
+  // Scroll progress - using Framer Motion
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -221,26 +219,22 @@ export default function ProposalSection() {
     restDelta: 0.001
   });
 
-  // 가로 스크롤 방지를 위한 useEffect 추가
+  // Prevent horizontal scroll
   useEffect(() => {
-    // 페이지 로드 시 가로 스크롤 방지
     document.documentElement.style.overflowX = 'hidden';
     document.body.style.overflowX = 'hidden';
     
     return () => {
-      // 컴포넌트 언마운트 시 복원
       document.documentElement.style.overflowX = '';
       document.body.style.overflowX = '';
     };
   }, []);
 
-  // 모달이 열렸을 때 스크롤 방지 및 ESC 키 핸들러
+  // Prevent scroll and ESC key handler when modal is open
   useEffect(() => {
     if (showIntroduction) {
-      // 스크롤 방지
       document.body.style.overflow = 'hidden';
       
-      // ESC 키 핸들러
       const handleEsc = (e: KeyboardEvent) => {
         if (e.key === 'Escape') {
           setShowIntroduction(false);
@@ -256,14 +250,13 @@ export default function ProposalSection() {
     }
   }, [showIntroduction]);
 
-  // 활성 섹션 결정 - CTA 섹션 인식 개선
+  // Determine active section
   useEffect(() => {
     const handleScroll = () => {      
       const scrollPosition = window.scrollY + 100
       const windowHeight = window.innerHeight
       const bodyHeight = document.body.scrollHeight
       
-      // 페이지 끝 근처에 도달하면 CTA 섹션으로 간주
       if (window.scrollY + windowHeight >= bodyHeight - 100) {
         setActiveSection("cta")
       } else if (ctaRef.current && scrollPosition >= ctaRef.current.offsetTop) {
@@ -281,7 +274,7 @@ export default function ProposalSection() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // 특정 섹션으로 스크롤 - 타입 오류 수정
+  // Scroll to specific section
   const scrollToSection = (ref: React.RefObject<HTMLElement | null>) => {
     if (ref.current) {
       window.scrollTo({
@@ -294,7 +287,7 @@ export default function ProposalSection() {
   return (
     <div className="flex flex-col min-h-screen relative overflow-x-hidden">
       <Topbar />
-      {/* 스크롤 프로그레스 바 - Framer Motion으로 변경 */}
+      {/* Scroll progress bar */}
       <div className="fixed top-0 left-0 w-full h-1 bg-gray-200 z-50">
         <motion.div 
           className="h-full bg-blue-600 origin-left"
@@ -302,38 +295,38 @@ export default function ProposalSection() {
         ></motion.div>
       </div>
       
-      {/* 사이드 네비게이션 - 위치 조정 */}
+      {/* Side navigation */}
       <div className="fixed right-4 lg:right-8 top-1/2 transform -translate-y-1/2 z-50 hidden lg:block">
         <div className="flex flex-col items-center space-y-6">
           <button 
             onClick={() => scrollToSection(heroRef)}
             className={`w-3 h-3 rounded-full transition-all duration-300 ${activeSection === 'hero' ? 'bg-blue-600 w-4 h-4' : 'bg-gray-400'}`}
-            aria-label="히어로 섹션으로 이동"
+            aria-label="Go to hero section"
           />
           <button 
             onClick={() => scrollToSection(featuresRef)}
             className={`w-3 h-3 rounded-full transition-all duration-300 ${activeSection === 'features' ? 'bg-blue-600 w-4 h-4' : 'bg-gray-400'}`}
-            aria-label="차별화 포인트 섹션으로 이동"
+            aria-label="Go to differentiators section"
           />
           <button 
             onClick={() => scrollToSection(commonRef)}
             className={`w-3 h-3 rounded-full transition-all duration-300 ${activeSection === 'common' ? 'bg-blue-600 w-4 h-4' : 'bg-gray-400'}`}
-            aria-label="주요 특성 섹션으로 이동"
+            aria-label="Go to features section"
           />
           <button 
             onClick={() => scrollToSection(ctaRef)}
             className={`w-3 h-3 rounded-full transition-all duration-300 ${activeSection === 'cta' ? 'bg-blue-600 w-4 h-4' : 'bg-gray-400'}`}
-            aria-label="CTA 섹션으로 이동"
+            aria-label="Go to CTA section"
           />
         </div>
       </div>
 
-      {/* 히어로 섹션 */}
+      {/* Hero section */}
       <section 
         ref={heroRef}
         className="relative min-h-screen flex items-center bg-gradient-to-br from-blue-900 via-blue-700 to-blue-500 text-white overflow-hidden"
       >
-        {/* 배경 애니메이션 요소 - 위치와 크기 조정 */}
+        {/* Background animation elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-full bg-grid-pattern opacity-20"></div>
           <motion.div 
@@ -372,16 +365,16 @@ export default function ProposalSection() {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <div className="max-w-3xl mx-auto text-center">
-            <span className="inline-block px-4 py-1 rounded-full bg-white/10 text-blue-100 font-medium text-sm mb-6 backdrop-blur-sm">
-              AI 실시간 번역 서비스
+            <span className="inline-block px-4 py-1 rounded-full bg-white/10 text-blue-100 font-medium text-sm mb-6 mt-8 backdrop-blur-sm">
+              AI Real-time Translation Service
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              언어 장벽 없는<br />세상을 만듭니다
+              Creating a World<br />Without Language Barriers
             </h1>
             <div className="h-1 w-24 bg-blue-300 mx-auto mb-8"></div>
             <p className="text-lg md:text-xl lg:text-2xl leading-relaxed mb-10 text-blue-100">
-              분야별 커스텀 모델로 소규모 회의부터 대규모 컨퍼런스까지
-              <br />어떤 환경에서든 완벽한 번역을 경험하세요.
+              Experience perfect translation in any environment
+              <br />from small meetings to large conferences with field-specific custom models.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-2 md:gap-4 mb-8">
               <Button 
@@ -393,9 +386,9 @@ export default function ProposalSection() {
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <Link href="/contact">
+                  <Link href="/en/contact">
                     <span className="flex items-center justify-center">
-                      지금 신청하기
+                      Apply Now
                       <motion.span
                         className="ml-2 inline-block"
                         animate={{ x: 0 }}
@@ -421,12 +414,12 @@ export default function ProposalSection() {
                     setIframeLoading(true);
                   }}
                 >
-                  서비스 소개서
+                  Service Introduction
                 </Button>
               </motion.div>
             </div>
             
-            {/* 통역방 입장하기 버튼 - 중앙에 추가 */}
+            {/* Enter Interpretation Room button */}
             <div className="flex justify-center mb-16">
               <Button 
                 variant="outline" 
@@ -441,14 +434,14 @@ export default function ProposalSection() {
                   <a href="https://cloud.elnino.kr/" target="_blank" rel="noopener noreferrer">
                     <span className="flex items-center justify-center">
                       <Globe className="h-4 w-4 md:h-5 md:w-5 mr-2" />
-                      통역방 입장하기
+                      Enter Interpretation Room
                     </span>
                   </a>
                 </motion.div>
               </Button>
             </div>
             
-            {/* 스크롤 다운 인디케이터 */}
+            {/* Scroll down indicator */}
             <motion.div 
               className="absolute bottom-9 left-1/2 transform -translate-x-1/2"
               animate={{ y: [0, 10, 0] }}
@@ -457,7 +450,7 @@ export default function ProposalSection() {
               <button 
                 onClick={() => scrollToSection(featuresRef)} 
                 className="text-white/70 hover:text-white transition-colors"
-                aria-label="아래로 스크롤"
+                aria-label="Scroll down"
               >
                 <ChevronDown className="h-8 w-8" />
               </button>
@@ -465,7 +458,7 @@ export default function ProposalSection() {
           </div>
         </motion.div>
         
-        {/* 웨이브 디바이더 */}
+        {/* Wave divider */}
         <div className="absolute bottom-0 left-0 w-full overflow-hidden" style={{ transform: 'translateY(1px)' }}>
           <svg
             className="w-full h-auto"
@@ -483,10 +476,10 @@ export default function ProposalSection() {
         </div>
       </section>
 
-      {/* 차별화 포인트 섹션 */}
+      {/* Differentiators section */}
       <section 
         ref={featuresRef}
-        className="py-24 bg-gray-50 overflow-hidden"
+        className="py-24 bg-gray-50 overflow-hidden -mt-px"
       >
         <div className="container mx-auto px-4 max-w-7xl">
           <motion.div className="text-center mb-20"
@@ -495,10 +488,10 @@ export default function ProposalSection() {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="inline-block px-4 py-1 rounded-full bg-blue-100 text-blue-700 font-medium text-sm mb-4">차별화된 기술력</span>
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Knoc만의 차별화 포인트</h2>
+            <span className="inline-block px-4 py-1 rounded-full bg-blue-100 text-blue-700 font-medium text-sm mb-4">Differentiated Technology</span>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Knoc&apos;s Unique Differentiators</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              타 서비스와 다른 분야별 특화 번역 모델 기술로 안정적이고 정확한 번역 서비스를 제공합니다.
+              We provide stable and accurate translation services with field-specific translation model technology that sets us apart from other services.
             </p>
           </motion.div>
 
@@ -510,7 +503,7 @@ export default function ProposalSection() {
         </div>
       </section>
 
-      {/* 일반 특성 섹션 - 2x2 그리드 + 상호작용 패널 */}
+      {/* Common features section */}
       <section 
         ref={commonRef}
         className="pt-24 pb-8 bg-white overflow-hidden"
@@ -522,10 +515,10 @@ export default function ProposalSection() {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="inline-block px-4 py-1 rounded-full bg-green-100 text-green-700 font-medium text-sm mb-4">핵심 기능</span>
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">놓칠 수 없는 주요 특성</h2>
+            <span className="inline-block px-4 py-1 rounded-full bg-green-100 text-green-700 font-medium text-sm mb-4">Core Features</span>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Essential Features You Can&apos;t Miss</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              최고의 번역 경험을 위한 필수 기능들을 모두 갖추었습니다.
+              We have all the essential features for the best translation experience.
             </p>
           </motion.div>
 
@@ -543,12 +536,12 @@ export default function ProposalSection() {
         </div>
       </section>
 
-      {/* CTA 섹션 */}
+      {/* CTA section */}
       <section 
         ref={ctaRef}
         className="py-24 bg-gradient-to-br from-blue-700 to-indigo-800 text-white relative overflow-hidden"
       >
-        {/* 배경 요소 - 크기와 위치 조정 */}
+        {/* Background elements */}
         <div className="absolute inset-0 overflow-hidden">
           <motion.div 
             className="absolute top-0 right-0 w-72 h-72 lg:w-96 lg:h-96 bg-blue-600 rounded-full filter blur-3xl opacity-20"
@@ -586,18 +579,18 @@ export default function ProposalSection() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl font-bold mb-6">지금 바로 시작하세요</h2>
+          <h2 className="text-4xl font-bold mb-6">Get Started Now</h2>
           <p className="text-xl text-blue-100 max-w-2xl mx-auto mb-10">
-            설치부터 활용까지 1분 안에 가능합니다.
+            From installation to utilization, possible within 1 minute.
           </p>
           
-          {/* 기대 효과 체크리스트 */}
+          {/* Expected benefits checklist */}
           <div className="max-w-md mx-auto mb-10 text-left">
-            <p className="text-lg font-semibold mb-4 text-center">도입 시 기대효과</p>
+            <p className="text-lg font-semibold mb-4 text-center">Expected Benefits</p>
             <ul className="space-y-3">
               {[
-                '국제 회의 참여율 향상',
-                '참가자 이해도 증진'
+                'Increased participation in international meetings',
+                'Enhanced participant understanding'
               ].map((item, i) => (
                 <li key={i} className="flex items-start">
                   <CheckCircle className="h-5 w-5 text-green-300 mr-2 flex-shrink-0 mt-1" />
@@ -607,19 +600,18 @@ export default function ProposalSection() {
             </ul>
           </div>
           
-          {/* --- [수정된 부분] 버튼: Link를 a 태그로 변경 --- */}
+          {/* CTA button */}
           <div className="flex justify-center">
             <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
-              <Link href="/contact" className="group bg-white text-blue-700 text-sm md:text-lg px-5 md:px-8 py-3 md:py-5 rounded-full inline-flex items-center justify-center font-semibold shadow-sm">
-                도입 문의하기
+              <Link href="/en/contact" className="group bg-white text-blue-700 text-sm md:text-lg px-5 md:px-8 py-3 md:py-5 rounded-full inline-flex items-center justify-center font-semibold shadow-sm">
+                Contact for Implementation
               </Link>
             </motion.div>
           </div>
-          {/* --- [수정 완료] --- */}
         </motion.div>
       </section>
 
-      {/* 고정 버튼 - 상단으로 스크롤 */}
+      {/* Fixed button - scroll to top */}
       <motion.div 
         className="fixed bottom-4 right-4 lg:bottom-8 lg:right-8 z-50"
         whileHover={{ scale: 1.05 }}
@@ -628,7 +620,7 @@ export default function ProposalSection() {
         <button 
           onClick={() => scrollToSection(heroRef)}
           className="bg-white p-3 lg:p-4 rounded-full shadow-lg text-blue-600 hover:bg-blue-50 transition-colors"
-          aria-label="맨 위로 이동"
+          aria-label="Go to top"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 lg:h-6 lg:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
@@ -636,7 +628,7 @@ export default function ProposalSection() {
         </button>
       </motion.div>
 
-      {/* 서비스 소개서 iframe 모달 */}
+      {/* Service introduction iframe modal */}
       {showIntroduction && (
         <motion.div 
           className="fixed inset-0 bg-black/80 z-[100] flex items-center justify-center p-4"
@@ -652,33 +644,33 @@ export default function ProposalSection() {
             transition={{ duration: 0.3 }}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* 헤더 */}
+            {/* Header */}
             <div className="absolute top-0 left-0 right-0 bg-white border-b border-gray-200 p-4 flex justify-between items-center z-10">
-              <h3 className="text-xl font-semibold text-gray-900">서비스 소개서</h3>
+              <h3 className="text-xl font-semibold text-gray-900">Service Introduction</h3>
               <button 
                 onClick={() => setShowIntroduction(false)}
                 className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-                aria-label="닫기"
+                aria-label="Close"
               >
                 <X className="h-5 w-5 text-gray-600" />
               </button>
             </div>
             
-            {/* iframe 컨테이너 */}
+            {/* iframe container */}
             <div className="pt-16 h-full">
-              {/* 로딩 인디케이터 */}
+              {/* Loading indicator */}
               {iframeLoading && (
                 <div className="absolute inset-0 flex items-center justify-center bg-white pt-16">
                   <div className="text-center">
                     <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-                    <p className="mt-4 text-gray-600">로딩 중...</p>
+                    <p className="mt-4 text-gray-600">Loading...</p>
                   </div>
                 </div>
               )}
               <iframe 
                 src={SERVICE_INTRODUCTION_URL}
                 className="w-full h-full border-0"
-                title="서비스 소개서"
+                title="Service Introduction"
                 allowFullScreen
                 onLoad={() => setIframeLoading(false)}
               />

@@ -2,8 +2,8 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import Topbar from '@/components/Topbar'
-import Footer from '@/components/Footer'
+import Topbar from '@/components/en/Topbar'
+import Footer from '@/components/en/Footer'
 import { 
   Download, 
   Monitor,
@@ -32,15 +32,15 @@ export default function DownloadPage() {
     releaseDate: '2025.07.30',
     fileSize: '108 MB',
     downloadUrl: 'https://github.com/project-elnino/elnino.kr/releases/latest/download/KnocSetup.exe',
-    requirements: 'Windows 7 이상 • 4GB RAM • 200MB 저장공간'
+    requirements: 'Windows 7 or higher • 4GB RAM • 200MB storage'
   }
 
   return (
     <div className="min-h-screen flex flex-col">
       <Topbar />
-      {/* 상단 섹션: 파란색 배경에 타이틀 - 패딩 증가 */}
+      {/* Top section: Blue background with title */}
       <section className="bg-gradient-to-br from-blue-900 via-blue-700 to-blue-500 py-32 relative overflow-hidden">
-        {/* 배경 애니메이션 요소 */}
+        {/* Background animation elements */}
         <div className="absolute inset-0">
           <div className="absolute top-0 left-0 w-full h-full bg-grid-pattern opacity-20"></div>
           <motion.div 
@@ -72,7 +72,7 @@ export default function DownloadPage() {
           />
         </div>
 
-        {/* 타이틀 콘텐츠 */}
+        {/* Title content */}
         <div className="container max-w-5xl mx-auto px-6 lg:px-8 relative z-10">
           <motion.div 
             className="text-center mt-12"
@@ -80,31 +80,31 @@ export default function DownloadPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <h1 className="text-5xl font-extrabold text-white mb-6">클라이언트 다운로드</h1>
+            <h1 className="text-5xl font-extrabold text-white mb-6">Client Download</h1>
             <div className="h-1 w-24 bg-blue-300 mx-auto mb-10"></div>
-            <p className="text-xl text-blue-100 max-w-2xl mx-auto">1분 만에 모든 설정을 끝냅니다.</p>
+            <p className="text-xl text-blue-100 max-w-2xl mx-auto">Complete all setup in just 1 minute.</p>
           </motion.div>
         </div>
       </section>
 
-      {/* 중단 섹션: 흰색 배경에 다운로드 컨텐츠 - 패딩 줄임 */}
+      {/* Middle section: White background with download content */}
       <section className="bg-white py-14 flex-grow">
         <div className="container max-w-4xl mx-auto px-6 lg:px-8">
-          {/* Windows 다운로드 섹션 */}
+          {/* Windows download section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            {/* Windows 플랫폼 정보 카드 */}
+            {/* Windows platform info card */}
             <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 mb-8">
               <div className="flex items-start gap-6">
-                {/* 아이콘 */}
+                {/* Icon */}
                 <div className="w-20 h-20 bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl flex items-center justify-center flex-shrink-0">
                   <Monitor className="w-10 h-10" style={{ color: windowsPlatform.color }} />
                 </div>
                 
-                {/* 정보 및 다운로드 */}
+                {/* Info and download */}
                 <div className="flex-1">
                   <div className="flex items-start justify-between">
                     <div>
@@ -126,7 +126,7 @@ export default function DownloadPage() {
                       </p>
                     </div>
                     
-                    {/* 다운로드 버튼 */}
+                    {/* Download button */}
                     <motion.button
                       onClick={() => handleDownload(windowsPlatform.downloadUrl)}
                       disabled={isDownloading}
@@ -141,12 +141,12 @@ export default function DownloadPage() {
                       {isDownloading ? (
                         <>
                           <CheckCircle className="w-5 h-5" />
-                          다운로드 시작됨
+                          Download Started
                         </>
                       ) : (
                         <>
                           <Download className="w-5 h-5" />
-                          다운로드
+                          Download
                         </>
                       )}
                     </motion.button>
@@ -155,17 +155,17 @@ export default function DownloadPage() {
               </div>
             </div>
 
-            {/* 도움말 */}
+            {/* Help text */}
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
               className="text-center text-sm text-gray-500"
             >
-              다운로드가 자동으로 시작되지 않으면 다운로드 버튼을 다시 클릭해주세요
+              If the download doesn&apos;t start automatically, please click the download button again
             </motion.p>
 
-            {/* 추가 정보 */}
+            {/* Additional info */}
             <motion.div 
               className="mt-12 grid grid-cols-3 gap-6"
               initial={{ opacity: 0, y: 20 }}
@@ -176,30 +176,31 @@ export default function DownloadPage() {
                 <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
                   <span className="text-blue-600 font-bold">1</span>
                 </div>
-                <h3 className="font-semibold text-gray-900 mb-1">다운로드</h3>
-                <p className="text-sm text-gray-600">설치 파일을 다운로드하세요</p>
+                <h3 className="font-semibold text-gray-900 mb-1">Download</h3>
+                <p className="text-sm text-gray-600">Download the installation file</p>
               </div>
               
               <div className="text-center p-6 bg-gray-50 rounded-xl">
                 <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
                   <span className="text-blue-600 font-bold">2</span>
                 </div>
-                <h3 className="font-semibold text-gray-900 mb-1">설치</h3>
-                <p className="text-sm text-gray-600">파일을 실행하여 설치하세요</p>
+                <h3 className="font-semibold text-gray-900 mb-1">Install</h3>
+                <p className="text-sm text-gray-600">Run the file to install</p>
               </div>
               
               <div className="text-center p-6 bg-gray-50 rounded-xl">
                 <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
                   <span className="text-blue-600 font-bold">3</span>
                 </div>
-                <h3 className="font-semibold text-gray-900 mb-1">시작</h3>
-                <p className="text-sm text-gray-600">로그인 후 사용을 시작하세요</p>
+                <h3 className="font-semibold text-gray-900 mb-1">Start</h3>
+                <p className="text-sm text-gray-600">Login and start using</p>
               </div>
             </motion.div>
           </motion.div>
         </div>
       </section>
-      {/* CSS 스타일 */}
+      
+      {/* CSS styles */}
       <style jsx global>{`
         .bg-grid-pattern {
           background-image: radial-gradient(rgba(255, 255, 255, 0.15) 2px, transparent 2px);

@@ -9,7 +9,7 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Topbar />
-      {/* 상단 섹션: 파란색 배경에 타이틀 - 패딩 증가 */}
+      {/* 상단 셉션: 파란색 배경에 타이틀 - 패딩 증가 */}
       <section className="bg-gradient-to-br from-blue-900 via-blue-700 to-blue-500 py-32 relative overflow-hidden">
         {/* 배경 애니메이션 요소 */}
         <div className="absolute inset-0">
