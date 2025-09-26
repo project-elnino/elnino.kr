@@ -9,7 +9,7 @@ import Topbar from "@/components/en/Topbar"
 import Footer from "@/components/en/Footer"
 
 // Service introduction URL
-const SERVICE_INTRODUCTION_URL = "https://gamma.app/embed/wmsjc2q5wzsaqjw";
+const SERVICE_INTRODUCTION_URL = "https://gamma.app/embed/6eqrunekf378rz0";
 
 // Data type definitions
 interface Stat {
