@@ -56,6 +56,11 @@ export default function Topbar() {
               Download
             </Link>
           </li>
+          <li>
+            <Link href="https://dev.elnino.kr/dashboard" className="hover:text-blue-500 transition-colors">
+              Dashboard
+            </Link>
+          </li>
           <li className="ml-1 sm:ml-2 border-l border-white/20 pl-3 sm:pl-4">
             <Link 
               href={getKoreanPath()} 

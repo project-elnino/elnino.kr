@@ -52,6 +52,12 @@ export default function Topbar() {
               <span className="sm:hidden">다운로드</span>
             </Link>
           </li>
+          <li>
+            <Link href="https://dev.elnino.kr/dashboard" className="hover:text-blue-500 transition-colors">
+              <span className="hidden sm:inline">대시보드</span>
+              <span className="sm:hidden">대시보드</span>
+            </Link>
+          </li>
           <li className="ml-1 sm:ml-2 border-l border-white/20 pl-3 sm:pl-4">
             <Link 
               href={getEnglishPath()} 
