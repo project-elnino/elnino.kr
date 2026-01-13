@@ -21,7 +21,7 @@ const generalPlan = {
   priceDescription: '사용 후 청구',
   icon: <Zap className="w-6 h-6" />,
   cta: '시작하기',
-  ctaLink: 'https://dev.elnino.kr/dashboard/team',
+  ctaLink: 'https://cloud.elnino.kr/dashboard/team',
   sections: [
     {
       title: '포함된 기능',
