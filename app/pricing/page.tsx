@@ -7,12 +7,6 @@ import Footer from '@/components/Footer'
 import { Check, Zap, Building2, ArrowRight, HelpCircle } from 'lucide-react'
 import { useState } from 'react'
 
-interface PricingFeature {
-  text: string;
-  included: boolean;
-}
-
-
 interface FAQItem {
   question: string;
   answer: string;
