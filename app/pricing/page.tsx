@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Topbar from '@/components/Topbar'
 import Footer from '@/components/Footer'
-import { Check, Zap, Calendar, Building2, ArrowRight, HelpCircle } from 'lucide-react'
+import { Check, Zap, Building2, ArrowRight, HelpCircle } from 'lucide-react'
 import { useState } from 'react'
 
 interface PricingFeature {
@@ -12,21 +12,6 @@ interface PricingFeature {
   included: boolean;
 }
 
-interface PricingPlan {
-  id: string;
-  name: string;
-  description: string;
-  price: string;
-  priceUnit: string;
-  priceDescription: string;
-  icon: React.ReactNode;
-  features: PricingFeature[];
-  cta: string;
-  ctaLink: string;
-  popular?: boolean;
-  highlight?: string;
-  includesFrom?: string;
-}
 
 interface FAQItem {
   question: string;
