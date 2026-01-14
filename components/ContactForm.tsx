@@ -70,60 +70,6 @@ interface FormData {
   additionalInfo: string;
 }
 
-// Format form data for email content - 깔끔하게 정리
-const formatEmailContent = (formData: FormData): string => {
-  const divider = "=".repeat(50);
-  const smallDivider = "-".repeat(30);
-  
-  let content = `👤 성명: ${formData.name}
-📧 이메일: ${formData.email}
-📱 연락처: ${formData.phone}
-${formData.company ? `🏢 업체명: ${formData.company}` : ''}
-
-${divider}
-
-🎯 지원 유형: ${formData.supportType === 'one-time' ? '단발성 지원' : '구독형 지원'}
-
-`;
-
-  if (formData.supportType === 'one-time') {
-    content += `📅 상세 정보
-${smallDivider}
-📅 행사 기간    : ${formData.startDate} ~ ${formData.endDate}
-${formData.startTime && formData.endTime ? `⏰ 이용 시간    : ${formData.startTime} ~ ${formData.endTime}\n` : ''}📍 행사 장소    : ${formData.venue}
-${formData.eventDetails ? `
-📝 행사 세부 내용
-${smallDivider}
-${formData.eventDetails}` : ''}
-
-`;
-  }
-
-  if (formData.supportType === 'subscription') {
-    content += `📅 상세 정보
-${smallDivider}
-${formData.purposes.length > 0 ? `🎯 주요 사용 목적 : ${formData.purposes.join(', ')}\n` : ''}
-📝 기관 소개 및 구독 목적
-${smallDivider}
-${formData.institutionInfo}
-
-`;
-  }
-
-  if (formData.additionalInfo) {
-    content += `💬 기타 문의 사항
-${smallDivider}
-${formData.additionalInfo}
-
-`;
-  }
-
-  content += `${divider}
-🕰️ 신청 일시 : ${new Date().toLocaleString('ko-KR')}`;
-
-  return content;
-};
-
 export default function ContactForm() {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
