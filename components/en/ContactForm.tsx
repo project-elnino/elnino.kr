@@ -15,7 +15,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 // Constants for better maintainability
 const TOTAL_STEPS = 3;
-const WEB3FORMS_ACCESS_KEY = "ffaed6ff-0f74-45a2-bf4c-edd6107d3078";
+const KNOC_API_URL = process.env.NEXT_PUBLIC_KNOC_API_URL || "https://cloud.elnino.kr";
 
 // Support types configuration
 const SUPPORT_TYPES: SupportType[] = [
@@ -216,26 +216,46 @@ export default function ContactForm() {
     setIsSubmitting(true);
 
     try {
-      // Prepare form data for Web3Forms
-      const submissionData = {
-        access_key: WEB3FORMS_ACCESS_KEY,
-        ...formData,
-        usagePurpose: formData.usagePurpose?.join(', '),
-        submitted_at: new Date().toISOString()
+      // Prepare form data for KNOC API
+      // Map English form fields to API format
+      const inquiryData = {
+        email: formData.email,
+        name: formData.name,
+        phone: formData.phone,
+        company: formData.company || null,
+        support_type: formData.supportType,
+        // One-time event fields
+        start_date: formData.eventDate || null,
+        end_date: formData.eventDate || null,  // Same as start for single day events
+        venue: formData.eventLocation || null,
+        event_details: formData.supportType === 'one-time'
+          ? `Event: ${formData.eventName || ''}\nParticipants: ${formData.participantCount || ''}\nLanguages: ${formData.targetLanguages || ''}`
+          : null,
+        // Subscription fields
+        purposes: formData.usagePurpose && formData.usagePurpose.length > 0
+          ? formData.usagePurpose
+          : null,
+        institution_info: formData.supportType === 'subscription'
+          ? `Expected Users: ${formData.expectedUsers || ''}\nMonthly Usage: ${formData.monthlyUsageFrequency || ''} times`
+          : null,
+        // Common
+        additional_info: formData.additionalRequests || null,
       };
 
-      const response = await fetch('https://api.web3forms.com/submit', {
+      console.log('Submitting inquiry to KNOC API...');
+
+      const response = await fetch(`${KNOC_API_URL}/api/inquiry`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json'
         },
-        body: JSON.stringify(submissionData)
+        body: JSON.stringify(inquiryData)
       });
 
       const result = await response.json();
+      console.log('API response:', result);
 
-      if (result.success) {
+      if (result.status === 'success') {
         toast.success('Application submitted successfully! We will contact you soon.');
         // Reset form
         setFormData({

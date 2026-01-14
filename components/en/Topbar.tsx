@@ -62,7 +62,7 @@ export default function Topbar() {
             </Link>
           </li>
           <li>
-            <Link href="https://dev.elnino.kr/dashboard" className="hover:text-blue-500 transition-colors">
+            <Link href="https://cloud.elnino.kr/dashboard" className="hover:text-blue-500 transition-colors">
               Dashboard
             </Link>
           </li>

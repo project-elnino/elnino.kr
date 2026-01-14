@@ -21,7 +21,7 @@ const generalPlan = {
   priceDescription: 'Billed after usage',
   icon: <Zap className="w-6 h-6" />,
   cta: 'Get Started',
-  ctaLink: 'https://dev.elnino.kr/dashboard/team',
+  ctaLink: 'https://cloud.elnino.kr/dashboard/team',
   sections: [
     {
       title: "What's Included",

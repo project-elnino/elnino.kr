@@ -16,7 +16,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 // Constants for better maintainability
 const TOTAL_STEPS = 3;
 const PROGRESS_STEP_PERCENTAGE = 33;
-const WEB3FORMS_ACCESS_KEY = "ffaed6ff-0f74-45a2-bf4c-edd6107d3078";
+const KNOC_API_URL = process.env.NEXT_PUBLIC_KNOC_API_URL || "https://cloud.elnino.kr";
 
 // Support types configuration
 const SUPPORT_TYPES: SupportType[] = [
@@ -259,45 +259,52 @@ export default function ContactForm() {
     
     setIsSubmitting(true);
     try {
-      // HTML 폼 형식으로 Web3Forms에 전송
-      const formData = new FormData();
-      
-      // Web3Forms 표준 HTML 폼 필드들
-      formData.append("access_key", WEB3FORMS_ACCESS_KEY);
-      formData.append("subject", `[Elnino] ${form.supportType === 'one-time' ? '단발성' : '구독형'} 지원 신청 - ${form.name}`);
-      
-      // 텍스트 형식으로 전송 (깨끗하게 포맷팅된 텍스트)
-      formData.append("message", formatEmailContent(form));
-      
-      // Web3Forms 특별 필드들 (HTML 폼 표준)
-      formData.append("botcheck", ""); // 스팸 방지용 빈 필드
-      
-      console.log('Submitting form to Web3Forms...');
-      
-      const response = await fetch("https://api.web3forms.com/submit", {
+      // knoc_server API로 문의사항 전송
+      const inquiryData = {
+        email: form.email,
+        name: form.name,
+        phone: form.phone,
+        company: form.company || null,
+        support_type: form.supportType,
+        // 단발성 지원 필드
+        start_date: form.startDate || null,
+        end_date: form.endDate || null,
+        start_time: form.startTime || null,
+        end_time: form.endTime || null,
+        venue: form.venue || null,
+        event_details: form.eventDetails || null,
+        // 구독형 지원 필드
+        purposes: form.purposes.length > 0 ? form.purposes : null,
+        institution_info: form.institutionInfo || null,
+        // 공통
+        additional_info: form.additionalInfo || null,
+      };
+
+      console.log('Submitting inquiry to KNOC API...');
+
+      const response = await fetch(`${KNOC_API_URL}/api/inquiry`, {
         method: "POST",
-        body: formData
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(inquiryData)
       });
 
       console.log('Response status:', response.status);
-      
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
 
       const result = await response.json();
-      console.log('Web3Forms response:', result);
+      console.log('API response:', result);
 
-      if (result.success) {
-        toast.success("신청이 완료되었습니다.", { 
-          description: "빠른 시일 내에 contact@elnino.kr에서 연락드리겠습니다.", 
-          icon: <CheckCircle2 className="h-5 w-5 text-green-500" /> 
+      if (result.status === 'success') {
+        toast.success("신청이 완료되었습니다.", {
+          description: "빠른 시일 내에 contact@elnino.kr에서 연락드리겠습니다.",
+          icon: <CheckCircle2 className="h-5 w-5 text-green-500" />
         });
-        
+
         // 폼 초기화
         setForm({
           email: "", name: "", company: "", phone: "",
-          supportType: "", startDate: "", endDate: "", startTime: "", endTime: "", 
+          supportType: "", startDate: "", endDate: "", startTime: "", endTime: "",
           venue: "", eventDetails: "", purposes: [], institutionInfo: "", additionalInfo: "",
         });
         setPrivacyAgreed(false);
@@ -307,22 +314,22 @@ export default function ContactForm() {
       }
     } catch (error) {
       console.error('Form submission error:', error);
-      
-      let errorMessage = "이메일 전송 중 오류가 발생했습니다.";
-      
+
+      let errorMessage = "문의 접수 중 오류가 발생했습니다.";
+
       if (error instanceof Error) {
         if (error.message.includes('Failed to fetch')) {
-          errorMessage = "네트워크 연결을 확인해주세요. 방화벽이나 광고 차단기가 요청을 막고 있을 수 있습니다.";
-        } else if (error.message.includes('HTTP error')) {
-          errorMessage = "서버 응답 오류가 발생했습니다. 잠시 후 다시 시도해주세요.";
+          errorMessage = "네트워크 연결을 확인해주세요.";
+        } else if (error.message) {
+          errorMessage = error.message;
         }
       }
-      
-      toast.error("전송 실패", { 
+
+      toast.error("전송 실패", {
         description: errorMessage
       });
-    } finally { 
-      setIsSubmitting(false); 
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
