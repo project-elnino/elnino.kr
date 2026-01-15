@@ -16,7 +16,7 @@ interface FAQItem {
 const generalPlan = {
   name: '종량제',
   description: '사용한 만큼만 후불 결제',
-  price: '4,900',
+  price: '6,900',
   priceUnit: '원/시간',
   priceDescription: '사용 후 청구',
   icon: <Zap className="w-6 h-6" />,
