@@ -41,6 +41,12 @@ export default function Topbar() {
         </Link>
         <ul className="flex gap-3 sm:gap-6 text-sm font-medium text-white items-center">
           <li>
+            <Link href="https://cloud.elnino.kr/webclient" className="hover:text-blue-500 transition-colors">
+              <span className="hidden sm:inline">시작하기</span>
+              <span className="sm:hidden">시작</span>
+            </Link>
+          </li>
+          <li>
             <Link href="/pricing" className="hover:text-blue-500 transition-colors">
               <span className="hidden sm:inline">가격 정책</span>
               <span className="sm:hidden">가격</span>
@@ -48,14 +54,8 @@ export default function Topbar() {
           </li>
           <li>
             <Link href="/contact" className="hover:text-blue-500 transition-colors">
-              <span className="hidden sm:inline">이용 신청</span>
-              <span className="sm:hidden">신청</span>
-            </Link>
-          </li>
-          <li>
-            <Link href="/download" className="hover:text-blue-500 transition-colors">
-              <span className="hidden sm:inline">다운로드</span>
-              <span className="sm:hidden">다운로드</span>
+              <span className="hidden sm:inline">문의</span>
+              <span className="sm:hidden">문의</span>
             </Link>
           </li>
           <li>

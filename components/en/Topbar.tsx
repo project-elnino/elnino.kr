@@ -47,18 +47,18 @@ export default function Topbar() {
         </Link>
         <ul className="flex gap-3 sm:gap-6 text-sm font-medium text-white items-center">
           <li>
+            <Link href="https://cloud.elnino.kr/webclient" className="hover:text-blue-500 transition-colors">
+              Get Started
+            </Link>
+          </li>
+          <li>
             <Link href="/en/pricing" className="hover:text-blue-500 transition-colors">
               Pricing
             </Link>
           </li>
           <li>
             <Link href="/en/contact" className="hover:text-blue-500 transition-colors">
-              Apply
-            </Link>
-          </li>
-          <li>
-            <Link href="/en/download" className="hover:text-blue-500 transition-colors">
-              Download
+              Contact
             </Link>
           </li>
           <li>

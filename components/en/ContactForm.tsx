@@ -15,6 +15,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 // Constants for better maintainability
 const TOTAL_STEPS = 3;
+const PROGRESS_STEP_PERCENTAGE = 33;
 const KNOC_API_URL = process.env.NEXT_PUBLIC_KNOC_API_URL || "https://cloud.elnino.kr";
 
 // Support types configuration
@@ -47,643 +48,579 @@ interface SupportType {
   icon: string;
 }
 
-// Form data interface - Unified for all support types
+// Form data interface
 interface FormData {
-  // Step 1: Common fields
-  name: string;
   email: string;
-  phone: string;
+  name: string;
   company: string;
-  supportType: 'one-time' | 'subscription' | null;
-  // Step 2: Conditional fields based on supportType
-  eventDate?: string;
-  eventName?: string;
-  eventLocation?: string;
-  participantCount?: string;
-  targetLanguages?: string;
-  expectedUsers?: string;
-  usagePurpose?: string[];
-  monthlyUsageFrequency?: string;
-  // Step 3: Common field
-  additionalRequests: string;
+  phone: string;
+  // Support type selection
+  supportType: 'one-time' | 'subscription' | '';
+  // One-time event fields
+  startDate: string;
+  endDate: string;
+  startTime: string;
+  endTime: string;
+  venue: string;
+  eventDetails: string;
+  // Subscription fields
+  purposes: string[];
+  institutionInfo: string;
+  // Additional info
+  additionalInfo: string;
 }
-
-// Phone number formatter function
-function formatPhoneNumber(value: string): string {
-  const numbers = value.replace(/[^\d]/g, '');
-  if (numbers.length <= 3) return numbers;
-  if (numbers.length <= 7) return `${numbers.slice(0, 3)}-${numbers.slice(3)}`;
-  return `${numbers.slice(0, 3)}-${numbers.slice(3, 7)}-${numbers.slice(7, 11)}`;
-}
-
-// Common validation functions
-const validateName = (name: string): ValidationResult => {
-  if (!name.trim()) return { isValid: false, message: "Please enter your name." };
-  if (name.trim().length < 2) return { isValid: false, message: "Name must be at least 2 characters." };
-  return { isValid: true };
-};
-
-const validateEmail = (email: string): ValidationResult => {
-  if (!email.trim()) return { isValid: false, message: "Please enter your email." };
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) return { isValid: false, message: "Please enter a valid email address." };
-  return { isValid: true };
-};
-
-const validatePhone = (phone: string): ValidationResult => {
-  if (!phone.trim()) return { isValid: false, message: "Please enter your phone number." };
-  const phoneNumbers = phone.replace(/[^\d]/g, '');
-  if (phoneNumbers.length < 10) return { isValid: false, message: "Please enter a valid phone number." };
-  return { isValid: true };
-};
-
-const validateCompany = (company: string): ValidationResult => {
-  if (!company.trim()) return { isValid: false, message: "Please enter your company/organization name." };
-  return { isValid: true };
-};
-
-const validateSupportType = (supportType: FormData['supportType']): ValidationResult => {
-  if (!supportType) return { isValid: false, message: "Please select a support type." };
-  return { isValid: true };
-};
 
 export default function ContactForm() {
-  const [currentStep, setCurrentStep] = useState(1);
+  const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formData, setFormData] = useState<FormData>({
-    name: '',
-    email: '',
-    phone: '',
-    company: '',
-    supportType: null,
-    eventDate: '',
-    eventName: '',
-    eventLocation: '',
-    participantCount: '',
-    targetLanguages: '',
-    expectedUsers: '',
-    usagePurpose: [],
-    monthlyUsageFrequency: '',
-    additionalRequests: ''
+  const [privacyAgreed, setPrivacyAgreed] = useState(false);
+  const [form, setForm] = useState<FormData>({
+    email: "", name: "", company: "", phone: "",
+    supportType: "", startDate: "", endDate: "", startTime: "", endTime: "",
+    venue: "", eventDetails: "", purposes: [], institutionInfo: "", additionalInfo: "",
   });
 
-  // Input update handler with phone number formatting
-  const handleInputChange = (field: keyof FormData, value: string | string[]) => {
-    if (field === 'phone' && typeof value === 'string') {
-      setFormData(prev => ({ ...prev, [field]: formatPhoneNumber(value) }));
-    } else {
-      setFormData(prev => ({ ...prev, [field]: value }));
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSupportTypeChange = (selectedType: 'one-time' | 'subscription') => {
+    setForm({ ...form, supportType: selectedType });
+  };
+
+  const handlePurposeChange = (purpose: string, checked: boolean) => {
+    const updatedPurposes = checked
+      ? [...form.purposes, purpose]
+      : form.purposes.filter(p => p !== purpose);
+    setForm({ ...form, purposes: updatedPurposes });
+  };
+
+  // Step 1 validation: Basic information
+  const validateStep1 = (formData: FormData): ValidationResult => {
+    const requiredFields = [
+      { field: formData.email, name: "Email" },
+      { field: formData.name, name: "Name" },
+      { field: formData.phone, name: "Phone" },
+    ];
+
+    for (const { field, name } of requiredFields) {
+      if (!field.trim()) {
+        return { isValid: false, message: `Please enter your ${name}.` };
+      }
     }
+
+    // Email format validation
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    if (!emailRegex.test(formData.email)) {
+      return { isValid: false, message: "Please enter a valid email address." };
+    }
+
+    return { isValid: true };
   };
 
-  // Purpose checkbox handler
-  const handlePurposeToggle = (purpose: string) => {
-    setFormData(prev => ({
-      ...prev,
-      usagePurpose: prev.usagePurpose?.includes(purpose)
-        ? prev.usagePurpose.filter(p => p !== purpose)
-        : [...(prev.usagePurpose || []), purpose]
-    }));
+  // Step 2 validation: Support type and related fields
+  const validateStep2 = (formData: FormData): ValidationResult => {
+    // Support type selection is required
+    if (!formData.supportType) {
+      return { isValid: false, message: "Please select a support type." };
+    }
+
+    // Validate based on support type
+    if (formData.supportType === 'one-time') {
+      const requiredFields = [
+        { field: formData.startDate, name: "Event start date" },
+        { field: formData.endDate, name: "Event end date" },
+        { field: formData.venue, name: "Event venue" },
+      ];
+
+      for (const { field, name } of requiredFields) {
+        if (!field.trim()) {
+          return { isValid: false, message: `Please enter the ${name}.` };
+        }
+      }
+
+      // Check if start date is before end date
+      if (formData.startDate && formData.endDate && formData.startDate > formData.endDate) {
+        return { isValid: false, message: "End date must be after start date." };
+      }
+
+    } else if (formData.supportType === 'subscription') {
+      if (!formData.institutionInfo.trim()) {
+        return { isValid: false, message: "Please enter the institution details and subscription purpose." };
+      }
+    }
+
+    return { isValid: true };
   };
 
-  // Step validation
-  const validateStep = (step: number): ValidationResult => {
+  // Step 3 validation: Privacy agreement
+  const validateStep3 = (privacyConsent: boolean): ValidationResult => {
+    if (!privacyConsent) {
+      return { isValid: false, message: "Please agree to the Privacy Policy." };
+    }
+
+    return { isValid: true };
+  };
+
+  // Unified validation function
+  const validateCurrentStep = (): ValidationResult => {
     switch (step) {
       case 1:
-        const nameValidation = validateName(formData.name);
-        if (!nameValidation.isValid) return nameValidation;
-        
-        const emailValidation = validateEmail(formData.email);
-        if (!emailValidation.isValid) return emailValidation;
-        
-        const phoneValidation = validatePhone(formData.phone);
-        if (!phoneValidation.isValid) return phoneValidation;
-        
-        const companyValidation = validateCompany(formData.company);
-        if (!companyValidation.isValid) return companyValidation;
-        
-        const supportTypeValidation = validateSupportType(formData.supportType);
-        if (!supportTypeValidation.isValid) return supportTypeValidation;
-        
-        return { isValid: true };
-
+        return validateStep1(form);
       case 2:
-        if (formData.supportType === 'one-time') {
-          if (!formData.eventDate) return { isValid: false, message: "Please select an event date." };
-          const selectedDate = new Date(formData.eventDate);
-          const today = new Date();
-          today.setHours(0, 0, 0, 0);
-          if (selectedDate < today) return { isValid: false, message: "Event date cannot be in the past." };
-          if (!formData.eventName?.trim()) return { isValid: false, message: "Please enter the event name." };
-          if (!formData.eventLocation?.trim()) return { isValid: false, message: "Please enter the event location." };
-          if (!formData.participantCount || parseInt(formData.participantCount) < 1) 
-            return { isValid: false, message: "Please enter the number of participants." };
-          if (!formData.targetLanguages?.trim()) return { isValid: false, message: "Please enter the target languages." };
-        } else if (formData.supportType === 'subscription') {
-          if (!formData.expectedUsers || parseInt(formData.expectedUsers) < 1)
-            return { isValid: false, message: "Please enter the expected number of users." };
-          if (!formData.usagePurpose || formData.usagePurpose.length === 0)
-            return { isValid: false, message: "Please select at least one usage purpose." };
-          if (!formData.monthlyUsageFrequency) 
-            return { isValid: false, message: "Please select the monthly usage frequency." };
-        }
-        return { isValid: true };
-
+        return validateStep2(form);
       case 3:
-        return { isValid: true };
-
+        return validateStep3(privacyAgreed);
       default:
-        return { isValid: false, message: "Invalid step" };
+        return { isValid: true };
     }
   };
 
-  // Step navigation
-  const handleNext = () => {
-    const validation = validateStep(currentStep);
+  const nextStep = () => {
+    const validation = validateCurrentStep();
+
     if (!validation.isValid) {
-      toast.error(validation.message);
+      toast.error("Please check your input", { description: validation.message });
       return;
     }
-    setCurrentStep(prev => Math.min(prev + 1, TOTAL_STEPS));
+
+    setStep((s) => Math.min(s + 1, TOTAL_STEPS));
   };
 
-  const handlePrev = () => {
-    setCurrentStep(prev => Math.max(prev - 1, 1));
-  };
+  const prevStep = () => setStep((s) => Math.max(s - 1, 1));
 
-  // Form submission
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (step < TOTAL_STEPS) {
+      return nextStep();
+    }
+
+    // Final validation for step 3
+    const validation = validateStep3(privacyAgreed);
+    if (!validation.isValid) {
+      toast.error("Privacy Policy Agreement", { description: validation.message });
+      return;
+    }
+
     setIsSubmitting(true);
-
     try {
-      // Prepare form data for KNOC API
-      // Map English form fields to API format
+      // knoc_server API로 문의사항 전송
       const inquiryData = {
-        email: formData.email,
-        name: formData.name,
-        phone: formData.phone,
-        company: formData.company || null,
-        support_type: formData.supportType,
-        // One-time event fields
-        start_date: formData.eventDate || null,
-        end_date: formData.eventDate || null,  // Same as start for single day events
-        venue: formData.eventLocation || null,
-        event_details: formData.supportType === 'one-time'
-          ? `Event: ${formData.eventName || ''}\nParticipants: ${formData.participantCount || ''}\nLanguages: ${formData.targetLanguages || ''}`
-          : null,
+        email: form.email,
+        name: form.name,
+        phone: form.phone,
+        company: form.company || null,
+        support_type: form.supportType,
+        // One-time support fields
+        start_date: form.startDate || null,
+        end_date: form.endDate || null,
+        start_time: form.startTime || null,
+        end_time: form.endTime || null,
+        venue: form.venue || null,
+        event_details: form.eventDetails || null,
         // Subscription fields
-        purposes: formData.usagePurpose && formData.usagePurpose.length > 0
-          ? formData.usagePurpose
-          : null,
-        institution_info: formData.supportType === 'subscription'
-          ? `Expected Users: ${formData.expectedUsers || ''}\nMonthly Usage: ${formData.monthlyUsageFrequency || ''} times`
-          : null,
+        purposes: form.purposes.length > 0 ? form.purposes : null,
+        institution_info: form.institutionInfo || null,
         // Common
-        additional_info: formData.additionalRequests || null,
+        additional_info: form.additionalInfo || null,
       };
 
       console.log('Submitting inquiry to KNOC API...');
 
       const response = await fetch(`${KNOC_API_URL}/api/inquiry`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(inquiryData)
       });
+
+      console.log('Response status:', response.status);
 
       const result = await response.json();
       console.log('API response:', result);
 
       if (result.status === 'success') {
-        toast.success('Application submitted successfully! We will contact you soon.');
-        // Reset form
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          company: '',
-          supportType: null,
-          eventDate: '',
-          eventName: '',
-          eventLocation: '',
-          participantCount: '',
-          targetLanguages: '',
-          expectedUsers: '',
-          usagePurpose: [],
-          monthlyUsageFrequency: '',
-          additionalRequests: ''
+        toast.success("Application submitted successfully.", {
+          description: "We will contact you shortly at contact@elnino.kr.",
+          icon: <CheckCircle2 className="h-5 w-5 text-green-500" />
         });
-        setCurrentStep(1);
+
+        // Reset form
+        setForm({
+          email: "", name: "", company: "", phone: "",
+          supportType: "", startDate: "", endDate: "", startTime: "", endTime: "",
+          venue: "", eventDetails: "", purposes: [], institutionInfo: "", additionalInfo: "",
+        });
+        setPrivacyAgreed(false);
+        setStep(1);
       } else {
-        throw new Error(result.message || 'Submission failed');
+        throw new Error(result.message || 'Form submission failed');
       }
     } catch (error) {
       console.error('Form submission error:', error);
-      toast.error('Failed to submit application. Please try again.');
+
+      let errorMessage = "An error occurred while submitting your inquiry.";
+
+      if (error instanceof Error) {
+        if (error.message.includes('Failed to fetch')) {
+          errorMessage = "Please check your network connection.";
+        } else if (error.message) {
+          errorMessage = error.message;
+        }
+      }
+
+      toast.error("Submission Failed", {
+        description: errorMessage
+      });
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  // Progress percentage calculation
-  const progressPercentage = ((currentStep - 1) / (TOTAL_STEPS - 1)) * 100;
+  // Progress calculation
+  const progressPercentage = `${PROGRESS_STEP_PERCENTAGE * step}%`;
+
+  // Check if current step is valid for button state
+  const isCurrentStepValid = (): boolean => {
+    const validation = validateCurrentStep();
+    return validation.isValid;
+  };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <Toaster position="top-center" richColors />
-      
-      <motion.div 
-        className="w-full max-w-2xl"
+    <div>
+      <Toaster richColors position="top-center" />
+
+      {/* Progress Bar */}
+      <div className="w-full bg-blue-100 rounded-full h-3 mb-8 overflow-hidden">
+        <motion.div
+          className="h-full bg-gradient-to-r from-blue-500 to-indigo-500"
+          initial={{ width: 0 }}
+          animate={{ width: progressPercentage }}
+          transition={{ duration: 0.5 }}
+        />
+      </div>
+
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.6 }}
       >
-        <Card className="p-6 md:p-10 shadow-2xl border-0 bg-white/95 backdrop-blur">
-          {/* Progress bar */}
-          <div className="mb-8">
-            <div className="flex justify-between mb-3">
-              <span className="text-sm font-medium text-gray-700">
-                Step {currentStep} of {TOTAL_STEPS}
-              </span>
-              <span className="text-sm font-medium text-gray-700">
-                {Math.round(progressPercentage)}%
-              </span>
-            </div>
-            <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-              <motion.div 
-                className="h-full bg-gradient-to-r from-blue-500 to-blue-600"
-                initial={{ width: 0 }}
-                animate={{ width: `${progressPercentage}%` }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-              />
-            </div>
-          </div>
-
-          {/* Form steps */}
-          <AnimatePresence mode="wait">
-            {/* Step 1: Basic Information & Support Type Selection */}
-            {currentStep === 1 && (
-              <motion.div
-                key="step1"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.3 }}
-                className="space-y-6"
-              >
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-2">
+        <Card className="rounded-3xl shadow-xl overflow-hidden border-0">
+          <form onSubmit={handleSubmit} className="divide-y divide-gray-200">
+            <AnimatePresence mode="wait">
+              {/* Step 1: Basic Information */}
+              {step === 1 && (
+                <motion.div
+                  key="step1"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="p-8 bg-white"
+                >
+                  <h2 className="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
+                    <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold mr-3">
+                      01
+                    </div>
                     Basic Information
                   </h2>
-                  <p className="text-gray-600">
-                    Please provide your basic information and select the support type you need.
-                  </p>
-                </div>
-
-                <div className="grid gap-4">
-                  <div>
-                    <Label htmlFor="name">Name *</Label>
-                    <Input
-                      id="name"
-                      value={formData.name}
-                      onChange={(e) => handleInputChange('name', e.target.value)}
-                      placeholder="Enter your name"
-                      className="mt-1"
-                    />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Email */}
+                    <div className="flex flex-col">
+                      <Label htmlFor="email" className="font-medium mb-1">Email <span className="text-red-500">*</span></Label>
+                      <Input id="email" name="email" type="email" required placeholder="example@company.com" value={form.email} onChange={handleChange} className="h-12 placeholder-gray-400" />
+                    </div>
+                    {/* Name */}
+                    <div className="flex flex-col">
+                      <Label htmlFor="name" className="font-medium mb-1">Name <span className="text-red-500">*</span></Label>
+                      <Input id="name" name="name" required placeholder="John Doe" value={form.name} onChange={handleChange} className="h-12 placeholder-gray-400" />
+                    </div>
+                    {/* Phone */}
+                    <div className="flex flex-col">
+                      <Label htmlFor="phone" className="font-medium mb-1">Phone <span className="text-red-500">*</span></Label>
+                      <Input id="phone" name="phone" required placeholder="010-1234-5678" value={form.phone} onChange={handleChange} className="h-12 placeholder-gray-400" />
+                    </div>
+                    {/* Company */}
+                    <div className="flex flex-col">
+                      <Label htmlFor="company" className="font-medium mb-1">Company</Label>
+                      <Input id="company" name="company" placeholder="Company Inc." value={form.company} onChange={handleChange} className="h-12 placeholder-gray-400" />
+                    </div>
                   </div>
-
-                  <div>
-                    <Label htmlFor="email">Email *</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) => handleInputChange('email', e.target.value)}
-                      placeholder="your@email.com"
-                      className="mt-1"
-                    />
-                  </div>
-
-                  <div>
-                    <Label htmlFor="phone">Phone Number *</Label>
-                    <Input
-                      id="phone"
-                      type="tel"
-                      value={formData.phone}
-                      onChange={(e) => handleInputChange('phone', e.target.value)}
-                      placeholder="010-1234-5678"
-                      className="mt-1"
-                    />
-                  </div>
-
-                  <div>
-                    <Label htmlFor="company">Company/Organization *</Label>
-                    <Input
-                      id="company"
-                      value={formData.company}
-                      onChange={(e) => handleInputChange('company', e.target.value)}
-                      placeholder="Enter your company or organization name"
-                      className="mt-1"
-                    />
-                  </div>
-                </div>
-
-                {/* Support Type Selection */}
-                <div className="space-y-3">
-                  <Label>Support Type *</Label>
-                  <div className="grid gap-3">
-                    {SUPPORT_TYPES.map((type) => (
+                  <div className="mt-8 text-right">
+                    <Button
+                      type="button"
+                      onClick={nextStep}
+                      className={cn(
+                        "px-8 py-6 rounded-full border border-blue-200",
+                        isCurrentStepValid()
+                          ? "bg-white hover:bg-white text-blue-700"
+                          : "bg-gray-100 text-gray-400 cursor-not-allowed"
+                      )}
+                    >
                       <motion.div
-                        key={type.id}
-                        whileHover={{ scale: 1.01 }}
-                        whileTap={{ scale: 0.99 }}
+                        whileHover={{ scale: isCurrentStepValid() ? 1.05 : 1 }}
+                        transition={{ duration: 0.3 }}
                       >
-                        <button
-                          type="button"
-                          onClick={() => handleInputChange('supportType', type.id)}
+                        Next
+                      </motion.div>
+                    </Button>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Step 2: Support Type Selection and Details */}
+              {step === 2 && (
+                <motion.div
+                  key="step2"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="p-8 bg-gray-50"
+                >
+                  <h2 className="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
+                    <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold mr-3">
+                      02
+                    </div>
+                    Support Information
+                  </h2>
+
+                  {/* Support Type Selection */}
+                  <div className="mb-8">
+                    <h3 className="text-lg font-semibold mb-4">Select Support Type</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {SUPPORT_TYPES.map((type) => (
+                        <div
+                          key={type.id}
                           className={cn(
-                            "w-full p-4 rounded-lg border-2 transition-all text-left",
-                            formData.supportType === type.id
+                            "border-2 rounded-lg p-4 cursor-pointer transition-all",
+                            form.supportType === type.id
                               ? "border-blue-500 bg-blue-50"
                               : "border-gray-200 hover:border-gray-300"
                           )}
+                          onClick={() => handleSupportTypeChange(type.id)}
                         >
-                          <div className="flex items-start gap-3">
+                          <div className="flex items-center space-x-3">
                             <span className="text-2xl">{type.icon}</span>
-                            <div className="flex-1">
-                              <h3 className="font-semibold text-gray-900">
-                                {type.title}
-                              </h3>
-                              <p className="text-sm text-gray-600 mt-1">
-                                {type.description}
-                              </p>
+                            <div>
+                              <h4 className="font-medium">{type.title}</h4>
+                              <p className="text-sm text-gray-600">{type.description}</p>
                             </div>
-                            {formData.supportType === type.id && (
-                              <CheckCircle2 className="w-5 h-5 text-blue-500 mt-1" />
-                            )}
                           </div>
-                        </button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Dynamic Form Content */}
+                  <div className="bg-white p-6 rounded-lg">
+                    {form.supportType === 'one-time' && (
+                      <div className="space-y-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <Label htmlFor="startDate" className="font-medium mb-1">Event Start Date <span className="text-red-500">*</span></Label>
+                            <Input id="startDate" name="startDate" type="date" value={form.startDate} onChange={handleChange} className="h-12" />
+                          </div>
+                          <div>
+                            <Label htmlFor="endDate" className="font-medium mb-1">Event End Date <span className="text-red-500">*</span></Label>
+                            <Input id="endDate" name="endDate" type="date" value={form.endDate} onChange={handleChange} className="h-12" />
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <Label htmlFor="startTime" className="font-medium mb-1">Start Time</Label>
+                            <Input id="startTime" name="startTime" type="time" value={form.startTime} onChange={handleChange} className="h-12" />
+                          </div>
+                          <div>
+                            <Label htmlFor="endTime" className="font-medium mb-1">End Time</Label>
+                            <Input id="endTime" name="endTime" type="time" value={form.endTime} onChange={handleChange} className="h-12" />
+                          </div>
+                        </div>
+
+                        <div>
+                          <Label htmlFor="venue" className="font-medium mb-1">Event Venue <span className="text-red-500">*</span></Label>
+                          <Input id="venue" name="venue" placeholder="COEX Convention Center, Seoul" value={form.venue} onChange={handleChange} className="h-12" />
+                        </div>
+
+                        <div>
+                          <Label htmlFor="eventDetails" className="font-medium mb-1">Event Details</Label>
+                          <Textarea
+                            id="eventDetails"
+                            name="eventDetails"
+                            placeholder="Please describe the purpose of the event, how it will be conducted, and any support requirements."
+                            value={form.eventDetails}
+                            onChange={handleChange}
+                            className="min-h-[120px] max-h-[120px] resize-none"
+                          />
+                        </div>
+                      </div>
+                    )}
+
+                    {form.supportType === 'subscription' && (
+                      <div className="space-y-6">
+                        <div>
+                          <Label className="font-medium mb-3 block">Primary Usage Purpose</Label>
+                          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                            {PURPOSE_OPTIONS.map((purpose) => (
+                              <label key={purpose} className="flex items-center space-x-2 cursor-pointer">
+                                <Checkbox
+                                  checked={form.purposes.includes(purpose)}
+                                  onCheckedChange={(checked) => handlePurposeChange(purpose, checked === true)}
+                                />
+                                <span className="text-sm">{purpose}</span>
+                              </label>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div>
+                          <Label htmlFor="institutionInfo" className="font-medium mb-1">Institution Details & Subscription Purpose <span className="text-red-500">*</span></Label>
+                          <Textarea
+                            id="institutionInfo"
+                            name="institutionInfo"
+                            placeholder="Please describe your institution and the goals you want to achieve through the subscription service. Include expected usage scale or any special requirements."
+                            value={form.institutionInfo}
+                            onChange={handleChange}
+                            className="min-h-[120px] max-h-[120px] resize-none"
+                          />
+                        </div>
+                      </div>
+                    )}
+
+                    {!form.supportType && (
+                      <div className="text-center py-8 text-gray-500">
+                        Please select a support type above
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="mt-8 flex justify-between">
+                    <Button
+                      type="button"
+                      onClick={prevStep}
+                      variant="outline"
+                      className="border-blue-600 text-blue-600 hover:bg-blue-50 px-6 py-6 rounded-full"
+                    >
+                      <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        Previous
                       </motion.div>
-                    ))}
+                    </Button>
+                    <Button
+                      type="button"
+                      onClick={nextStep}
+                      className={cn(
+                        "px-8 py-6 rounded-full border border-blue-200",
+                        isCurrentStepValid()
+                          ? "bg-white hover:bg-white text-blue-700"
+                          : "bg-gray-100 text-gray-400 cursor-not-allowed"
+                      )}
+                    >
+                      <motion.div
+                        whileHover={{ scale: isCurrentStepValid() ? 1.05 : 1 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        Next
+                      </motion.div>
+                    </Button>
                   </div>
-                </div>
+                </motion.div>
+              )}
 
-                <div className="flex justify-end pt-4">
-                  <Button onClick={handleNext} size="lg">
-                    Next
-                  </Button>
-                </div>
-              </motion.div>
-            )}
-
-            {/* Step 2: Detailed Information (conditional based on support type) */}
-            {currentStep === 2 && (
-              <motion.div
-                key="step2"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.3 }}
-                className="space-y-6"
-              >
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                    {formData.supportType === 'one-time' ? 'Event Details' : 'Usage Details'}
+              {/* Step 3: Additional Information and Privacy Agreement */}
+              {step === 3 && (
+                <motion.div
+                  key="step3"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="p-8 bg-white"
+                >
+                  <h2 className="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
+                    <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold mr-3">
+                      03
+                    </div>
+                    Additional Information
                   </h2>
-                  <p className="text-gray-600">
-                    {formData.supportType === 'one-time' 
-                      ? 'Please provide information about your event.'
-                      : 'Please provide information about your expected usage.'}
-                  </p>
-                </div>
-
-                {formData.supportType === 'one-time' ? (
-                  <div className="grid gap-4">
-                    <div>
-                      <Label htmlFor="eventDate">Event Date *</Label>
-                      <Input
-                        id="eventDate"
-                        type="date"
-                        value={formData.eventDate}
-                        onChange={(e) => handleInputChange('eventDate', e.target.value)}
-                        min={new Date().toISOString().split('T')[0]}
-                        className="mt-1"
+                  <div className="space-y-6">
+                    <div className="flex flex-col">
+                      <Label htmlFor="additionalInfo" className="font-medium mb-2.5">Other Inquiries</Label>
+                      <Textarea
+                        id="additionalInfo"
+                        name="additionalInfo"
+                        placeholder="Please enter any special requests or additional information you would like to share."
+                        value={form.additionalInfo}
+                        onChange={handleChange}
+                        className="min-h-[120px] max-h-[120px] resize-none"
                       />
                     </div>
 
-                    <div>
-                      <Label htmlFor="eventName">Event Name *</Label>
-                      <Input
-                        id="eventName"
-                        value={formData.eventName}
-                        onChange={(e) => handleInputChange('eventName', e.target.value)}
-                        placeholder="e.g., International Business Conference 2025"
+                    {/* Privacy Policy Agreement */}
+                    <div className="flex items-start space-x-2 mt-6 p-4 bg-gray-50 rounded-lg">
+                      <Checkbox
+                        id="privacy"
+                        checked={privacyAgreed}
+                        onCheckedChange={(checked) => setPrivacyAgreed(checked === true)}
                         className="mt-1"
                       />
-                    </div>
-
-                    <div>
-                      <Label htmlFor="eventLocation">Event Location *</Label>
-                      <Input
-                        id="eventLocation"
-                        value={formData.eventLocation}
-                        onChange={(e) => handleInputChange('eventLocation', e.target.value)}
-                        placeholder="e.g., COEX Convention Center, Seoul"
-                        className="mt-1"
-                      />
-                    </div>
-
-                    <div>
-                      <Label htmlFor="participantCount">Number of Participants *</Label>
-                      <Input
-                        id="participantCount"
-                        type="number"
-                        min="1"
-                        value={formData.participantCount}
-                        onChange={(e) => handleInputChange('participantCount', e.target.value)}
-                        placeholder="Expected number of participants"
-                        className="mt-1"
-                      />
-                    </div>
-
-                    <div>
-                      <Label htmlFor="targetLanguages">Target Languages *</Label>
-                      <Input
-                        id="targetLanguages"
-                        value={formData.targetLanguages}
-                        onChange={(e) => handleInputChange('targetLanguages', e.target.value)}
-                        placeholder="e.g., Korean, English, Chinese, Japanese"
-                        className="mt-1"
-                      />
-                      <p className="text-sm text-gray-500 mt-1">
-                        Please list all languages you need for interpretation
-                      </p>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="grid gap-4">
-                    <div>
-                      <Label htmlFor="expectedUsers">Expected Number of Users *</Label>
-                      <Input
-                        id="expectedUsers"
-                        type="number"
-                        min="1"
-                        value={formData.expectedUsers}
-                        onChange={(e) => handleInputChange('expectedUsers', e.target.value)}
-                        placeholder="Number of users who will use the service"
-                        className="mt-1"
-                      />
-                    </div>
-
-                    <div>
-                      <Label>Usage Purpose * (Select all that apply)</Label>
-                      <div className="grid grid-cols-2 gap-3 mt-2">
-                        {PURPOSE_OPTIONS.map((purpose) => (
-                          <div key={purpose} className="flex items-center space-x-2">
-                            <Checkbox
-                              id={purpose}
-                              checked={formData.usagePurpose?.includes(purpose) || false}
-                              onCheckedChange={() => handlePurposeToggle(purpose)}
-                            />
-                            <Label
-                              htmlFor={purpose}
-                              className="text-sm font-normal cursor-pointer"
-                            >
-                              {purpose}
-                            </Label>
-                          </div>
-                        ))}
+                      <div className="grid gap-1.5 leading-none">
+                        <label
+                          htmlFor="privacy"
+                          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        >
+                          Privacy Policy Agreement <span className="text-red-500">*</span>
+                        </label>
+                        <p className="text-sm text-gray-500">
+                          The collected personal information will only be used for service provision purposes and will not be used for other purposes or provided to third parties.{" "}
+                          <a href="/en/privacy" className="text-blue-600 hover:underline" target="_blank" rel="noopener">
+                            View full policy
+                          </a>
+                        </p>
                       </div>
                     </div>
-
-                    <div>
-                      <Label htmlFor="monthlyUsageFrequency">Monthly Usage Frequency *</Label>
-                      <select
-                        id="monthlyUsageFrequency"
-                        value={formData.monthlyUsageFrequency}
-                        onChange={(e) => handleInputChange('monthlyUsageFrequency', e.target.value)}
-                        className="w-full mt-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      >
-                        <option value="">Select frequency</option>
-                        <option value="1-5">1-5 times</option>
-                        <option value="6-10">6-10 times</option>
-                        <option value="11-20">11-20 times</option>
-                        <option value="21+">21+ times</option>
-                      </select>
-                    </div>
                   </div>
-                )}
-
-                <div className="flex justify-between pt-4">
-                  <Button onClick={handlePrev} variant="outline" size="lg">
-                    Previous
-                  </Button>
-                  <Button onClick={handleNext} size="lg">
-                    Next
-                  </Button>
-                </div>
-              </motion.div>
-            )}
-
-            {/* Step 3: Additional Requests */}
-            {currentStep === 3 && (
-              <motion.div
-                key="step3"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.3 }}
-                className="space-y-6"
-              >
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                    Additional Requests
-                  </h2>
-                  <p className="text-gray-600">
-                    Please let us know if you have any additional requirements or questions.
-                  </p>
-                </div>
-
-                <div>
-                  <Label htmlFor="additionalRequests">Additional Requests (Optional)</Label>
-                  <Textarea
-                    id="additionalRequests"
-                    value={formData.additionalRequests}
-                    onChange={(e) => handleInputChange('additionalRequests', e.target.value)}
-                    placeholder="Please share any specific requirements, questions, or additional information..."
-                    rows={6}
-                    className="mt-1"
-                  />
-                </div>
-
-                {/* Summary */}
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h3 className="font-semibold text-gray-900 mb-3">Application Summary</h3>
-                  <dl className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <dt className="text-gray-600">Name:</dt>
-                      <dd className="font-medium">{formData.name}</dd>
-                    </div>
-                    <div className="flex justify-between">
-                      <dt className="text-gray-600">Company:</dt>
-                      <dd className="font-medium">{formData.company}</dd>
-                    </div>
-                    <div className="flex justify-between">
-                      <dt className="text-gray-600">Support Type:</dt>
-                      <dd className="font-medium">
-                        {SUPPORT_TYPES.find(t => t.id === formData.supportType)?.title}
-                      </dd>
-                    </div>
-                    {formData.supportType === 'one-time' && (
-                      <>
-                        <div className="flex justify-between">
-                          <dt className="text-gray-600">Event Date:</dt>
-                          <dd className="font-medium">{formData.eventDate}</dd>
-                        </div>
-                        <div className="flex justify-between">
-                          <dt className="text-gray-600">Participants:</dt>
-                          <dd className="font-medium">{formData.participantCount}</dd>
-                        </div>
-                      </>
-                    )}
-                    {formData.supportType === 'subscription' && (
-                      <>
-                        <div className="flex justify-between">
-                          <dt className="text-gray-600">Expected Users:</dt>
-                          <dd className="font-medium">{formData.expectedUsers}</dd>
-                        </div>
-                        <div className="flex justify-between">
-                          <dt className="text-gray-600">Monthly Usage:</dt>
-                          <dd className="font-medium">{formData.monthlyUsageFrequency} times</dd>
-                        </div>
-                      </>
-                    )}
-                  </dl>
-                </div>
-
-                <div className="flex justify-between pt-4">
-                  <Button onClick={handlePrev} variant="outline" size="lg">
-                    Previous
-                  </Button>
-                  <Button 
-                    onClick={handleSubmit} 
-                    size="lg"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <span className="animate-spin inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full mr-2" />
-                        Submitting...
-                      </>
-                    ) : (
-                      'Submit Application'
-                    )}
-                  </Button>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+                  <div className="mt-8 flex justify-between">
+                    <Button
+                      type="button"
+                      onClick={prevStep}
+                      variant="outline"
+                      className="border-blue-600 text-blue-600 hover:bg-blue-50 px-6 py-6 rounded-full"
+                    >
+                      <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        Previous
+                      </motion.div>
+                    </Button>
+                    <Button
+                      type="submit"
+                      className={cn(
+                        "px-8 py-6 rounded-full",
+                        isSubmitting || !isCurrentStepValid()
+                          ? "bg-gray-400 text-white opacity-50 cursor-not-allowed"
+                          : "bg-blue-700 hover:bg-blue-800 text-white"
+                      )}
+                      disabled={isSubmitting || !isCurrentStepValid()}
+                    >
+                      <motion.div
+                        whileHover={{ scale: (isSubmitting || !isCurrentStepValid()) ? 1 : 1.05 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        {isSubmitting ? "Submitting..." : "Submit"}
+                      </motion.div>
+                    </Button>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </form>
         </Card>
       </motion.div>
     </div>
