@@ -36,6 +36,17 @@ interface Feature {
 // 차별화 포인트 데이터에서 imageUrl 제거
 const differentiators: Differentiator[] = [
   {
+    id: "easy-setup",
+    title: "간편한 사용",
+    description: "별도 설치나 언어 설정 없이 크롬 브라우저에서 바로 사용할 수 있습니다. 참가자는 자신의 언어로 말하기만 하면 자동으로 인식되어 다른 언어로 번역됩니다. 모바일, 노트북 상관없이 모든 기기에서 이용 가능합니다.",
+    highlight: "크롬 브라우저만 있으면 OK",
+    stats: [
+      { label: "설치", value: "불필요" },
+      { label: "언어 설정", value: "불필요" },
+      { label: "언어 인식", value: "자동" }
+    ]
+  },
+  {
     id: "boosting-model",
     title: "단어 & 맥락 부스팅 모델",
     description: "특정 산업과 분야에 특화된 AI 모델로 키워드와 문맥을 동시에 부스팅합니다. 의학, 법률, IT, 금융 등 전문 분야에서 최대 99%의 정확도를 보장합니다.",
@@ -49,29 +60,24 @@ const differentiators: Differentiator[] = [
   {
     id: "scalable-solution",
     title: "다양한 규모 지원",
-    description: "5인 소규모 회의부터 5,000명 이상의 대규모 컨퍼런스까지 모든 환경에서 안정적인 성능을 제공합니다. 네트워크 상태에 따라 자동으로 최적화됩니다.",
-    highlight: "최대 5,000명 동시 접속 지원",
+    description: "5인 소규모 회의부터 1,000명 이상의 대규모 컨퍼런스까지 모든 환경에서 안정적인 성능을 제공합니다. 네트워크 상태에 따라 자동으로 최적화됩니다.",
+    highlight: "최대 1,000명 동시 접속 지원",
     stats: [
-      { label: "최대 참가자", value: "5,000+" },
+      { label: "최대 참가자", value: "1,000" },
       { label: "최소 참가자", value: "1명" },
       { label: "네트워크 자동 최적화", value: "Yes" }
-    ]
-  },
-  {
-    id: "easy-setup",
-    title: "간편 설치 & 사용",
-    description: "프로그램 설치 만으로 시스템 구축이 완료됩니다. 발표자는 노트북 한 대, 참가자는 스마트폰만으로 원활한 번역 서비스를 이용할 수 있습니다.",
-    highlight: "설치 소요시간 단 1분",
-    stats: [
-      { label: "설치 단계", value: "1단계" },
-      { label: "필요 장비", value: "노트북 1대" },
-      { label: "기술 지원", value: "24/7" }
     ]
   }
 ]
 
 // 일반 특성 데이터
 const commonFeatures: Feature[] = [
+  {
+    icon: "🌐",
+    title: "언어 조사 불필요",
+    description: "발화자 언어는 자동 인식, 참가자는 원하는 언어로 번역 수신",
+    details: "발화자의 언어는 자동으로 인식되고, 참가자는 원하는 언어를 직접 선택하여 번역을 받습니다. 회의 중에도 언어를 자유롭게 전환할 수 있어 사전 언어 조사가 필요 없습니다."
+  },
   {
     icon: "⚡",
     title: "빠른 속도",
@@ -83,12 +89,6 @@ const commonFeatures: Feature[] = [
     title: "101개 언어 지원",
     description: "전 세계 주요 언어는 물론 소수 언어까지 폭넓게 지원",
     details: "영어와 중국어를 비롯한 언어부터 희소 언어까지 지원합니다. 모든 언어는 양방향 번역이 가능하며 지속적으로 업데이트됩니다."
-  },
-  {
-    icon: "🌐",
-    title: "언어 조사 불필요",
-    description: "참가자의 언어를 본인이 직접 선택 가능",
-    details: "발화자와 참가자가 직접 자신의 언어를 선택합니다. 사전 조사 없이 회의 시작 직전에도 빠른 설정이 가능합니다."
   },
   {
     icon: "💰",
@@ -118,12 +118,12 @@ function DifferentiatorItem({ item, index }: DifferentiatorItemProps) {
   return (
     <motion.div
       ref={ref}
-      className="max-w-4xl mx-auto" // 좌우 분할 레이아웃 제거, 중앙 정렬 컨테이너로 변경
-      initial={{ opacity: 0, y: 50 }} // 애니메이션을 위로 떠오르는 효과로 변경
+      className="max-w-5xl mx-auto" // 카드 너비 확장
+      initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, ease: [0.17, 0.55, 0.55, 1] }}
     >
-      <div className="relative bg-gradient-to-br from-blue-50 via-white to-indigo-50 rounded-3xl shadow-lg border border-gray-100 p-8 md:p-12 overflow-hidden">
+      <div className="relative bg-gradient-to-br from-blue-50 via-white to-indigo-50 rounded-3xl shadow-lg border border-gray-100 p-6 sm:p-8 md:p-12 overflow-hidden">
         {/* 배경에 큰 숫자로 디자인 요소 추가 */}
         <div className="absolute top-4 right-8 text-8xl md:text-9xl font-black text-gray-200/80 select-none z-0">
           {(index + 1).toString().padStart(2, '0')}
@@ -152,11 +152,11 @@ function DifferentiatorItem({ item, index }: DifferentiatorItemProps) {
           </p>
 
           {/* 통계 정보 - 그리드 레이아웃 */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8 max-w-lg">
+          <div className="grid grid-cols-3 gap-3 sm:gap-4 mb-8 max-w-xl">
             {item.stats.map((stat, i) => (
-              <div key={i} className="bg-white/70 backdrop-blur-sm rounded-xl p-4 text-center transform transition-transform hover:-translate-y-1 shadow-sm hover:shadow-md border border-gray-200/50">
-                <p className="text-blue-600 font-bold text-2xl mb-1">{stat.value}</p>
-                <p className="text-gray-600 text-sm">{stat.label}</p>
+              <div key={i} className="bg-white/70 backdrop-blur-sm rounded-xl p-3 sm:p-4 text-center transform transition-transform hover:-translate-y-1 shadow-sm hover:shadow-md border border-gray-200/50">
+                <p className="text-blue-600 font-bold text-xl sm:text-2xl mb-1 whitespace-nowrap">{stat.value}</p>
+                <p className="text-gray-600 text-xs sm:text-sm whitespace-nowrap">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -588,23 +588,29 @@ export default function ProposalSection() {
         >
           <h2 className="text-4xl font-bold mb-6">지금 바로 시작하세요</h2>
           <p className="text-xl text-blue-100 max-w-2xl mx-auto mb-10">
-            설치부터 활용까지 1분 안에 가능합니다.
+            접속부터 사용까지 1분이면 충분합니다.
           </p>
           
           {/* 기대 효과 체크리스트 */}
-          <div className="max-w-md mx-auto mb-10 text-left">
+          <div className="mx-auto mb-10 inline-block">
             <p className="text-lg font-semibold mb-4 text-center">도입 시 기대효과</p>
-            <ul className="space-y-3">
+            <div className="grid grid-cols-2 gap-x-12 gap-y-3">
               {[
-                '국제 회의 참여율 향상',
-                '참가자 이해도 증진'
+                '통역사 비용 절감',
+                '행사 준비 시간 단축',
+                '글로벌 참가자 확대',
+                '다국어 동시 지원',
+                '참가자 만족도 향상',
+                '실시간 소통 가능',
+                '별도 장비 불필요',
+                '현장 운영 간소화'
               ].map((item, i) => (
-                <li key={i} className="flex items-start">
-                  <CheckCircle className="h-5 w-5 text-green-300 mr-2 flex-shrink-0 mt-1" />
+                <div key={i} className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-green-300 mr-2 flex-shrink-0" />
                   <span>{item}</span>
-                </li>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
           
           {/* --- [수정된 부분] 버튼: Link를 a 태그로 변경 --- */}

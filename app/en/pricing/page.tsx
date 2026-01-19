@@ -16,7 +16,7 @@ interface FAQItem {
 const generalPlan = {
   name: 'Pay-As-You-Go',
   description: 'Pay only for what you use',
-  price: '$3.50',
+  price: '$2.50',
   priceUnit: '/hour',
   priceDescription: 'Billed after usage',
   icon: <Zap className="w-6 h-6" />,
@@ -30,6 +30,14 @@ const generalPlan = {
         'Real-time translation',
         'Auto language detection & switching',
         'Dashboard access',
+      ]
+    },
+    {
+      title: 'Service Scope',
+      items: [
+        'Max 10 participants per room',
+        'Up to 3 concurrent rooms',
+        'Data usage: service improvement',
       ]
     },
     {
@@ -62,16 +70,22 @@ const contractPlan = {
       title: "What's Included",
       items: [
         'Custom pricing',
-        'Large-scale event support (5,000+)',
         'Field-specific boosting model',
-        '24/7 priority support',
-        'Dedicated account manager',
+        'Translation subtitle screen',
+      ]
+    },
+    {
+      title: 'Service Scope',
+      items: [
+        'Max 1,000 participants per room',
+        'Unlimited concurrent rooms',
+        'Data not stored or used',
       ]
     },
     {
       title: 'Recommended For',
       items: [
-        'Conferences · Seminars · Workshops',
+        'Conferences · Seminars · Workshops (100+)',
         'Institutions · Enterprises · Universities',
         'Regular large-scale events',
       ]
@@ -95,6 +109,10 @@ const faqs: FAQItem[] = [
   {
     question: 'Which plan should I choose?',
     answer: 'For small meetings or simple tests, we recommend Pay-As-You-Go. For conferences or workshops, choose Short-Term Contract. For institutions or enterprises with ongoing needs, Monthly Subscription is the best choice.'
+  },
+  {
+    question: 'What is auto language detection & switching?',
+    answer: 'The speaker\'s language is automatically detected regardless of what language they speak. Participants can select their preferred language in the subtitle room to view translations in their own language. This enables multilingual communication without prior language surveys.'
   },
   {
     question: 'What is the field-specific boosting model?',

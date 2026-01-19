@@ -35,6 +35,17 @@ interface Feature {
 // Differentiator data
 const differentiators: Differentiator[] = [
   {
+    id: "easy-setup",
+    title: "Easy to Use",
+    description: "No installation or language settings required - just open Chrome and start. Participants simply speak in their own language, and it's automatically detected and translated. Works on any device, mobile or laptop.",
+    highlight: "Just need Chrome browser",
+    stats: [
+      { label: "Installation", value: "Not Required" },
+      { label: "Language Setup", value: "Not Required" },
+      { label: "Language Detection", value: "Auto" }
+    ]
+  },
+  {
     id: "boosting-model",
     title: "Word & Context Boosting Model",
     description: "AI model specialized for specific industries and fields, boosting both keywords and context simultaneously. Guarantees up to 99% accuracy in professional fields such as medicine, law, IT, and finance.",
@@ -48,29 +59,24 @@ const differentiators: Differentiator[] = [
   {
     id: "scalable-solution",
     title: "Support for Various Scales",
-    description: "Provides stable performance in all environments, from small 5-person meetings to large conferences with over 5,000 participants. Automatically optimizes according to network conditions.",
-    highlight: "Supports up to 5,000 simultaneous connections",
+    description: "Provides stable performance in all environments, from small 5-person meetings to large conferences with up to 1,000 participants. Automatically optimizes according to network conditions.",
+    highlight: "Supports up to 1,000 simultaneous connections",
     stats: [
-      { label: "Max Participants", value: "5,000+" },
+      { label: "Max Participants", value: "1,000" },
       { label: "Min Participants", value: "1" },
       { label: "Auto Network Optimization", value: "Yes" }
-    ]
-  },
-  {
-    id: "easy-setup",
-    title: "Easy Installation & Use",
-    description: "System setup is complete with just program installation. Presenters need only a laptop, and participants can enjoy smooth translation services with just their smartphones.",
-    highlight: "Installation takes only 1 minute",
-    stats: [
-      { label: "Installation Steps", value: "1 Step" },
-      { label: "Required Equipment", value: "1 Laptop" },
-      { label: "Technical Support", value: "24/7" }
     ]
   }
 ]
 
 // Common features data
 const commonFeatures: Feature[] = [
+  {
+    icon: "🌐",
+    title: "No Language Survey Needed",
+    description: "Speaker's language auto-detected, listeners receive translation in their chosen language",
+    details: "The speaker's language is automatically detected, and listeners select their preferred language to receive translations. Languages can be switched freely during the meeting, eliminating the need for pre-meeting language surveys."
+  },
   {
     icon: "⚡",
     title: "Fast Speed",
@@ -82,12 +88,6 @@ const commonFeatures: Feature[] = [
     title: "101 Languages Support",
     description: "Wide support from major world languages to minority languages",
     details: "Supports languages from English and Chinese to rare languages. All languages support bidirectional translation and are continuously updated."
-  },
-  {
-    icon: "🌐",
-    title: "No Language Survey Needed",
-    description: "Participants can select their own language directly",
-    details: "Speakers and participants select their own languages directly. Quick setup is possible even right before the meeting without prior surveys."
   },
   {
     icon: "💰",
@@ -116,12 +116,12 @@ function DifferentiatorItem({ item, index }: DifferentiatorItemProps) {
   return (
     <motion.div
       ref={ref}
-      className="max-w-4xl mx-auto"
+      className="max-w-5xl mx-auto"
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, ease: [0.17, 0.55, 0.55, 1] }}
     >
-      <div className="relative bg-gradient-to-br from-blue-50 via-white to-indigo-50 rounded-3xl shadow-lg border border-gray-100 p-8 md:p-12 overflow-hidden">
+      <div className="relative bg-gradient-to-br from-blue-50 via-white to-indigo-50 rounded-3xl shadow-lg border border-gray-100 p-6 sm:p-8 md:p-12 overflow-hidden">
         {/* Background large number design element */}
         <div className="absolute top-4 right-8 text-8xl md:text-9xl font-black text-gray-200/80 select-none z-0">
           {(index + 1).toString().padStart(2, '0')}
@@ -150,11 +150,11 @@ function DifferentiatorItem({ item, index }: DifferentiatorItemProps) {
           </p>
 
           {/* Statistics - grid layout */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8 max-w-lg">
+          <div className="grid grid-cols-3 gap-3 sm:gap-4 mb-8 max-w-xl">
             {item.stats.map((stat, i) => (
-              <div key={i} className="bg-white/70 backdrop-blur-sm rounded-xl p-4 text-center transform transition-transform hover:-translate-y-1 shadow-sm hover:shadow-md border border-gray-200/50">
-                <p className="text-blue-600 font-bold text-2xl mb-1">{stat.value}</p>
-                <p className="text-gray-600 text-sm">{stat.label}</p>
+              <div key={i} className="bg-white/70 backdrop-blur-sm rounded-xl p-3 sm:p-4 text-center transform transition-transform hover:-translate-y-1 shadow-sm hover:shadow-md border border-gray-200/50">
+                <p className="text-blue-600 font-bold text-xl sm:text-2xl mb-1 whitespace-nowrap">{stat.value}</p>
+                <p className="text-gray-600 text-xs sm:text-sm whitespace-nowrap">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -581,23 +581,29 @@ export default function ProposalSection() {
         >
           <h2 className="text-4xl font-bold mb-6">Get Started Now</h2>
           <p className="text-xl text-blue-100 max-w-2xl mx-auto mb-10">
-            From installation to utilization, possible within 1 minute.
+            From access to use, all within 1 minute.
           </p>
           
           {/* Expected benefits checklist */}
-          <div className="max-w-md mx-auto mb-10 text-left">
+          <div className="mx-auto mb-10 inline-block">
             <p className="text-lg font-semibold mb-4 text-center">Expected Benefits</p>
-            <ul className="space-y-3">
+            <div className="grid grid-cols-2 gap-x-12 gap-y-3">
               {[
-                'Increased participation in international meetings',
-                'Enhanced participant understanding'
+                'Reduced interpreter costs',
+                'Shortened event preparation time',
+                'Expanded global participants',
+                'Simultaneous multi-language support',
+                'Improved participant satisfaction',
+                'Real-time communication',
+                'No additional equipment needed',
+                'Simplified on-site operations'
               ].map((item, i) => (
-                <li key={i} className="flex items-start">
-                  <CheckCircle className="h-5 w-5 text-green-300 mr-2 flex-shrink-0 mt-1" />
+                <div key={i} className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-green-300 mr-2 flex-shrink-0" />
                   <span>{item}</span>
-                </li>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
           
           {/* CTA button */}
