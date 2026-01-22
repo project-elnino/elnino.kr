@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useRef, useCallback } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
 import { motion, useInView, useScroll, useSpring, useMotionValue, useTransform, AnimatePresence } from 'framer-motion'
 import { Button } from "@/components/ui/button"
@@ -65,13 +65,10 @@ function AnimatedCounter({ value, suffix = "" }: { value: string; suffix?: strin
   const isNumeric = /^\d+/.test(value);
 
   const count = useMotionValue(0);
-  const rounded = useTransform(count, (latest) => Math.round(latest));
   const [displayValue, setDisplayValue] = useState(isNumeric ? "0" : value);
 
   useEffect(() => {
     if (isInView && isNumeric) {
-      const animation = count.set(0);
-      const controls = count.set(numericValue);
 
       let startTime: number;
       const duration = 1500;

@@ -2,7 +2,11 @@
   "permissions": {
     "allow": [
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(npm run dev:*)",
+      "Bash(timeout:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nenhance UI design and remove deprecated email\n\n- Add floating particles, animated counters, and gradient backgrounds\n- Improve scroll progress bar and side navigation with labels\n- Add glow effects to CTA buttons and glassmorphism utilities\n- Fix hydration error by using deterministic particle positions\n- Remove contact@elnino.kr from all pages \\(footer, contact form, policies\\)\n- Remove recommendation badge from contract pricing option\n- Update policy pages to link to contact form instead\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(npm run build:*)"
     ]
   }
 }
