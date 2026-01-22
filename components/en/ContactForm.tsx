@@ -243,7 +243,7 @@ export default function ContactForm() {
 
       if (result.status === 'success') {
         toast.success("Application submitted successfully.", {
-          description: "We will contact you shortly at contact@elnino.kr.",
+          description: "We will contact you shortly.",
           icon: <CheckCircle2 className="h-5 w-5 text-green-500" />
         });
 

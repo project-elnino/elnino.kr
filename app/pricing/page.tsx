@@ -1,11 +1,52 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import Topbar from '@/components/Topbar'
 import Footer from '@/components/Footer'
-import { Check, Zap, Building2, ArrowRight, HelpCircle } from 'lucide-react'
+import { Check, Zap, Building2, ArrowRight, ChevronDown } from 'lucide-react'
 import { useState } from 'react'
+
+// 파티클 데이터 (고정 값으로 hydration 오류 방지)
+const particleData = [
+  { left: 8, top: 15, duration: 4.2, delay: 0.3 },
+  { left: 22, top: 45, duration: 5.1, delay: 1.1 },
+  { left: 35, top: 75, duration: 3.8, delay: 0.7 },
+  { left: 48, top: 25, duration: 5.5, delay: 1.5 },
+  { left: 62, top: 55, duration: 4.0, delay: 0.5 },
+  { left: 75, top: 85, duration: 4.8, delay: 1.2 },
+  { left: 88, top: 35, duration: 5.3, delay: 0.9 },
+  { left: 15, top: 65, duration: 3.5, delay: 1.8 },
+  { left: 55, top: 10, duration: 4.5, delay: 0.4 },
+  { left: 82, top: 70, duration: 5.0, delay: 1.0 },
+];
+
+// 파티클 컴포넌트
+function FloatingParticles() {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {particleData.map((particle, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-1 h-1 bg-white/20 rounded-full"
+          style={{
+            left: `${particle.left}%`,
+            top: `${particle.top}%`,
+          }}
+          animate={{
+            y: [0, -20, 0],
+            opacity: [0.2, 0.4, 0.2],
+          }}
+          transition={{
+            duration: particle.duration,
+            repeat: Infinity,
+            delay: particle.delay,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
 
 interface FAQItem {
   question: string;
@@ -120,27 +161,36 @@ const faqs: FAQItem[] = [
   }
 ]
 
-function FAQAccordion({ item }: { item: FAQItem }) {
+function FAQAccordion({ item, index }: { item: FAQItem; index: number }) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <div className="border-b border-gray-200 last:border-b-0">
+    <motion.div
+      className="border-b border-gray-100 last:border-b-0"
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.05 }}
+    >
       <button
-        className="w-full py-5 flex items-center justify-between text-left hover:text-blue-600 transition-colors"
+        className="w-full py-5 flex items-center justify-between text-left group"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <span className="font-medium text-gray-900 pr-4">{item.question}</span>
-        <HelpCircle className={`w-5 h-5 text-gray-400 flex-shrink-0 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        <span className="font-medium text-gray-900 pr-4 group-hover:text-blue-600 transition-colors">{item.question}</span>
+        <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${isOpen ? 'bg-blue-600 text-white rotate-180' : 'bg-gray-100 text-gray-500 group-hover:bg-blue-100 group-hover:text-blue-600'}`}>
+          <ChevronDown className="w-4 h-4" />
+        </div>
       </button>
       <motion.div
         initial={false}
         animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
         className="overflow-hidden"
       >
-        <p className="pb-5 text-gray-600 leading-relaxed">{item.answer}</p>
+        <div className="pb-5 pl-0">
+          <p className="text-gray-600 leading-relaxed bg-blue-50/50 rounded-xl p-4">{item.answer}</p>
+        </div>
       </motion.div>
-    </div>
+    </motion.div>
   )
 }
 
@@ -150,36 +200,38 @@ export default function PricingPage() {
       <Topbar />
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-900 via-blue-700 to-blue-500 py-32 relative overflow-hidden">
+      <section className="relative py-32 overflow-hidden">
+        {/* 애니메이션 그라데이션 배경 */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-950 via-blue-800 to-indigo-900" />
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-tr from-purple-900/30 via-transparent to-cyan-900/20"
+            animate={{ opacity: [0.3, 0.5, 0.3] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </div>
+
         {/* Background animation elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-0 left-0 w-full h-full bg-grid-pattern opacity-20"></div>
+          <div className="absolute top-0 left-0 w-full h-full bg-grid-pattern opacity-10"></div>
+          <FloatingParticles />
           <motion.div
-            className="absolute top-20 left-10 w-64 h-64 bg-blue-800 rounded-full filter blur-3xl opacity-20"
+            className="absolute top-20 left-10 w-72 h-72 bg-blue-500 rounded-full filter blur-[100px] opacity-30"
             animate={{
-              x: [0, 30, -20, 0],
-              y: [0, -20, 20, 0],
-              scale: [1, 1.1, 0.9, 1]
+              x: [0, 40, -30, 0],
+              y: [0, -30, 30, 0],
+              scale: [1, 1.2, 0.9, 1]
             }}
-            transition={{
-              repeat: Infinity,
-              duration: 7,
-              ease: "easeInOut"
-            }}
+            transition={{ repeat: Infinity, duration: 12, ease: "easeInOut" }}
           />
           <motion.div
-            className="absolute bottom-10 right-10 w-80 h-80 bg-blue-600 rounded-full filter blur-3xl opacity-20"
+            className="absolute bottom-10 right-10 w-96 h-96 bg-indigo-500 rounded-full filter blur-[120px] opacity-25"
             animate={{
-              x: [0, -30, 20, 0],
-              y: [0, 20, -20, 0],
-              scale: [1, 0.9, 1.1, 1]
+              x: [0, -40, 30, 0],
+              y: [0, 30, -30, 0],
+              scale: [1, 0.9, 1.15, 1]
             }}
-            transition={{
-              repeat: Infinity,
-              duration: 7,
-              ease: "easeInOut",
-              delay: 2
-            }}
+            transition={{ repeat: Infinity, duration: 15, ease: "easeInOut", delay: 3 }}
           />
         </div>
 
@@ -191,8 +243,20 @@ export default function PricingPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <h1 className="text-5xl font-extrabold text-white mb-6">가격 정책</h1>
-            <div className="h-1 w-24 bg-blue-300 mx-auto mb-10"></div>
+            <motion.div
+              className="inline-block px-4 py-1.5 rounded-full bg-white/10 text-blue-200 font-medium text-sm mb-6 backdrop-blur-sm border border-white/10"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              투명한 가격 정책
+            </motion.div>
+            <h1 className="text-5xl font-extrabold text-white mb-6">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-white">
+                가격 정책
+              </span>
+            </h1>
+            <div className="h-1 w-24 bg-gradient-to-r from-blue-400 to-indigo-400 mx-auto mb-10 rounded-full"></div>
             <p className="text-xl text-blue-100 max-w-2xl mx-auto">
               사용 목적에 맞는 최적의 요금제를 선택하세요
             </p>
@@ -210,17 +274,17 @@ export default function PricingPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="relative bg-white rounded-3xl shadow-lg overflow-hidden flex flex-col"
+              className="relative bg-white rounded-3xl shadow-lg hover:shadow-xl overflow-hidden flex flex-col border border-gray-100 transition-shadow duration-300"
             >
               {/* 카드 헤더 */}
-              <div className="bg-gray-50 px-8 py-4 border-b border-gray-100">
+              <div className="bg-gradient-to-r from-gray-50 to-gray-100 px-8 py-4 border-b border-gray-100">
                 <h2 className="text-lg font-semibold text-gray-600">일반 요금</h2>
               </div>
 
               <div className="p-8">
                 {/* Icon & Name */}
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-blue-100 text-blue-600">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-200 text-blue-600 shadow-sm">
                     {generalPlan.icon}
                   </div>
                   <div>
@@ -230,40 +294,37 @@ export default function PricingPage() {
                 </div>
 
                 {/* Price */}
-                <div className="mb-6">
+                <div className="mb-8 pb-6 border-b border-gray-100">
                   <div className="flex items-baseline gap-1">
                     <span className="text-4xl font-bold text-gray-900">{generalPlan.price}</span>
-                    <span className="text-lg text-gray-600">{generalPlan.priceUnit}</span>
+                    <span className="text-lg text-gray-500">{generalPlan.priceUnit}</span>
                   </div>
-                  <p className="text-sm text-gray-500 mt-1">{generalPlan.priceDescription}</p>
+                  <p className="text-sm text-gray-400 mt-2">{generalPlan.priceDescription}</p>
                 </div>
 
                 {/* CTA Button */}
                 <Link
                   href={generalPlan.ctaLink}
-                  className="w-full flex items-center justify-center gap-2 py-4 px-6 rounded-xl font-semibold transition-all bg-blue-600 text-white hover:bg-blue-700 mb-6"
+                  className="w-full flex items-center justify-center gap-2 py-4 px-6 rounded-xl font-semibold transition-all bg-gray-900 text-white hover:bg-gray-800 mb-8 shadow-sm hover:shadow-md"
                 >
                   {generalPlan.cta}
                   <ArrowRight className="w-4 h-4" />
                 </Link>
 
-                {/* Divider */}
-                <div className="border-b border-gray-200 mb-6"></div>
-
                 {/* Feature Sections */}
                 <div className="space-y-6">
                   {generalPlan.sections.map((section, sectionIndex) => (
                     <div key={sectionIndex}>
-                      <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
+                      <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
                         {section.title}
                       </h4>
-                      <div className="space-y-2">
+                      <div className="space-y-2.5">
                         {section.items.map((item, itemIndex) => (
                           <div key={itemIndex} className="flex items-start gap-3">
-                            <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 bg-green-100 text-green-600">
+                            <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 bg-gray-100 text-gray-600">
                               <Check className="w-3 h-3" />
                             </div>
-                            <span className="text-gray-700 text-sm">{item}</span>
+                            <span className="text-gray-600 text-sm">{item}</span>
                           </div>
                         ))}
                       </div>
@@ -273,22 +334,22 @@ export default function PricingPage() {
               </div>
             </motion.div>
 
-            {/* 계약 요금 카드 */}
+            {/* 계약 요금 카드 - Premium */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="relative bg-white rounded-3xl shadow-lg overflow-hidden flex flex-col"
+              className="relative bg-white rounded-3xl shadow-xl hover:shadow-2xl overflow-hidden flex flex-col border-2 border-blue-500 transition-shadow duration-300"
             >
               {/* 카드 헤더 */}
-              <div className="bg-gray-50 px-8 py-4 border-b border-gray-100">
-                <h2 className="text-lg font-semibold text-gray-600">계약 요금</h2>
+              <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-4">
+                <h2 className="text-lg font-semibold text-white">계약 요금</h2>
               </div>
 
               <div className="p-8">
                 {/* Icon & Name */}
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-blue-100 text-blue-600">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-lg">
                     {contractPlan.icon}
                   </div>
                   <div>
@@ -298,41 +359,38 @@ export default function PricingPage() {
                 </div>
 
                 {/* Price */}
-                <div className="mb-6">
+                <div className="mb-8 pb-6 border-b border-gray-100">
                   <div className="flex items-baseline gap-1">
-                    <span className="text-4xl font-bold text-gray-900">{contractPlan.price}</span>
+                    <span className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">{contractPlan.price}</span>
                   </div>
-                  <p className="text-sm text-gray-500 mt-1">{contractPlan.priceDescription}</p>
+                  <p className="text-sm text-gray-400 mt-2">{contractPlan.priceDescription}</p>
                 </div>
 
                 {/* CTA Button */}
                 <Link
                   href={contractPlan.ctaLink}
-                  className="w-full flex items-center justify-center gap-2 py-4 px-6 rounded-xl font-semibold transition-all bg-blue-600 text-white hover:bg-blue-700 mb-6"
+                  className="w-full flex items-center justify-center gap-2 py-4 px-6 rounded-xl font-semibold transition-all bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 mb-8 shadow-lg hover:shadow-xl"
                 >
                   {contractPlan.cta}
                   <ArrowRight className="w-4 h-4" />
                 </Link>
 
-                {/* Divider */}
-                <div className="border-b border-gray-200 mb-6"></div>
-
                 {/* Feature Sections */}
                 <div className="space-y-6">
                   {contractPlan.sections.map((section, sectionIndex) => (
                     <div key={sectionIndex}>
-                      <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
+                      <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
                         {section.title}
                       </h4>
-                      <div className="space-y-2">
+                      <div className="space-y-2.5">
                         {/* 포함된 기능 섹션에서 종량제의 모든 기능 포함 표시 */}
                         {section.title === '포함된 기능' && (
                           <div className="flex items-start gap-3">
-                            <div className="w-5 h-5 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <div className="w-5 h-5 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
                               <Check className="w-3 h-3 text-white" />
                             </div>
                             <span className="text-gray-700 text-sm">
-                              <span className="text-blue-600 font-medium">{contractPlan.includesFrom}</span>의 모든 기능 포함
+                              <span className="text-blue-600 font-semibold">{contractPlan.includesFrom}</span>의 모든 기능 포함
                             </span>
                           </div>
                         )}
@@ -360,10 +418,13 @@ export default function PricingPage() {
             transition={{ duration: 0.5, delay: 0.5 }}
             className="max-w-3xl mx-auto"
           >
-            <h2 className="text-3xl font-bold text-gray-900 text-center mb-10">자주 묻는 질문</h2>
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+            <div className="text-center mb-10">
+              <span className="inline-block px-4 py-1.5 rounded-full bg-blue-100 text-blue-700 font-medium text-sm mb-4">FAQ</span>
+              <h2 className="text-3xl font-bold text-gray-900">자주 묻는 질문</h2>
+            </div>
+            <div className="bg-white rounded-3xl shadow-lg border border-gray-100 p-6 sm:p-8">
               {faqs.map((faq, index) => (
-                <FAQAccordion key={index} item={faq} />
+                <FAQAccordion key={index} item={faq} index={index} />
               ))}
             </div>
           </motion.div>
@@ -373,35 +434,55 @@ export default function PricingPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="mt-20 bg-gradient-to-r from-blue-600 to-indigo-700 rounded-3xl p-10 text-center text-white relative overflow-hidden"
+            className="mt-20 bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 rounded-3xl p-8 sm:p-12 text-center text-white relative overflow-hidden"
           >
             <div className="absolute inset-0 overflow-hidden">
               <motion.div
-                className="absolute -top-20 -right-20 w-64 h-64 bg-white/10 rounded-full filter blur-2xl"
+                className="absolute -top-32 -right-32 w-80 h-80 bg-white/10 rounded-full filter blur-3xl"
                 animate={{
-                  x: [0, 20, 0],
-                  y: [0, -20, 0],
+                  x: [0, 30, 0],
+                  y: [0, -30, 0],
+                  scale: [1, 1.1, 1],
                 }}
                 transition={{
                   repeat: Infinity,
-                  duration: 8,
+                  duration: 10,
                   ease: "easeInOut"
+                }}
+              />
+              <motion.div
+                className="absolute -bottom-32 -left-32 w-80 h-80 bg-indigo-500/20 rounded-full filter blur-3xl"
+                animate={{
+                  x: [0, -20, 0],
+                  y: [0, 20, 0],
+                  scale: [1, 1.05, 1],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 12,
+                  ease: "easeInOut",
+                  delay: 2
                 }}
               />
             </div>
             <div className="relative z-10">
+              <div className="inline-block px-4 py-1.5 rounded-full bg-white/10 text-blue-100 font-medium text-sm mb-6 backdrop-blur-sm">
+                맞춤 상담
+              </div>
               <h3 className="text-2xl md:text-3xl font-bold mb-4">맞춤 견적이 필요하신가요?</h3>
-              <p className="text-blue-100 mb-8 max-w-xl mx-auto">
+              <p className="text-blue-100 mb-8 max-w-xl mx-auto leading-relaxed">
                 대규모 행사나 특별한 요구사항이 있으시다면 언제든지 문의해 주세요.
                 <br />최적의 솔루션을 제안해 드립니다.
               </p>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 bg-white text-blue-700 px-8 py-4 rounded-full font-semibold hover:bg-blue-50 transition-colors shadow-lg"
-              >
-                문의하기
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+              <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.2 }}>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 bg-white text-blue-700 px-8 py-4 rounded-full font-semibold hover:bg-blue-50 transition-all shadow-xl hover:shadow-2xl"
+                >
+                  문의하기
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </motion.div>
             </div>
           </motion.div>
         </div>

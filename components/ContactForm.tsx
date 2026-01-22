@@ -243,7 +243,7 @@ export default function ContactForm() {
 
       if (result.status === 'success') {
         toast.success("신청이 완료되었습니다.", {
-          description: "빠른 시일 내에 contact@elnino.kr에서 연락드리겠습니다.",
+          description: "빠른 시일 내에 연락드리겠습니다.",
           icon: <CheckCircle2 className="h-5 w-5 text-green-500" />
         });
 

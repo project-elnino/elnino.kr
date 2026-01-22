@@ -1,12 +1,109 @@
 'use client'
 
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, useCallback } from 'react'
 import Link from 'next/link'
-import { motion, useInView, useScroll, useSpring } from 'framer-motion'
+import { motion, useInView, useScroll, useSpring, useMotionValue, useTransform, AnimatePresence } from 'framer-motion'
 import { Button } from "@/components/ui/button"
-import { ArrowRightIcon,  CheckCircle, ChevronDown, Globe, X } from "lucide-react"
+import { ArrowRightIcon, CheckCircle, ChevronDown, Globe, X, Languages, Zap, MessageCircle, Coins, Sparkles } from "lucide-react"
 import Topbar from "@/components/Topbar"
 import Footer from "@/components/Footer"
+
+// 파티클 데이터 (고정 값으로 hydration 오류 방지)
+const particleData = [
+  { left: 5, top: 10, duration: 4, delay: 0.2, xOffset: 5 },
+  { left: 15, top: 25, duration: 5, delay: 0.8, xOffset: -8 },
+  { left: 25, top: 60, duration: 3.5, delay: 1.2, xOffset: 10 },
+  { left: 35, top: 40, duration: 6, delay: 0.5, xOffset: -5 },
+  { left: 45, top: 80, duration: 4.5, delay: 1.8, xOffset: 7 },
+  { left: 55, top: 15, duration: 5.5, delay: 0.3, xOffset: -10 },
+  { left: 65, top: 70, duration: 3.8, delay: 1.5, xOffset: 8 },
+  { left: 75, top: 35, duration: 4.2, delay: 0.7, xOffset: -6 },
+  { left: 85, top: 55, duration: 5.2, delay: 1.1, xOffset: 4 },
+  { left: 95, top: 20, duration: 4.8, delay: 0.4, xOffset: -7 },
+  { left: 10, top: 85, duration: 3.2, delay: 1.6, xOffset: 9 },
+  { left: 30, top: 5, duration: 5.8, delay: 0.9, xOffset: -4 },
+  { left: 50, top: 45, duration: 4.3, delay: 1.3, xOffset: 6 },
+  { left: 70, top: 90, duration: 3.6, delay: 0.6, xOffset: -9 },
+  { left: 90, top: 50, duration: 5.1, delay: 1.4, xOffset: 3 },
+];
+
+// 파티클 컴포넌트
+function FloatingParticles() {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {particleData.map((particle, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-1 h-1 bg-white/30 rounded-full"
+          style={{
+            left: `${particle.left}%`,
+            top: `${particle.top}%`,
+          }}
+          animate={{
+            y: [0, -30, 0],
+            x: [0, particle.xOffset, 0],
+            opacity: [0.2, 0.5, 0.2],
+            scale: [1, 1.5, 1],
+          }}
+          transition={{
+            duration: particle.duration,
+            repeat: Infinity,
+            delay: particle.delay,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+// 카운터 애니메이션 컴포넌트
+function AnimatedCounter({ value, suffix = "" }: { value: string; suffix?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true });
+  const numericValue = parseInt(value.replace(/[^0-9]/g, '')) || 0;
+  const isNumeric = /^\d+/.test(value);
+
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, (latest) => Math.round(latest));
+  const [displayValue, setDisplayValue] = useState(isNumeric ? "0" : value);
+
+  useEffect(() => {
+    if (isInView && isNumeric) {
+      const animation = count.set(0);
+      const controls = count.set(numericValue);
+
+      let startTime: number;
+      const duration = 1500;
+
+      const animate = (timestamp: number) => {
+        if (!startTime) startTime = timestamp;
+        const progress = Math.min((timestamp - startTime) / duration, 1);
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        count.set(numericValue * easeOut);
+        setDisplayValue(Math.round(numericValue * easeOut).toString());
+
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        } else {
+          setDisplayValue(value.replace(/[^0-9+%]/g, ''));
+        }
+      };
+
+      requestAnimationFrame(animate);
+    }
+  }, [isInView, isNumeric, numericValue, value, count]);
+
+  if (!isNumeric) {
+    return <span ref={ref}>{value}</span>;
+  }
+
+  return (
+    <span ref={ref}>
+      {displayValue}{suffix}
+    </span>
+  );
+}
 
 // 서비스 소개서 URL - 이 부분을 실제 URL로 변경하세요
 const SERVICE_INTRODUCTION_URL = "https://gamma.app/embed/wmsjc2q5wzsaqjw";
@@ -27,8 +124,8 @@ interface Differentiator {
 }
 
 interface Feature {
-  icon: string;
-  title:string;
+  icon: React.ReactNode;
+  title: string;
   description: string;
   details: string;
 }
@@ -73,25 +170,25 @@ const differentiators: Differentiator[] = [
 // 일반 특성 데이터
 const commonFeatures: Feature[] = [
   {
-    icon: "🌐",
+    icon: <Languages className="w-6 h-6" />,
     title: "언어 조사 불필요",
     description: "발화자 언어는 자동 인식, 참가자는 원하는 언어로 번역 수신",
     details: "발화자의 언어는 자동으로 인식되고, 참가자는 원하는 언어를 직접 선택하여 번역을 받습니다. 회의 중에도 언어를 자유롭게 전환할 수 있어 사전 언어 조사가 필요 없습니다."
   },
   {
-    icon: "⚡",
+    icon: <Zap className="w-6 h-6" />,
     title: "빠른 속도",
     description: "발화 직후 즉시 번역되어 자연스러운 대화 흐름 유지하며 번역 제공",
     details: "AI 최적화 알고리즘으로 최소한의 지연으로 번역합니다. 전후 맥락을 고려한 매끄러운 대화를 경험하세요."
   },
   {
-    icon: "🗣️",
+    icon: <MessageCircle className="w-6 h-6" />,
     title: "101개 언어 지원",
     description: "전 세계 주요 언어는 물론 소수 언어까지 폭넓게 지원",
     details: "영어와 중국어를 비롯한 언어부터 희소 언어까지 지원합니다. 모든 언어는 양방향 번역이 가능하며 지속적으로 업데이트됩니다."
   },
   {
-    icon: "💰",
+    icon: <Coins className="w-6 h-6" />,
     title: "합리적 가격",
     description: "합리적 요금제로 비용 효율성 극대화",
     details: "월 구독제로 합리적이고 투명한 과금 체계를 제공합니다. 기업 규모나 사용자 수에 따른 다양한 요금제를 선택할 수 있습니다."
@@ -109,8 +206,7 @@ interface FeatureItemProps {
   index: number;
 }
 
-// --- [수정된 부분] 차별화 포인트 아이템 컴포넌트 ---
-// 이미지를 사용하지 않는 카드 디자인으로 변경
+// 차별화 포인트 아이템 컴포넌트
 function DifferentiatorItem({ item, index }: DifferentiatorItemProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
@@ -118,52 +214,73 @@ function DifferentiatorItem({ item, index }: DifferentiatorItemProps) {
   return (
     <motion.div
       ref={ref}
-      className="max-w-5xl mx-auto" // 카드 너비 확장
+      className="max-w-5xl mx-auto"
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, ease: [0.17, 0.55, 0.55, 1] }}
     >
-      <div className="relative bg-gradient-to-br from-blue-50 via-white to-indigo-50 rounded-3xl shadow-lg border border-gray-100 p-6 sm:p-8 md:p-12 overflow-hidden">
-        {/* 배경에 큰 숫자로 디자인 요소 추가 */}
-        <div className="absolute top-4 right-8 text-8xl md:text-9xl font-black text-gray-200/80 select-none z-0">
+      <div className="relative bg-white rounded-3xl shadow-xl border border-gray-100/80 p-6 sm:p-8 md:p-12 overflow-hidden group hover:shadow-2xl transition-shadow duration-500">
+        {/* 배경 그라데이션 오버레이 */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-transparent to-indigo-50/50 opacity-60"></div>
+
+        {/* 배경에 큰 숫자 */}
+        <div className="absolute top-4 right-6 sm:right-8 text-7xl sm:text-8xl md:text-9xl font-black text-gray-100 select-none z-0 transition-all duration-500 group-hover:text-blue-100/80">
           {(index + 1).toString().padStart(2, '0')}
         </div>
 
-        {/* 배경에 은은하게 움직이는 블러 효과 추가 */}
+        {/* 배경 블러 효과 */}
         <motion.div
-          className="absolute -top-10 -left-10 w-40 h-40 bg-blue-100 rounded-full filter blur-3xl opacity-50"
-          animate={{ x: [0, 10, -5, 0], y: [0, -5, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 12, ease: "easeInOut" }}
+          className="absolute -top-20 -left-20 w-60 h-60 bg-blue-200 rounded-full filter blur-3xl opacity-30"
+          animate={{ x: [0, 15, -10, 0], y: [0, -10, 15, 0] }}
+          transition={{ repeat: Infinity, duration: 15, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute -bottom-10 -right-10 w-40 h-40 bg-indigo-100 rounded-full filter blur-3xl opacity-50"
-          animate={{ x: [0, -10, 5, 0], y: [0, 5, -10, 0] }}
-          transition={{ repeat: Infinity, duration: 12, ease: "easeInOut", delay: 2 }}
+          className="absolute -bottom-20 -right-20 w-60 h-60 bg-indigo-200 rounded-full filter blur-3xl opacity-30"
+          animate={{ x: [0, -15, 10, 0], y: [0, 10, -15, 0] }}
+          transition={{ repeat: Infinity, duration: 15, ease: "easeInOut", delay: 3 }}
         />
 
         {/* 텍스트 컨텐츠 영역 */}
         <div className="relative z-10">
-          <h3 className="text-3xl font-bold text-gray-900 mb-4">
+          {/* 인덱스 배지 */}
+          <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 text-white font-bold text-sm mb-5 shadow-lg">
+            {index + 1}
+          </div>
+
+          <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
             {item.title}
           </h3>
-          <div className="h-1 w-16 bg-blue-500 mb-6"></div>
-          <p className="text-lg text-gray-700 mb-8 leading-relaxed max-w-3xl">
+          <div className="h-1 w-20 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full mb-6"></div>
+          <p className="text-base sm:text-lg text-gray-600 mb-8 leading-relaxed max-w-3xl">
             {item.description}
           </p>
 
           {/* 통계 정보 - 그리드 레이아웃 */}
           <div className="grid grid-cols-3 gap-3 sm:gap-4 mb-8 max-w-xl">
             {item.stats.map((stat, i) => (
-              <div key={i} className="bg-white/70 backdrop-blur-sm rounded-xl p-3 sm:p-4 text-center transform transition-transform hover:-translate-y-1 shadow-sm hover:shadow-md border border-gray-200/50">
-                <p className="text-blue-600 font-bold text-xl sm:text-2xl mb-1 whitespace-nowrap">{stat.value}</p>
-                <p className="text-gray-600 text-xs sm:text-sm whitespace-nowrap">{stat.label}</p>
-              </div>
+              <motion.div
+                key={i}
+                className="relative bg-white rounded-2xl p-3 sm:p-5 text-center shadow-md hover:shadow-xl border border-gray-100 transition-all duration-300 overflow-hidden group"
+                whileHover={{ y: -6, scale: 1.03 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="relative z-10">
+                  <p className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 font-bold text-xl sm:text-2xl mb-1 whitespace-nowrap">
+                    <AnimatedCounter value={stat.value} />
+                  </p>
+                  <p className="text-gray-500 text-xs sm:text-sm whitespace-nowrap">{stat.label}</p>
+                </div>
+              </motion.div>
             ))}
           </div>
 
           {/* 하이라이트 정보 */}
-          <div className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-800 font-semibold rounded-lg shadow-sm">
-            <CheckCircle className="inline-block h-5 w-5 mr-2 text-blue-600" />
+          <div className="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-semibold rounded-full shadow-lg">
+            <CheckCircle className="inline-block h-5 w-5 mr-2" />
             {item.highlight}
           </div>
         </div>
@@ -175,27 +292,27 @@ function DifferentiatorItem({ item, index }: DifferentiatorItemProps) {
 // 특성 아이템 컴포넌트
 function FeatureItem({ feature }: FeatureItemProps) {
   return (
-    <motion.div 
-      className="bg-white rounded-2xl shadow-md overflow-hidden h-full flex flex-col"
-      whileHover={{ scale: 1.01 }}
+    <motion.div
+      className="group bg-white rounded-2xl shadow-md hover:shadow-xl overflow-hidden h-full flex flex-col border border-gray-100 transition-shadow duration-300"
+      whileHover={{ scale: 1.02, y: -4 }}
       transition={{ duration: 0.3 }}
     >
       {/* 상단 컨텐츠 영역 */}
       <div className="p-6 flex-1">
-        <div className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-200 text-blue-600 rounded-xl text-xl mb-4 shadow-sm">
+        <div className="w-14 h-14 flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-2xl mb-5 shadow-lg group-hover:scale-105 transition-transform duration-300">
           {feature.icon}
         </div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">{feature.title}</h3>
-        <p className="text-gray-700 text-sm">{feature.description}</p>
+        <h3 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
+        <p className="text-gray-600 text-sm leading-relaxed">{feature.description}</p>
       </div>
-      
-      {/* 구분선 - 모든 카드에서 동일한 위치 */}
+
+      {/* 구분선 */}
       <div className="px-6">
-        <div className="h-px bg-gray-200"></div>
+        <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
       </div>
-      
+
       {/* 상세 내용 */}
-      <div className="bg-blue-50 px-6 py-4">
+      <div className="bg-gradient-to-br from-blue-50 to-indigo-50 px-6 py-5">
         <p className="text-gray-700 text-sm leading-relaxed">{feature.details}</p>
       </div>
     </motion.div>
@@ -294,73 +411,130 @@ export default function ProposalSection() {
   return (
     <div className="flex flex-col min-h-screen relative overflow-x-hidden">
       <Topbar />
-      {/* 스크롤 프로그레스 바 - Framer Motion으로 변경 */}
-      <div className="fixed top-0 left-0 w-full h-1 bg-gray-200 z-50">
-        <motion.div 
-          className="h-full bg-blue-600 origin-left"
+      {/* 스크롤 프로그레스 바 - 그라데이션 효과 */}
+      <div className="fixed top-0 left-0 w-full h-1 bg-gray-900/20 z-50 backdrop-blur-sm">
+        <motion.div
+          className="h-full bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 origin-left shadow-lg shadow-blue-500/50"
           style={{ scaleX }}
-        ></motion.div>
+        />
+        <motion.div
+          className="absolute top-0 right-0 w-2 h-2 bg-white rounded-full shadow-lg shadow-white/50 -translate-y-0.5"
+          style={{
+            left: useTransform(scrollYProgress, [0, 1], ['0%', '100%']),
+            opacity: useTransform(scrollYProgress, [0, 0.02, 0.98, 1], [0, 1, 1, 0])
+          }}
+        />
       </div>
       
-      {/* 사이드 네비게이션 - 위치 조정 */}
+      {/* 사이드 네비게이션 - 라벨 포함 */}
       <div className="fixed right-4 lg:right-8 top-1/2 transform -translate-y-1/2 z-50 hidden lg:block">
-        <div className="flex flex-col items-center space-y-6">
-          <button 
-            onClick={() => scrollToSection(heroRef)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${activeSection === 'hero' ? 'bg-blue-600 w-4 h-4' : 'bg-gray-400'}`}
-            aria-label="히어로 섹션으로 이동"
-          />
-          <button 
-            onClick={() => scrollToSection(featuresRef)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${activeSection === 'features' ? 'bg-blue-600 w-4 h-4' : 'bg-gray-400'}`}
-            aria-label="차별화 포인트 섹션으로 이동"
-          />
-          <button 
-            onClick={() => scrollToSection(commonRef)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${activeSection === 'common' ? 'bg-blue-600 w-4 h-4' : 'bg-gray-400'}`}
-            aria-label="주요 특성 섹션으로 이동"
-          />
-          <button 
-            onClick={() => scrollToSection(ctaRef)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${activeSection === 'cta' ? 'bg-blue-600 w-4 h-4' : 'bg-gray-400'}`}
-            aria-label="CTA 섹션으로 이동"
-          />
+        <div className="flex flex-col items-end space-y-4">
+          {[
+            { ref: heroRef, section: 'hero', label: '소개' },
+            { ref: featuresRef, section: 'features', label: '차별화' },
+            { ref: commonRef, section: 'common', label: '기능' },
+            { ref: ctaRef, section: 'cta', label: '시작' },
+          ].map(({ ref, section, label }) => (
+            <button
+              key={section}
+              onClick={() => scrollToSection(ref)}
+              className="group flex items-center gap-3"
+              aria-label={`${label} 섹션으로 이동`}
+            >
+              <span className={`text-xs font-medium px-2 py-1 rounded-md transition-all duration-300 ${
+                activeSection === section
+                  ? 'bg-blue-600 text-white opacity-100'
+                  : 'bg-gray-800/80 text-white opacity-0 group-hover:opacity-100'
+              }`}>
+                {label}
+              </span>
+              <div className={`relative transition-all duration-300 ${
+                activeSection === section ? 'w-4 h-4' : 'w-3 h-3 group-hover:w-3.5 group-hover:h-3.5'
+              }`}>
+                <div className={`absolute inset-0 rounded-full transition-all duration-300 ${
+                  activeSection === section
+                    ? 'bg-blue-600 shadow-lg shadow-blue-600/50'
+                    : 'bg-gray-400 group-hover:bg-gray-300'
+                }`} />
+                {activeSection === section && (
+                  <motion.div
+                    className="absolute inset-0 rounded-full bg-blue-400"
+                    animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  />
+                )}
+              </div>
+            </button>
+          ))}
         </div>
       </div>
 
       {/* 히어로 섹션 */}
-      <section 
+      <section
         ref={heroRef}
-        className="relative min-h-screen flex items-center bg-gradient-to-br from-blue-900 via-blue-700 to-blue-500 text-white overflow-hidden"
+        className="relative min-h-screen flex items-center text-white overflow-hidden"
       >
-        {/* 배경 애니메이션 요소 - 위치와 크기 조정 */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-full bg-grid-pattern opacity-20"></div>
-          <motion.div 
-            className="absolute top-20 left-5 w-48 h-48 lg:w-64 lg:h-64 bg-blue-800 rounded-full filter blur-3xl opacity-20"
-            animate={{ 
-              x: [0, 15, -10, 0],
-              y: [0, -10, 10, 0],
-              scale: [1, 1.05, 0.95, 1]
+        {/* 애니메이션 그라데이션 배경 */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-950 via-blue-800 to-indigo-900" />
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-tr from-purple-900/50 via-transparent to-cyan-900/30"
+            animate={{
+              opacity: [0.3, 0.5, 0.3],
             }}
-            transition={{ 
-              repeat: Infinity, 
-              duration: 7,
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-bl from-indigo-900/40 via-transparent to-blue-900/40"
+            animate={{
+              opacity: [0.5, 0.3, 0.5],
+            }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          />
+        </div>
+
+        {/* 배경 애니메이션 요소 */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-full bg-grid-pattern opacity-10"></div>
+          <FloatingParticles />
+          <motion.div
+            className="absolute top-20 left-5 w-48 h-48 lg:w-72 lg:h-72 bg-blue-500 rounded-full filter blur-[100px] opacity-30"
+            animate={{
+              x: [0, 30, -20, 0],
+              y: [0, -20, 30, 0],
+              scale: [1, 1.2, 0.9, 1]
+            }}
+            transition={{
+              repeat: Infinity,
+              duration: 10,
               ease: "easeInOut"
             }}
           />
-          <motion.div 
-            className="absolute bottom-20 right-5 w-60 h-60 lg:w-80 lg:h-80 bg-blue-600 rounded-full filter blur-3xl opacity-20"
-            animate={{ 
-              x: [0, -15, 10, 0],
-              y: [0, 10, -10, 0],
-              scale: [1, 0.95, 1.05, 1]
+          <motion.div
+            className="absolute bottom-20 right-5 w-60 h-60 lg:w-96 lg:h-96 bg-indigo-500 rounded-full filter blur-[120px] opacity-25"
+            animate={{
+              x: [0, -30, 20, 0],
+              y: [0, 20, -20, 0],
+              scale: [1, 0.9, 1.15, 1]
             }}
-            transition={{ 
-              repeat: Infinity, 
-              duration: 7,
+            transition={{
+              repeat: Infinity,
+              duration: 12,
               ease: "easeInOut",
               delay: 2
+            }}
+          />
+          <motion.div
+            className="absolute top-1/2 left-1/3 w-40 h-40 lg:w-64 lg:h-64 bg-purple-500 rounded-full filter blur-[80px] opacity-20"
+            animate={{
+              x: [0, 40, -30, 0],
+              y: [0, -30, 20, 0],
+            }}
+            transition={{
+              repeat: Infinity,
+              duration: 15,
+              ease: "easeInOut",
+              delay: 4
             }}
           />
         </div>
@@ -383,39 +557,33 @@ export default function ProposalSection() {
               분야별 커스텀 모델로 소규모 회의부터 대규모 컨퍼런스까지
               <br />어떤 환경에서든 완벽한 번역을 경험하세요.
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-2 md:gap-4 mb-8">
-              <Button 
-                size="default" 
-                className="bg-white hover:bg-white text-blue-700 text-sm md:text-lg px-5 md:px-8 py-3 md:py-5 rounded-full"
-                asChild
-              >
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <Link href="/contact">
-                    <span className="flex items-center justify-center">
-                      지금 신청하기
-                      <motion.span
-                        className="ml-2 inline-block"
-                        animate={{ x: 0 }}
-                        whileHover={{ x: 3 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <ArrowRightIcon className="h-4 w-4 md:h-5 md:w-5" />
-                      </motion.span>
-                    </span>
-                  </Link>
-                </motion.div>
-              </Button>
+            <div className="flex flex-col sm:flex-row justify-center gap-3 md:gap-4 mb-8">
+              {/* Primary CTA with glow */}
               <motion.div
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.3 }}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+                className="relative group"
               >
-                <Button 
-                  variant="outline" 
-                  size="default" 
-                  className="bg-white hover:bg-white text-blue-700 text-sm md:text-lg px-5 md:px-8 py-3 md:py-5 rounded-full"
+                <div className="absolute -inset-1 bg-gradient-to-r from-white/50 to-blue-200/50 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <Link
+                  href="/contact"
+                  className="relative flex items-center justify-center gap-2 bg-white text-blue-700 text-sm md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold shadow-xl shadow-black/10 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300"
+                >
+                  <Sparkles className="w-4 h-4 md:w-5 md:h-5" />
+                  지금 신청하기
+                  <ArrowRightIcon className="h-4 w-4 md:h-5 md:w-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </motion.div>
+
+              {/* Secondary CTA */}
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Button
+                  variant="outline"
+                  size="default"
+                  className="bg-white/10 backdrop-blur-sm border-2 border-white/30 hover:bg-white/20 hover:border-white/50 text-white text-sm md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-full transition-all duration-300"
                   onClick={() => {
                     setShowIntroduction(true);
                     setIframeLoading(true);
@@ -592,9 +760,11 @@ export default function ProposalSection() {
           </p>
           
           {/* 기대 효과 체크리스트 */}
-          <div className="mx-auto mb-10 inline-block">
-            <p className="text-lg font-semibold mb-4 text-center">도입 시 기대효과</p>
-            <div className="grid grid-cols-2 gap-x-12 gap-y-3">
+          <div className="mx-auto mb-12 max-w-2xl">
+            <div className="inline-block px-4 py-1.5 rounded-full bg-white/10 text-blue-100 font-medium text-sm mb-6 backdrop-blur-sm">
+              도입 시 기대효과
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 text-left">
               {[
                 '통역사 비용 절감',
                 '행사 준비 시간 단축',
@@ -605,93 +775,154 @@ export default function ProposalSection() {
                 '별도 장비 불필요',
                 '현장 운영 간소화'
               ].map((item, i) => (
-                <div key={i} className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-300 mr-2 flex-shrink-0" />
-                  <span>{item}</span>
-                </div>
+                <motion.div
+                  key={i}
+                  className="flex items-center bg-white/5 rounded-lg px-4 py-2.5 backdrop-blur-sm"
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.05 }}
+                >
+                  <CheckCircle className="h-5 w-5 text-green-400 mr-3 flex-shrink-0" />
+                  <span className="text-white/90">{item}</span>
+                </motion.div>
               ))}
             </div>
           </div>
           
-          {/* --- [수정된 부분] 버튼: Link를 a 태그로 변경 --- */}
+          {/* CTA 버튼 with glow */}
           <div className="flex justify-center">
-            <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
-              <Link href="/contact" className="group bg-white text-blue-700 text-sm md:text-lg px-5 md:px-8 py-3 md:py-5 rounded-full inline-flex items-center justify-center font-semibold shadow-sm">
+            <motion.div
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              className="relative group"
+            >
+              <motion.div
+                className="absolute -inset-2 bg-gradient-to-r from-white/40 via-blue-200/40 to-white/40 rounded-full blur-xl"
+                animate={{
+                  opacity: [0.5, 0.8, 0.5],
+                  scale: [1, 1.05, 1],
+                }}
+                transition={{ duration: 3, repeat: Infinity }}
+              />
+              <Link
+                href="/contact"
+                className="relative flex items-center justify-center gap-2 bg-white text-blue-700 text-sm md:text-lg px-6 md:px-10 py-3 md:py-5 rounded-full font-semibold shadow-xl hover:shadow-2xl transition-all duration-300"
+              >
+                <Sparkles className="w-5 h-5" />
                 도입 문의하기
+                <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </motion.div>
           </div>
-          {/* --- [수정 완료] --- */}
         </motion.div>
       </section>
 
       {/* 고정 버튼 - 상단으로 스크롤 */}
-      <motion.div 
+      <motion.div
         className="fixed bottom-4 right-4 lg:bottom-8 lg:right-8 z-50"
-        whileHover={{ scale: 1.05 }}
-        transition={{ duration: 0.3 }}
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 1 }}
       >
-        <button 
+        <motion.button
           onClick={() => scrollToSection(heroRef)}
-          className="bg-white p-3 lg:p-4 rounded-full shadow-lg text-blue-600 hover:bg-blue-50 transition-colors"
+          className="relative group bg-gradient-to-br from-blue-600 to-indigo-600 p-3 lg:p-4 rounded-full shadow-xl text-white overflow-hidden"
+          whileHover={{ scale: 1.1, y: -2 }}
+          whileTap={{ scale: 0.95 }}
           aria-label="맨 위로 이동"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 lg:h-6 lg:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <motion.div
+            className="absolute inset-0 bg-white/20 rounded-full"
+            animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0, 0.3] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          />
+          <svg xmlns="http://www.w3.org/2000/svg" className="relative z-10 h-5 w-5 lg:h-6 lg:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
           </svg>
-        </button>
+        </motion.button>
       </motion.div>
 
       {/* 서비스 소개서 iframe 모달 */}
-      {showIntroduction && (
-        <motion.div 
-          className="fixed inset-0 bg-black/80 z-[100] flex items-center justify-center p-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={() => setShowIntroduction(false)}
-        >
-          <motion.div 
-            className="bg-white rounded-lg w-full max-w-6xl h-[90vh] relative overflow-hidden"
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.3 }}
-            onClick={(e) => e.stopPropagation()}
+      <AnimatePresence>
+        {showIntroduction && (
+          <motion.div
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowIntroduction(false)}
           >
-            {/* 헤더 */}
-            <div className="absolute top-0 left-0 right-0 bg-white border-b border-gray-200 p-4 flex justify-between items-center z-10">
-              <h3 className="text-xl font-semibold text-gray-900">서비스 소개서</h3>
-              <button 
-                onClick={() => setShowIntroduction(false)}
-                className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-                aria-label="닫기"
-              >
-                <X className="h-5 w-5 text-gray-600" />
-              </button>
-            </div>
-            
-            {/* iframe 컨테이너 */}
-            <div className="pt-16 h-full">
-              {/* 로딩 인디케이터 */}
-              {iframeLoading && (
-                <div className="absolute inset-0 flex items-center justify-center bg-white pt-16">
-                  <div className="text-center">
-                    <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-                    <p className="mt-4 text-gray-600">로딩 중...</p>
-                  </div>
-                </div>
-              )}
-              <iframe 
-                src={SERVICE_INTRODUCTION_URL}
-                className="w-full h-full border-0"
-                title="서비스 소개서"
-                allowFullScreen
-                onLoad={() => setIframeLoading(false)}
-              />
-            </div>
+            {/* 배경 블러 */}
+            <motion.div
+              className="absolute inset-0 bg-black/60 backdrop-blur-md"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            />
+
+            <motion.div
+              className="relative bg-white rounded-2xl w-full max-w-6xl h-[90vh] overflow-hidden shadow-2xl"
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 10 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* 헤더 */}
+              <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-4 flex justify-between items-center z-10">
+                <h3 className="text-xl font-semibold text-white">서비스 소개서</h3>
+                <motion.button
+                  onClick={() => setShowIntroduction(false)}
+                  className="p-2 hover:bg-white/20 rounded-full transition-colors text-white"
+                  whileHover={{ scale: 1.1, rotate: 90 }}
+                  whileTap={{ scale: 0.9 }}
+                  aria-label="닫기"
+                >
+                  <X className="h-5 w-5" />
+                </motion.button>
+              </div>
+
+              {/* iframe 컨테이너 */}
+              <div className="pt-16 h-full bg-gray-50">
+                {/* 로딩 인디케이터 */}
+                <AnimatePresence>
+                  {iframeLoading && (
+                    <motion.div
+                      className="absolute inset-0 flex items-center justify-center bg-white pt-16 z-20"
+                      initial={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <div className="text-center">
+                        <div className="relative w-16 h-16 mx-auto">
+                          <motion.div
+                            className="absolute inset-0 rounded-full border-4 border-blue-200"
+                          />
+                          <motion.div
+                            className="absolute inset-0 rounded-full border-4 border-transparent border-t-blue-600"
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                          />
+                        </div>
+                        <p className="mt-4 text-gray-600 font-medium">로딩 중...</p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+                <iframe
+                  src={SERVICE_INTRODUCTION_URL}
+                  className="w-full h-full border-0"
+                  title="서비스 소개서"
+                  allowFullScreen
+                  onLoad={() => setIframeLoading(false)}
+                />
+              </div>
+            </motion.div>
           </motion.div>
-        </motion.div>
-      )}
+        )}
+      </AnimatePresence>
 
       <style jsx global>{`
         .bg-grid-pattern {

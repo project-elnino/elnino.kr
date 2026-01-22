@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
 import { motion, useInView, useScroll, useSpring } from 'framer-motion'
 import { Button } from "@/components/ui/button"
-import { ArrowRightIcon,  CheckCircle, ChevronDown, Globe, X } from "lucide-react"
+import { ArrowRightIcon, CheckCircle, ChevronDown, Globe, X, Languages, Zap, MessageCircle, Coins } from "lucide-react"
 import Topbar from "@/components/en/Topbar"
 import Footer from "@/components/en/Footer"
 
@@ -26,8 +26,8 @@ interface Differentiator {
 }
 
 interface Feature {
-  icon: string;
-  title:string;
+  icon: React.ReactNode;
+  title: string;
   description: string;
   details: string;
 }
@@ -72,25 +72,25 @@ const differentiators: Differentiator[] = [
 // Common features data
 const commonFeatures: Feature[] = [
   {
-    icon: "🌐",
+    icon: <Languages className="w-6 h-6" />,
     title: "No Language Survey Needed",
     description: "Speaker's language auto-detected, listeners receive translation in their chosen language",
     details: "The speaker's language is automatically detected, and listeners select their preferred language to receive translations. Languages can be switched freely during the meeting, eliminating the need for pre-meeting language surveys."
   },
   {
-    icon: "⚡",
+    icon: <Zap className="w-6 h-6" />,
     title: "Fast Speed",
     description: "Immediate translation after speech maintains natural conversation flow",
     details: "Experience smooth conversations with minimal delay using AI-optimized algorithms. Enjoy seamless dialogue considering context before and after."
   },
   {
-    icon: "🗣️",
+    icon: <MessageCircle className="w-6 h-6" />,
     title: "101 Languages Support",
     description: "Wide support from major world languages to minority languages",
     details: "Supports languages from English and Chinese to rare languages. All languages support bidirectional translation and are continuously updated."
   },
   {
-    icon: "💰",
+    icon: <Coins className="w-6 h-6" />,
     title: "Reasonable Pricing",
     description: "Maximize cost efficiency with reasonable pricing plans",
     details: "Provides reasonable and transparent billing with monthly subscriptions. Choose from various pricing plans based on company size or number of users."
@@ -121,47 +121,59 @@ function DifferentiatorItem({ item, index }: DifferentiatorItemProps) {
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, ease: [0.17, 0.55, 0.55, 1] }}
     >
-      <div className="relative bg-gradient-to-br from-blue-50 via-white to-indigo-50 rounded-3xl shadow-lg border border-gray-100 p-6 sm:p-8 md:p-12 overflow-hidden">
-        {/* Background large number design element */}
-        <div className="absolute top-4 right-8 text-8xl md:text-9xl font-black text-gray-200/80 select-none z-0">
+      <div className="relative bg-white rounded-3xl shadow-xl border border-gray-100/80 p-6 sm:p-8 md:p-12 overflow-hidden group hover:shadow-2xl transition-shadow duration-500">
+        {/* Background gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-transparent to-indigo-50/50 opacity-60"></div>
+
+        {/* Background large number */}
+        <div className="absolute top-4 right-6 sm:right-8 text-7xl sm:text-8xl md:text-9xl font-black text-gray-100 select-none z-0 transition-all duration-500 group-hover:text-blue-100/80">
           {(index + 1).toString().padStart(2, '0')}
         </div>
 
         {/* Background blur effects */}
         <motion.div
-          className="absolute -top-10 -left-10 w-40 h-40 bg-blue-100 rounded-full filter blur-3xl opacity-50"
-          animate={{ x: [0, 10, -5, 0], y: [0, -5, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 12, ease: "easeInOut" }}
+          className="absolute -top-20 -left-20 w-60 h-60 bg-blue-200 rounded-full filter blur-3xl opacity-30"
+          animate={{ x: [0, 15, -10, 0], y: [0, -10, 15, 0] }}
+          transition={{ repeat: Infinity, duration: 15, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute -bottom-10 -right-10 w-40 h-40 bg-indigo-100 rounded-full filter blur-3xl opacity-50"
-          animate={{ x: [0, -10, 5, 0], y: [0, 5, -10, 0] }}
-          transition={{ repeat: Infinity, duration: 12, ease: "easeInOut", delay: 2 }}
+          className="absolute -bottom-20 -right-20 w-60 h-60 bg-indigo-200 rounded-full filter blur-3xl opacity-30"
+          animate={{ x: [0, -15, 10, 0], y: [0, 10, -15, 0] }}
+          transition={{ repeat: Infinity, duration: 15, ease: "easeInOut", delay: 3 }}
         />
 
         {/* Text content area */}
         <div className="relative z-10">
-          <h3 className="text-3xl font-bold text-gray-900 mb-4">
+          {/* Index badge */}
+          <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 text-white font-bold text-sm mb-5 shadow-lg">
+            {index + 1}
+          </div>
+
+          <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
             {item.title}
           </h3>
-          <div className="h-1 w-16 bg-blue-500 mb-6"></div>
-          <p className="text-lg text-gray-700 mb-8 leading-relaxed max-w-3xl">
+          <div className="h-1 w-20 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full mb-6"></div>
+          <p className="text-base sm:text-lg text-gray-600 mb-8 leading-relaxed max-w-3xl">
             {item.description}
           </p>
 
           {/* Statistics - grid layout */}
           <div className="grid grid-cols-3 gap-3 sm:gap-4 mb-8 max-w-xl">
             {item.stats.map((stat, i) => (
-              <div key={i} className="bg-white/70 backdrop-blur-sm rounded-xl p-3 sm:p-4 text-center transform transition-transform hover:-translate-y-1 shadow-sm hover:shadow-md border border-gray-200/50">
+              <motion.div
+                key={i}
+                className="bg-white rounded-2xl p-3 sm:p-5 text-center shadow-md hover:shadow-lg border border-gray-100 transition-all duration-300"
+                whileHover={{ y: -4, scale: 1.02 }}
+              >
                 <p className="text-blue-600 font-bold text-xl sm:text-2xl mb-1 whitespace-nowrap">{stat.value}</p>
-                <p className="text-gray-600 text-xs sm:text-sm whitespace-nowrap">{stat.label}</p>
-              </div>
+                <p className="text-gray-500 text-xs sm:text-sm whitespace-nowrap">{stat.label}</p>
+              </motion.div>
             ))}
           </div>
 
           {/* Highlight info */}
-          <div className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-800 font-semibold rounded-lg shadow-sm">
-            <CheckCircle className="inline-block h-5 w-5 mr-2 text-blue-600" />
+          <div className="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-semibold rounded-full shadow-lg">
+            <CheckCircle className="inline-block h-5 w-5 mr-2" />
             {item.highlight}
           </div>
         </div>
@@ -173,27 +185,27 @@ function DifferentiatorItem({ item, index }: DifferentiatorItemProps) {
 // Feature item component
 function FeatureItem({ feature }: FeatureItemProps) {
   return (
-    <motion.div 
-      className="bg-white rounded-2xl shadow-md overflow-hidden h-full flex flex-col"
-      whileHover={{ scale: 1.01 }}
+    <motion.div
+      className="group bg-white rounded-2xl shadow-md hover:shadow-xl overflow-hidden h-full flex flex-col border border-gray-100 transition-shadow duration-300"
+      whileHover={{ scale: 1.02, y: -4 }}
       transition={{ duration: 0.3 }}
     >
       {/* Top content area */}
       <div className="p-6 flex-1">
-        <div className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-200 text-blue-600 rounded-xl text-xl mb-4 shadow-sm">
+        <div className="w-14 h-14 flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-2xl mb-5 shadow-lg group-hover:scale-105 transition-transform duration-300">
           {feature.icon}
         </div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">{feature.title}</h3>
-        <p className="text-gray-700 text-sm">{feature.description}</p>
+        <h3 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
+        <p className="text-gray-600 text-sm leading-relaxed">{feature.description}</p>
       </div>
-      
-      {/* Divider line */}
+
+      {/* Divider */}
       <div className="px-6">
-        <div className="h-px bg-gray-200"></div>
+        <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
       </div>
-      
+
       {/* Detail content */}
-      <div className="bg-blue-50 px-6 py-4">
+      <div className="bg-gradient-to-br from-blue-50 to-indigo-50 px-6 py-5">
         <p className="text-gray-700 text-sm leading-relaxed">{feature.details}</p>
       </div>
     </motion.div>
@@ -585,9 +597,11 @@ export default function ProposalSection() {
           </p>
           
           {/* Expected benefits checklist */}
-          <div className="mx-auto mb-10 inline-block">
-            <p className="text-lg font-semibold mb-4 text-center">Expected Benefits</p>
-            <div className="grid grid-cols-2 gap-x-12 gap-y-3">
+          <div className="mx-auto mb-12 max-w-2xl">
+            <div className="inline-block px-4 py-1.5 rounded-full bg-white/10 text-blue-100 font-medium text-sm mb-6 backdrop-blur-sm">
+              Expected Benefits
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 text-left">
               {[
                 'Reduced interpreter costs',
                 'Shortened event preparation time',
@@ -598,10 +612,17 @@ export default function ProposalSection() {
                 'No additional equipment needed',
                 'Simplified on-site operations'
               ].map((item, i) => (
-                <div key={i} className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-300 mr-2 flex-shrink-0" />
-                  <span>{item}</span>
-                </div>
+                <motion.div
+                  key={i}
+                  className="flex items-center bg-white/5 rounded-lg px-4 py-2.5 backdrop-blur-sm"
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.05 }}
+                >
+                  <CheckCircle className="h-5 w-5 text-green-400 mr-3 flex-shrink-0" />
+                  <span className="text-white/90">{item}</span>
+                </motion.div>
               ))}
             </div>
           </div>

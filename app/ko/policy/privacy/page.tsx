@@ -86,7 +86,7 @@ export default function PrivacyPolicyPage() {
         {/* Footer Information */}
         <div className='border-t pt-8 mt-12'>
           <p className='text-sm text-gray-600 text-center'>
-            개인정보 처리방침에 대한 문의사항은 contact@elnino.kr로 연락주시기 바랍니다.
+            개인정보 처리방침에 대한 문의사항은 <a href="/contact" className="text-blue-600 hover:underline">문의하기</a> 페이지를 이용해주세요.
           </p>
         </div>
       </main>

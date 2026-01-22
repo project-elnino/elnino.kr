@@ -96,11 +96,8 @@ export default function PrivacyPolicyPage() {
           <section className='mb-12'>
             <h2 className='text-2xl font-semibold text-gray-900 mb-4 border-b pb-2'>■ Contact Information</h2>
             <p className='text-gray-700 leading-relaxed mb-4'>
-              For any questions or concerns regarding our privacy policy, please contact:
+              For any questions or concerns regarding our privacy policy, please visit our <a href="/en/contact" className="text-blue-600 hover:underline">Contact</a> page.
             </p>
-            <div className='bg-gray-50 p-6 rounded-lg'>
-              <p className='text-gray-700'>Email: contact@elnino.kr</p>
-            </div>
           </section>
         </div>
       </main>
