@@ -3,58 +3,27 @@
 import ContactForm from '@/components/en/ContactForm'
 import Topbar from '@/components/en/Topbar'
 import Footer from '@/components/en/Footer'
-import { motion } from 'framer-motion'
 
 export default function ContactPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Topbar />
       {/* Top section: Blue background with title */}
-      <section className="bg-gradient-to-br from-blue-900 via-blue-700 to-blue-500 py-32 relative overflow-hidden">
-        {/* Background animation elements */}
+      <section className="bg-gradient-to-br from-blue-950 via-blue-800 to-indigo-900 pt-28 sm:pt-32 pb-20 relative overflow-hidden">
+        {/* Background elements - static */}
         <div className="absolute inset-0">
-          <div className="absolute top-0 left-0 w-full h-full bg-grid-pattern opacity-20"></div>
-          <motion.div 
-            className="absolute top-20 left-10 w-64 h-64 bg-blue-800 rounded-full filter blur-3xl opacity-20"
-            animate={{ 
-              x: [0, 30, -20, 0],
-              y: [0, -20, 20, 0],
-              scale: [1, 1.1, 0.9, 1]
-            }}
-            transition={{ 
-              repeat: Infinity, 
-              duration: 7,
-              ease: "easeInOut"
-            }}
-          />
-          <motion.div 
-            className="absolute bottom-10 right-10 w-80 h-80 bg-blue-600 rounded-full filter blur-3xl opacity-20"
-            animate={{ 
-              x: [0, -30, 20, 0],
-              y: [0, 20, -20, 0],
-              scale: [1, 0.9, 1.1, 1]
-            }}
-            transition={{ 
-              repeat: Infinity, 
-              duration: 7,
-              ease: "easeInOut",
-              delay: 2
-            }}
-          />
+          <div className="absolute top-0 left-0 w-full h-full bg-grid-pattern opacity-10"></div>
+          <div className="absolute top-20 left-10 w-64 h-64 bg-blue-500 rounded-full filter blur-[100px] opacity-20" />
+          <div className="absolute bottom-10 right-10 w-80 h-80 bg-indigo-500 rounded-full filter blur-[120px] opacity-20" />
         </div>
 
         {/* Title content */}
         <div className="container max-w-5xl mx-auto px-6 lg:px-8 relative z-10">
-          <motion.div 
-            className="text-center mt-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <h1 className="text-5xl font-extrabold text-white mb-6">Application & Inquiry</h1>
-            <div className="h-1 w-24 bg-blue-300 mx-auto mb-10"></div>
-            <p className="text-xl text-blue-100 max-w-2xl mx-auto">Complete your application in 3 simple steps.</p>
-          </motion.div>
+          <div className="text-center">
+            <h1 className="text-4xl sm:text-5xl font-extrabold text-white mb-6">Application & Inquiry</h1>
+            <div className="h-1 w-24 bg-blue-300 mx-auto mb-8"></div>
+            <p className="text-lg sm:text-xl text-blue-100 max-w-2xl mx-auto">Complete your application in 3 simple steps.</p>
+          </div>
         </div>
       </section>
 

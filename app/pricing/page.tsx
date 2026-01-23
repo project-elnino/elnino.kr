@@ -7,46 +7,6 @@ import Footer from '@/components/Footer'
 import { Check, Zap, Building2, ArrowRight, ChevronDown } from 'lucide-react'
 import { useState } from 'react'
 
-// 파티클 데이터 (고정 값으로 hydration 오류 방지)
-const particleData = [
-  { left: 8, top: 15, duration: 4.2, delay: 0.3 },
-  { left: 22, top: 45, duration: 5.1, delay: 1.1 },
-  { left: 35, top: 75, duration: 3.8, delay: 0.7 },
-  { left: 48, top: 25, duration: 5.5, delay: 1.5 },
-  { left: 62, top: 55, duration: 4.0, delay: 0.5 },
-  { left: 75, top: 85, duration: 4.8, delay: 1.2 },
-  { left: 88, top: 35, duration: 5.3, delay: 0.9 },
-  { left: 15, top: 65, duration: 3.5, delay: 1.8 },
-  { left: 55, top: 10, duration: 4.5, delay: 0.4 },
-  { left: 82, top: 70, duration: 5.0, delay: 1.0 },
-];
-
-// 파티클 컴포넌트
-function FloatingParticles() {
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {particleData.map((particle, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-1 h-1 bg-white/20 rounded-full"
-          style={{
-            left: `${particle.left}%`,
-            top: `${particle.top}%`,
-          }}
-          animate={{
-            y: [0, -20, 0],
-            opacity: [0.2, 0.4, 0.2],
-          }}
-          transition={{
-            duration: particle.duration,
-            repeat: Infinity,
-            delay: particle.delay,
-          }}
-        />
-      ))}
-    </div>
-  );
-}
 
 interface FAQItem {
   question: string;
@@ -200,67 +160,26 @@ export default function PricingPage() {
       <Topbar />
 
       {/* Hero Section */}
-      <section className="relative py-32 overflow-hidden">
-        {/* 애니메이션 그라데이션 배경 */}
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-950 via-blue-800 to-indigo-900" />
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-tr from-purple-900/30 via-transparent to-cyan-900/20"
-            animate={{ opacity: [0.3, 0.5, 0.3] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          />
-        </div>
-
-        {/* Background animation elements */}
+      <section className="bg-gradient-to-br from-blue-950 via-blue-800 to-indigo-900 pt-28 sm:pt-32 pb-20 relative overflow-hidden">
+        {/* Background elements - static */}
         <div className="absolute inset-0">
           <div className="absolute top-0 left-0 w-full h-full bg-grid-pattern opacity-10"></div>
-          <FloatingParticles />
-          <motion.div
-            className="absolute top-20 left-10 w-72 h-72 bg-blue-500 rounded-full filter blur-[100px] opacity-30"
-            animate={{
-              x: [0, 40, -30, 0],
-              y: [0, -30, 30, 0],
-              scale: [1, 1.2, 0.9, 1]
-            }}
-            transition={{ repeat: Infinity, duration: 12, ease: "easeInOut" }}
-          />
-          <motion.div
-            className="absolute bottom-10 right-10 w-96 h-96 bg-indigo-500 rounded-full filter blur-[120px] opacity-25"
-            animate={{
-              x: [0, -40, 30, 0],
-              y: [0, 30, -30, 0],
-              scale: [1, 0.9, 1.15, 1]
-            }}
-            transition={{ repeat: Infinity, duration: 15, ease: "easeInOut", delay: 3 }}
-          />
+          <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500 rounded-full filter blur-[100px] opacity-20" />
+          <div className="absolute bottom-10 right-10 w-96 h-96 bg-indigo-500 rounded-full filter blur-[120px] opacity-20" />
         </div>
 
         {/* Title content */}
         <div className="container max-w-5xl mx-auto px-6 lg:px-8 relative z-10">
-          <motion.div
-            className="text-center mt-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <motion.div
-              className="inline-block px-4 py-1.5 rounded-full bg-white/10 text-blue-200 font-medium text-sm mb-6 backdrop-blur-sm border border-white/10"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-            >
+          <div className="text-center">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-white/10 text-blue-200 font-medium text-sm mb-6 backdrop-blur-sm border border-white/10">
               투명한 가격 정책
-            </motion.div>
-            <h1 className="text-5xl font-extrabold text-white mb-6">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-white">
-                가격 정책
-              </span>
-            </h1>
-            <div className="h-1 w-24 bg-gradient-to-r from-blue-400 to-indigo-400 mx-auto mb-10 rounded-full"></div>
-            <p className="text-xl text-blue-100 max-w-2xl mx-auto">
+            </span>
+            <h1 className="text-4xl sm:text-5xl font-extrabold text-white mb-6">가격 정책</h1>
+            <div className="h-1 w-24 bg-gradient-to-r from-blue-400 to-indigo-400 mx-auto mb-8 rounded-full"></div>
+            <p className="text-lg sm:text-xl text-blue-100 max-w-2xl mx-auto">
               사용 목적에 맞는 최적의 요금제를 선택하세요
             </p>
-          </motion.div>
+          </div>
         </div>
       </section>
 
