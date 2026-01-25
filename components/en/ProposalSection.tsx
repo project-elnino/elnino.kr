@@ -7,8 +7,8 @@ import { CheckCircle, ChevronDown, Globe, X, Languages, Zap, MessageCircle, Coin
 import Topbar from "@/components/en/Topbar"
 import Footer from "@/components/en/Footer"
 
-// Service introduction URL
-const SERVICE_INTRODUCTION_URL = "https://gamma.app/embed/6eqrunekf378rz0";
+// Service introduction URL - temporarily using Korean PDF
+const SERVICE_INTRODUCTION_URL = "/Knoc설명서_국문.pdf";
 
 // Data type definitions
 interface Stat {

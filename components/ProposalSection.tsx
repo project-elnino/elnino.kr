@@ -7,8 +7,8 @@ import { ArrowRightIcon, CheckCircle, ChevronDown, Globe, X, Languages, Zap, Mes
 import Topbar from "@/components/Topbar"
 import Footer from "@/components/Footer"
 
-// 서비스 소개서 URL - 이 부분을 실제 URL로 변경하세요
-const SERVICE_INTRODUCTION_URL = "https://gamma.app/embed/wmsjc2q5wzsaqjw";
+// 서비스 소개서 URL - 로컬 PDF 파일 사용
+const SERVICE_INTRODUCTION_URL = "/Knoc설명서_국문.pdf";
 
 // 데이터 타입 정의
 interface Stat {
