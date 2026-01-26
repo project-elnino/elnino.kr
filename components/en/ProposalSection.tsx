@@ -188,6 +188,13 @@ function FeatureItem({ feature }: FeatureItemProps) {
   );
 }
 
+// Mobile detection helper
+function isMobileDevice(): boolean {
+  if (typeof window === 'undefined') return false;
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    || window.innerWidth < 768;
+}
+
 export default function ProposalSection() {
   const [activeSection, setActiveSection] = useState<string>("hero")
   const [showIntroduction, setShowIntroduction] = useState(false)
@@ -342,8 +349,14 @@ export default function ProposalSection() {
               <button
                 className="flex items-center justify-center bg-white/10 backdrop-blur-sm border border-white/30 hover:bg-white/20 text-white text-base px-8 py-3.5 rounded-full font-semibold transition-colors duration-200 min-w-[160px]"
                 onClick={() => {
-                  setShowIntroduction(true);
-                  setIframeLoading(true);
+                  // Mobile: open PDF directly in new tab (native PDF viewer)
+                  if (isMobileDevice()) {
+                    window.open(SERVICE_INTRODUCTION_URL, '_blank');
+                  } else {
+                    // Desktop: show iframe modal
+                    setShowIntroduction(true);
+                    setIframeLoading(true);
+                  }
                 }}
               >
                 Introduction
