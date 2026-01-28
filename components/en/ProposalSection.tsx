@@ -8,7 +8,7 @@ import Topbar from "@/components/en/Topbar"
 import Footer from "@/components/en/Footer"
 
 // Service introduction URL - temporarily using Korean PDF
-const SERVICE_INTRODUCTION_URL = "/Knoc설명서_국문.pdf";
+const SERVICE_INTRODUCTION_URL = "/KnocManual_English.pdf";
 
 // Data type definitions
 interface Stat {
