@@ -16,7 +16,7 @@
     "brochure": "サービス資料"
   },
   "clients": {
-    "title": "様々な機関でご利用中"
+    "title": "ご利用実績"
   },
   "services": {
     "title": "Knocの差別化ポイント",
@@ -141,7 +141,7 @@
       "price": "要相談",
       "priceNote": "規模と期間により設定",
       "cta": "お問い合わせ",
-      "includesAll": "のすべての機能を含む",
+      "includesAll": "従量制のすべての機能を含む",
       "items": {
         "features": [
           "カスタム見積もり",

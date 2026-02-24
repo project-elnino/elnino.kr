@@ -490,7 +490,7 @@ export default function ContactForm() {
                 type="submit"
                 disabled={isSubmitting}
                 className={cn(
-                  "w-full flex justify-center py-4 px-4 border border-transparent rounded-md shadow-sm text-lg font-bold font-['Manrope'] transition-colors",
+                  "w-full flex justify-center py-6 px-4 border border-transparent rounded-md shadow-sm text-lg font-bold font-['Manrope'] transition-colors",
                   isSubmitting
                     ? "bg-[#94A3B8] cursor-not-allowed text-[#FFFFFF]"
                     : "bg-[#0EA5E9] hover:bg-[#0284C7] text-[#FFFFFF]"

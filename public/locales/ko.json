@@ -16,7 +16,7 @@
     "brochure": "서비스 소개서"
   },
   "clients": {
-    "title": "다양한 기관에서 사용 중"
+    "title": "함께한 기관"
   },
   "services": {
     "title": "Knoc만의 차별화 포인트",
@@ -141,7 +141,7 @@
       "price": "협의",
       "priceNote": "규모와 기간에 따라 책정",
       "cta": "문의하기",
-      "includesAll": "의 모든 기능 포함",
+      "includesAll": "종량제의 모든 기능 포함",
       "items": {
         "features": [
           "맞춤형 견적",
