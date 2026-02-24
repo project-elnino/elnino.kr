@@ -114,19 +114,22 @@ export default function ProposalSection() {
         </section>
 
         {/* Client Logos Section */}
-        <section className="py-10 bg-[#FFFFFF] border-y border-[#E2E8F0] overflow-hidden">
+        <section className="py-10 bg-[#FFFFFF] border-y border-[#E2E8F0]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <p className="text-center text-sm font-semibold text-[#94A3B8] tracking-wide uppercase font-['Manrope'] mb-8">
               {t('clients.title')}
             </p>
-            <div className="relative">
-              {/* Gradient overlays */}
-              <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#FFFFFF] to-transparent z-10 pointer-events-none" />
-              <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#FFFFFF] to-transparent z-10 pointer-events-none" />
+          </div>
+          {/* Full width marquee with overflow hidden */}
+          <div className="relative overflow-hidden">
+            {/* Gradient overlays */}
+            <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#FFFFFF] to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#FFFFFF] to-transparent z-10 pointer-events-none" />
 
-              {/* Infinite scroll - needs 2 copies for seamless loop */}
-              <div className="flex animate-marquee">
-                <div className="flex gap-16 items-center px-8 shrink-0">
+            {/* Infinite scroll - 5x copies for seamless loop */}
+            <div className="flex animate-marquee">
+              {[...Array(5)].map((_, i) => (
+                <div key={i} className="flex gap-16 items-center px-8 shrink-0">
                   <div className="w-[180px] h-[50px] flex items-center justify-center opacity-60 hover:opacity-100 transition-all duration-300">
                     <img src="/logos/konkuk.webp" alt="건국대학교" className="max-w-full max-h-full object-contain" />
                   </div>
@@ -134,7 +137,9 @@ export default function ProposalSection() {
                     <img src="/logos/ksrit.svg" alt="대한영상의학기술학회" className="max-w-full max-h-full object-contain" />
                   </div>
                 </div>
-                <div className="flex gap-16 items-center px-8 shrink-0">
+              ))}
+              {[...Array(5)].map((_, i) => (
+                <div key={`clone-${i}`} className="flex gap-16 items-center px-8 shrink-0">
                   <div className="w-[180px] h-[50px] flex items-center justify-center opacity-60 hover:opacity-100 transition-all duration-300">
                     <img src="/logos/konkuk.webp" alt="건국대학교" className="max-w-full max-h-full object-contain" />
                   </div>
@@ -142,7 +147,7 @@ export default function ProposalSection() {
                     <img src="/logos/ksrit.svg" alt="대한영상의학기술학회" className="max-w-full max-h-full object-contain" />
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>

@@ -25,6 +25,18 @@ const translations: Record<Locale, Translations> = {
 
 let translationsLoaded = false;
 
+// Detect browser language and return appropriate locale
+const detectBrowserLocale = (): Locale => {
+  if (typeof navigator === 'undefined') return 'en';
+
+  const browserLang = navigator.language || (navigator.languages && navigator.languages[0]) || 'en';
+  const langCode = browserLang.toLowerCase().split('-')[0];
+
+  if (langCode === 'ko') return 'ko';
+  if (langCode === 'ja') return 'ja';
+  return 'en'; // Default to English for all other languages
+};
+
 // Helper function to get nested value from object
 const getNestedValue = (obj: Translations, path: string): string => {
   const keys = path.split('.');
@@ -54,10 +66,12 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     const loadTranslations = async () => {
       if (translationsLoaded) {
         setIsLoaded(true);
-        // Load saved locale after translations are ready
+        // Load saved locale or detect from browser
         const savedLocale = localStorage.getItem('locale') as Locale | null;
         if (savedLocale && ['ko', 'en', 'ja'].includes(savedLocale)) {
           setLocaleState(savedLocale);
+        } else {
+          setLocaleState(detectBrowserLocale());
         }
         return;
       }
@@ -75,10 +89,12 @@ export function I18nProvider({ children }: { children: ReactNode }) {
         translationsLoaded = true;
         setIsLoaded(true);
 
-        // Load saved locale after translations are loaded
+        // Load saved locale or detect from browser
         const savedLocale = localStorage.getItem('locale') as Locale | null;
         if (savedLocale && ['ko', 'en', 'ja'].includes(savedLocale)) {
           setLocaleState(savedLocale);
+        } else {
+          setLocaleState(detectBrowserLocale());
         }
       } catch (error) {
         console.error('Failed to load translations:', error);

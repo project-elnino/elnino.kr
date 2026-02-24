@@ -10,8 +10,6 @@ import { useTranslation, Locale } from "@/lib/i18n";
 export default function Topbar() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLangOpen, setIsLangOpen] = useState(false);
-  const langRef = useRef<HTMLDivElement>(null);
   const { locale, setLocale, t } = useTranslation();
 
   const isActive = (path: string) => {
@@ -19,57 +17,61 @@ export default function Topbar() {
     return pathname.startsWith(path);
   };
 
-  const handleLanguageChange = (newLocale: Locale) => {
-    setLocale(newLocale);
-    setIsLangOpen(false);
-  };
-
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (langRef.current && !langRef.current.contains(event.target as Node)) {
-        setIsLangOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
   const languageLabels: Record<Locale, string> = {
     ko: '한국어',
     en: 'English',
     ja: '日本語',
   };
 
-  const LanguageDropdown = ({ className = "" }: { className?: string }) => (
-    <div ref={langRef} className={`relative ${className}`}>
-      <button
-        onClick={() => setIsLangOpen(!isLangOpen)}
-        className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-[#334155] hover:text-[#0F172A] border border-[#E2E8F0] rounded-lg bg-[#FFFFFF] hover:bg-[#F8F9FA] transition-colors font-['Noto_Sans']"
-      >
-        <Globe className="w-4 h-4" />
-        {languageLabels[locale]}
-        <ChevronDown className={`w-4 h-4 transition-transform ${isLangOpen ? 'rotate-180' : ''}`} />
-      </button>
-      {isLangOpen && (
-        <div className="absolute top-full right-0 mt-1 py-1 bg-[#FFFFFF] border border-[#E2E8F0] rounded-lg shadow-lg min-w-[120px] z-50">
-          {(['ko', 'en', 'ja'] as Locale[]).map((lang) => (
-            <button
-              key={lang}
-              onClick={() => handleLanguageChange(lang)}
-              className={`w-full px-4 py-2 text-left text-sm font-['Noto_Sans'] transition-colors ${
-                locale === lang
-                  ? 'text-[#0EA5E9] bg-[#F0F9FF] font-medium'
-                  : 'text-[#334155] hover:bg-[#F8F9FA]'
-              }`}
-            >
-              {languageLabels[lang]}
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
-  );
+  const LanguageDropdown = ({ className = "" }: { className?: string }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const ref = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+      const handleClickOutside = (event: MouseEvent) => {
+        if (ref.current && !ref.current.contains(event.target as Node)) {
+          setIsOpen(false);
+        }
+      };
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+
+    const handleChange = (newLocale: Locale) => {
+      setLocale(newLocale);
+      setIsOpen(false);
+    };
+
+    return (
+      <div ref={ref} className={`relative ${className}`}>
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-[#334155] hover:text-[#0F172A] border border-[#E2E8F0] rounded-lg bg-[#FFFFFF] hover:bg-[#F8F9FA] transition-colors font-['Noto_Sans']"
+        >
+          <Globe className="w-4 h-4" />
+          {languageLabels[locale]}
+          <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        </button>
+        {isOpen && (
+          <div className="absolute top-full right-0 mt-1 py-1 bg-[#FFFFFF] border border-[#E2E8F0] rounded-lg shadow-lg min-w-[120px] z-50">
+            {(['ko', 'en', 'ja'] as Locale[]).map((lang) => (
+              <button
+                key={lang}
+                onClick={() => handleChange(lang)}
+                className={`w-full px-4 py-2 text-left text-sm font-['Noto_Sans'] transition-colors ${
+                  locale === lang
+                    ? 'text-[#0EA5E9] bg-[#F0F9FF] font-medium'
+                    : 'text-[#334155] hover:bg-[#F8F9FA]'
+                }`}
+              >
+                {languageLabels[lang]}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-40 bg-[#F8F9FA]/95 backdrop-blur-sm border-b border-[#E2E8F0]">
@@ -145,13 +147,16 @@ export default function Topbar() {
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden text-[#334155]"
-          >
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+          {/* Mobile Actions */}
+          <div className="md:hidden flex items-center gap-2">
+            <LanguageDropdown />
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="text-[#334155]"
+            >
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -196,16 +201,6 @@ export default function Topbar() {
               {t('nav.contact')}
             </Link>
             <div className="pt-4 border-t border-[#E2E8F0] space-y-3">
-              {/* Mobile Language Select */}
-              <select
-                value={locale}
-                onChange={(e) => handleLanguageChange(e.target.value as Locale)}
-                className="w-full px-4 py-2.5 text-sm font-medium rounded-lg border border-[#E2E8F0] bg-[#FFFFFF] text-[#334155] font-['Noto_Sans']"
-              >
-                <option value="ko">한국어</option>
-                <option value="en">English</option>
-                <option value="ja">日本語</option>
-              </select>
               <Link
                 href="https://cloud.elnino.kr/webclient"
                 className="block w-full text-center px-4 py-2.5 text-sm font-medium rounded-lg text-[#FFFFFF] bg-[#0EA5E9] hover:bg-[#0284C7] transition-colors font-['Manrope']"
