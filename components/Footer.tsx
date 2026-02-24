@@ -1,49 +1,118 @@
+'use client';
+
 import Link from "next/link";
 import Image from "next/image";
+import { Mail, MapPin } from "lucide-react";
+import { useTranslation } from "@/lib/i18n";
 
 export default function Footer() {
-  return (
-    <footer className="bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 py-12 text-blue-100 relative overflow-hidden">
-      {/* 배경 장식 */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-24 -right-24 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl"></div>
-      </div>
+  const { t } = useTranslation();
 
-      <div className="container max-w-5xl mx-auto px-6 lg:px-8 relative z-10">
-        <div className="flex flex-col md:flex-row justify-between items-start gap-8">
-          {/* 회사 정보 */}
-          <div className="flex flex-col">
-            <Link href="/" className="flex items-center gap-2.5 mb-4">
+  return (
+    <footer className="bg-[#F8F9FA] border-t border-[#E2E8F0] pt-16 pb-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+          {/* Company Info */}
+          <div className="col-span-1 md:col-span-1">
+            <Link href="/" className="flex items-center gap-2 mb-4">
               <Image src="/logo.png" alt="Elnino Logo" width={32} height={32} />
-              <div>
-                <span className="text-xl font-bold text-white">Elnino</span>
-                <span className="text-xs text-blue-300 ml-2">Knoc</span>
-              </div>
+              <span className="font-['Manrope'] font-bold text-2xl tracking-tight text-[#0F172A]">
+                ELNINO
+              </span>
             </Link>
-            <p className="text-sm text-blue-200/70 max-w-xs">
-              AI 기반 실시간 번역 서비스로 언어 장벽 없는 소통을 지원합니다.
+            <p className="mt-4 text-sm text-[#334155] font-['Noto_Sans'] leading-relaxed">
+              {t('footer.description')}
             </p>
           </div>
 
-          {/* 링크 및 저작권 */}
-          <div className="flex flex-col items-start md:items-end gap-4">
-            <nav className="flex gap-6">
-              <Link
-                href="/policy/terms"
-                className="text-sm hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-white after:transition-all hover:after:w-full"
-              >
-                이용약관
-              </Link>
-              <Link
-                href="/policy/privacy"
-                className="text-sm hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-white after:transition-all hover:after:w-full"
-              >
-                개인정보처리방침
-              </Link>
-            </nav>
-            <div className="h-px w-full md:w-48 bg-gradient-to-r from-transparent via-blue-500/30 to-transparent"></div>
-            <p className="text-xs text-blue-200/50">© 2026 Elnino. All rights reserved.</p>
+          {/* Services */}
+          <div>
+            <h3 className="text-sm font-bold text-[#0F172A] tracking-wider uppercase font-['Manrope'] mb-4">
+              {t('footer.services')}
+            </h3>
+            <ul className="space-y-3">
+              <li>
+                <Link href="https://cloud.elnino.kr/webclient" className="text-[#334155] hover:text-[#0EA5E9] text-sm font-['Noto_Sans'] transition-colors">
+                  {t('footer.realtime')}
+                </Link>
+              </li>
+              <li>
+                <Link href="/pricing" className="text-[#334155] hover:text-[#0EA5E9] text-sm font-['Noto_Sans'] transition-colors">
+                  {t('nav.pricing')}
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="text-[#334155] hover:text-[#0EA5E9] text-sm font-['Noto_Sans'] transition-colors">
+                  {t('nav.faq')}
+                </Link>
+              </li>
+              <li>
+                <Link href="https://cloud.elnino.kr/dashboard" className="text-[#334155] hover:text-[#0EA5E9] text-sm font-['Noto_Sans'] transition-colors">
+                  {t('nav.dashboard')}
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Company */}
+          <div>
+            <h3 className="text-sm font-bold text-[#0F172A] tracking-wider uppercase font-['Manrope'] mb-4">
+              {t('footer.company')}
+            </h3>
+            <ul className="space-y-3">
+              <li>
+                <Link href="/blog" className="text-[#334155] hover:text-[#0EA5E9] text-sm font-['Noto_Sans'] transition-colors">
+                  {t('nav.blog')}
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-[#334155] hover:text-[#0EA5E9] text-sm font-['Noto_Sans'] transition-colors">
+                  {t('footer.contactUs')}
+                </Link>
+              </li>
+              <li>
+                <Link href="/policy/privacy" className="text-[#334155] hover:text-[#0EA5E9] text-sm font-['Noto_Sans'] transition-colors">
+                  {t('footer.privacy')}
+                </Link>
+              </li>
+              <li>
+                <Link href="/policy/terms" className="text-[#334155] hover:text-[#0EA5E9] text-sm font-['Noto_Sans'] transition-colors">
+                  {t('footer.terms')}
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h3 className="text-sm font-bold text-[#0F172A] tracking-wider uppercase font-['Manrope'] mb-4">
+              {t('footer.contactInfo')}
+            </h3>
+            <ul className="space-y-3">
+              <li className="flex items-start">
+                <MapPin className="h-5 w-5 text-[#0EA5E9] mr-2 mt-0.5 flex-shrink-0" />
+                <span className="text-[#334155] text-sm font-['Noto_Sans']">{t('footer.location')}</span>
+              </li>
+              <li className="flex items-center">
+                <Mail className="h-5 w-5 text-[#0EA5E9] mr-2 flex-shrink-0" />
+                <span className="text-[#334155] text-sm font-['Noto_Sans']">contact@elnino.kr</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Bottom */}
+        <div className="border-t border-[#E2E8F0] pt-8 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-xs text-[#94A3B8] font-['Noto_Sans']">
+            {t('footer.copyright')}
+          </p>
+          <div className="flex gap-6 mt-4 md:mt-0">
+            <Link href="/policy/terms" className="text-xs text-[#94A3B8] hover:text-[#0EA5E9] font-['Noto_Sans'] transition-colors">
+              {t('footer.terms')}
+            </Link>
+            <Link href="/policy/privacy" className="text-xs text-[#94A3B8] hover:text-[#0EA5E9] font-['Noto_Sans'] transition-colors">
+              {t('footer.privacy')}
+            </Link>
           </div>
         </div>
       </div>

@@ -1,95 +1,132 @@
+'use client'
+
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import Topbar from '@/components/Topbar';
 import Footer from '@/components/Footer';
+import { useTranslation } from '@/lib/i18n';
 
 export default function PrivacyPolicyPage() {
+  const { t } = useTranslation()
+
+  // Parse nested arrays from translation
+  const purposes = [
+    t('policy.privacy.section2.purposes.0'),
+    t('policy.privacy.section2.purposes.1'),
+    t('policy.privacy.section2.purposes.2'),
+    t('policy.privacy.section2.purposes.3'),
+  ]
+
+  const legalItems = [
+    { label: t('policy.privacy.section3.legal.items.0.label'), period: t('policy.privacy.section3.legal.items.0.period') },
+    { label: t('policy.privacy.section3.legal.items.1.label'), period: t('policy.privacy.section3.legal.items.1.period') },
+    { label: t('policy.privacy.section3.legal.items.2.label'), period: t('policy.privacy.section3.legal.items.2.period') },
+    { label: t('policy.privacy.section3.legal.items.3.label'), period: t('policy.privacy.section3.legal.items.3.period') },
+  ]
+
   return (
-    <div className='min-h-screen bg-white font-sans'>
+    <div className="min-h-screen bg-[#F8F9FA] font-['Noto_Sans'] text-[#0F172A]">
       <Topbar />
-      {/* Blue background for the top bar area */}
-      <div className='bg-blue-700 pt-12 md:pt-16'>
-        {/* Header Section */}
-        <header className='bg-blue-700 text-white'>
-          <div className='container mx-auto px-4 max-w-4xl py-8'>
-            <Link href='/' className='inline-flex items-center text-white/80 hover:text-white mb-6 text-sm transition-colors duration-300'>
-              <ArrowLeft className='h-4 w-4 mr-2' />
-              홈으로 돌아가기
+
+      <main className="flex-1">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+          {/* Header */}
+          <div className="mb-10 border-b border-[#E2E8F0] pb-8">
+            <Link href="/" className="inline-flex items-center text-[#0EA5E9] hover:text-[#0284C7] mb-6 text-sm font-medium transition-colors">
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              {t('policy.backToHome')}
             </Link>
-            
-            <h1 className='text-3xl md:text-4xl font-bold text-white mb-2'>개인정보처리방침</h1>
-            <p className='text-white/90'>시행일: 2025년 5월 25일</p>
+            <h1 className="text-4xl font-extrabold text-[#0F172A] font-['Manrope'] mb-4">
+              {t('policy.privacy.title')}
+            </h1>
+            <p className="text-sm text-[#64748B]">
+              {t('policy.effectiveDate')}
+            </p>
           </div>
-        </header>
-      </div>
 
-      {/* Main content section */}
-      <main className='container mx-auto px-4 max-w-4xl py-12'>
-        <div className='prose prose-gray max-w-none'>
-          {/* Section 1: Collected Personal Information */}
-          <section className='mb-12'>
-            <h2 className='text-2xl font-semibold text-gray-900 mb-4 border-b pb-2'>■ 수집하는 개인정보 항목</h2>
-            <p className='text-gray-700 leading-relaxed mb-4'>
-              회사는 통역 견적의뢰 및 서비스 제공을 위해 아래와 같은 개인정보를 수집하고 있습니다.
-            </p>
-            <div className='bg-gray-50 p-6 rounded-lg'>
-                <p className='text-gray-800 mb-2 font-semibold'>ο 수집항목</p>
-                <p className='text-gray-700 leading-relaxed'>회사명(기관명), 성명, 직위, 휴대폰, E-mail, 통역언어, 통역의 구분, 통역일시, 통역 상세 내용, 통역 장소, 통역자료, 쿠키 등</p>
-                <p className='text-gray-800 mt-4 mb-2 font-semibold'>ο 개인정보 수집방법</p>
-                <p className='text-gray-700 leading-relaxed'>홈페이지(견적의뢰 게시물 작성)</p>
-            </div>
-          </section>
+          <div className="prose prose-slate max-w-none">
+            {/* Section 1 */}
+            <section className="mb-10">
+              <h2 className="text-2xl font-bold text-[#0F172A] font-['Manrope'] mb-4 flex items-center">
+                <span className="bg-[#0F172A] text-[#FFFFFF] w-8 h-8 rounded-full flex items-center justify-center text-sm mr-3">1</span>
+                {t('policy.privacy.section1.title')}
+              </h2>
+              <p className="text-[#334155] leading-relaxed mb-4">
+                {t('policy.privacy.section1.description')}
+              </p>
+              <div className="bg-[#FFFFFF] p-6 rounded-lg border border-[#E2E8F0]">
+                <p className="text-[#0F172A] mb-2 font-semibold font-['Manrope']">{t('policy.privacy.section1.itemsLabel')}</p>
+                <p className="text-[#334155] leading-relaxed mb-4">{t('policy.privacy.section1.items')}</p>
+                <p className="text-[#0F172A] mb-2 font-semibold font-['Manrope']">{t('policy.privacy.section1.methodLabel')}</p>
+                <p className="text-[#334155] leading-relaxed">{t('policy.privacy.section1.method')}</p>
+              </div>
+            </section>
 
-          {/* Section 2: Purpose of Collection and Use */}
-          <section className='mb-12'>
-            <h2 className='text-2xl font-semibold text-gray-900 mb-4 border-b pb-2'>■ 개인정보의 수집 및 이용목적</h2>
-            <p className='text-gray-700 leading-relaxed mb-4'>
-              회사는 수집한 개인정보를 다음의 목적을 위해 활용합니다.
-            </p>
-            <ul className='list-disc pl-6 text-gray-700 space-y-2'>
-                <li>통역 견적 상담, 서비스 제공 및 계약 이행</li>
-                <li>고객 관리, 문의사항 응대 및 분쟁 해결</li>
-                <li>서비스 개선 및 신규 서비스 개발</li>
-                <li>마케팅 및 광고 정보 제공 (사전 동의 시)</li>
-            </ul>
-          </section>
-          
-          {/* Section 3: Retention and Use Period */}
-          <section className='mb-12'>
-            <h2 className='text-2xl font-semibold text-gray-900 mb-4 border-b pb-2'>■ 개인정보의 보유 및 이용기간</h2>
-            <p className='text-gray-700 leading-relaxed mb-4'>
-              회사는 개인정보 수집 및 이용목적이 달성된 후에는 해당 정보를 지체 없이 파기합니다. 단, 다음의 정보에 대해서는 아래의 사유로 명시한 기간 동안 보존합니다.
-            </p>
-            <div className='space-y-4'>
-                <div className='bg-gray-50 p-4 rounded-lg'>
-                    <p className='font-semibold text-gray-800'>내부 방침에 따른 정보 보유</p>
-                    <ul className='list-disc pl-5 mt-2 text-gray-700'>
-                        <li><span className='font-medium'>보존 항목 :</span> 수집된 개인정보 항목 일체</li>
-                        <li><span className='font-medium'>보존 근거 :</span> 분쟁 해결 및 고객 문의 기록 보존</li>
-                        <li><span className='font-medium'>보존 기간 :</span> 문의 처리 완료 후 5년</li>
-                    </ul>
+            {/* Section 2 */}
+            <section className="mb-10">
+              <h2 className="text-2xl font-bold text-[#0F172A] font-['Manrope'] mb-4 flex items-center">
+                <span className="bg-[#0F172A] text-[#FFFFFF] w-8 h-8 rounded-full flex items-center justify-center text-sm mr-3">2</span>
+                {t('policy.privacy.section2.title')}
+              </h2>
+              <p className="text-[#334155] leading-relaxed mb-4">
+                {t('policy.privacy.section2.description')}
+              </p>
+              <div className="bg-[#FFFFFF] p-6 rounded-lg border border-[#E2E8F0]">
+                <ul className="space-y-3 text-[#334155]">
+                  {purposes.map((purpose, index) => (
+                    <li key={index} className="flex items-start">
+                      <span className="text-[#0EA5E9] mr-2">•</span>
+                      <span>{purpose}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </section>
+
+            {/* Section 3 */}
+            <section className="mb-10">
+              <h2 className="text-2xl font-bold text-[#0F172A] font-['Manrope'] mb-4 flex items-center">
+                <span className="bg-[#0F172A] text-[#FFFFFF] w-8 h-8 rounded-full flex items-center justify-center text-sm mr-3">3</span>
+                {t('policy.privacy.section3.title')}
+              </h2>
+              <p className="text-[#334155] leading-relaxed mb-4">
+                {t('policy.privacy.section3.description')}
+              </p>
+              <div className="space-y-4">
+                <div className="bg-[#FFFFFF] p-4 rounded-lg border border-[#E2E8F0]">
+                  <p className="font-semibold text-[#0F172A] font-['Manrope']">{t('policy.privacy.section3.internal.title')}</p>
+                  <ul className="mt-2 text-[#334155] space-y-1">
+                    <li><span className="font-medium">{t('policy.privacy.section3.internal.itemLabel')}</span> {t('policy.privacy.section3.internal.item')}</li>
+                    <li><span className="font-medium">{t('policy.privacy.section3.internal.reasonLabel')}</span> {t('policy.privacy.section3.internal.reason')}</li>
+                    <li><span className="font-medium">{t('policy.privacy.section3.internal.periodLabel')}</span> {t('policy.privacy.section3.internal.period')}</li>
+                  </ul>
                 </div>
-                <div className='bg-gray-50 p-4 rounded-lg'>
-                    <p className='font-semibold text-gray-800'>관계법령에 따른 보존</p>
-                     <p className='text-sm text-gray-600 mb-3'>상법, 전자상거래 등에서의 소비자보호에 관한 법률 등 관계법령의 규정에 의하여 보존할 필요가 있는 경우 회사는 관계법령에서 정한 일정한 기간 동안 정보를 보관합니다. 이 경우 회사는 보관하는 정보를 그 보관의 목적으로만 이용하며 보존기간은 아래와 같습니다.</p>
-                    <ul className='list-disc pl-5 mt-2 text-gray-700'>
-                        <li><span className='font-medium'>계약 또는 청약철회 등에 관한 기록 :</span> 5년 (전자상거래등에서의 소비자보호에 관한 법률)</li>
-                        <li><span className='font-medium'>대금결제 및 재화 등의 공급에 관한 기록 :</span> 5년 (전자상거래등에서의 소비자보호에 관한 법률)</li>
-                        <li><span className='font-medium'>소비자의 불만 또는 분쟁처리에 관한 기록 :</span> 3년 (전자상거래등에서의 소비자보호에 관한 법률)</li>
-                        <li><span className='font-medium'>신용정보의 수집/처리 및 이용 등에 관한 기록 :</span> 3년 (신용정보의 이용 및 보호에 관한 법률)</li>
-                    </ul>
+                <div className="bg-[#FFFFFF] p-4 rounded-lg border border-[#E2E8F0]">
+                  <p className="font-semibold text-[#0F172A] font-['Manrope']">{t('policy.privacy.section3.legal.title')}</p>
+                  <p className="text-sm text-[#64748B] mb-3">{t('policy.privacy.section3.legal.description')}</p>
+                  <ul className="mt-2 text-[#334155] space-y-1">
+                    {legalItems.map((item, index) => (
+                      <li key={index}><span className="font-medium">{item.label}</span> {item.period}</li>
+                    ))}
+                  </ul>
                 </div>
-            </div>
-          </section>
-        </div>
+              </div>
+            </section>
+          </div>
 
-        {/* Footer Information */}
-        <div className='border-t pt-8 mt-12'>
-          <p className='text-sm text-gray-600 text-center'>
-            개인정보 처리방침에 대한 문의사항은 <a href="/contact" className="text-blue-600 hover:underline">문의하기</a> 페이지를 이용해주세요.
-          </p>
+          {/* Footer */}
+          <div className="mt-16 pt-8 border-t border-[#E2E8F0] flex justify-center">
+            <Link
+              href="/"
+              className="inline-flex items-center justify-center px-8 py-3 border border-[#E2E8F0] rounded-md shadow-sm text-base font-bold text-[#0F172A] bg-[#FFFFFF] hover:bg-[#F1F5F9] transition-colors font-['Manrope']"
+            >
+              <ArrowLeft className="h-5 w-5 mr-2" />
+              {t('policy.backToHome')}
+            </Link>
+          </div>
         </div>
       </main>
+
       <Footer />
     </div>
   )

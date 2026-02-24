@@ -1,0 +1,407 @@
+{
+  "nav": {
+    "pricing": "Pricing",
+    "blog": "Blog",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "dashboard": "Dashboard",
+    "start": "Get Started"
+  },
+  "hero": {
+    "badge": "AI Real-time Translation Service",
+    "title": "Breaking Language",
+    "titleHighlight": "Barriers",
+    "description": "Experience perfect translation in any environment, from small meetings to large conferences, with our industry-specific custom models.",
+    "cta": "Request Quote",
+    "brochure": "Service Brochure"
+  },
+  "clients": {
+    "title": "Trusted by Various Organizations"
+  },
+  "services": {
+    "title": "What Makes Knoc Different",
+    "description": "We provide stable and accurate translation services with industry-specific translation model technology that sets us apart from other services.",
+    "easy": {
+      "title": "Easy to Use",
+      "description": "Use it directly in Chrome browser without any installation or language settings. Available on all devices including mobile and laptop.",
+      "cta": "All you need is Chrome browser"
+    },
+    "boost": {
+      "title": "Word & Context Boosting Model",
+      "description": "AI models specialized for specific industries boost keywords and context simultaneously. We guarantee up to 99% accuracy in specialized fields such as medicine, law, IT, and finance.",
+      "cta": "Enhanced accuracy compared to competitors"
+    },
+    "scale": {
+      "title": "Various Scale Support",
+      "description": "Stable performance in all environments, from 5-person small meetings to conferences with over 1,000 participants.",
+      "cta": "Up to 1,000 concurrent users"
+    }
+  },
+  "why": {
+    "title": "Why Knoc?",
+    "description": "We have all the essential features for the best translation experience. We support perfect communication by combining technical accuracy with language expertise.",
+    "features": {
+      "autoDetect": {
+        "title": "No Language Survey Required",
+        "description": "Speaker's language is automatically detected, participants receive translations in their preferred language"
+      },
+      "speed": {
+        "title": "Fast Speed",
+        "description": "Instant translation right after speech, maintaining natural conversation flow"
+      },
+      "languages": {
+        "title": "101 Languages Supported",
+        "description": "Broad support including major languages worldwide and minority languages"
+      },
+      "pricing": {
+        "title": "Reasonable Pricing",
+        "description": "Maximize cost efficiency with reasonable pricing plans"
+      }
+    },
+    "stats": {
+      "accuracy": "Translation Accuracy",
+      "languages": "Supported Languages",
+      "concurrent": "Max Concurrent Users",
+      "uptime": "Service Operation",
+      "fields": "Specialized Fields"
+    }
+  },
+  "testimonials": {
+    "title": "Customer Reviews",
+    "items": [
+      {
+        "text": "We used Knoc at an international conference and were very satisfied with the accuracy and speed of real-time translation. The participants' response was great, and most importantly, the preparation process was simple.",
+        "name": "Kim OO",
+        "role": "International Conference Manager"
+      },
+      {
+        "text": "I was surprised that even medical terminology was translated accurately. Thanks to the boosting model, we were able to conduct international seminars smoothly without professional interpreters.",
+        "name": "Lee OO",
+        "role": "University Hospital Professor"
+      }
+    ]
+  },
+  "cta": {
+    "title": "Have any questions?",
+    "description": "If you have any questions about our service, please contact us. We will respond within 24 hours.",
+    "button": "Contact Us"
+  },
+  "footer": {
+    "description": "We support barrier-free communication with AI-based real-time translation service.",
+    "services": "Services",
+    "realtime": "Real-time Translation",
+    "company": "Company",
+    "contactUs": "Contact Us",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "contactInfo": "Contact",
+    "location": "Seoul, South Korea",
+    "copyright": "© 2026 Elnino. All rights reserved."
+  },
+  "pricing": {
+    "badge": "Transparent Pricing",
+    "title": "Pricing",
+    "description": "Choose the optimal plan for your purpose",
+    "general": {
+      "header": "Standard Plan",
+      "name": "Pay-as-you-go",
+      "description": "Pay only for what you use",
+      "price": "₩3,900",
+      "unit": "/hour",
+      "priceNote": "Billed after use",
+      "cta": "Get Started",
+      "sections": {
+        "features": "Included Features",
+        "scope": "Service Scope",
+        "recommend": "Recommended For"
+      },
+      "items": {
+        "features": [
+          "101 languages supported",
+          "Real-time translation",
+          "Automatic language detection & switching",
+          "Dashboard access"
+        ],
+        "scope": [
+          "Up to 10 people per room",
+          "Up to 3 simultaneous rooms",
+          "Translation data used for service improvement"
+        ],
+        "recommend": [
+          "Small meetings (under 10 people)",
+          "Online meetings",
+          "Simple testing"
+        ]
+      }
+    },
+    "contract": {
+      "header": "Contract Plan",
+      "name": "Contract",
+      "description": "Premium service with customized contracts",
+      "price": "Custom",
+      "priceNote": "Priced based on scale and duration",
+      "cta": "Contact Us",
+      "includesAll": "All features included",
+      "items": {
+        "features": [
+          "Custom pricing",
+          "Industry-specific boosting models",
+          "Translation subtitle screen provided"
+        ],
+        "scope": [
+          "Up to 1,000 people per room",
+          "Unlimited simultaneous rooms",
+          "Guaranteed no storage or use of translation data"
+        ],
+        "recommend": [
+          "Conferences · Academic events · Seminars (100+ people)",
+          "Institutions · Companies · Universities",
+          "Regular large-scale events"
+        ]
+      }
+    },
+    "ctaBanner": {
+      "badge": "Custom Consultation",
+      "title": "Need a custom quote?",
+      "description": "For large events or special requirements, please feel free to contact us. We will propose the optimal solution.",
+      "button": "Contact Us"
+    }
+  },
+  "faq": {
+    "badge": "FAQ",
+    "title": "Frequently Asked Questions",
+    "description": "Check out answers to common questions about our service",
+    "items": [
+      {
+        "question": "What is the difference between pay-as-you-go and contract?",
+        "answer": "Pay-as-you-go is a post-payment system where you pay only for the time you use. Short-term contracts and monthly subscriptions require prior consultation and are suitable for large events or regular use."
+      },
+      {
+        "question": "Is there a minimum usage time?",
+        "answer": "There is no minimum usage time for pay-as-you-go. Short-term contracts and monthly subscriptions are negotiable."
+      },
+      {
+        "question": "What are the payment methods?",
+        "answer": "Pay-as-you-go is billed after use, while short-term contracts and monthly subscriptions are prepaid according to agreed terms."
+      },
+      {
+        "question": "Which plan should I choose?",
+        "answer": "We recommend pay-as-you-go for small meetings or simple tests, short-term contracts for conferences and workshops, and monthly subscriptions for institutions or companies with regular use."
+      },
+      {
+        "question": "What is automatic language recognition and switching?",
+        "answer": "The system automatically recognizes whatever language the speaker uses, and participants can select their preferred language in the subtitle room to see translations in their own language. Multilingual communication is possible without prior language surveys."
+      },
+      {
+        "question": "What is the industry-specific boosting model?",
+        "answer": "It is an AI model optimized for more accurate translation of specialized terminology in fields such as medicine, law, IT, and finance. Available with short-term contracts and monthly subscriptions."
+      },
+      {
+        "question": "What languages are supported?",
+        "answer": "We support 101 languages including major languages like English, Chinese, Japanese, and Spanish. All languages support bidirectional translation and are continuously updated."
+      },
+      {
+        "question": "How accurate is the translation?",
+        "answer": "We guarantee over 95% accuracy in general conversation and up to 99% accuracy in specialized fields with boosting models applied."
+      },
+      {
+        "question": "How many people can use it simultaneously?",
+        "answer": "Pay-as-you-go allows up to 10 people per room with 3 simultaneous rooms. Contract plans allow up to 1,000 people per room with unlimited simultaneous rooms."
+      },
+      {
+        "question": "Do I need to install a separate app?",
+        "answer": "No, you can use it immediately with just a Chrome browser. Available on all devices including mobile, tablet, and laptop."
+      }
+    ],
+    "ctaBanner": {
+      "title": "Have more questions?",
+      "description": "If you have additional questions, please feel free to contact us.",
+      "button": "Contact Us"
+    }
+  },
+  "contact": {
+    "badge": "Contact",
+    "title": "Contact Us",
+    "description": "If you have any questions about our service, please contact us.",
+    "info": {
+      "title": "Contact Information",
+      "phone": "Phone",
+      "phoneValue": "Available upon inquiry",
+      "email": "Email",
+      "hours": "Business Hours",
+      "hoursValue": "Weekdays 09:00 - 18:00",
+      "urgentTitle": "Need quick response?",
+      "urgentDescription": "For event support needed within 48 hours, please contact our emergency line directly."
+    },
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "company": "Company/Organization",
+      "position": "Position/Title",
+      "serviceType": "Service Type",
+      "serviceTypePlaceholder": "Select a service",
+      "serviceTypes": {
+        "oneTime": "One-time Support (Conferences, Workshops, etc.)",
+        "subscription": "Subscription (Institutional regular support)"
+      },
+      "eventInfo": "Event Information",
+      "startDate": "Event Start Date",
+      "endDate": "Event End Date",
+      "startTime": "Start Time",
+      "endTime": "End Time",
+      "venue": "Event Venue",
+      "venuePlaceholder": "e.g., Conference Center, Building Name",
+      "eventDetails": "Event Details",
+      "eventDetailsPlaceholder": "Please describe the purpose, format, and support needed for your event.",
+      "subscriptionInfo": "Subscription Information",
+      "purposes": "Primary Use Cases",
+      "purposeOptions": ["Meetings", "Education/Lectures", "Presentations", "International Collaboration", "Workshops", "Other"],
+      "institutionInfo": "Organization Introduction & Subscription Purpose",
+      "institutionInfoPlaceholder": "Please describe your organization and the goals you want to achieve through the subscription service.",
+      "message": "Message",
+      "messagePlaceholder": "Please enter any additional inquiries or requests...",
+      "submit": "Submit",
+      "submitting": "Submitting...",
+      "required": "*"
+    },
+    "success": {
+      "title": "Thank You",
+      "description": "Your inquiry has been submitted successfully. Our team will contact you within 24 hours.",
+      "button": "Return to Home"
+    },
+    "placeholders": {
+      "name": "John Doe",
+      "email": "example@company.com",
+      "phone": "010-1234-5678",
+      "company": "Company Name Inc.",
+      "position": "Manager"
+    }
+  },
+  "blog": {
+    "badge": "Blog",
+    "title": "Blog",
+    "description": "Check out the latest news and translation technology insights from Knoc",
+    "empty": {
+      "title": "No posts yet",
+      "description": "We will be back soon with useful content. Please check back when new posts are available.",
+      "button": "Return to Home"
+    }
+  },
+  "modal": {
+    "brochureTitle": "Service Brochure",
+    "close": "Close",
+    "loading": "Loading..."
+  },
+  "policy": {
+    "backToHome": "Back to Home",
+    "effectiveDate": "Effective Date: May 25, 2025",
+    "privacy": {
+      "title": "Privacy Policy",
+      "section1": {
+        "title": "Personal Information We Collect",
+        "description": "We collect the following personal information for interpretation quote requests and service provision.",
+        "itemsLabel": "Collected Items",
+        "items": "Company name (Organization), Name, Position, Mobile phone, Email, Interpretation language, Type of interpretation, Interpretation date/time, Interpretation details, Venue, Materials, Cookies, etc.",
+        "methodLabel": "Collection Method",
+        "method": "Website (Quote request submission)"
+      },
+      "section2": {
+        "title": "Purpose of Collection and Use",
+        "description": "We use the collected personal information for the following purposes.",
+        "purposes": [
+          "Interpretation quote consultation, service provision and contract fulfillment",
+          "Customer management, inquiry response and dispute resolution",
+          "Service improvement and new service development",
+          "Marketing and advertising information (with prior consent)"
+        ]
+      },
+      "section3": {
+        "title": "Retention and Use Period",
+        "description": "We destroy personal information without delay after the purpose of collection and use has been achieved. However, the following information is retained for the periods specified below.",
+        "internal": {
+          "title": "Retention by Internal Policy",
+          "itemLabel": "Retained Items:",
+          "item": "All collected personal information items",
+          "reasonLabel": "Retention Reason:",
+          "reason": "Dispute resolution and customer inquiry record retention",
+          "periodLabel": "Retention Period:",
+          "period": "5 years after inquiry resolution"
+        },
+        "legal": {
+          "title": "Retention by Applicable Laws",
+          "description": "When required to retain information under applicable laws such as the Commercial Act and the Act on Consumer Protection in Electronic Commerce, we retain information for the period specified by law.",
+          "items": [
+            { "label": "Records of contracts or withdrawal:", "period": "5 years" },
+            { "label": "Records of payment and supply of goods:", "period": "5 years" },
+            { "label": "Records of consumer complaints or disputes:", "period": "3 years" },
+            { "label": "Records of credit information collection/processing:", "period": "3 years" }
+          ]
+        }
+      }
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "effectiveNotice": "These terms are effective from May 25, 2025.",
+      "sections": [
+        {
+          "title": "Purpose",
+          "content": "These Terms of Service aim to establish the terms and conditions of use and operation of the services provided by \"Elnino\" (hereinafter referred to as 'the Site')."
+        },
+        {
+          "title": "Definitions",
+          "description": "The main terms used in these terms are defined as follows.",
+          "definitions": [
+            { "term": "Member:", "definition": "A user who has agreed to the Site's terms, provided personal information for registration, entered into a service agreement with the Site, and uses the Site." },
+            { "term": "Service Agreement:", "definition": "A contract entered into between the Site and a member regarding the use of the Site." },
+            { "term": "Member ID:", "definition": "A unique combination of letters and numbers assigned to each member for identification and service use." },
+            { "term": "Password:", "definition": "A combination of letters and numbers selected by the member to verify their identity and protect their rights." },
+            { "term": "Operator:", "definition": "The operator who establishes and operates a website for the service." },
+            { "term": "Termination:", "definition": "The act of a member canceling their service agreement." }
+          ]
+        },
+        {
+          "title": "Rules Outside the Terms",
+          "content": "The operator may separately announce operational policies when necessary, and if these terms and operational policies overlap, the operational policies shall take precedence."
+        },
+        {
+          "title": "Formation of Service Agreement",
+          "items": [
+            "The service agreement is formed when a person wishing to use the Site as a member agrees to these terms and applies for membership, and the operator approves the application.",
+            "A person wishing to register as a member and use the service agrees to these terms by reading them and selecting 'I Agree' below during the membership application process."
+          ]
+        },
+        {
+          "title": "Service Application",
+          "items": [
+            "Users wishing to register as members and use the Site must provide the required information (User ID, Password, Nickname, etc.) requested by the Site.",
+            "Members who register using others' information or false information cannot claim any rights related to Site use and may be subject to penalties under applicable laws."
+          ]
+        },
+        {
+          "title": "Privacy Policy",
+          "items": [
+            "The Site and operator do not store passwords provided during membership registration, and related matters follow the Site's Privacy Policy.",
+            "The operator strives to protect members' personal information, including registration information, in accordance with applicable laws."
+          ]
+        },
+        {
+          "title": "Operator's Obligations",
+          "items": [
+            "The operator shall process legitimate opinions or complaints raised by members as quickly as possible.",
+            "The operator may request the Site to repair or restore equipment without delay when failures or losses occur to ensure continuous and stable site operation."
+          ]
+        },
+        {
+          "title": "Member's Obligations",
+          "items": [
+            "Members must comply with the provisions of these terms, regulations established by the operator, notices, operational policies announced by the Site, and applicable laws.",
+            "Members may not transfer, gift, or use as collateral their service usage rights or other contractual status to others without the explicit consent of the Site.",
+            "Users must exercise considerable care in managing their ID and password.",
+            "Members must not infringe upon the intellectual property rights of the operator, the Site, or third parties."
+          ]
+        }
+      ]
+    }
+  }
+}
