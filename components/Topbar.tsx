@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { ExternalLink, Menu, X, ChevronDown } from "lucide-react";
+import { ExternalLink, Menu, X, ChevronDown, Globe } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useTranslation, Locale } from "@/lib/i18n";
 
@@ -47,6 +47,7 @@ export default function Topbar() {
         onClick={() => setIsLangOpen(!isLangOpen)}
         className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-[#334155] hover:text-[#0F172A] border border-[#E2E8F0] rounded-lg bg-[#FFFFFF] hover:bg-[#F8F9FA] transition-colors font-['Noto_Sans']"
       >
+        <Globe className="w-4 h-4" />
         {languageLabels[locale]}
         <ChevronDown className={`w-4 h-4 transition-transform ${isLangOpen ? 'rotate-180' : ''}`} />
       </button>
