@@ -1,12 +1,11 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import koData from '@/public/locales/ko.json';
+import enData from '@/public/locales/en.json';
+import jaData from '@/public/locales/ja.json';
 
 export type Locale = 'ko' | 'en' | 'ja';
-
-interface Translations {
-  [key: string]: string | Translations;
-}
 
 interface I18nContextType {
   locale: Locale;
@@ -16,14 +15,11 @@ interface I18nContextType {
 
 const I18nContext = createContext<I18nContextType | undefined>(undefined);
 
-// Translation files will be loaded dynamically
-const translations: Record<Locale, Translations> = {
-  ko: {},
-  en: {},
-  ja: {},
+const translations: Record<Locale, unknown> = {
+  ko: koData,
+  en: enData,
+  ja: jaData,
 };
-
-let translationsLoaded = false;
 
 // Detect browser language and return appropriate locale
 const detectBrowserLocale = (): Locale => {
@@ -34,12 +30,11 @@ const detectBrowserLocale = (): Locale => {
 
   if (langCode === 'ko') return 'ko';
   if (langCode === 'ja') return 'ja';
-  return 'en'; // Default to English for all other languages
+  return 'en';
 };
 
 // Helper function to get nested value from object (supports arrays)
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const getNestedValue = (obj: Translations, path: string): string => {
+const getNestedValue = (obj: unknown, path: string): string => {
   const keys = path.split('.');
   let current: unknown = obj;
 
@@ -62,59 +57,17 @@ const getNestedValue = (obj: Translations, path: string): string => {
 
 export function I18nProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>('ko');
-  const [isLoaded, setIsLoaded] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
-  // Mark as mounted after hydration
   useEffect(() => {
+    const savedLocale = localStorage.getItem('locale') as Locale | null;
+    if (savedLocale && ['ko', 'en', 'ja'].includes(savedLocale)) {
+      setLocaleState(savedLocale);
+    } else {
+      setLocaleState(detectBrowserLocale());
+    }
     setIsMounted(true);
   }, []);
-
-  // Load translations and saved locale from localStorage together
-  useEffect(() => {
-    const loadTranslations = async () => {
-      if (translationsLoaded) {
-        setIsLoaded(true);
-        // Load saved locale or detect from browser
-        const savedLocale = localStorage.getItem('locale') as Locale | null;
-        if (savedLocale && ['ko', 'en', 'ja'].includes(savedLocale)) {
-          setLocaleState(savedLocale);
-        } else {
-          setLocaleState(detectBrowserLocale());
-        }
-        return;
-      }
-
-      try {
-        const [koData, enData, jaData] = await Promise.all([
-          fetch('/locales/ko.json').then(res => res.json()),
-          fetch('/locales/en.json').then(res => res.json()),
-          fetch('/locales/ja.json').then(res => res.json()),
-        ]);
-
-        translations.ko = koData;
-        translations.en = enData;
-        translations.ja = jaData;
-        translationsLoaded = true;
-        setIsLoaded(true);
-
-        // Load saved locale or detect from browser
-        const savedLocale = localStorage.getItem('locale') as Locale | null;
-        if (savedLocale && ['ko', 'en', 'ja'].includes(savedLocale)) {
-          setLocaleState(savedLocale);
-        } else {
-          setLocaleState(detectBrowserLocale());
-        }
-      } catch (error) {
-        console.error('Failed to load translations:', error);
-        setIsLoaded(true);
-      }
-    };
-
-    if (isMounted) {
-      loadTranslations();
-    }
-  }, [isMounted]);
 
   const setLocale = (newLocale: Locale) => {
     setLocaleState(newLocale);
@@ -124,7 +77,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   };
 
   const t = (key: string): string => {
-    if (!isLoaded) return key;
+    if (!isMounted) return '';
     return getNestedValue(translations[locale], key);
   };
 
