@@ -37,15 +37,24 @@ const detectBrowserLocale = (): Locale => {
   return 'en'; // Default to English for all other languages
 };
 
-// Helper function to get nested value from object
+// Helper function to get nested value from object (supports arrays)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const getNestedValue = (obj: Translations, path: string): string => {
   const keys = path.split('.');
-  let current: Translations | string = obj;
+  let current: unknown = obj;
 
   for (const key of keys) {
-    if (typeof current === 'string') return path;
-    if (current[key] === undefined) return path;
-    current = current[key];
+    if (current == null || typeof current === 'string') return path;
+    if (Array.isArray(current)) {
+      const index = parseInt(key, 10);
+      if (isNaN(index) || index < 0 || index >= current.length) return path;
+      current = current[index];
+    } else if (typeof current === 'object') {
+      current = (current as Record<string, unknown>)[key];
+      if (current === undefined) return path;
+    } else {
+      return path;
+    }
   }
 
   return typeof current === 'string' ? current : path;
