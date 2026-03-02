@@ -46,22 +46,22 @@ export default function Topbar() {
       <div ref={ref} className={`relative ${className}`}>
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-[#334155] hover:text-[#0F172A] border border-[#E2E8F0] rounded-lg bg-[#FFFFFF] hover:bg-[#F8F9FA] transition-colors font-['Noto_Sans']"
+          className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-slate-700 hover:text-foreground border border-border rounded-lg bg-white hover:bg-background transition-colors"
         >
           <Globe className="w-4 h-4" />
           {languageLabels[locale]}
           <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
         </button>
         {isOpen && (
-          <div className="absolute top-full right-0 mt-1 py-1 bg-[#FFFFFF] border border-[#E2E8F0] rounded-lg shadow-lg min-w-[120px] z-50">
+          <div className="absolute top-full right-0 mt-1 py-1 bg-white border border-border rounded-lg shadow-lg min-w-[120px] z-50">
             {(['ko', 'en', 'ja'] as Locale[]).map((lang) => (
               <button
                 key={lang}
                 onClick={() => handleChange(lang)}
-                className={`w-full px-4 py-2 text-left text-sm font-['Noto_Sans'] transition-colors ${
+                className={`w-full px-4 py-2 text-left text-sm transition-colors ${
                   locale === lang
-                    ? 'text-[#0EA5E9] bg-[#F0F9FF] font-medium'
-                    : 'text-[#334155] hover:bg-[#F8F9FA]'
+                    ? 'text-primary bg-primary-light font-medium'
+                    : 'text-slate-700 hover:bg-background'
                 }`}
               >
                 {languageLabels[lang]}
@@ -74,13 +74,13 @@ export default function Topbar() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 bg-[#F8F9FA]/95 backdrop-blur-sm border-b border-[#E2E8F0]">
+    <header className="fixed top-0 left-0 right-0 z-40 bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0 flex items-center cursor-pointer gap-2">
             <Image src="/logo.png" alt="Elnino Logo" width={28} height={28} />
-            <span className="font-['Manrope'] font-bold text-xl tracking-tight text-[#0F172A]">
+            <span className="font-heading font-bold text-xl tracking-tight text-foreground">
               ELNINO
             </span>
           </Link>
@@ -89,40 +89,30 @@ export default function Topbar() {
           <nav className="hidden md:flex items-center gap-8">
             <Link
               href="/pricing"
-              className={`font-['Noto_Sans'] text-sm font-medium transition-colors ${
+              className={`text-sm font-medium transition-colors ${
                 isActive('/pricing')
-                  ? 'text-[#0EA5E9]'
-                  : 'text-[#334155] hover:text-[#0F172A]'
+                  ? 'text-primary'
+                  : 'text-slate-700 hover:text-foreground'
               }`}
             >
               {t('nav.pricing')}
             </Link>
             <Link
-              href="/blog"
-              className={`font-['Noto_Sans'] text-sm font-medium transition-colors ${
-                isActive('/blog')
-                  ? 'text-[#0EA5E9]'
-                  : 'text-[#334155] hover:text-[#0F172A]'
-              }`}
-            >
-              {t('nav.blog')}
-            </Link>
-            <Link
               href="/about"
-              className={`font-['Noto_Sans'] text-sm font-medium transition-colors ${
+              className={`text-sm font-medium transition-colors ${
                 isActive('/about')
-                  ? 'text-[#0EA5E9]'
-                  : 'text-[#334155] hover:text-[#0F172A]'
+                  ? 'text-primary'
+                  : 'text-slate-700 hover:text-foreground'
               }`}
             >
               {t('nav.faq')}
             </Link>
             <Link
               href="/contact"
-              className={`font-['Noto_Sans'] text-sm font-medium transition-colors ${
+              className={`text-sm font-medium transition-colors ${
                 isActive('/contact')
-                  ? 'text-[#0EA5E9]'
-                  : 'text-[#334155] hover:text-[#0F172A]'
+                  ? 'text-primary'
+                  : 'text-slate-700 hover:text-foreground'
               }`}
             >
               {t('nav.contact')}
@@ -134,14 +124,14 @@ export default function Topbar() {
             <LanguageDropdown />
             <Link
               href="https://cloud.elnino.kr/dashboard"
-              className="inline-flex items-center justify-center gap-1 px-4 py-2 text-sm font-medium rounded-lg border border-[#E2E8F0] text-[#334155] bg-[#FFFFFF] hover:bg-[#F8F9FA] transition-colors font-['Manrope']"
+              className="inline-flex items-center justify-center gap-1 px-4 py-2 text-sm font-medium rounded-lg border border-border text-slate-700 bg-white hover:bg-background transition-colors font-heading"
             >
               {t('nav.dashboard')}
               <ExternalLink className="w-3 h-3 opacity-50" />
             </Link>
             <Link
               href="https://cloud.elnino.kr/webclient"
-              className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg text-[#FFFFFF] bg-[#0EA5E9] hover:bg-[#0284C7] transition-colors font-['Manrope']"
+              className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg text-primary-foreground bg-primary hover:bg-primary-dark transition-colors font-heading"
             >
               {t('nav.start')}
             </Link>
@@ -152,7 +142,7 @@ export default function Topbar() {
             <LanguageDropdown />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-[#334155]"
+              className="text-slate-700"
             >
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -162,30 +152,21 @@ export default function Topbar() {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-[#FFFFFF] border-t border-[#E2E8F0]">
+        <div className="md:hidden bg-white border-t border-border">
           <nav className="px-4 py-4 space-y-3">
             <Link
               href="/pricing"
-              className={`block py-2 font-['Noto_Sans'] font-medium ${
-                isActive('/pricing') ? 'text-[#0EA5E9]' : 'text-[#334155]'
+              className={`block py-2 font-medium ${
+                isActive('/pricing') ? 'text-primary' : 'text-slate-700'
               }`}
               onClick={() => setIsMenuOpen(false)}
             >
               {t('nav.pricing')}
             </Link>
             <Link
-              href="/blog"
-              className={`block py-2 font-['Noto_Sans'] font-medium ${
-                isActive('/blog') ? 'text-[#0EA5E9]' : 'text-[#334155]'
-              }`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {t('nav.blog')}
-            </Link>
-            <Link
               href="/about"
-              className={`block py-2 font-['Noto_Sans'] font-medium ${
-                isActive('/about') ? 'text-[#0EA5E9]' : 'text-[#334155]'
+              className={`block py-2 font-medium ${
+                isActive('/about') ? 'text-primary' : 'text-slate-700'
               }`}
               onClick={() => setIsMenuOpen(false)}
             >
@@ -193,24 +174,24 @@ export default function Topbar() {
             </Link>
             <Link
               href="/contact"
-              className={`block py-2 font-['Noto_Sans'] font-medium ${
-                isActive('/contact') ? 'text-[#0EA5E9]' : 'text-[#334155]'
+              className={`block py-2 font-medium ${
+                isActive('/contact') ? 'text-primary' : 'text-slate-700'
               }`}
               onClick={() => setIsMenuOpen(false)}
             >
               {t('nav.contact')}
             </Link>
-            <div className="pt-4 border-t border-[#E2E8F0] space-y-3">
+            <div className="pt-4 border-t border-border space-y-3">
               <Link
                 href="https://cloud.elnino.kr/webclient"
-                className="block w-full text-center px-4 py-2.5 text-sm font-medium rounded-lg text-[#FFFFFF] bg-[#0EA5E9] hover:bg-[#0284C7] transition-colors font-['Manrope']"
+                className="block w-full text-center px-4 py-2.5 text-sm font-medium rounded-lg text-primary-foreground bg-primary hover:bg-primary-dark transition-colors font-heading"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {t('nav.start')}
               </Link>
               <Link
                 href="https://cloud.elnino.kr/dashboard"
-                className="flex items-center justify-center gap-1 w-full px-4 py-2.5 text-sm font-medium rounded-lg border border-[#E2E8F0] text-[#334155] bg-[#FFFFFF] hover:bg-[#F8F9FA] transition-colors font-['Manrope']"
+                className="flex items-center justify-center gap-1 w-full px-4 py-2.5 text-sm font-medium rounded-lg border border-border text-slate-700 bg-white hover:bg-background transition-colors font-heading"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {t('nav.dashboard')}

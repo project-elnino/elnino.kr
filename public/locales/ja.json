@@ -1,7 +1,7 @@
 {
   "nav": {
     "pricing": "料金プラン",
-    "blog": "ブログ",
+
     "faq": "FAQ",
     "contact": "お問い合わせ",
     "dashboard": "ダッシュボード",
@@ -82,6 +82,7 @@
     ]
   },
   "cta": {
+    "badge": "カスタム相談",
     "title": "ご質問はございますか？",
     "description": "サービスについてご不明な点がございましたら、お問い合わせください。24時間以内にご返答いたします。",
     "button": "お問い合わせ"
@@ -102,67 +103,51 @@
     "badge": "透明な料金体系",
     "title": "料金プラン",
     "description": "ご利用目的に合った最適なプランをお選びください",
-    "general": {
-      "header": "一般料金",
-      "name": "従量制",
-      "description": "使った分だけ後払い",
-      "price": "₩3,900",
-      "unit": "/時間",
-      "priceNote": "使用後請求",
-      "cta": "始める",
-      "sections": {
-        "features": "含まれる機能",
-        "scope": "サービス範囲",
-        "recommend": "こんな方におすすめ"
+    "monthly": "月",
+    "hour": "時間",
+    "perHour": "/時間",
+    "payAsYouGo": "従量制",
+    "includedHours": "含む時間",
+    "unitPrice": "時間単価",
+    "overage": "超過料金",
+    "maxParticipants": "最大人数",
+    "simultaneousRooms": "同時ルーム数",
+    "subtitleScreen": "字幕スクリーン",
+    "features": "含まれる機能",
+    "cta": "始める",
+    "ctaContact": "お問い合わせ",
+    "popular": "人気",
+    "plans": {
+      "starter": {
+        "name": "Starter",
+        "description": "気軽に始める従量制",
+        "recommend": "小規模会議、簡単なテスト"
       },
-      "items": {
-        "features": [
-          "101言語対応",
-          "リアルタイム翻訳",
-          "自動言語認識＆切替",
-          "ダッシュボードアクセス"
-        ],
-        "scope": [
-          "ルームあたり最大10名",
-          "同時運営可能ルーム3つ",
-          "翻訳データ活用：サービス改善目的"
-        ],
-        "recommend": [
-          "小規模会議（10名以下）",
-          "オンラインミーティング",
-          "簡単なテスト"
-        ]
+      "pro": {
+        "name": "Pro",
+        "description": "定期的な小規模利用",
+        "recommend": "オンライン会議、小規模セミナー"
+      },
+      "team": {
+        "name": "Team",
+        "description": "チーム単位の本格利用",
+        "recommend": "学会、企業会議、教育"
+      },
+      "business": {
+        "name": "Business",
+        "description": "大規模イベント専用",
+        "recommend": "カンファレンス、機関、大学"
       }
     },
-    "contract": {
-      "header": "契約料金",
-      "name": "契約",
-      "description": "カスタム契約でプレミアムサービス",
-      "price": "要相談",
-      "priceNote": "規模と期間により設定",
-      "cta": "お問い合わせ",
-      "includesAll": "従量制のすべての機能を含む",
-      "items": {
-        "features": [
-          "カスタム見積もり",
-          "分野別ブースティングモデル",
-          "翻訳字幕スクリーン提供"
-        ],
-        "scope": [
-          "ルームあたり最大1,000名",
-          "同時運営ルーム無制限",
-          "翻訳データの非保存・非活用保証"
-        ],
-        "recommend": [
-          "カンファレンス・学会・セミナー（100名以上）",
-          "機関・企業・大学",
-          "定期的な大規模イベント"
-        ]
-      }
-    },
+    "featureList": [
+      "101言語対応",
+      "リアルタイム翻訳",
+      "自動言語認識",
+      "ダッシュボードアクセス"
+    ],
     "ctaBanner": {
       "badge": "カスタム相談",
-      "title": "カスタム見積もりが必要ですか？",
+      "title": "より大規模が必要ですか？",
       "description": "大規模イベントや特別なご要望がございましたら、いつでもお問い合わせください。最適なソリューションをご提案いたします。",
       "button": "お問い合わせ"
     }
@@ -276,16 +261,6 @@
       "phone": "090-1234-5678",
       "company": "株式会社〇〇",
       "position": "担当者"
-    }
-  },
-  "blog": {
-    "badge": "ブログ",
-    "title": "ブログ",
-    "description": "Knocの最新ニュースと翻訳技術のインサイトをご確認ください",
-    "empty": {
-      "title": "まだ投稿がありません",
-      "description": "まもなく有益なコンテンツでお届けします。新しい投稿が公開されたらご確認ください。",
-      "button": "ホームに戻る"
     }
   },
   "modal": {

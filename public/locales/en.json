@@ -1,7 +1,7 @@
 {
   "nav": {
     "pricing": "Pricing",
-    "blog": "Blog",
+
     "faq": "FAQ",
     "contact": "Contact",
     "dashboard": "Dashboard",
@@ -82,6 +82,7 @@
     ]
   },
   "cta": {
+    "badge": "Custom Consultation",
     "title": "Have any questions?",
     "description": "If you have any questions about our service, please contact us. We will respond within 24 hours.",
     "button": "Contact Us"
@@ -102,67 +103,51 @@
     "badge": "Transparent Pricing",
     "title": "Pricing",
     "description": "Choose the optimal plan for your purpose",
-    "general": {
-      "header": "Standard Plan",
-      "name": "Pay-as-you-go",
-      "description": "Pay only for what you use",
-      "price": "₩3,900",
-      "unit": "/hour",
-      "priceNote": "Billed after use",
-      "cta": "Get Started",
-      "sections": {
-        "features": "Included Features",
-        "scope": "Service Scope",
-        "recommend": "Recommended For"
+    "monthly": "mo",
+    "hour": "hours",
+    "perHour": "/hr",
+    "payAsYouGo": "Pay-as-you-go",
+    "includedHours": "Included hours",
+    "unitPrice": "Unit price",
+    "overage": "Overage",
+    "maxParticipants": "Max participants",
+    "simultaneousRooms": "Simultaneous rooms",
+    "subtitleScreen": "Subtitle screen",
+    "features": "Features",
+    "cta": "Get Started",
+    "ctaContact": "Contact Us",
+    "popular": "Popular",
+    "plans": {
+      "starter": {
+        "name": "Starter",
+        "description": "Lightweight pay-as-you-go",
+        "recommend": "Small meetings, quick tests"
       },
-      "items": {
-        "features": [
-          "101 languages supported",
-          "Real-time translation",
-          "Automatic language detection & switching",
-          "Dashboard access"
-        ],
-        "scope": [
-          "Up to 10 people per room",
-          "Up to 3 simultaneous rooms",
-          "Translation data used for service improvement"
-        ],
-        "recommend": [
-          "Small meetings (under 10 people)",
-          "Online meetings",
-          "Simple testing"
-        ]
+      "pro": {
+        "name": "Pro",
+        "description": "Regular small-scale use",
+        "recommend": "Online meetings, small seminars"
+      },
+      "team": {
+        "name": "Team",
+        "description": "Full team-level usage",
+        "recommend": "Conferences, corporate, education"
+      },
+      "business": {
+        "name": "Business",
+        "description": "Large-scale events",
+        "recommend": "Conferences, institutions, universities"
       }
     },
-    "contract": {
-      "header": "Contract Plan",
-      "name": "Contract",
-      "description": "Premium service with customized contracts",
-      "price": "Custom",
-      "priceNote": "Priced based on scale and duration",
-      "cta": "Contact Us",
-      "includesAll": "All Pay-as-you-go features included",
-      "items": {
-        "features": [
-          "Custom pricing",
-          "Industry-specific boosting models",
-          "Translation subtitle screen provided"
-        ],
-        "scope": [
-          "Up to 1,000 people per room",
-          "Unlimited simultaneous rooms",
-          "Guaranteed no storage or use of translation data"
-        ],
-        "recommend": [
-          "Conferences · Academic events · Seminars (100+ people)",
-          "Institutions · Companies · Universities",
-          "Regular large-scale events"
-        ]
-      }
-    },
+    "featureList": [
+      "101 languages supported",
+      "Real-time translation",
+      "Auto language detection",
+      "Dashboard access"
+    ],
     "ctaBanner": {
       "badge": "Custom Consultation",
-      "title": "Need a custom quote?",
+      "title": "Need an even larger scale?",
       "description": "For large events or special requirements, please feel free to contact us. We will propose the optimal solution.",
       "button": "Contact Us"
     }
@@ -276,16 +261,6 @@
       "phone": "010-1234-5678",
       "company": "Company Name Inc.",
       "position": "Manager"
-    }
-  },
-  "blog": {
-    "badge": "Blog",
-    "title": "Blog",
-    "description": "Check out the latest news and translation technology insights from Knoc",
-    "empty": {
-      "title": "No posts yet",
-      "description": "We will be back soon with useful content. Please check back when new posts are available.",
-      "button": "Return to Home"
     }
   },
   "modal": {

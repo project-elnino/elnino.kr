@@ -157,18 +157,18 @@ export default function ContactForm() {
   if (isSuccess) {
     return (
       <div className="max-w-2xl mx-auto text-center py-20">
-        <div className="w-20 h-20 bg-[#E0F2FE] rounded-full flex items-center justify-center mx-auto mb-6">
-          <CheckCircle2 className="h-10 w-10 text-[#0EA5E9]" />
+        <div className="w-20 h-20 bg-primary-light rounded-full flex items-center justify-center mx-auto mb-6">
+          <CheckCircle2 className="h-10 w-10 text-primary" />
         </div>
-        <h2 className="text-3xl font-extrabold text-[#0F172A] font-['Manrope'] mb-4">
+        <h2 className="text-3xl font-extrabold text-foreground font-heading mb-4">
           {t('contact.success.title')}
         </h2>
-        <p className="text-lg text-[#334155] font-['Noto_Sans'] mb-8">
+        <p className="text-lg text-slate-700 mb-8">
           {t('contact.success.description')}
         </p>
         <Link
           href="/"
-          className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-bold rounded-md text-[#FFFFFF] bg-[#0EA5E9] hover:bg-[#0284C7] transition-colors font-['Manrope']"
+          className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-bold rounded-md text-white bg-primary hover:bg-primary-dark transition-colors font-heading"
         >
           {t('contact.success.button')}
         </Link>
@@ -184,38 +184,38 @@ export default function ContactForm() {
         {/* Left Column: Contact Info */}
         <div className="lg:col-span-1 space-y-8">
           <div>
-            <h3 className="text-xl font-bold text-[#0F172A] font-['Manrope'] mb-6">{t('contact.info.title')}</h3>
+            <h3 className="text-xl font-bold text-foreground font-heading mb-6">{t('contact.info.title')}</h3>
             <div className="space-y-5">
               <div className="flex items-start">
-                <Phone className="h-5 w-5 text-[#0EA5E9] mr-3 mt-1 flex-shrink-0" />
+                <Phone className="h-5 w-5 text-primary mr-3 mt-1 flex-shrink-0" />
                 <div>
-                  <p className="text-sm font-bold text-[#0F172A] font-['Manrope']">{t('contact.info.phone')}</p>
-                  <p className="text-[#334155] text-sm font-['Noto_Sans']">{t('contact.info.phoneValue')}</p>
+                  <p className="text-sm font-bold text-foreground font-heading">{t('contact.info.phone')}</p>
+                  <p className="text-slate-700 text-sm">{t('contact.info.phoneValue')}</p>
                 </div>
               </div>
               <div className="flex items-start">
-                <Mail className="h-5 w-5 text-[#0EA5E9] mr-3 mt-1 flex-shrink-0" />
+                <Mail className="h-5 w-5 text-primary mr-3 mt-1 flex-shrink-0" />
                 <div>
-                  <p className="text-sm font-bold text-[#0F172A] font-['Manrope']">{t('contact.info.email')}</p>
-                  <p className="text-[#334155] text-sm font-['Noto_Sans']">contact@elnino.kr</p>
+                  <p className="text-sm font-bold text-foreground font-heading">{t('contact.info.email')}</p>
+                  <p className="text-slate-700 text-sm">peteryoung0414@gmail.com</p>
                 </div>
               </div>
               <div className="flex items-start">
-                <Clock className="h-5 w-5 text-[#0EA5E9] mr-3 mt-1 flex-shrink-0" />
+                <Clock className="h-5 w-5 text-primary mr-3 mt-1 flex-shrink-0" />
                 <div>
-                  <p className="text-sm font-bold text-[#0F172A] font-['Manrope']">{t('contact.info.hours')}</p>
-                  <p className="text-[#334155] text-sm font-['Noto_Sans']">{t('contact.info.hoursValue')}</p>
+                  <p className="text-sm font-bold text-foreground font-heading">{t('contact.info.hours')}</p>
+                  <p className="text-slate-700 text-sm">{t('contact.info.hoursValue')}</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-[#E0F2FE] p-6 rounded-lg border border-[#BAE6FD]">
-            <h4 className="font-bold text-[#0F172A] font-['Manrope'] mb-2 flex items-center">
-              <Info className="h-4 w-4 mr-2 text-[#0EA5E9]" />
+          <div className="bg-primary-light p-6 rounded-lg border border-[#BAE6FD]">
+            <h4 className="font-bold text-foreground font-heading mb-2 flex items-center">
+              <Info className="h-4 w-4 mr-2 text-primary" />
               {t('contact.info.urgentTitle')}
             </h4>
-            <p className="text-sm text-[#0C4A6E] font-['Noto_Sans']">
+            <p className="text-sm text-[#0C4A6E]">
               {t('contact.info.urgentDescription')}
             </p>
           </div>
@@ -223,11 +223,11 @@ export default function ContactForm() {
 
         {/* Right Column: The Form */}
         <div className="lg:col-span-2">
-          <form onSubmit={handleSubmit} className="bg-[#FFFFFF] p-8 md:p-10 rounded-2xl shadow-sm border border-[#E2E8F0]">
+          <form onSubmit={handleSubmit} className="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-border">
             {/* Row 1: Name, Email */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
               <div>
-                <label htmlFor="name" className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider font-['Manrope'] mb-2">
+                <label htmlFor="name" className="block text-xs font-bold text-foreground uppercase tracking-wider font-heading mb-2">
                   {t('contact.form.name')} <span className="text-[#EF4444]">{t('contact.form.required')}</span>
                 </label>
                 <input
@@ -236,12 +236,12 @@ export default function ContactForm() {
                   id="name"
                   value={form.name}
                   onChange={handleChange}
-                  className="w-full bg-[#F8F9FA] border-b-2 border-[#E2E8F0] py-3 px-4 focus:outline-none focus:border-[#0EA5E9] transition-colors text-[#0F172A] font-['Noto_Sans'] placeholder-[#94A3B8]"
+                  className="w-full bg-background border-b-2 border-border py-3 px-4 focus:outline-none focus:border-primary transition-colors text-foreground placeholder-slate-400"
                   placeholder={t('contact.placeholders.name')}
                 />
               </div>
               <div>
-                <label htmlFor="email" className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider font-['Manrope'] mb-2">
+                <label htmlFor="email" className="block text-xs font-bold text-foreground uppercase tracking-wider font-heading mb-2">
                   {t('contact.form.email')} <span className="text-[#EF4444]">{t('contact.form.required')}</span>
                 </label>
                 <input
@@ -250,7 +250,7 @@ export default function ContactForm() {
                   id="email"
                   value={form.email}
                   onChange={handleChange}
-                  className="w-full bg-[#F8F9FA] border-b-2 border-[#E2E8F0] py-3 px-4 focus:outline-none focus:border-[#0EA5E9] transition-colors text-[#0F172A] font-['Noto_Sans'] placeholder-[#94A3B8]"
+                  className="w-full bg-background border-b-2 border-border py-3 px-4 focus:outline-none focus:border-primary transition-colors text-foreground placeholder-slate-400"
                   placeholder={t('contact.placeholders.email')}
                 />
               </div>
@@ -259,7 +259,7 @@ export default function ContactForm() {
             {/* Row 2: Phone, Company */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
               <div>
-                <label htmlFor="phone" className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider font-['Manrope'] mb-2">
+                <label htmlFor="phone" className="block text-xs font-bold text-foreground uppercase tracking-wider font-heading mb-2">
                   {t('contact.form.phone')}
                 </label>
                 <input
@@ -268,12 +268,12 @@ export default function ContactForm() {
                   id="phone"
                   value={form.phone}
                   onChange={handleChange}
-                  className="w-full bg-[#F8F9FA] border-b-2 border-[#E2E8F0] py-3 px-4 focus:outline-none focus:border-[#0EA5E9] transition-colors text-[#0F172A] font-['Noto_Sans'] placeholder-[#94A3B8]"
+                  className="w-full bg-background border-b-2 border-border py-3 px-4 focus:outline-none focus:border-primary transition-colors text-foreground placeholder-slate-400"
                   placeholder={t('contact.placeholders.phone')}
                 />
               </div>
               <div>
-                <label htmlFor="company" className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider font-['Manrope'] mb-2">
+                <label htmlFor="company" className="block text-xs font-bold text-foreground uppercase tracking-wider font-heading mb-2">
                   {t('contact.form.company')} <span className="text-[#EF4444]">{t('contact.form.required')}</span>
                 </label>
                 <input
@@ -282,7 +282,7 @@ export default function ContactForm() {
                   id="company"
                   value={form.company}
                   onChange={handleChange}
-                  className="w-full bg-[#F8F9FA] border-b-2 border-[#E2E8F0] py-3 px-4 focus:outline-none focus:border-[#0EA5E9] transition-colors text-[#0F172A] font-['Noto_Sans'] placeholder-[#94A3B8]"
+                  className="w-full bg-background border-b-2 border-border py-3 px-4 focus:outline-none focus:border-primary transition-colors text-foreground placeholder-slate-400"
                   placeholder={t('contact.placeholders.company')}
                 />
               </div>
@@ -290,7 +290,7 @@ export default function ContactForm() {
 
             {/* Row 3: Position */}
             <div className="mb-8">
-              <label htmlFor="position" className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider font-['Manrope'] mb-2">
+              <label htmlFor="position" className="block text-xs font-bold text-foreground uppercase tracking-wider font-heading mb-2">
                 {t('contact.form.position')}
               </label>
               <input
@@ -299,14 +299,14 @@ export default function ContactForm() {
                 id="position"
                 value={form.position}
                 onChange={handleChange}
-                className="w-full bg-[#F8F9FA] border-b-2 border-[#E2E8F0] py-3 px-4 focus:outline-none focus:border-[#0EA5E9] transition-colors text-[#0F172A] font-['Noto_Sans'] placeholder-[#94A3B8]"
+                className="w-full bg-background border-b-2 border-border py-3 px-4 focus:outline-none focus:border-primary transition-colors text-foreground placeholder-slate-400"
                 placeholder={t('contact.placeholders.position')}
               />
             </div>
 
             {/* Row 4: Service Type */}
             <div className="mb-8">
-              <label htmlFor="serviceType" className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider font-['Manrope'] mb-2">
+              <label htmlFor="serviceType" className="block text-xs font-bold text-foreground uppercase tracking-wider font-heading mb-2">
                 {t('contact.form.serviceType')} <span className="text-[#EF4444]">{t('contact.form.required')}</span>
               </label>
               <div className="relative">
@@ -315,14 +315,14 @@ export default function ContactForm() {
                   id="serviceType"
                   value={form.serviceType}
                   onChange={handleChange}
-                  className="w-full bg-[#F8F9FA] border-b-2 border-[#E2E8F0] py-3 px-4 focus:outline-none focus:border-[#0EA5E9] transition-colors text-[#0F172A] font-['Noto_Sans'] appearance-none cursor-pointer"
+                  className="w-full bg-background border-b-2 border-border py-3 px-4 focus:outline-none focus:border-primary transition-colors text-foreground appearance-none cursor-pointer"
                 >
                   <option value="" disabled>{t('contact.form.serviceTypePlaceholder')}</option>
                   {SERVICE_TYPES.map((type) => (
                     <option key={type.value} value={type.value}>{type.label}</option>
                   ))}
                 </select>
-                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-[#0F172A]">
+                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-foreground">
                   <ChevronDown className="h-4 w-4" />
                 </div>
               </div>
@@ -330,13 +330,13 @@ export default function ContactForm() {
 
             {/* Conditional Fields for One-time Support */}
             {form.serviceType === 'one-time' && (
-              <div className="mb-8 p-6 bg-[#F8F9FA] rounded-xl border border-[#E2E8F0] space-y-6">
-                <h4 className="text-sm font-bold text-[#0F172A] font-['Manrope']">{t('contact.form.eventInfo')}</h4>
+              <div className="mb-8 p-6 bg-background rounded-xl border border-border space-y-6">
+                <h4 className="text-sm font-bold text-foreground font-heading">{t('contact.form.eventInfo')}</h4>
 
                 {/* Date Row */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="startDate" className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider font-['Manrope'] mb-2">
+                    <label htmlFor="startDate" className="block text-xs font-bold text-foreground uppercase tracking-wider font-heading mb-2">
                       {t('contact.form.startDate')} <span className="text-[#EF4444]">{t('contact.form.required')}</span>
                     </label>
                     <input
@@ -345,11 +345,11 @@ export default function ContactForm() {
                       id="startDate"
                       value={form.startDate}
                       onChange={handleChange}
-                      className="w-full bg-[#FFFFFF] border-b-2 border-[#E2E8F0] py-3 px-4 focus:outline-none focus:border-[#0EA5E9] transition-colors text-[#0F172A] font-['Noto_Sans']"
+                      className="w-full bg-white border-b-2 border-border py-3 px-4 focus:outline-none focus:border-primary transition-colors text-foreground"
                     />
                   </div>
                   <div>
-                    <label htmlFor="endDate" className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider font-['Manrope'] mb-2">
+                    <label htmlFor="endDate" className="block text-xs font-bold text-foreground uppercase tracking-wider font-heading mb-2">
                       {t('contact.form.endDate')} <span className="text-[#EF4444]">{t('contact.form.required')}</span>
                     </label>
                     <input
@@ -358,7 +358,7 @@ export default function ContactForm() {
                       id="endDate"
                       value={form.endDate}
                       onChange={handleChange}
-                      className="w-full bg-[#FFFFFF] border-b-2 border-[#E2E8F0] py-3 px-4 focus:outline-none focus:border-[#0EA5E9] transition-colors text-[#0F172A] font-['Noto_Sans']"
+                      className="w-full bg-white border-b-2 border-border py-3 px-4 focus:outline-none focus:border-primary transition-colors text-foreground"
                     />
                   </div>
                 </div>
@@ -366,7 +366,7 @@ export default function ContactForm() {
                 {/* Time Row */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="startTime" className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider font-['Manrope'] mb-2">
+                    <label htmlFor="startTime" className="block text-xs font-bold text-foreground uppercase tracking-wider font-heading mb-2">
                       {t('contact.form.startTime')}
                     </label>
                     <input
@@ -375,11 +375,11 @@ export default function ContactForm() {
                       id="startTime"
                       value={form.startTime}
                       onChange={handleChange}
-                      className="w-full bg-[#FFFFFF] border-b-2 border-[#E2E8F0] py-3 px-4 focus:outline-none focus:border-[#0EA5E9] transition-colors text-[#0F172A] font-['Noto_Sans']"
+                      className="w-full bg-white border-b-2 border-border py-3 px-4 focus:outline-none focus:border-primary transition-colors text-foreground"
                     />
                   </div>
                   <div>
-                    <label htmlFor="endTime" className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider font-['Manrope'] mb-2">
+                    <label htmlFor="endTime" className="block text-xs font-bold text-foreground uppercase tracking-wider font-heading mb-2">
                       {t('contact.form.endTime')}
                     </label>
                     <input
@@ -388,14 +388,14 @@ export default function ContactForm() {
                       id="endTime"
                       value={form.endTime}
                       onChange={handleChange}
-                      className="w-full bg-[#FFFFFF] border-b-2 border-[#E2E8F0] py-3 px-4 focus:outline-none focus:border-[#0EA5E9] transition-colors text-[#0F172A] font-['Noto_Sans']"
+                      className="w-full bg-white border-b-2 border-border py-3 px-4 focus:outline-none focus:border-primary transition-colors text-foreground"
                     />
                   </div>
                 </div>
 
                 {/* Venue */}
                 <div>
-                  <label htmlFor="venue" className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider font-['Manrope'] mb-2">
+                  <label htmlFor="venue" className="block text-xs font-bold text-foreground uppercase tracking-wider font-heading mb-2">
                     {t('contact.form.venue')} <span className="text-[#EF4444]">{t('contact.form.required')}</span>
                   </label>
                   <input
@@ -404,14 +404,14 @@ export default function ContactForm() {
                     id="venue"
                     value={form.venue}
                     onChange={handleChange}
-                    className="w-full bg-[#FFFFFF] border-b-2 border-[#E2E8F0] py-3 px-4 focus:outline-none focus:border-[#0EA5E9] transition-colors text-[#0F172A] font-['Noto_Sans'] placeholder-[#94A3B8]"
+                    className="w-full bg-white border-b-2 border-border py-3 px-4 focus:outline-none focus:border-primary transition-colors text-foreground placeholder-slate-400"
                     placeholder={t('contact.form.venuePlaceholder')}
                   />
                 </div>
 
                 {/* Event Details */}
                 <div>
-                  <label htmlFor="eventDetails" className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider font-['Manrope'] mb-2">
+                  <label htmlFor="eventDetails" className="block text-xs font-bold text-foreground uppercase tracking-wider font-heading mb-2">
                     {t('contact.form.eventDetails')}
                   </label>
                   <textarea
@@ -420,7 +420,7 @@ export default function ContactForm() {
                     rows={3}
                     value={form.eventDetails}
                     onChange={handleChange}
-                    className="w-full bg-[#FFFFFF] border-b-2 border-[#E2E8F0] py-3 px-4 focus:outline-none focus:border-[#0EA5E9] transition-colors text-[#0F172A] font-['Noto_Sans'] placeholder-[#94A3B8] resize-none"
+                    className="w-full bg-white border-b-2 border-border py-3 px-4 focus:outline-none focus:border-primary transition-colors text-foreground placeholder-slate-400 resize-none"
                     placeholder={t('contact.form.eventDetailsPlaceholder')}
                   />
                 </div>
@@ -429,12 +429,12 @@ export default function ContactForm() {
 
             {/* Conditional Fields for Subscription Support */}
             {form.serviceType === 'subscription' && (
-              <div className="mb-8 p-6 bg-[#F8F9FA] rounded-xl border border-[#E2E8F0] space-y-6">
-                <h4 className="text-sm font-bold text-[#0F172A] font-['Manrope']">{t('contact.form.subscriptionInfo')}</h4>
+              <div className="mb-8 p-6 bg-background rounded-xl border border-border space-y-6">
+                <h4 className="text-sm font-bold text-foreground font-heading">{t('contact.form.subscriptionInfo')}</h4>
 
                 {/* Purpose Options */}
                 <div>
-                  <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider font-['Manrope'] mb-3">
+                  <label className="block text-xs font-bold text-foreground uppercase tracking-wider font-heading mb-3">
                     {t('contact.form.purposes')}
                   </label>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
@@ -444,7 +444,7 @@ export default function ContactForm() {
                           checked={form.purposes.includes(purpose)}
                           onCheckedChange={(checked) => handlePurposeChange(purpose, checked === true)}
                         />
-                        <span className="text-sm text-[#334155] font-['Noto_Sans']">{purpose}</span>
+                        <span className="text-sm text-slate-700">{purpose}</span>
                       </label>
                     ))}
                   </div>
@@ -452,7 +452,7 @@ export default function ContactForm() {
 
                 {/* Institution Info */}
                 <div>
-                  <label htmlFor="institutionInfo" className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider font-['Manrope'] mb-2">
+                  <label htmlFor="institutionInfo" className="block text-xs font-bold text-foreground uppercase tracking-wider font-heading mb-2">
                     {t('contact.form.institutionInfo')} <span className="text-[#EF4444]">{t('contact.form.required')}</span>
                   </label>
                   <textarea
@@ -461,7 +461,7 @@ export default function ContactForm() {
                     rows={4}
                     value={form.institutionInfo}
                     onChange={handleChange}
-                    className="w-full bg-[#FFFFFF] border-b-2 border-[#E2E8F0] py-3 px-4 focus:outline-none focus:border-[#0EA5E9] transition-colors text-[#0F172A] font-['Noto_Sans'] placeholder-[#94A3B8] resize-none"
+                    className="w-full bg-white border-b-2 border-border py-3 px-4 focus:outline-none focus:border-primary transition-colors text-foreground placeholder-slate-400 resize-none"
                     placeholder={t('contact.form.institutionInfoPlaceholder')}
                   />
                 </div>
@@ -470,7 +470,7 @@ export default function ContactForm() {
 
             {/* Row 5: Message */}
             <div className="mb-10">
-              <label htmlFor="message" className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider font-['Manrope'] mb-2">
+              <label htmlFor="message" className="block text-xs font-bold text-foreground uppercase tracking-wider font-heading mb-2">
                 {t('contact.form.message')} <span className="text-[#EF4444]">{t('contact.form.required')}</span>
               </label>
               <textarea
@@ -479,7 +479,7 @@ export default function ContactForm() {
                 rows={5}
                 value={form.message}
                 onChange={handleChange}
-                className="w-full bg-[#F8F9FA] border-b-2 border-[#E2E8F0] py-3 px-4 focus:outline-none focus:border-[#0EA5E9] transition-colors text-[#0F172A] font-['Noto_Sans'] placeholder-[#94A3B8] resize-none"
+                className="w-full bg-background border-b-2 border-border py-3 px-4 focus:outline-none focus:border-primary transition-colors text-foreground placeholder-slate-400 resize-none"
                 placeholder={t('contact.form.messagePlaceholder')}
               />
             </div>
@@ -490,10 +490,10 @@ export default function ContactForm() {
                 type="submit"
                 disabled={isSubmitting}
                 className={cn(
-                  "w-full flex justify-center py-6 px-4 border border-transparent rounded-md shadow-sm text-lg font-bold font-['Manrope'] transition-colors",
+                  "w-full flex justify-center py-6 px-4 border border-transparent rounded-md shadow-sm text-lg font-bold font-heading transition-colors",
                   isSubmitting
-                    ? "bg-[#94A3B8] cursor-not-allowed text-[#FFFFFF]"
-                    : "bg-[#0EA5E9] hover:bg-[#0284C7] text-[#FFFFFF]"
+                    ? "bg-slate-400 cursor-not-allowed text-white"
+                    : "bg-primary hover:bg-primary-dark text-white"
                 )}
               >
                 {isSubmitting ? (
