@@ -78,7 +78,7 @@ export default function ProposalSection() {
 
       <main>
         {/* Hero Section */}
-        <section className="relative pt-24 pb-16 lg:pt-32 lg:pb-24 overflow-hidden bg-background">
+        <section className="relative pt-24 pb-8 lg:pt-32 lg:pb-12 overflow-hidden bg-background">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
               {/* Left Content */}
@@ -144,12 +144,12 @@ export default function ProposalSection() {
         </section>
 
         {/* Client Logos Section */}
-        <section className="py-10 bg-white border-y border-border">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <p className="text-center text-sm font-semibold text-slate-400 tracking-wide uppercase font-heading mb-8">
-              {t('clients.title')}
-            </p>
-          </div>
+        <div className="bg-background pt-6 pb-3">
+          <p className="text-center text-sm font-semibold text-slate-400 tracking-wide uppercase font-heading">
+            {t('clients.title')}
+          </p>
+        </div>
+        <section className="py-4 bg-white border-y border-border">
           <div className="relative overflow-hidden">
             <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
             <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
