@@ -107,6 +107,10 @@
     "hour": "hours",
     "perHour": "/hr",
     "payAsYouGo": "Pay-as-you-go",
+    "customPrice": "Custom",
+    "customPriceDesc": "Tailored plan for your needs",
+    "custom": "Custom",
+    "unlimited": "Unlimited",
     "includedHours": "Included hours",
     "unitPrice": "Unit price",
     "overage": "Overage",
@@ -118,25 +122,20 @@
     "ctaContact": "Contact Us",
     "popular": "Popular",
     "plans": {
-      "starter": {
-        "name": "Starter",
+      "payg": {
+        "name": "Pay As You Go",
         "description": "Lightweight pay-as-you-go",
         "recommend": "Small meetings, quick tests"
       },
       "pro": {
         "name": "Pro",
-        "description": "Regular small-scale use",
-        "recommend": "Online meetings, small seminars"
+        "description": "Subscribe for better rates",
+        "recommend": "Online meetings, seminars, education"
       },
-      "team": {
-        "name": "Team",
-        "description": "Full team-level usage",
-        "recommend": "Conferences, corporate, education"
-      },
-      "business": {
-        "name": "Business",
-        "description": "Large-scale events",
-        "recommend": "Conferences, institutions, universities"
+      "custom": {
+        "name": "Custom",
+        "description": "Tailored enterprise plan",
+        "recommend": "Large events, institutions, universities"
       }
     },
     "featureList": [
@@ -245,7 +244,7 @@
       "institutionInfo": "Organization Introduction & Subscription Purpose",
       "institutionInfoPlaceholder": "Please describe your organization and the goals you want to achieve through the subscription service.",
       "message": "Message",
-      "messagePlaceholder": "Please enter any additional inquiries or requests...",
+      "messagePlaceholder": "Please describe your needs: service type (one-time/subscription/custom), purpose, scale, schedule, etc...",
       "submit": "Submit",
       "submitting": "Submitting...",
       "required": "*"

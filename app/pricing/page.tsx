@@ -9,52 +9,43 @@ import { useTranslation } from '@/lib/i18n'
 
 const PLANS = [
   {
-    key: 'starter',
+    key: 'payg',
     price: 0,
     includedHours: 0,
     unitPrice: '$5.59',
     overage: '$5.59',
-    maxParticipants: 10,
-    rooms: 1,
+    maxParticipants: 1000,
+    rooms: -1,
     subtitleScreen: false,
     ctaLink: 'https://cloud.elnino.kr/dashboard/team',
     popular: false,
+    isCustom: false,
   },
   {
     key: 'pro',
-    price: 150,
-    includedHours: 30,
-    unitPrice: '$5.00',
-    overage: '$5.59',
-    maxParticipants: 150,
-    rooms: 5,
-    subtitleScreen: true,
-    ctaLink: 'https://cloud.elnino.kr/dashboard/team',
-    popular: true,
-  },
-  {
-    key: 'team',
-    price: 429,
-    includedHours: 100,
-    unitPrice: '$4.29',
-    overage: '$4.99',
+    price: 170,
+    includedHours: 50,
+    unitPrice: '$3.40',
+    overage: '$3.99',
     maxParticipants: 300,
     rooms: 10,
     subtitleScreen: true,
     ctaLink: 'https://cloud.elnino.kr/dashboard/team',
-    popular: false,
+    popular: true,
+    isCustom: false,
   },
   {
-    key: 'business',
-    price: 1077,
-    includedHours: 300,
-    unitPrice: '$3.59',
-    overage: '$4.29',
-    maxParticipants: 500,
-    rooms: 30,
+    key: 'custom',
+    price: -1,
+    includedHours: -1,
+    unitPrice: '',
+    overage: '',
+    maxParticipants: -1,
+    rooms: -1,
     subtitleScreen: true,
     ctaLink: '/contact',
     popular: false,
+    isCustom: true,
   },
 ] as const
 
@@ -80,7 +71,7 @@ export default function PricingPage() {
       {/* Pricing Cards */}
       <section className="bg-background py-12 flex-grow">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
             {PLANS.map((plan, i) => (
               <motion.div
                 key={plan.key}
@@ -112,7 +103,14 @@ export default function PricingPage() {
 
                   {/* Price */}
                   <div className="mb-6 pb-6 border-b border-border">
-                    {plan.price === 0 ? (
+                    {plan.isCustom ? (
+                      <div>
+                        <div className="flex items-baseline gap-1">
+                          <span className="text-3xl font-bold text-foreground font-heading">{t('pricing.customPrice')}</span>
+                        </div>
+                        <p className="text-xs text-slate-400 mt-1">{t('pricing.customPriceDesc')}</p>
+                      </div>
+                    ) : plan.price === 0 ? (
                       <div>
                         <div className="flex items-baseline gap-1">
                           <span className="text-3xl font-bold text-foreground font-heading">$5.59</span>
@@ -135,43 +133,83 @@ export default function PricingPage() {
 
                   {/* Specs */}
                   <div className="space-y-3 mb-6 text-sm">
-                    {plan.includedHours > 0 && (
-                      <div className="flex justify-between">
-                        <span className="text-muted-foreground flex items-center gap-1.5">
-                          {t('pricing.includedHours')}
-                        </span>
-                        <span className="font-semibold text-foreground">{plan.includedHours}{t('pricing.hour')}</span>
-                      </div>
+                    {plan.isCustom ? (
+                      <>
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground">{t('pricing.includedHours')}</span>
+                          <span className="font-semibold text-foreground">{t('pricing.custom')}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground">{t('pricing.overage')}</span>
+                          <span className="font-semibold text-foreground">{t('pricing.custom')}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground flex items-center gap-1.5">
+                            <Users className="w-3.5 h-3.5" />
+                            {t('pricing.maxParticipants')}
+                          </span>
+                          <span className="font-semibold text-foreground">{t('pricing.custom')}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground flex items-center gap-1.5">
+                            <DoorOpen className="w-3.5 h-3.5" />
+                            {t('pricing.simultaneousRooms')}
+                          </span>
+                          <span className="font-semibold text-foreground">{t('pricing.custom')}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground flex items-center gap-1.5">
+                            <Monitor className="w-3.5 h-3.5" />
+                            {t('pricing.subtitleScreen')}
+                          </span>
+                          <Check className="w-4 h-4 text-primary" />
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        {plan.includedHours > 0 && (
+                          <div className="flex justify-between">
+                            <span className="text-muted-foreground flex items-center gap-1.5">
+                              {t('pricing.includedHours')}
+                            </span>
+                            <span className="font-semibold text-foreground">{plan.includedHours}{t('pricing.hour')}</span>
+                          </div>
+                        )}
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground">{t('pricing.overage')}</span>
+                          <span className="font-semibold text-foreground">{plan.overage}{t('pricing.perHour')}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground flex items-center gap-1.5">
+                            <Users className="w-3.5 h-3.5" />
+                            {t('pricing.maxParticipants')}
+                          </span>
+                          <span className="font-semibold text-foreground">
+                            {plan.maxParticipants >= 1000 ? t('pricing.unlimited') : plan.maxParticipants}
+                          </span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground flex items-center gap-1.5">
+                            <DoorOpen className="w-3.5 h-3.5" />
+                            {t('pricing.simultaneousRooms')}
+                          </span>
+                          <span className="font-semibold text-foreground">
+                            {plan.rooms === -1 ? t('pricing.unlimited') : plan.rooms}
+                          </span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground flex items-center gap-1.5">
+                            <Monitor className="w-3.5 h-3.5" />
+                            {t('pricing.subtitleScreen')}
+                          </span>
+                          {plan.subtitleScreen ? (
+                            <Check className="w-4 h-4 text-primary" />
+                          ) : (
+                            <XIcon className="w-4 h-4 text-slate-300" />
+                          )}
+                        </div>
+                      </>
                     )}
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">{t('pricing.overage')}</span>
-                      <span className="font-semibold text-foreground">{plan.overage}{t('pricing.perHour')}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground flex items-center gap-1.5">
-                        <Users className="w-3.5 h-3.5" />
-                        {t('pricing.maxParticipants')}
-                      </span>
-                      <span className="font-semibold text-foreground">{plan.maxParticipants}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground flex items-center gap-1.5">
-                        <DoorOpen className="w-3.5 h-3.5" />
-                        {t('pricing.simultaneousRooms')}
-                      </span>
-                      <span className="font-semibold text-foreground">{plan.rooms}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground flex items-center gap-1.5">
-                        <Monitor className="w-3.5 h-3.5" />
-                        {t('pricing.subtitleScreen')}
-                      </span>
-                      {plan.subtitleScreen ? (
-                        <Check className="w-4 h-4 text-primary" />
-                      ) : (
-                        <XIcon className="w-4 h-4 text-slate-300" />
-                      )}
-                    </div>
                   </div>
 
                   {/* Features */}
@@ -199,7 +237,7 @@ export default function PricingPage() {
                           : 'bg-background text-foreground border border-border hover:bg-white hover:border-primary/30'
                       }`}
                     >
-                      {plan.key === 'business' ? t('pricing.ctaContact') : t('pricing.cta')}
+                      {plan.isCustom ? t('pricing.ctaContact') : t('pricing.cta')}
                       <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
                     <p className="text-xs text-center text-muted-foreground mt-2">
