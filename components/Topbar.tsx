@@ -86,7 +86,7 @@ export default function Topbar() {
           </Link>
 
           {/* Desktop Navigation - Center */}
-          <nav className="hidden md:flex items-center gap-10">
+          <nav className="hidden md:flex items-center gap-16">
             <Link
               href="/pricing"
               className={`text-sm font-medium transition-colors ${
