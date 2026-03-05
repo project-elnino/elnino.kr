@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useTranslation } from "@/lib/i18n";
 
-const KNOC_API_URL = process.env.NEXT_PUBLIC_KNOC_API_URL || "https://dev.elnino.kr";
+const KNOC_API_URL = process.env.NEXT_PUBLIC_KNOC_API_URL || "https://cloud.elnino.kr";
 
 interface FormData {
   name: string;
