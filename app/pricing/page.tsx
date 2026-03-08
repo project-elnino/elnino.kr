@@ -133,6 +133,10 @@ export default function PricingPage() {
                     ) : (
                       <>
                         <div className="flex justify-between">
+                          <span className="text-muted-foreground">{t('pricing.includedHours')}</span>
+                          <span className="font-semibold text-foreground">-</span>
+                        </div>
+                        <div className="flex justify-between">
                           <span className="text-muted-foreground flex items-center gap-1.5">
                             <Users className="w-3.5 h-3.5" />
                             {t('pricing.maxParticipants')}
@@ -156,6 +160,10 @@ export default function PricingPage() {
                             {t('pricing.subtitleScreen')}
                           </span>
                           <Check className="w-4 h-4 text-primary" />
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground">{t('pricing.overage')}</span>
+                          <span className="font-semibold text-foreground">{t('pricing.creditStop')}</span>
                         </div>
                       </>
                     )}
@@ -183,7 +191,7 @@ export default function PricingPage() {
                       ) : (
                         [0, 1, 2].map((idx) => (
                           <div key={`pd-${idx}`} className="flex items-center gap-2 text-sm text-slate-400">
-                            <XIcon className="w-3.5 h-3.5 text-slate-300 flex-shrink-0" />
+                            <XIcon className="w-3.5 h-3.5 text-red-400 flex-shrink-0" />
                             {t(`pricing.paygDisabled.${idx}`)}
                           </div>
                         ))
