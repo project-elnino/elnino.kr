@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Topbar from '@/components/Topbar'
 import Footer from '@/components/Footer'
-import { Check, X as XIcon, ArrowRight, Users, DoorOpen, Monitor } from 'lucide-react'
+import { Check, X as XIcon, ArrowRight, Users, DoorOpen, Monitor, Clock, AlertTriangle } from 'lucide-react'
 import { useTranslation } from '@/lib/i18n'
 
 const PLANS = [
@@ -101,11 +101,17 @@ export default function PricingPage() {
                     {plan.isCustom ? (
                       <>
                         <div className="flex justify-between">
-                          <span className="text-muted-foreground">{t('pricing.includedHours')}</span>
+                          <span className="text-muted-foreground flex items-center gap-1.5">
+                            <Clock className="w-3.5 h-3.5" />
+                            {t('pricing.includedHours')}
+                          </span>
                           <span className="font-semibold text-foreground">{t('pricing.custom')}</span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-muted-foreground">{t('pricing.overage')}</span>
+                          <span className="text-muted-foreground flex items-center gap-1.5">
+                            <AlertTriangle className="w-3.5 h-3.5" />
+                            {t('pricing.overage')}
+                          </span>
                           <span className="font-semibold text-foreground">{t('pricing.custom')}</span>
                         </div>
                         <div className="flex justify-between">
@@ -133,8 +139,18 @@ export default function PricingPage() {
                     ) : (
                       <>
                         <div className="flex justify-between">
-                          <span className="text-muted-foreground">{t('pricing.includedHours')}</span>
+                          <span className="text-muted-foreground flex items-center gap-1.5">
+                            <Clock className="w-3.5 h-3.5" />
+                            {t('pricing.includedHours')}
+                          </span>
                           <span className="font-semibold text-foreground">-</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground flex items-center gap-1.5">
+                            <AlertTriangle className="w-3.5 h-3.5" />
+                            {t('pricing.overage')}
+                          </span>
+                          <span className="font-semibold text-foreground">{t('pricing.creditStop')}</span>
                         </div>
                         <div className="flex justify-between">
                           <span className="text-muted-foreground flex items-center gap-1.5">
@@ -160,10 +176,6 @@ export default function PricingPage() {
                             {t('pricing.subtitleScreen')}
                           </span>
                           <Check className="w-4 h-4 text-primary" />
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-muted-foreground">{t('pricing.overage')}</span>
-                          <span className="font-semibold text-foreground">{t('pricing.creditStop')}</span>
                         </div>
                       </>
                     )}
