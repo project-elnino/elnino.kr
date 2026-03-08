@@ -46,8 +46,8 @@
         "description": "Speaker's language is automatically detected, participants receive translations in their preferred language"
       },
       "speed": {
-        "title": "Fast Speed",
-        "description": "Instant translation right after speech, maintaining natural conversation flow"
+        "title": "Instant Complete Translation",
+        "description": "Context-based translation in one pass right after speech, providing stable subtitles without corrections"
       },
       "languages": {
         "title": "101 Languages Supported",
@@ -138,6 +138,16 @@
       "Real-time translation",
       "Auto language detection",
       "Dashboard access"
+    ],
+    "paygDisabled": [
+      "No team invites",
+      "No overage pricing negotiation",
+      "Data may be used for training"
+    ],
+    "customFeatures": [
+      "Team invites & management",
+      "Negotiable overage pricing",
+      "Data Zero Retention"
     ],
     "ctaBanner": {
       "badge": "Custom Consultation",

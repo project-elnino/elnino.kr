@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Topbar from '@/components/Topbar'
 import Footer from '@/components/Footer'
-import { Check, ArrowRight, Users, DoorOpen, Monitor } from 'lucide-react'
+import { Check, X as XIcon, ArrowRight, Users, DoorOpen, Monitor } from 'lucide-react'
 import { useTranslation } from '@/lib/i18n'
 
 const PLANS = [
@@ -56,7 +56,7 @@ export default function PricingPage() {
       {/* Pricing Cards */}
       <section className="bg-background py-12 flex-grow">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+          <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto mb-20">
             {PLANS.map((plan, i) => (
               <motion.div
                 key={plan.key}
@@ -173,6 +173,21 @@ export default function PricingPage() {
                           {t(`pricing.featureList.${idx}`)}
                         </div>
                       ))}
+                      {plan.isCustom ? (
+                        [0, 1, 2].map((idx) => (
+                          <div key={`cf-${idx}`} className="flex items-center gap-2 text-sm text-slate-700">
+                            <Check className="w-3.5 h-3.5 text-primary flex-shrink-0" />
+                            {t(`pricing.customFeatures.${idx}`)}
+                          </div>
+                        ))
+                      ) : (
+                        [0, 1, 2].map((idx) => (
+                          <div key={`pd-${idx}`} className="flex items-center gap-2 text-sm text-slate-400">
+                            <XIcon className="w-3.5 h-3.5 text-slate-300 flex-shrink-0" />
+                            {t(`pricing.paygDisabled.${idx}`)}
+                          </div>
+                        ))
+                      )}
                     </div>
                   </div>
 
