@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Topbar from '@/components/Topbar'
 import Footer from '@/components/Footer'
-import { Check, X as XIcon, ArrowRight, Users, DoorOpen, Monitor } from 'lucide-react'
+import { Check, ArrowRight, Users, DoorOpen, Monitor } from 'lucide-react'
 import { useTranslation } from '@/lib/i18n'
 
 const PLANS = [
@@ -12,26 +12,12 @@ const PLANS = [
     key: 'payg',
     price: 0,
     includedHours: 0,
-    unitPrice: '$5.59',
-    overage: '$5.59',
-    maxParticipants: 1000,
-    rooms: -1,
-    subtitleScreen: false,
-    ctaLink: 'https://cloud.elnino.kr/dashboard/team',
-    popular: false,
-    isCustom: false,
-  },
-  {
-    key: 'pro',
-    price: 170,
-    includedHours: 50,
-    unitPrice: '$3.40',
-    overage: '$3.99',
+    unitPrice: '$4.99',
+    overage: '',
     maxParticipants: 300,
-    rooms: 10,
+    rooms: 1,
     subtitleScreen: true,
     ctaLink: 'https://cloud.elnino.kr/dashboard/team',
-    popular: true,
     isCustom: false,
   },
   {
@@ -44,7 +30,6 @@ const PLANS = [
     rooms: -1,
     subtitleScreen: true,
     ctaLink: '/contact',
-    popular: false,
     isCustom: true,
   },
 ] as const
@@ -78,18 +63,8 @@ export default function PricingPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: i * 0.08 }}
-                className={`relative bg-white rounded-2xl flex flex-col border transition-shadow duration-300 hover:shadow-lg ${
-                  plan.popular ? 'border-primary ring-2 ring-primary/20' : 'border-border'
-                }`}
+                className="relative bg-white rounded-2xl flex flex-col border border-border transition-shadow duration-300 hover:shadow-lg"
               >
-                {plan.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <span className="bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-full">
-                      {t('pricing.popular')}
-                    </span>
-                  </div>
-                )}
-
                 <div className="p-6 flex flex-col flex-grow">
                   {/* Plan name & description */}
                   <div className="mb-6">
@@ -110,23 +85,13 @@ export default function PricingPage() {
                         </div>
                         <p className="text-xs text-slate-400 mt-1">{t('pricing.customPriceDesc')}</p>
                       </div>
-                    ) : plan.price === 0 ? (
-                      <div>
-                        <div className="flex items-baseline gap-1">
-                          <span className="text-3xl font-bold text-foreground font-heading">$5.59</span>
-                          <span className="text-sm text-muted-foreground">{t('pricing.perHour')}</span>
-                        </div>
-                        <p className="text-xs text-slate-400 mt-1">{t('pricing.payAsYouGo')}</p>
-                      </div>
                     ) : (
                       <div>
                         <div className="flex items-baseline gap-1">
-                          <span className="text-3xl font-bold text-foreground font-heading">${plan.price.toLocaleString()}</span>
-                          <span className="text-sm text-muted-foreground">/{t('pricing.monthly')}</span>
+                          <span className="text-3xl font-bold text-foreground font-heading">$4.99</span>
+                          <span className="text-sm text-muted-foreground">{t('pricing.perHour')}</span>
                         </div>
-                        <p className="text-xs text-slate-400 mt-1">
-                          {plan.includedHours}{t('pricing.hour')} · {plan.unitPrice}{t('pricing.perHour')}
-                        </p>
+                        <p className="text-xs text-slate-400 mt-1">{t('pricing.payAsYouGo')}</p>
                       </div>
                     )}
                   </div>
@@ -167,25 +132,13 @@ export default function PricingPage() {
                       </>
                     ) : (
                       <>
-                        {plan.includedHours > 0 && (
-                          <div className="flex justify-between">
-                            <span className="text-muted-foreground flex items-center gap-1.5">
-                              {t('pricing.includedHours')}
-                            </span>
-                            <span className="font-semibold text-foreground">{plan.includedHours}{t('pricing.hour')}</span>
-                          </div>
-                        )}
-                        <div className="flex justify-between">
-                          <span className="text-muted-foreground">{t('pricing.overage')}</span>
-                          <span className="font-semibold text-foreground">{plan.overage}{t('pricing.perHour')}</span>
-                        </div>
                         <div className="flex justify-between">
                           <span className="text-muted-foreground flex items-center gap-1.5">
                             <Users className="w-3.5 h-3.5" />
                             {t('pricing.maxParticipants')}
                           </span>
                           <span className="font-semibold text-foreground">
-                            {plan.maxParticipants >= 1000 ? t('pricing.unlimited') : plan.maxParticipants}
+                            {plan.maxParticipants}
                           </span>
                         </div>
                         <div className="flex justify-between">
@@ -194,7 +147,7 @@ export default function PricingPage() {
                             {t('pricing.simultaneousRooms')}
                           </span>
                           <span className="font-semibold text-foreground">
-                            {plan.rooms === -1 ? t('pricing.unlimited') : plan.rooms}
+                            {plan.rooms}
                           </span>
                         </div>
                         <div className="flex justify-between">
@@ -202,11 +155,7 @@ export default function PricingPage() {
                             <Monitor className="w-3.5 h-3.5" />
                             {t('pricing.subtitleScreen')}
                           </span>
-                          {plan.subtitleScreen ? (
-                            <Check className="w-4 h-4 text-primary" />
-                          ) : (
-                            <XIcon className="w-4 h-4 text-slate-300" />
-                          )}
+                          <Check className="w-4 h-4 text-primary" />
                         </div>
                       </>
                     )}
@@ -231,11 +180,7 @@ export default function PricingPage() {
                   <div className="mt-auto">
                     <Link
                       href={plan.ctaLink}
-                      className={`w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-semibold text-sm transition-all font-heading ${
-                        plan.popular
-                          ? 'bg-primary text-primary-foreground hover:bg-primary-dark'
-                          : 'bg-background text-foreground border border-border hover:bg-white hover:border-primary/30'
-                      }`}
+                      className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-semibold text-sm transition-all font-heading bg-background text-foreground border border-border hover:bg-white hover:border-primary/30"
                     >
                       {plan.isCustom ? t('pricing.ctaContact') : t('pricing.cta')}
                       <ArrowRight className="w-3.5 h-3.5" />

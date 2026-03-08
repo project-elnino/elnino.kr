@@ -115,7 +115,7 @@
     "unitPrice": "Unit price",
     "overage": "Overage",
     "maxParticipants": "Max participants",
-    "simultaneousRooms": "Simultaneous rooms",
+    "simultaneousRooms": "Active rooms",
     "subtitleScreen": "Subtitle screen",
     "features": "Features",
     "cta": "Get Started",
@@ -127,14 +127,9 @@
         "description": "Lightweight pay-as-you-go",
         "recommend": "Small meetings, quick tests"
       },
-      "pro": {
-        "name": "Pro",
-        "description": "Subscribe for better rates",
-        "recommend": "Online meetings, seminars, education"
-      },
       "custom": {
         "name": "Custom",
-        "description": "Tailored enterprise plan",
+        "description": "Custom plan for organizations",
         "recommend": "Large events, institutions, universities"
       }
     },
@@ -158,19 +153,19 @@
     "items": [
       {
         "question": "What is the difference between pay-as-you-go and contract?",
-        "answer": "Pay-as-you-go is a post-payment system where you pay only for the time you use. Short-term contracts and monthly subscriptions require prior consultation and are suitable for large events or regular use."
+        "answer": "Pay As You Go is a prepaid credit system where you purchase credit packs before use. Custom plans are monthly subscriptions set up through consultation, suitable for large events or regular use."
       },
       {
         "question": "Is there a minimum usage time?",
-        "answer": "There is no minimum usage time for pay-as-you-go. Short-term contracts and monthly subscriptions are negotiable."
+        "answer": "There is no minimum usage time for Pay As You Go. Custom plan terms are negotiable."
       },
       {
         "question": "What are the payment methods?",
-        "answer": "Pay-as-you-go is billed after use, while short-term contracts and monthly subscriptions are prepaid according to agreed terms."
+        "answer": "Pay As You Go uses prepaid credit packs. Custom plans are billed as monthly subscriptions."
       },
       {
         "question": "Which plan should I choose?",
-        "answer": "We recommend pay-as-you-go for small meetings or simple tests, short-term contracts for conferences and workshops, and monthly subscriptions for institutions or companies with regular use."
+        "answer": "We recommend Pay As You Go for small meetings or simple tests, and Custom plans for institutions or companies with regular use."
       },
       {
         "question": "What is automatic language recognition and switching?",
@@ -178,7 +173,7 @@
       },
       {
         "question": "What is the industry-specific boosting model?",
-        "answer": "It is an AI model optimized for more accurate translation of specialized terminology in fields such as medicine, law, IT, and finance. Available with short-term contracts and monthly subscriptions."
+        "answer": "It is an AI model optimized for more accurate translation of specialized terminology in fields such as medicine, law, IT, and finance. Available with all plans."
       },
       {
         "question": "What languages are supported?",
@@ -190,7 +185,7 @@
       },
       {
         "question": "How many people can use it simultaneously?",
-        "answer": "Pay-as-you-go allows up to 10 people per room with 3 simultaneous rooms. Contract plans allow up to 1,000 people per room with unlimited simultaneous rooms."
+        "answer": "Pay As You Go allows up to 300 participants per room with 1 simultaneous room. Custom plans have participant limits and simultaneous rooms configured based on consultation."
       },
       {
         "question": "Do I need to install a separate app?",
