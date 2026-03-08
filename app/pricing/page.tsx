@@ -150,7 +150,7 @@ export default function PricingPage() {
                             <AlertTriangle className="w-3.5 h-3.5" />
                             {t('pricing.overage')}
                           </span>
-                          <span className="font-semibold text-foreground">{t('pricing.creditStop')}</span>
+                          <span className="font-semibold text-foreground">-</span>
                         </div>
                         <div className="flex justify-between">
                           <span className="text-muted-foreground flex items-center gap-1.5">
