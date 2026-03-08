@@ -141,13 +141,11 @@
     ],
     "paygDisabled": [
       "No team invites",
-      "No overage pricing negotiation",
       "Data may be used for training"
     ],
     "creditStop": "Stops when credits run out",
     "customFeatures": [
       "Team invites & management",
-      "Negotiable overage pricing",
       "Data Zero Retention"
     ],
     "ctaBanner": {

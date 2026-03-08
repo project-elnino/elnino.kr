@@ -13,7 +13,6 @@ const PLANS = [
     price: 0,
     includedHours: 0,
     unitPrice: '$4.99',
-    overage: '',
     maxParticipants: 300,
     rooms: 1,
     subtitleScreen: true,
@@ -25,7 +24,6 @@ const PLANS = [
     price: -1,
     includedHours: -1,
     unitPrice: '',
-    overage: '',
     maxParticipants: -1,
     rooms: -1,
     subtitleScreen: true,
@@ -194,14 +192,14 @@ export default function PricingPage() {
                         </div>
                       ))}
                       {plan.isCustom ? (
-                        [0, 1, 2].map((idx) => (
+                        [0, 1].map((idx) => (
                           <div key={`cf-${idx}`} className="flex items-center gap-2 text-sm text-slate-700">
                             <Check className="w-3.5 h-3.5 text-primary flex-shrink-0" />
                             {t(`pricing.customFeatures.${idx}`)}
                           </div>
                         ))
                       ) : (
-                        [0, 1, 2].map((idx) => (
+                        [0, 1].map((idx) => (
                           <div key={`pd-${idx}`} className="flex items-center gap-2 text-sm text-slate-400">
                             <XIcon className="w-3.5 h-3.5 text-red-400 flex-shrink-0" />
                             {t(`pricing.paygDisabled.${idx}`)}
