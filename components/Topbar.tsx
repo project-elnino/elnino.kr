@@ -98,9 +98,9 @@ export default function Topbar() {
               {t('nav.pricing')}
             </Link>
             <Link
-              href="/about"
+              href="/faq"
               className={`text-sm font-medium transition-colors ${
-                isActive('/about')
+                isActive('/faq')
                   ? 'text-primary'
                   : 'text-slate-700 hover:text-foreground'
               }`}
@@ -164,9 +164,9 @@ export default function Topbar() {
               {t('nav.pricing')}
             </Link>
             <Link
-              href="/about"
+              href="/faq"
               className={`block py-2 font-medium ${
-                isActive('/about') ? 'text-primary' : 'text-slate-700'
+                isActive('/faq') ? 'text-primary' : 'text-slate-700'
               }`}
               onClick={() => setIsMenuOpen(false)}
             >

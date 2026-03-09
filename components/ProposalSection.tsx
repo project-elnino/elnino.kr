@@ -78,68 +78,48 @@ export default function ProposalSection() {
 
       <main>
         {/* Hero Section */}
-        <section className="relative pt-24 pb-8 lg:pt-32 lg:pb-12 overflow-hidden bg-background">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-              {/* Left Content */}
-              <motion.div
-                className="max-w-2xl"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: 'easeOut' }}
-              >
-                <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary-light text-primary-dark text-xs font-semibold tracking-wide uppercase font-heading mb-6">
-                  {t('hero.badge')}
-                </div>
-                <h1 className="text-4xl sm:text-5xl font-extrabold text-foreground leading-tight tracking-tight mb-6">
-                  {t('hero.title')}
-                  <span className="block text-primary">{t('hero.titleHighlight')}</span>
-                </h1>
-                <p className="text-lg sm:text-xl text-slate-700 mb-8 leading-relaxed">
-                  {t('hero.description')}
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Link
-                    href="/contact"
-                    className="inline-flex items-center justify-center px-8 py-3.5 border border-transparent text-base font-bold rounded-md text-primary-foreground bg-primary hover:bg-primary-dark transition-all shadow-md hover:shadow-lg font-heading"
-                  >
-                    {t('hero.cta')}
-                    <ArrowRight className="ml-2 -mr-1 h-5 w-5" />
-                  </Link>
-                  <button
-                    onClick={() => {
-                      if (isMobileDevice()) {
-                        window.open(SERVICE_INTRODUCTION_URL, '_blank');
-                      } else {
-                        setShowIntroduction(true);
-                        setIframeLoading(true);
-                      }
-                    }}
-                    className="inline-flex items-center justify-center px-8 py-3.5 border border-border text-base font-bold rounded-md text-foreground bg-white hover:bg-slate-50 transition-colors font-heading"
-                  >
-                    {t('hero.brochure')}
-                  </button>
-                </div>
-              </motion.div>
+        <section className="relative pt-32 pb-16 lg:pt-40 lg:pb-24 overflow-hidden bg-background">
+          {/* Gradient decorations */}
+          <div className="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] rounded-full bg-cyan-400/10 blur-[100px] pointer-events-none" />
+          <div className="absolute top-[20%] right-[-10%] w-[400px] h-[400px] rounded-full bg-blue-400/10 blur-[100px] pointer-events-none" />
+          <div className="absolute bottom-[-10%] left-[30%] w-[600px] h-[600px] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
 
-              {/* Right Image - hidden on mobile */}
-              <motion.div
-                className="relative hidden lg:flex w-full justify-end"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
-              >
-                <div className="relative w-full max-w-full aspect-[3/2] overflow-hidden rounded-2xl">
-                  <Image
-                    src="/hero-conference.jpg"
-                    alt="국제 비즈니스 컨퍼런스"
-                    fill
-                    priority
-                    className="object-cover"
-                  />
-                </div>
-              </motion.div>
-            </div>
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+            >
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-foreground leading-[1.1] tracking-tight mb-6">
+                {t('hero.title')}
+                <span className="block text-primary">{t('hero.titleHighlight')}</span>
+              </h1>
+              <p className="text-lg sm:text-xl text-slate-600 mb-10 leading-relaxed max-w-2xl mx-auto">
+                {t('hero.description')}
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-center px-8 py-3.5 border border-transparent text-base font-bold rounded-md text-primary-foreground bg-primary hover:bg-primary-dark transition-all shadow-md hover:shadow-lg font-heading"
+                >
+                  {t('hero.cta')}
+                  <ArrowRight className="ml-2 -mr-1 h-5 w-5" />
+                </Link>
+                <button
+                  onClick={() => {
+                    if (isMobileDevice()) {
+                      window.open(SERVICE_INTRODUCTION_URL, '_blank');
+                    } else {
+                      setShowIntroduction(true);
+                      setIframeLoading(true);
+                    }
+                  }}
+                  className="inline-flex items-center justify-center px-8 py-3.5 border border-border text-base font-bold rounded-md text-foreground bg-white hover:bg-slate-50 transition-colors font-heading"
+                >
+                  {t('hero.brochure')}
+                </button>
+              </div>
+            </motion.div>
           </div>
         </section>
 

@@ -42,7 +42,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-slate-700 hover:text-primary text-sm transition-colors">
+                <Link href="/faq" className="text-slate-700 hover:text-primary text-sm transition-colors">
                   {t('nav.faq')}
                 </Link>
               </li>
@@ -73,6 +73,11 @@ export default function Footer() {
               <li>
                 <Link href="/policy/terms" className="text-slate-700 hover:text-primary text-sm transition-colors">
                   {t('footer.terms')}
+                </Link>
+              </li>
+              <li>
+                <Link href="/policy/refund" className="text-slate-700 hover:text-primary text-sm transition-colors">
+                  {t('footer.refund')}
                 </Link>
               </li>
             </ul>
@@ -107,6 +112,9 @@ export default function Footer() {
             </Link>
             <Link href="/policy/privacy" className="text-xs text-slate-400 hover:text-primary transition-colors">
               {t('footer.privacy')}
+            </Link>
+            <Link href="/policy/refund" className="text-xs text-slate-400 hover:text-primary transition-colors">
+              {t('footer.refund')}
             </Link>
           </div>
         </div>

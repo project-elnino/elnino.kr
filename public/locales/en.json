@@ -95,6 +95,7 @@
     "contactUs": "Contact Us",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
+    "refund": "Refund Policy",
     "contactInfo": "Contact",
     "location": "Seoul, South Korea",
     "copyright": "© 2026 Elnino. All rights reserved."
@@ -276,108 +277,238 @@
     "effectiveDate": "Effective Date: May 25, 2025",
     "privacy": {
       "title": "Privacy Policy",
-      "section1": {
-        "title": "Personal Information We Collect",
-        "description": "We collect the following personal information for interpretation quote requests and service provision.",
-        "itemsLabel": "Collected Items",
-        "items": "Company name (Organization), Name, Position, Mobile phone, Email, Interpretation language, Type of interpretation, Interpretation date/time, Interpretation details, Venue, Materials, Cookies, etc.",
-        "methodLabel": "Collection Method",
-        "method": "Website (Quote request submission)"
-      },
-      "section2": {
-        "title": "Purpose of Collection and Use",
-        "description": "We use the collected personal information for the following purposes.",
-        "purposes": [
-          "Interpretation quote consultation, service provision and contract fulfillment",
-          "Customer management, inquiry response and dispute resolution",
-          "Service improvement and new service development",
-          "Marketing and advertising information (with prior consent)"
-        ]
-      },
-      "section3": {
-        "title": "Retention and Use Period",
-        "description": "We destroy personal information without delay after the purpose of collection and use has been achieved. However, the following information is retained for the periods specified below.",
-        "internal": {
-          "title": "Retention by Internal Policy",
-          "itemLabel": "Retained Items:",
-          "item": "All collected personal information items",
-          "reasonLabel": "Retention Reason:",
-          "reason": "Dispute resolution and customer inquiry record retention",
-          "periodLabel": "Retention Period:",
-          "period": "5 years after inquiry resolution"
-        },
-        "legal": {
-          "title": "Retention by Applicable Laws",
-          "description": "When required to retain information under applicable laws such as the Commercial Act and the Act on Consumer Protection in Electronic Commerce, we retain information for the period specified by law.",
-          "items": [
-            { "label": "Records of contracts or withdrawal:", "period": "5 years" },
-            { "label": "Records of payment and supply of goods:", "period": "5 years" },
-            { "label": "Records of consumer complaints or disputes:", "period": "3 years" },
-            { "label": "Records of credit information collection/processing:", "period": "3 years" }
+      "sections": [
+        {
+          "title": "Personal Information Collected & Methods",
+          "description": "The Company collects the following personal information for service provision.",
+          "subsections": [
+            {
+              "subtitle": "Upon Registration",
+              "content": "Email address, name (or nickname), password"
+            },
+            {
+              "subtitle": "During Service Use",
+              "content": "Translation usage records, usage time, access logs, device information (browser type, OS), IP address"
+            },
+            {
+              "subtitle": "Upon Payment",
+              "content": "Payment method information is processed through a third-party payment processor (Paddle). The Company only retains payment records (payment date, amount, plan type)."
+            },
+            {
+              "subtitle": "Upon Inquiry",
+              "content": "Name, email, phone number, company/organization name, position, inquiry details"
+            }
           ]
+        },
+        {
+          "title": "Purpose of Collection and Use of Personal Information",
+          "description": "The Company uses collected personal information for the following purposes.",
+          "items": [
+            "Account registration and management: Member identification, identity verification, service eligibility management",
+            "Service provision: AI real-time translation service delivery, usage time management, credit settlement",
+            "Billing: Credit purchase history management, subscription payment processing, usage history settlement",
+            "Customer support: Inquiry response, complaint handling, dispute resolution, notice delivery",
+            "Service improvement: Service usage statistical analysis, quality improvement, new feature development"
+          ]
+        },
+        {
+          "title": "Retention and Use Period of Personal Information",
+          "description": "The Company destroys personal information without delay after the purpose of collection and use has been achieved. However, when retention is required under applicable laws, information is retained for the following periods.",
+          "items": [
+            "Records of contracts or subscription withdrawal: 5 years (Electronic Commerce Act)",
+            "Records of payment and supply of goods: 5 years (Electronic Commerce Act)",
+            "Records of consumer complaints or dispute resolution: 3 years (Electronic Commerce Act)",
+            "Login records: 3 months (Protection of Communications Secrets Act)"
+          ],
+          "withdrawal": "Upon account deletion, personal information is destroyed immediately. Information required to be retained under applicable laws is stored separately for the specified period and then destroyed."
+        },
+        {
+          "title": "Provision of Personal Information to Third Parties",
+          "description": "The Company does not, in principle, provide users' personal information to third parties. However, the following cases are exceptions.",
+          "items": [
+            "Payment processing: Minimum necessary information is provided to Paddle (payment processor) for payment processing.",
+            "Legal requests: When investigative agencies make requests in accordance with legally prescribed procedures for investigative purposes.",
+            "User consent: When the user has given prior consent."
+          ]
+        },
+        {
+          "title": "User Rights",
+          "description": "Users may exercise the following rights at any time.",
+          "items": [
+            "Request to access personal information",
+            "Request to correct or delete personal information",
+            "Request to suspend processing of personal information",
+            "Request for account deletion (withdrawal)"
+          ],
+          "contact": "The above rights can be exercised through the settings page within the service or by contacting peteryoung0414@gmail.com. The Company will take action without delay."
+        },
+        {
+          "title": "Use of Cookies",
+          "description": "The Company uses cookies to provide optimized services to users.",
+          "items": [
+            "Purpose of cookie collection: Maintaining login status, saving language settings, service usage analysis",
+            "How to refuse cookies: You can refuse cookies through browser settings, but some service features may be limited."
+          ]
+        },
+        {
+          "title": "Privacy Officer",
+          "description": "The Company has designated a Privacy Officer who oversees all matters related to personal information processing.",
+          "contactInfo": {
+            "name": "Privacy Officer",
+            "email": "peteryoung0414@gmail.com"
+          },
+          "notice": "For reports or consultations regarding personal information breaches, you may contact the Personal Information Infringement Report Center (privacy.kisa.or.kr), the Supreme Prosecutors' Office Cyber Investigation Division (spo.go.kr), or the National Police Agency Cyber Bureau (cyberbureau.police.go.kr)."
         }
-      }
+      ]
     },
     "terms": {
       "title": "Terms of Service",
-      "effectiveNotice": "These terms are effective from May 25, 2025.",
+      "effectiveNotice": "These Terms of Service are effective from May 25, 2025.",
       "sections": [
         {
           "title": "Purpose",
-          "content": "These Terms of Service aim to establish the terms and conditions of use and operation of the services provided by \"Elnino\" (hereinafter referred to as 'the Site')."
+          "content": "These Terms of Service (hereinafter 'Terms') aim to define the rights, obligations, and responsibilities between Elnino (hereinafter 'the Company') and users regarding the use of the AI real-time translation service \"Knoc\" (hereinafter 'the Service') provided by the Company."
         },
         {
           "title": "Definitions",
-          "description": "The main terms used in these terms are defined as follows.",
+          "description": "The definitions of terms used in these Terms are as follows.",
           "definitions": [
-            { "term": "Member:", "definition": "A user who has agreed to the Site's terms, provided personal information for registration, entered into a service agreement with the Site, and uses the Site." },
-            { "term": "Service Agreement:", "definition": "A contract entered into between the Site and a member regarding the use of the Site." },
-            { "term": "Member ID:", "definition": "A unique combination of letters and numbers assigned to each member for identification and service use." },
-            { "term": "Password:", "definition": "A combination of letters and numbers selected by the member to verify their identity and protect their rights." },
-            { "term": "Operator:", "definition": "The operator who establishes and operates a website for the service." },
-            { "term": "Termination:", "definition": "The act of a member canceling their service agreement." }
+            { "term": "Service:", "definition": "Refers to the AI-based real-time translation service (Knoc) provided by the Company, including real-time subtitle translation, multilingual support, and other features accessible through web browsers." },
+            { "term": "Member:", "definition": "Refers to a person who has agreed to these Terms, completed registration, and uses the Service." },
+            { "term": "Credit:", "definition": "Refers to prepaid usage vouchers purchased for service use under the Pay As You Go plan. Credits are deducted based on service usage time." },
+            { "term": "Subscription:", "definition": "Refers to a method of using the service through monthly recurring payments under the Custom plan." },
+            { "term": "Room:", "definition": "Refers to a virtual space where real-time translation takes place, serving as a unit where speakers and participants join together." }
           ]
         },
         {
-          "title": "Rules Outside the Terms",
-          "content": "The operator may separately announce operational policies when necessary, and if these terms and operational policies overlap, the operational policies shall take precedence."
-        },
-        {
-          "title": "Formation of Service Agreement",
+          "title": "Effect and Amendment of Terms",
           "items": [
-            "The service agreement is formed when a person wishing to use the Site as a member agrees to these terms and applies for membership, and the operator approves the application.",
-            "A person wishing to register as a member and use the service agrees to these terms by reading them and selecting 'I Agree' below during the membership application process."
+            "These Terms take effect by being posted on the service screen or notified to users through other means.",
+            "The Company may amend these Terms within the scope that does not violate applicable laws, and will notify users within the service at least 7 days before the effective date of any changes.",
+            "Members who do not agree to the amended Terms may discontinue use and withdraw from the service."
           ]
         },
         {
-          "title": "Service Application",
+          "title": "Service Description",
+          "description": "The services provided by the Company are as follows.",
           "items": [
-            "Users wishing to register as members and use the Site must provide the required information (User ID, Password, Nickname, etc.) requested by the Site.",
-            "Members who register using others' information or false information cannot claim any rights related to Site use and may be subject to penalties under applicable laws."
+            "AI-based real-time speech-to-text translation service",
+            "Automatic recognition and translation support for 101 languages",
+            "Industry-specific terminology boosting models",
+            "Usage management through dashboard",
+            "Other services developed or provided through partnerships by the Company"
           ]
         },
         {
-          "title": "Privacy Policy",
+          "title": "Service Agreement",
           "items": [
-            "The Site and operator do not store passwords provided during membership registration, and related matters follow the Site's Privacy Policy.",
-            "The operator strives to protect members' personal information, including registration information, in accordance with applicable laws."
+            "The service agreement is established when a person wishing to register agrees to these Terms, fills in member information as prescribed by the Company, submits a registration application, and the Company approves it.",
+            "The Company may reject a registration application or terminate the agreement afterwards in the following cases: when another person's information is used, when false information is provided, or when eligibility was previously restricted due to Terms violations."
           ]
         },
         {
-          "title": "Operator's Obligations",
+          "title": "Fees and Payment",
+          "description": "Matters regarding service plans and payment are as follows.",
           "items": [
-            "The operator shall process legitimate opinions or complaints raised by members as quickly as possible.",
-            "The operator may request the Site to repair or restore equipment without delay when failures or losses occur to ensure continuous and stable site operation."
+            "Pay As You Go: A prepaid credit system. Credits are deducted based on service usage time, and service is suspended when credits are exhausted.",
+            "Custom (Subscription): A monthly subscription providing agreed-upon usage hours and features. Additional usage hours purchased during the subscription period expire at the end of the subscription.",
+            "Usage hours from Pay As You Go and subscription plans cannot be combined or transferred between each other.",
+            "All payments are processed through a third-party payment processor (Paddle).",
+            "All payments are non-refundable. Please refer to the Refund Policy for details."
           ]
         },
         {
-          "title": "Member's Obligations",
+          "title": "Service Restriction and Suspension",
           "items": [
-            "Members must comply with the provisions of these terms, regulations established by the operator, notices, operational policies announced by the Site, and applicable laws.",
-            "Members may not transfer, gift, or use as collateral their service usage rights or other contractual status to others without the explicit consent of the Site.",
-            "Users must exercise considerable care in managing their ID and password.",
-            "Members must not infringe upon the intellectual property rights of the operator, the Site, or third parties."
+            "The Company may restrict or suspend service in the following cases: unavoidable circumstances due to service facility maintenance, when a member disrupts normal service operation, or force majeure events such as natural disasters or national emergencies.",
+            "The Company will provide prior notice of service restriction or suspension, and may provide post-notification in unavoidable circumstances."
           ]
+        },
+        {
+          "title": "Member Obligations",
+          "items": [
+            "Members must comply with these Terms, the Company's notices, service usage guidelines, and other announcements.",
+            "Members must not infringe on others' personal information or use the service fraudulently.",
+            "Members may not use the service for commercial resale or relay purposes.",
+            "Members are responsible for safely managing their account credentials (ID, password) and may not transfer or share them with third parties."
+          ]
+        },
+        {
+          "title": "Intellectual Property Rights",
+          "items": [
+            "Copyright and intellectual property rights related to the Service belong to the Company.",
+            "Members may not reproduce, transmit, publish, distribute, broadcast, or provide to third parties any information obtained through the service without prior approval from the Company.",
+            "Rights to translation output processed through the Service belong to the rights holder of the original content."
+          ]
+        },
+        {
+          "title": "Disclaimer",
+          "items": [
+            "Due to the nature of AI-based translation services, the Company does not guarantee complete accuracy of translations. Users are responsible for how they utilize translation results.",
+            "The Company is not liable when service cannot be provided due to force majeure events such as natural disasters, war, or service suspension by telecommunications providers.",
+            "The Company is not liable for service disruptions caused by circumstances attributable to the member."
+          ]
+        },
+        {
+          "title": "Termination",
+          "items": [
+            "Members may request termination (withdrawal) at any time through service settings or customer support.",
+            "The Company may terminate the agreement after prior notice if a member violates these Terms, and may terminate immediately in urgent cases.",
+            "Upon termination, remaining credits or subscription period are not refunded."
+          ]
+        },
+        {
+          "title": "Dispute Resolution",
+          "items": [
+            "Disputes related to these Terms shall be interpreted and governed by the laws of the Republic of Korea.",
+            "For disputes arising between the Company and members regarding service use, the Seoul Central District Court shall have jurisdiction."
+          ]
+        }
+      ]
+    },
+    "refund": {
+      "title": "Refund Policy",
+      "effectiveNotice": "This Refund Policy is effective from May 25, 2025.",
+      "sections": [
+        {
+          "title": "General Principles",
+          "content": "All payments for the AI real-time translation service \"Knoc\" provided by Elnino (hereinafter 'the Company') are non-refundable. Members are advised to fully review the service details, plan terms, and this Refund Policy before making any payment."
+        },
+        {
+          "title": "Pay As You Go",
+          "description": "The payment and refund terms for the Pay As You Go plan are as follows.",
+          "items": [
+            "Credits are purchased on a prepaid basis and are non-refundable after purchase.",
+            "Credits are deducted based on service usage time, and unused credits are not eligible for refund.",
+            "Pay As You Go credits and Custom subscription usage hours cannot be combined or transferred between each other."
+          ]
+        },
+        {
+          "title": "Custom (Subscription)",
+          "description": "The payment and refund terms for the subscription plan are as follows.",
+          "items": [
+            "Monthly subscription fees are non-refundable after payment.",
+            "Additional usage hours purchased during the subscription period expire at the end of the subscription and are non-refundable.",
+            "Pro-rated refunds for remaining subscription periods are not provided upon cancellation. After cancellation, the service remains available until the end of the current billing cycle.",
+            "Custom subscription usage hours and Pay As You Go credits do not interfere with or combine with each other."
+          ]
+        },
+        {
+          "title": "Exceptions",
+          "description": "The Company may consider separate compensation in the following cases only.",
+          "items": [
+            "If service is disrupted for an extended period (24 consecutive hours or more) due to circumstances attributable to the Company, compensation in usage time for the affected period will be considered.",
+            "If duplicate charges due to payment system errors are confirmed, the duplicate payment will be refunded.",
+            "Even in the above exceptional cases, compensation may be provided as credits or usage time rather than monetary refunds."
+          ]
+        },
+        {
+          "title": "Contact",
+          "content": "Inquiries regarding refunds and payments can be submitted through the contact information below.",
+          "contactInfo": {
+            "email": "peteryoung0414@gmail.com"
+          },
+          "notice": "We will respond within 3 business days after receiving your inquiry."
         }
       ]
     }

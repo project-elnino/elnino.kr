@@ -13,16 +13,24 @@ export default function ContactPage() {
       <Topbar />
 
       <main className="flex-1">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
-          {/* Page Header */}
-          <div className="text-center mb-16">
-            <h1 className="text-4xl font-extrabold text-foreground font-heading mb-4">
-              {t('contact.title')}
-            </h1>
-            <p className="text-lg text-slate-700 max-w-2xl mx-auto">
-              {t('contact.description')}
-            </p>
+        {/* Hero with gradient */}
+        <div className="relative overflow-hidden">
+          <div className="absolute top-[-10%] left-[-5%] w-[400px] h-[400px] rounded-full bg-cyan-400/10 blur-[100px] pointer-events-none" />
+          <div className="absolute top-[10%] right-[-8%] w-[350px] h-[350px] rounded-full bg-blue-400/10 blur-[100px] pointer-events-none" />
+          <div className="absolute bottom-[-20%] left-[40%] w-[500px] h-[500px] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-12 relative">
+            <div className="text-center">
+              <h1 className="text-4xl sm:text-5xl font-extrabold text-foreground font-heading tracking-tight mb-4">
+                {t('contact.title')}
+              </h1>
+              <p className="text-lg text-slate-700 max-w-2xl mx-auto">
+                {t('contact.description')}
+              </p>
+            </div>
           </div>
+        </div>
+
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-20">
 
           {/* Contact Form */}
           <ContactForm />

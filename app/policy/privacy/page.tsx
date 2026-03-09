@@ -2,127 +2,160 @@
 
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import Topbar from '@/components/Topbar';
 import Footer from '@/components/Footer';
 import { useTranslation } from '@/lib/i18n';
 
 export default function PrivacyPolicyPage() {
   const { t } = useTranslation()
+  const [activeSection, setActiveSection] = useState(0)
 
-  // Parse nested arrays from translation
-  const purposes = [
-    t('policy.privacy.section2.purposes.0'),
-    t('policy.privacy.section2.purposes.1'),
-    t('policy.privacy.section2.purposes.2'),
-    t('policy.privacy.section2.purposes.3'),
-  ]
+  const sectionTitles = Array.from({ length: 7 }, (_, i) => t(`policy.privacy.sections.${i}.title`))
 
-  const legalItems = [
-    { label: t('policy.privacy.section3.legal.items.0.label'), period: t('policy.privacy.section3.legal.items.0.period') },
-    { label: t('policy.privacy.section3.legal.items.1.label'), period: t('policy.privacy.section3.legal.items.1.period') },
-    { label: t('policy.privacy.section3.legal.items.2.label'), period: t('policy.privacy.section3.legal.items.2.period') },
-    { label: t('policy.privacy.section3.legal.items.3.label'), period: t('policy.privacy.section3.legal.items.3.period') },
-  ]
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            const idx = Number(entry.target.getAttribute('data-section'))
+            if (!isNaN(idx)) setActiveSection(idx)
+          }
+        }
+      },
+      { rootMargin: '-20% 0px -60% 0px' }
+    )
+    document.querySelectorAll('[data-section]').forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-white text-foreground">
       <Topbar />
 
       <main className="flex-1">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
           {/* Header */}
-          <div className="mb-10 border-b border-border pb-8">
-            <Link href="/" className="inline-flex items-center text-primary hover:text-primary-dark mb-6 text-sm font-medium transition-colors">
-              <ArrowLeft className="h-4 w-4 mr-2" />
+          <div className="mb-12">
+            <Link href="/" className="inline-flex items-center text-slate-500 hover:text-foreground mb-8 text-sm transition-colors">
+              <ArrowLeft className="h-4 w-4 mr-1.5" />
               {t('policy.backToHome')}
             </Link>
-            <h1 className="text-4xl font-extrabold text-foreground font-heading mb-4">
+            <h1 className="text-3xl font-bold text-foreground font-heading mb-2">
               {t('policy.privacy.title')}
             </h1>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-slate-400">
               {t('policy.effectiveDate')}
             </p>
           </div>
 
-          <div className="prose prose-slate max-w-none">
-            {/* Section 1 */}
-            <section className="mb-10">
-              <h2 className="text-2xl font-bold text-foreground font-heading mb-4 flex items-center">
-                <span className="bg-foreground text-white w-8 h-8 rounded-full flex items-center justify-center text-sm mr-3">1</span>
-                {t('policy.privacy.section1.title')}
-              </h2>
-              <p className="text-slate-700 leading-relaxed mb-4">
-                {t('policy.privacy.section1.description')}
-              </p>
-              <div className="bg-white p-6 rounded-lg border border-border">
-                <p className="text-foreground mb-2 font-semibold font-heading">{t('policy.privacy.section1.itemsLabel')}</p>
-                <p className="text-slate-700 leading-relaxed mb-4">{t('policy.privacy.section1.items')}</p>
-                <p className="text-foreground mb-2 font-semibold font-heading">{t('policy.privacy.section1.methodLabel')}</p>
-                <p className="text-slate-700 leading-relaxed">{t('policy.privacy.section1.method')}</p>
-              </div>
-            </section>
-
-            {/* Section 2 */}
-            <section className="mb-10">
-              <h2 className="text-2xl font-bold text-foreground font-heading mb-4 flex items-center">
-                <span className="bg-foreground text-white w-8 h-8 rounded-full flex items-center justify-center text-sm mr-3">2</span>
-                {t('policy.privacy.section2.title')}
-              </h2>
-              <p className="text-slate-700 leading-relaxed mb-4">
-                {t('policy.privacy.section2.description')}
-              </p>
-              <div className="bg-white p-6 rounded-lg border border-border">
-                <ul className="space-y-3 text-slate-700">
-                  {purposes.map((purpose, index) => (
-                    <li key={index} className="flex items-start">
-                      <span className="text-primary mr-2">•</span>
-                      <span>{purpose}</span>
+          <div className="flex gap-16">
+            {/* TOC Sidebar */}
+            <nav className="hidden lg:block w-56 flex-shrink-0">
+              <div className="sticky top-32">
+                <ul className="space-y-1 text-sm border-l border-slate-200">
+                  {sectionTitles.map((title, idx) => (
+                    <li key={idx}>
+                      <a
+                        href={`#privacy-${idx}`}
+                        className={`block pl-4 py-1.5 -ml-px border-l-2 transition-colors ${
+                          activeSection === idx
+                            ? 'border-primary text-primary font-medium'
+                            : 'border-transparent text-slate-400 hover:text-slate-600 hover:border-slate-300'
+                        }`}
+                      >
+                        {title}
+                      </a>
                     </li>
                   ))}
                 </ul>
               </div>
-            </section>
+            </nav>
 
-            {/* Section 3 */}
-            <section className="mb-10">
-              <h2 className="text-2xl font-bold text-foreground font-heading mb-4 flex items-center">
-                <span className="bg-foreground text-white w-8 h-8 rounded-full flex items-center justify-center text-sm mr-3">3</span>
-                {t('policy.privacy.section3.title')}
-              </h2>
-              <p className="text-slate-700 leading-relaxed mb-4">
-                {t('policy.privacy.section3.description')}
-              </p>
-              <div className="space-y-4">
-                <div className="bg-white p-4 rounded-lg border border-border">
-                  <p className="font-semibold text-foreground font-heading">{t('policy.privacy.section3.internal.title')}</p>
-                  <ul className="mt-2 text-slate-700 space-y-1">
-                    <li><span className="font-medium">{t('policy.privacy.section3.internal.itemLabel')}</span> {t('policy.privacy.section3.internal.item')}</li>
-                    <li><span className="font-medium">{t('policy.privacy.section3.internal.reasonLabel')}</span> {t('policy.privacy.section3.internal.reason')}</li>
-                    <li><span className="font-medium">{t('policy.privacy.section3.internal.periodLabel')}</span> {t('policy.privacy.section3.internal.period')}</li>
-                  </ul>
+            {/* Content */}
+            <div className="flex-1 min-w-0">
+              {/* Section 1 - 수집 항목 */}
+              <section id="privacy-0" data-section="0" className="mb-14 scroll-mt-32">
+                <h2 className="text-lg font-semibold text-foreground mb-3">{sectionTitles[0]}</h2>
+                <p className="text-slate-600 text-[15px] leading-7 mb-5">
+                  {t('policy.privacy.sections.0.description')}
+                </p>
+                <div className="space-y-4">
+                  {[0, 1, 2, 3].map((i) => (
+                    <div key={i}>
+                      <h3 className="text-sm font-medium text-foreground mb-1">
+                        {t(`policy.privacy.sections.0.subsections.${i}.subtitle`)}
+                      </h3>
+                      <p className="text-slate-500 text-sm leading-6">
+                        {t(`policy.privacy.sections.0.subsections.${i}.content`)}
+                      </p>
+                    </div>
+                  ))}
                 </div>
-                <div className="bg-white p-4 rounded-lg border border-border">
-                  <p className="font-semibold text-foreground font-heading">{t('policy.privacy.section3.legal.title')}</p>
-                  <p className="text-sm text-muted-foreground mb-3">{t('policy.privacy.section3.legal.description')}</p>
-                  <ul className="mt-2 text-slate-700 space-y-1">
-                    {legalItems.map((item, index) => (
-                      <li key={index}><span className="font-medium">{item.label}</span> {item.period}</li>
-                    ))}
-                  </ul>
+              </section>
+
+              <hr className="border-slate-100 mb-14" />
+
+              {/* Sections 2-6 */}
+              {[1, 2, 3, 4, 5].map((sectionIdx) => {
+                const itemCounts = [5, 4, 3, 4, 2]
+                const count = itemCounts[sectionIdx - 1]
+                return (
+                  <div key={sectionIdx}>
+                    <section id={`privacy-${sectionIdx}`} data-section={sectionIdx} className="mb-14 scroll-mt-32">
+                      <h2 className="text-lg font-semibold text-foreground mb-3">{sectionTitles[sectionIdx]}</h2>
+                      <p className="text-slate-600 text-[15px] leading-7 mb-4">
+                        {t(`policy.privacy.sections.${sectionIdx}.description`)}
+                      </p>
+                      <ul className="space-y-2">
+                        {Array.from({ length: count }, (_, i) => (
+                          <li key={i} className="flex items-start text-slate-600 text-sm leading-6">
+                            <span className="text-slate-300 mr-3 mt-0.5 select-none">—</span>
+                            <span>{t(`policy.privacy.sections.${sectionIdx}.items.${i}`)}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      {sectionIdx === 2 && (
+                        <p className="text-slate-500 text-sm leading-6 mt-4">
+                          {t('policy.privacy.sections.2.withdrawal')}
+                        </p>
+                      )}
+                      {sectionIdx === 4 && (
+                        <p className="text-slate-500 text-sm leading-6 mt-4">
+                          {t('policy.privacy.sections.4.contact')}
+                        </p>
+                      )}
+                    </section>
+                    {sectionIdx < 5 && <hr className="border-slate-100 mb-14" />}
+                  </div>
+                )
+              })}
+
+              <hr className="border-slate-100 mb-14" />
+
+              {/* Section 7 - 개인정보보호책임자 */}
+              <section id="privacy-6" data-section="6" className="mb-14 scroll-mt-32">
+                <h2 className="text-lg font-semibold text-foreground mb-3">{sectionTitles[6]}</h2>
+                <p className="text-slate-600 text-[15px] leading-7 mb-4">
+                  {t('policy.privacy.sections.6.description')}
+                </p>
+                <div className="text-sm text-slate-600 space-y-1 mb-4">
+                  <p><span className="font-medium text-foreground">{t('policy.privacy.sections.6.contactInfo.name')}</span></p>
+                  <p>E-mail: <a href={`mailto:${t('policy.privacy.sections.6.contactInfo.email')}`} className="text-primary hover:underline">{t('policy.privacy.sections.6.contactInfo.email')}</a></p>
                 </div>
+                <p className="text-slate-400 text-xs leading-5">
+                  {t('policy.privacy.sections.6.notice')}
+                </p>
+              </section>
+
+              {/* Back */}
+              <div className="pt-8 border-t border-slate-100">
+                <Link href="/" className="inline-flex items-center text-sm text-slate-500 hover:text-foreground transition-colors">
+                  <ArrowLeft className="h-4 w-4 mr-1.5" />
+                  {t('policy.backToHome')}
+                </Link>
               </div>
-            </section>
-          </div>
-
-          {/* Footer */}
-          <div className="mt-16 pt-8 border-t border-border flex justify-center">
-            <Link
-              href="/"
-              className="inline-flex items-center justify-center px-8 py-3 border border-border rounded-md shadow-sm text-base font-bold text-foreground bg-white hover:bg-slate-50 transition-colors font-heading"
-            >
-              <ArrowLeft className="h-5 w-5 mr-2" />
-              {t('policy.backToHome')}
-            </Link>
+            </div>
           </div>
         </div>
       </main>
