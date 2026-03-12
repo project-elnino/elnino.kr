@@ -16,7 +16,7 @@ export default function TermsOfServicePage() {
     { type: 'definitions', defCount: 5 },
     { type: 'items', itemCount: 3 },
     { type: 'descItems', itemCount: 5 },
-    { type: 'items', itemCount: 2 },
+    { type: 'items', itemCount: 3 },
     { type: 'descItems', itemCount: 5 },
     { type: 'items', itemCount: 2 },
     { type: 'items', itemCount: 4 },
