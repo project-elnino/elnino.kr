@@ -11,7 +11,7 @@ export default function PrivacyPolicyPage() {
   const { t } = useTranslation()
   const [activeSection, setActiveSection] = useState(0)
 
-  const sectionTitles = Array.from({ length: 7 }, (_, i) => t(`policy.privacy.sections.${i}.title`))
+  const sectionTitles = Array.from({ length: 8 }, (_, i) => t(`policy.privacy.sections.${i}.title`))
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -81,7 +81,7 @@ export default function PrivacyPolicyPage() {
                   {t('policy.privacy.sections.0.description')}
                 </p>
                 <div className="space-y-4">
-                  {[0, 1, 2, 3].map((i) => (
+                  {[0, 1, 2, 3, 4].map((i) => (
                     <div key={i}>
                       <h3 className="text-sm font-medium text-foreground mb-1">
                         {t(`policy.privacy.sections.0.subsections.${i}.subtitle`)}
@@ -97,8 +97,8 @@ export default function PrivacyPolicyPage() {
               <hr className="border-slate-100 mb-14" />
 
               {/* Sections 2-6 */}
-              {[1, 2, 3, 4, 5].map((sectionIdx) => {
-                const itemCounts = [5, 4, 3, 4, 2]
+              {[1, 2, 3, 4, 5, 6].map((sectionIdx) => {
+                const itemCounts = [5, 4, 4, 4, 2, 4]
                 const count = itemCounts[sectionIdx - 1]
                 return (
                   <div key={sectionIdx}>
@@ -126,25 +126,25 @@ export default function PrivacyPolicyPage() {
                         </p>
                       )}
                     </section>
-                    {sectionIdx < 5 && <hr className="border-slate-100 mb-14" />}
+                    {sectionIdx < 6 && <hr className="border-slate-100 mb-14" />}
                   </div>
                 )
               })}
 
               <hr className="border-slate-100 mb-14" />
 
-              {/* Section 7 - 개인정보보호책임자 */}
-              <section id="privacy-6" data-section="6" className="mb-14 scroll-mt-32">
-                <h2 className="text-lg font-semibold text-foreground mb-3">{sectionTitles[6]}</h2>
+              {/* Section 8 - 개인정보보호책임자 */}
+              <section id="privacy-7" data-section="7" className="mb-14 scroll-mt-32">
+                <h2 className="text-lg font-semibold text-foreground mb-3">{sectionTitles[7]}</h2>
                 <p className="text-slate-600 text-[15px] leading-7 mb-4">
-                  {t('policy.privacy.sections.6.description')}
+                  {t('policy.privacy.sections.7.description')}
                 </p>
                 <div className="text-sm text-slate-600 space-y-1 mb-4">
-                  <p><span className="font-medium text-foreground">{t('policy.privacy.sections.6.contactInfo.name')}</span></p>
-                  <p>E-mail: <a href={`mailto:${t('policy.privacy.sections.6.contactInfo.email')}`} className="text-primary hover:underline">{t('policy.privacy.sections.6.contactInfo.email')}</a></p>
+                  <p><span className="font-medium text-foreground">{t('policy.privacy.sections.7.contactInfo.name')}</span></p>
+                  <p>E-mail: <a href={`mailto:${t('policy.privacy.sections.7.contactInfo.email')}`} className="text-primary hover:underline">{t('policy.privacy.sections.7.contactInfo.email')}</a></p>
                 </div>
                 <p className="text-slate-400 text-xs leading-5">
-                  {t('policy.privacy.sections.6.notice')}
+                  {t('policy.privacy.sections.7.notice')}
                 </p>
               </section>
 
