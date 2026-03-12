@@ -101,6 +101,11 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Paddle MoR Notice */}
+        <p className="text-xs text-slate-400 leading-5 mb-6">
+          {t('footer.paddleMor')}
+        </p>
+
         {/* Bottom */}
         <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-xs text-slate-400">
