@@ -133,7 +133,7 @@ export default function ContactForm() {
                 <Mail className="h-5 w-5 text-primary mr-3 mt-1 flex-shrink-0" />
                 <div>
                   <p className="text-sm font-bold text-foreground font-heading">{t('contact.info.email')}</p>
-                  <p className="text-slate-700 text-sm">peteryoung0414@gmail.com</p>
+                  <p className="text-slate-700 text-sm">contact@elnino.kr</p>
                 </div>
               </div>
               <div className="flex items-start">
