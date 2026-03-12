@@ -289,11 +289,15 @@
             },
             {
               "subtitle": "During Service Use",
-              "content": "Translation usage records, usage time, access logs, device information (browser type, OS), IP address"
+              "content": "Translation usage records, usage time, access logs, device information (browser type, OS), IP address. During real-time translation sessions, the speaker's voice data is temporarily processed but is immediately deleted upon session termination under the Data Zero Retention policy and is not stored separately."
             },
             {
               "subtitle": "Upon Payment",
               "content": "Payment method information is processed through a third-party payment processor (Paddle). The Company only retains payment records (payment date, amount, plan type)."
+            },
+            {
+              "subtitle": "Social Login (OAuth)",
+              "content": "When logging in via Google or Microsoft accounts, we receive your email address, name (or display name), and profile image from the respective service."
             },
             {
               "subtitle": "Upon Inquiry",
@@ -321,13 +325,14 @@
             "Records of consumer complaints or dispute resolution: 3 years (Electronic Commerce Act)",
             "Login records: 3 months (Protection of Communications Secrets Act)"
           ],
-          "withdrawal": "Upon account deletion, personal information is destroyed immediately. Information required to be retained under applicable laws is stored separately for the specified period and then destroyed."
+          "withdrawal": "Upon account deletion, personal information is destroyed immediately. Information required to be retained under applicable laws is stored separately for the specified period and then destroyed. Voice data and translation data processed during real-time translation sessions are immediately destroyed upon session termination under the Data Zero Retention policy and are not stored or retained separately. Such data is not used for AI model training."
         },
         {
           "title": "Provision of Personal Information to Third Parties",
           "description": "The Company does not, in principle, provide users' personal information to third parties. However, the following cases are exceptions.",
           "items": [
             "Payment processing: Minimum necessary information is provided to Paddle (payment processor) for payment processing.",
+            "AI service processing: Voice and text data are transmitted to external AI API providers for speech recognition and translation services. Such data is immediately destroyed after real-time processing and is not used for AI training.",
             "Legal requests: When investigative agencies make requests in accordance with legally prescribed procedures for investigative purposes.",
             "User consent: When the user has given prior consent."
           ]
@@ -349,6 +354,16 @@
           "items": [
             "Purpose of cookie collection: Maintaining login status, saving language settings, service usage analysis",
             "How to refuse cookies: You can refuse cookies through browser settings, but some service features may be limited."
+          ]
+        },
+        {
+          "title": "International Transfer of Personal Information",
+          "description": "The Company may process users' personal information on servers located outside of Korea for service provision.",
+          "items": [
+            "Purpose of transfer: Provision of real-time speech recognition and multilingual translation services",
+            "Items transferred: Voice data (immediately destroyed after real-time processing), translation text (immediately destroyed after real-time processing)",
+            "Recipients: AI service providers (speech recognition and translation processing), cloud infrastructure providers (server operation)",
+            "Retention and use period: Immediately destroyed after real-time processing (Data Zero Retention policy applied)"
           ]
         },
         {
@@ -404,7 +419,8 @@
           "title": "Service Agreement",
           "items": [
             "The service agreement is established when a person wishing to register agrees to these Terms, fills in member information as prescribed by the Company, submits a registration application, and the Company approves it.",
-            "The Company may reject a registration application or terminate the agreement afterwards in the following cases: when another person's information is used, when false information is provided, or when eligibility was previously restricted due to Terms violations."
+            "The Service is available only to users aged 14 or older. If a child under 14 wishes to use the Service, the consent of a legal guardian is required. The Company does not collect personal information of children under 14 without the consent of a legal guardian.",
+            "The Company may reject a registration application or terminate the agreement afterwards in the following cases: when another person's information is used, when false information is provided, when eligibility was previously restricted due to Terms violations, or when a person under 14 has not obtained the consent of a legal guardian."
           ]
         },
         {
@@ -473,7 +489,16 @@
       "sections": [
         {
           "title": "General Principles",
-          "content": "All payments for the AI real-time translation service \"Knoc\" provided by Elnino (hereinafter 'the Company') are non-refundable. Members are advised to fully review the service details, plan terms, and this Refund Policy before making any payment."
+          "content": "Payments and refunds for the AI real-time translation service \"Knoc\" provided by Elnino (hereinafter 'the Company') are subject to the conditions below. Members are advised to fully review the service details, plan terms, and this Refund Policy before making any payment."
+        },
+        {
+          "title": "Right of Withdrawal",
+          "description": "In accordance with the Act on Consumer Protection in Electronic Commerce, withdrawal is permitted under the following conditions.",
+          "items": [
+            "If the service has not been used at all after purchasing credits (Pay As You Go), a withdrawal request may be made within 7 days of payment for a full refund.",
+            "If the service has not been used at all after purchasing a subscription (Custom), a withdrawal request may be made within 7 days of payment for a full refund.",
+            "If credits have been partially used or the subscription service has already been accessed, the right of withdrawal is restricted."
+          ]
         },
         {
           "title": "Pay As You Go",
@@ -509,7 +534,7 @@
           "contactInfo": {
             "email": "contact@elnino.kr"
           },
-          "notice": "We will respond within 3 business days after receiving your inquiry."
+          "notice": "We will respond within 3 business days after receiving your inquiry. If a refund or payment dispute is not resolved, you may file a mediation request with the Korea Consumer Agency (www.kca.go.kr, 1372) or the Electronic Commerce Mediation Committee (www.ecmc.or.kr)."
         }
       ]
     }
