@@ -14,6 +14,7 @@ export default function RefundPolicyPage() {
   const sections: { type: 'content' | 'descItems' | 'contact'; itemCount?: number }[] = [
     { type: 'content' },
     { type: 'descItems', itemCount: 3 },
+    { type: 'descItems', itemCount: 3 },
     { type: 'descItems', itemCount: 4 },
     { type: 'descItems', itemCount: 3 },
     { type: 'contact' },
