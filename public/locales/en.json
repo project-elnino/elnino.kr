@@ -216,7 +216,7 @@
     "info": {
       "title": "Contact Information",
       "phone": "Phone",
-      "phoneValue": "Available upon inquiry",
+      "phoneValue": "+82-10-3323-0349",
       "email": "Email",
       "hours": "Business Hours",
       "hoursValue": "Weekdays 09:00 - 18:00",
@@ -275,7 +275,7 @@
   },
   "policy": {
     "backToHome": "Back to Home",
-    "effectiveDate": "Effective Date: May 25, 2025",
+    "effectiveDate": "Effective Date: March 14, 2026",
     "privacy": {
       "title": "Privacy Policy",
       "sections": [
@@ -379,7 +379,7 @@
     },
     "terms": {
       "title": "Terms of Service",
-      "effectiveNotice": "These Terms of Service are effective from May 25, 2025.",
+      "effectiveNotice": "These Terms of Service are effective from March 14, 2026.",
       "sections": [
         {
           "title": "Purpose",
@@ -430,8 +430,8 @@
             "Pay As You Go: A prepaid credit system. Credits are deducted based on service usage time, and service is suspended when credits are exhausted.",
             "Custom (Subscription): A monthly subscription providing agreed-upon usage hours and features. Additional usage hours purchased during the subscription period expire at the end of the subscription.",
             "Usage hours from Pay As You Go and subscription plans cannot be combined or transferred between each other.",
-            "All payments are processed through a third-party payment processor (Paddle).",
-            "All payments are non-refundable. Please refer to the Refund Policy for details."
+            "All payments are processed through Paddle.com, which acts as the Merchant of Record for all orders. Paddle handles all payment processing, customer service inquiries related to payments, and refund processing.",
+            "All purchases are backed by a 30-day money-back guarantee. Please refer to the Refund Policy for full details on refund eligibility and procedures."
           ]
         },
         {
@@ -471,7 +471,7 @@
           "items": [
             "Members may request termination (withdrawal) at any time through service settings or customer support.",
             "The Company may terminate the agreement after prior notice if a member violates these Terms, and may terminate immediately in urgent cases.",
-            "Upon termination, remaining credits or subscription period are not refunded."
+            "Upon termination, remaining credits or subscription period are subject to the Refund Policy. Refund requests within the 30-day money-back guarantee period will be honored."
           ]
         },
         {
@@ -485,27 +485,37 @@
     },
     "refund": {
       "title": "Refund Policy",
-      "effectiveNotice": "This Refund Policy is effective from May 25, 2025.",
+      "effectiveNotice": "This Refund Policy is effective from March 14, 2026.",
       "sections": [
         {
           "title": "General Principles",
-          "content": "Payments and refunds for the AI real-time translation service \"Knoc\" provided by Elnino (hereinafter 'the Company') are subject to the conditions below. Members are advised to fully review the service details, plan terms, and this Refund Policy before making any payment."
+          "content": "Payments and refunds for the AI real-time translation service \"Knoc\" provided by Elnino (hereinafter 'the Company') are subject to the conditions below. All payments are processed through Paddle.com, which acts as the Merchant of Record for all orders. Members are advised to fully review the service details, plan terms, and this Refund Policy before making any payment."
+        },
+        {
+          "title": "30-Day Money-Back Guarantee",
+          "description": "We offer a 30-day money-back guarantee on all purchases. The following conditions apply.",
+          "items": [
+            "If you are not satisfied with the service for any reason, you may request a full refund within 30 days of the original purchase date.",
+            "To request a refund, please contact us at contact@elnino.kr or +82-10-3323-0349 with your order details.",
+            "Refund requests are processed through Paddle, our Merchant of Record. Paddle may also process refund requests made directly to Paddle within 14 days of the transaction date or the last subscription renewal date.",
+            "After the 30-day money-back guarantee period has elapsed, refunds are not available except as described in the Exceptions section below."
+          ]
         },
         {
           "title": "Right of Withdrawal",
-          "description": "In accordance with the Act on Consumer Protection in Electronic Commerce, withdrawal is permitted under the following conditions.",
+          "description": "In accordance with the Act on Consumer Protection in Electronic Commerce (for Korean consumers), withdrawal is additionally permitted under the following conditions.",
           "items": [
             "If the service has not been used at all after purchasing credits (Pay As You Go), a withdrawal request may be made within 7 days of payment for a full refund.",
             "If the service has not been used at all after purchasing a subscription (Custom), a withdrawal request may be made within 7 days of payment for a full refund.",
-            "If credits have been partially used or the subscription service has already been accessed, the right of withdrawal is restricted."
+            "These rights are in addition to, and do not limit, the 30-day money-back guarantee described above."
           ]
         },
         {
           "title": "Pay As You Go",
           "description": "The payment and refund terms for the Pay As You Go plan are as follows.",
           "items": [
-            "Credits are purchased on a prepaid basis and are non-refundable after purchase.",
-            "Credits are deducted based on service usage time, and unused credits are not eligible for refund.",
+            "Credits are purchased on a prepaid basis. Refund requests within the 30-day money-back guarantee period will be honored.",
+            "Credits are deducted based on service usage time. After the 30-day guarantee period, unused credits are not eligible for refund.",
             "Pay As You Go credits and Custom subscription usage hours cannot be combined or transferred between each other."
           ]
         },
@@ -513,9 +523,10 @@
           "title": "Custom (Subscription)",
           "description": "The payment and refund terms for the subscription plan are as follows.",
           "items": [
-            "Monthly subscription fees are non-refundable after payment.",
-            "Additional usage hours purchased during the subscription period expire at the end of the subscription and are non-refundable.",
-            "Pro-rated refunds for remaining subscription periods are not provided upon cancellation. After cancellation, the service remains available until the end of the current billing cycle.",
+            "Refund requests within the 30-day money-back guarantee period from the initial purchase or latest renewal will be honored.",
+            "After the 30-day guarantee period, monthly subscription fees are non-refundable.",
+            "Additional usage hours purchased during the subscription period expire at the end of the subscription.",
+            "Upon cancellation, the service remains available until the end of the current billing cycle.",
             "Custom subscription usage hours and Pay As You Go credits do not interfere with or combine with each other."
           ]
         },
@@ -532,9 +543,10 @@
           "title": "Contact",
           "content": "Inquiries regarding refunds and payments can be submitted through the contact information below.",
           "contactInfo": {
-            "email": "contact@elnino.kr"
+            "email": "contact@elnino.kr",
+            "phone": "+82-10-3323-0349"
           },
-          "notice": "We will respond within 3 business days after receiving your inquiry. If a refund or payment dispute is not resolved, you may file a mediation request with the Korea Consumer Agency (www.kca.go.kr, 1372) or the Electronic Commerce Mediation Committee (www.ecmc.or.kr)."
+          "notice": "We will respond within 3 business days after receiving your inquiry. Refund requests may also be submitted directly to Paddle.com. If a refund or payment dispute is not resolved, you may file a mediation request with the Korea Consumer Agency (www.kca.go.kr, 1372) or the Electronic Commerce Mediation Committee (www.ecmc.or.kr)."
         }
       ]
     }

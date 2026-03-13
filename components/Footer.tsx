@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, MapPin } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { useTranslation } from "@/lib/i18n";
 
 export default function Footer() {
@@ -92,6 +92,10 @@ export default function Footer() {
               <li className="flex items-start">
                 <MapPin className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
                 <span className="text-slate-700 text-sm">{t('footer.location')}</span>
+              </li>
+              <li className="flex items-center">
+                <Phone className="h-5 w-5 text-primary mr-2 flex-shrink-0" />
+                <a href="tel:+82-10-3323-0349" className="text-slate-700 text-sm hover:text-primary transition-colors">+82-10-3323-0349</a>
               </li>
               <li className="flex items-center">
                 <Mail className="h-5 w-5 text-primary mr-2 flex-shrink-0" />
