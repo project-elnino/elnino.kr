@@ -13,7 +13,7 @@ const PLANS = [
     price: 0,
     includedHours: 0,
     unitPrice: '$4.99',
-    maxParticipants: 300,
+    maxParticipants: 30,
     rooms: 1,
     subtitleScreen: true,
     ctaLink: 'https://cloud.elnino.kr/dashboard/team',
