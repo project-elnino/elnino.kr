@@ -70,14 +70,14 @@
     "title": "Customer Reviews",
     "items": [
       {
-        "text": "We used Knoc at an international conference and were very satisfied with the accuracy and speed of real-time translation. The participants' response was great, and most importantly, the preparation process was simple.",
-        "name": "Kim OO",
-        "role": "International Conference Manager"
+        "text": "It showed great results during field trips. It was very easy to deliver announcements and run programs in real time. Even in environments where voices were hard to hear, students could check the content in their own language through the mobile subtitle room, which was especially useful.",
+        "name": "Kim O-hee, Manager",
+        "role": "Konkuk University International Exchange & Cooperation Team"
       },
       {
-        "text": "I was surprised that even medical terminology was translated accurately. Thanks to the boosting model, we were able to conduct international seminars smoothly without professional interpreters.",
-        "name": "Lee OO",
-        "role": "University Hospital Professor"
+        "text": "It was very useful during orientations and briefings. These are occasions where important information needs to be delivered to many students, but since many students don't understand English or Korean, we had to explain everything separately each time. After introducing Knoc, we were able to proceed much more smoothly, and student satisfaction was high. 83.2% of students responded that future adoption would be necessary.",
+        "name": "Kim O-won, Staff",
+        "role": "Konkuk University International Exchange & Cooperation Team"
       }
     ]
   },
@@ -268,10 +268,161 @@
       "position": "Manager"
     }
   },
-  "modal": {
-    "brochureTitle": "Service Brochure",
-    "close": "Close",
-    "loading": "Loading..."
+  "serviceIntro": {
+    "pdfDownload": "PDF Download",
+    "topbar": "Service Brochure",
+    "cover": {
+      "title": "Real-time",
+      "titleHighlight": "AI Voice Translation",
+      "titleAfter": "With Just a Browser.",
+      "description": "Recognizes the speaker's voice and provides subtitles in each participant's language. No installation, no preparation needed.",
+      "kpiLanguages": "101",
+      "kpiLanguagesLabel": "Supported Languages",
+      "kpiAccuracy": "99%+",
+      "kpiAccuracyLabel": "Translation Accuracy",
+      "kpiConcurrent": "1K+",
+      "kpiConcurrentLabel": "Concurrent Users"
+    },
+    "whyNow": {
+      "num": "01",
+      "title": "Multilingual Communication Is No Longer Optional",
+      "lead": "With globalization, remote work, and the expansion of multicultural society, the demand for multilingual communication is exploding. Yet most organizations still rely on outdated methods.",
+      "trends": [
+        { "num": "2.8M+", "unit": "Foreign Residents in Korea · Over 5% of Population", "desc": "For the first time, foreign residents have exceeded 5% of Korea's population, making multilingual support essential for both public and private sectors.", "source": "Source: Ministry of Justice, Korea Immigration Service, 2025" },
+        { "num": "80%", "unit": "Remote/Hybrid Work Adoption Rate", "desc": "80% of remote-capable jobs have adopted hybrid or remote work, causing a surge in demand for multilingual video conferencing.", "source": "Source: Gallup, 2024" },
+        { "num": "4th in World", "unit": "Large-Scale International Conference Host", "desc": "Korea ranks 4th worldwide in hosting international conferences with 1,000+ attendees. Global international conferences also grew 9% year-over-year.", "source": "Source: ICCA GlobeWatch, 2024" }
+      ],
+      "oldTitle": "Organizations Falling Behind",
+      "oldItems": ["Spending millions on interpreter hiring every time", "2-4 weeks preparation, no emergency response possible", "Confidential information leak risk through external personnel", "Communication blind spots due to unsupported minority languages"],
+      "newTitle": "Organizations Adapting Quickly",
+      "newItems": ["AI translation costs less than 1/100", "Instant use, zero preparation needed", "Data security through zero retention", "Eliminating communication gaps with 101 languages"],
+      "calloutTitle": "The difference is made by the speed of technology adoption.",
+      "calloutDesc": "Without interpreters, without installation, with just a browser — you can switch right now."
+    },
+    "problems": {
+      "num": "02",
+      "title": "Limitations of the Traditional Approach",
+      "lead": "Traditional methods relying on professional interpreters and interpretation equipment face limitations in cost, time, and security.",
+      "items": [
+        { "title": "Interpretation Cost", "desc": "Professional simultaneous interpreters cost $800-1,600+ per day. Large events require budgets in the tens of thousands." },
+        { "title": "Preparation Burden", "desc": "Hiring interpreters, language coordination, equipment setup takes at least 2-4 weeks. Emergency situations cannot be addressed." },
+        { "title": "Terminology Limitations", "desc": "Risk of mistranslation by general interpreters in specialized fields like medical, legal, IT, finance, and government." },
+        { "title": "Cannot Scale", "desc": "Costs increase linearly as participant numbers grow. Forecasting is also difficult." },
+        { "title": "Security Risk", "desc": "There is always a risk of confidential meeting content being leaked through external interpreters." }
+      ],
+      "stats": [
+        { "value": "$800–1,600", "label": "Interpreter Daily Cost" },
+        { "value": "2–4 weeks", "label": "Minimum Prep Time" },
+        { "value": "1–2", "label": "Supported Languages" }
+      ],
+      "calloutTitle": "What if all these problems could be solved with a single service?",
+      "calloutDesc": "No installation, no preparation, no external personnel — real-time translation in 101 languages with just a Chrome browser."
+    },
+    "solution": {
+      "num": "03",
+      "title": "Knoc — Real-time AI Translation Solution",
+      "lead": "Recognizes the speaker's voice in real time and translates subtitles into each participant's language. Works identically on mobile, tablet, and laptop — all you need is a Chrome browser.",
+      "screenshotAlt": "Knoc Subtitle Screen",
+      "kpiLanguages": "101",
+      "kpiLanguagesLabel": "Supported Languages",
+      "kpiAccuracy": "99%+",
+      "kpiAccuracyLabel": "Translation Accuracy",
+      "kpiConcurrent": "1,000+",
+      "kpiConcurrentLabel": "Concurrent Users"
+    },
+    "features": {
+      "num": "04",
+      "title": "Core Features",
+      "tiles": [
+        { "title": "Easy to Use", "items": ["Runs instantly in Chrome without app installation", "All devices: mobile, tablet, laptop", "Automatic speaker language detection"] },
+        { "title": "Industry-Specific AI", "items": ["Custom models for medical, legal, IT, finance, government", "Simultaneous keyword + context boosting", "Enhanced specialized translation accuracy with boosting"] },
+        { "title": "Massive Scalability", "items": ["From 5-person meetings to 1,000+ conferences", "Stable operation with 1,000+ concurrent users", "24/7 uninterrupted service"] },
+        { "title": "Data Security", "items": ["Data Zero Retention", "GDPR Compliant", "No data stored after session ends"] }
+      ]
+    },
+    "comparison": {
+      "num": "05",
+      "title": "Comparison & Case Studies",
+      "tableTitle": "Professional Interpreters vs Knoc",
+      "columns": ["Category", "Professional Interpreter", "Knoc"],
+      "rows": [
+        { "label": "Cost", "old": "$800-1,600+/day", "new": "$4.99/hour~" },
+        { "label": "Prep Time", "old": "2-4 weeks", "new": "Instant use" },
+        { "label": "Terminology", "old": "Limited by field", "new": "Improved accuracy with boosting models" },
+        { "label": "Languages", "old": "1-2", "new": "101" },
+        { "label": "Data Security", "old": "External personnel risk", "new": "Data Zero Retention" },
+        { "label": "Scalability", "old": "Cost increases per person", "new": "Same price for 1,000+" }
+      ],
+      "caseTitle": "Adoption Review — Konkuk University International Winter Program",
+      "cases": [
+        { "name": "Kim O-hee, Manager", "org": "Konkuk University International Exchange & Cooperation Team", "text": "It showed great results during field trips. It was very easy to deliver announcements and run programs in real time. Even in environments where voices were hard to hear, students could check the content in their own language through the mobile subtitle room, which was especially useful." },
+        { "name": "Kim O-won, Staff", "org": "Konkuk University International Exchange & Cooperation Team", "text": "It was very useful during orientations and briefings. These are occasions where important information needs to be delivered to many students, but since many don't understand English or Korean, we had to explain everything separately each time. After introducing Knoc, proceedings became much smoother, and student satisfaction was high. 83.2% of students responded that future adoption would be necessary." }
+      ]
+    },
+    "scenarios": {
+      "num": "06",
+      "title": "Use Case Scenarios",
+      "lead": "Available in all settings requiring multilingual communication, from corporate clients to public institutions.",
+      "badgeEnterprise": "Enterprise",
+      "badgeInstitution": "Institution",
+      "items": [
+        { "badge": "enterprise", "text": "Global Video Conferences — Real-time translation for HQ-branch regular meetings" },
+        { "badge": "enterprise", "text": "Overseas Partner Meetings — Reduce interpretation costs for client meetings" },
+        { "badge": "enterprise", "text": "Internal Training — Education and workshops for multinational employees" },
+        { "badge": "enterprise", "text": "Job Interviews — Language barrier-free interviews for international talent" },
+        { "badge": "enterprise", "text": "Board & Executive Meetings — Confidentiality with Data Zero Retention" },
+        { "badge": "institution", "text": "Foreign Resident Services — Multilingual support at city/district offices, immigration offices" },
+        { "badge": "institution", "text": "International Events — Government-hosted forums, city exchange events" },
+        { "badge": "institution", "text": "Multicultural Policy — Education & counseling at multicultural family support centers" },
+        { "badge": "institution", "text": "Public Education — Lectures & seminars for international students at national universities" },
+        { "badge": "institution", "text": "International Exchange — Sister city exchanges, ODA programs, international workshops" }
+      ],
+      "securityTitle": "Security & Data Policy",
+      "security": [
+        { "title": "Data Zero Retention", "desc": "Voice and translation data are not used for AI training. No data stored after session ends." },
+        { "title": "GDPR Compliant", "desc": "Ensures transparency and safety of personal data processing in accordance with the EU General Data Protection Regulation." },
+        { "title": "SaaS Cloud", "desc": "No server setup or software installation needed. Deploy instantly with zero IT infrastructure burden." }
+      ]
+    },
+    "pricing": {
+      "num": "07",
+      "title": "Pricing & Expected Benefits",
+      "payg": { "name": "Pay As You Go", "sub": "Pay As You Go", "price": "$4.99", "unit": "/hour · Prepaid Credits", "features": ["Up to 30 per room", "Prepaid credit system", "Small meetings & one-time use", "Start immediately"] },
+      "custom": { "name": "Custom", "sub": "Custom / Enterprise", "price": "Custom Quote", "unit": "Tailored for organizations", "features": ["Negotiate participants, rooms, hours", "Team invite & management included", "Data Zero Retention guaranteed", "Optimized for large events & regular use"], "note": "* Pricing may vary based on concurrent speakers or included hours." },
+      "effectsTitle": "Expected Benefits",
+      "effects": [
+        { "title": "Cost Savings", "desc": "Achieve the same level of multilingual communication at less than 1/100 the cost of professional interpreters." },
+        { "title": "Instant Response", "desc": "Use immediately without preparation. Rapid multilingual communication even in emergencies." },
+        { "title": "Multilingual Inclusion", "desc": "Include minority language speakers with 101 languages. Eliminate communication blind spots in multicultural settings." },
+        { "title": "Digital Transformation", "desc": "SaaS-based with no installation. Deploy instantly without IT infrastructure investment." }
+      ],
+      "competitorTitle": "Competitor Price Comparison — 3 Hours",
+      "competitors": [
+        { "name": "Wordly", "price": "$75/hr → $225" },
+        { "name": "EventCAT (WISE)", "price": "$30/hr → $90" },
+        { "name": "EventCAT (SWIFT)", "price": "$15/hr → $45" },
+        { "name": "Knoc", "price": "$4.99/hr → $14.97" }
+      ]
+    },
+    "process": {
+      "num": "08",
+      "title": "Adoption Process",
+      "steps": [
+        { "title": "Inquiry", "desc": "Request consultation via email or website" },
+        { "title": "Consultation", "desc": "Identify use cases and requirements" },
+        { "title": "Pilot", "desc": "Validate service through pilot testing" },
+        { "title": "Full Adoption", "desc": "Custom contract and service launch" }
+      ],
+      "calloutTitle": "Pay As You Go can start right now.",
+      "calloutDesc": "Create an account at cloud.elnino.kr/dashboard, purchase credits, and start immediately. For custom plans, contact us via email.",
+      "ctaTitle": "Experience Knoc right now.",
+      "ctaDesc": "Smooth global communication without professional interpreters. Start instantly from your browser.",
+      "ctaButton": "cloud.elnino.kr/webclient →",
+      "contactEmail": "contact@elnino.kr",
+      "contactWeb": "elnino.kr",
+      "contactDashboard": "cloud.elnino.kr/dashboard",
+      "contactHours": "Daily 09:00–24:00"
+    }
   },
   "policy": {
     "backToHome": "Back to Home",

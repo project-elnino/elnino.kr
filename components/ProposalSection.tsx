@@ -1,20 +1,13 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight, Check, Globe, Zap, MessageCircle, ChevronRight, X, Star } from "lucide-react"
+import { ArrowRight, Check, Globe, Zap, MessageCircle, ChevronRight, Star } from "lucide-react"
 import { motion } from "framer-motion"
 import Topbar from "@/components/Topbar"
 import Footer from "@/components/Footer"
 import { useTranslation } from "@/lib/i18n"
-
-// 서비스 소개서 URL (언어별)
-const SERVICE_INTRODUCTION_URLS: Record<string, string> = {
-  ko: "/Knoc설명서_국문.pdf",
-  en: "/Knoc설명서_영문.pdf",
-  ja: "/Knoc설명서_국문.pdf",
-};
 
 const SERVICES = [
   { key: 'easy', icon: Globe },
@@ -36,18 +29,8 @@ const CLIENT_LOGOS = [
   { src: '/logos/ksrit.svg', alt: '대한영상의학기술학회' },
 ] as const;
 
-function isMobileDevice(): boolean {
-  if (typeof window === 'undefined') return false;
-  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-    || window.innerWidth < 768;
-}
-
 export default function ProposalSection() {
-  const { t, locale } = useTranslation()
-  const [showIntroduction, setShowIntroduction] = useState(false)
-  const [iframeLoading, setIframeLoading] = useState(true)
-
-  const SERVICE_INTRODUCTION_URL = SERVICE_INTRODUCTION_URLS[locale] || SERVICE_INTRODUCTION_URLS.ko;
+  const { t } = useTranslation()
 
   useEffect(() => {
     document.documentElement.style.overflowX = 'hidden';
@@ -57,20 +40,6 @@ export default function ProposalSection() {
       document.body.style.overflowX = '';
     };
   }, []);
-
-  useEffect(() => {
-    if (showIntroduction) {
-      document.body.style.overflow = 'hidden';
-      const handleEsc = (e: KeyboardEvent) => {
-        if (e.key === 'Escape') setShowIntroduction(false);
-      };
-      window.addEventListener('keydown', handleEsc);
-      return () => {
-        document.body.style.overflow = '';
-        window.removeEventListener('keydown', handleEsc);
-      };
-    }
-  }, [showIntroduction]);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -105,19 +74,12 @@ export default function ProposalSection() {
                   {t('hero.cta')}
                   <ArrowRight className="ml-2 -mr-1 h-5 w-5" />
                 </Link>
-                <button
-                  onClick={() => {
-                    if (isMobileDevice()) {
-                      window.open(SERVICE_INTRODUCTION_URL, '_blank');
-                    } else {
-                      setShowIntroduction(true);
-                      setIframeLoading(true);
-                    }
-                  }}
+                <Link
+                  href="/serviceintro"
                   className="inline-flex items-center justify-center px-8 py-3.5 border border-border text-base font-bold rounded-md text-foreground bg-white hover:bg-slate-50 transition-colors font-heading"
                 >
                   {t('hero.brochure')}
-                </button>
+                </Link>
               </div>
             </motion.div>
           </div>
@@ -297,55 +259,6 @@ export default function ProposalSection() {
           </div>
         </section>
       </main>
-
-      {/* Service Introduction Modal */}
-      {showIntroduction && (
-        <div
-          className="fixed inset-0 z-50 overflow-y-auto"
-          aria-labelledby="modal-title"
-          role="dialog"
-          aria-modal="true"
-        >
-          <div className="flex items-center justify-center min-h-screen p-4">
-            <div
-              className="fixed inset-0 bg-slate-900 bg-opacity-75 transition-opacity"
-              aria-hidden="true"
-              onClick={() => setShowIntroduction(false)}
-            ></div>
-
-            <div className="inline-block bg-white rounded-2xl text-left overflow-hidden shadow-xl transform transition-all w-full max-w-6xl h-[90vh] relative">
-              <div className="bg-white border-b border-border px-6 py-4 flex justify-between items-center">
-                <h3 className="text-xl font-bold text-foreground">{t('modal.brochureTitle')}</h3>
-                <button
-                  onClick={() => setShowIntroduction(false)}
-                  className="p-2 hover:bg-slate-50 rounded-full transition-colors"
-                  aria-label={t('modal.close')}
-                >
-                  <X className="h-5 w-5 text-slate-700" />
-                </button>
-              </div>
-
-              <div className="h-[calc(90vh-72px)]">
-                {iframeLoading && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-white pt-16">
-                    <div className="text-center">
-                      <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-                      <p className="mt-4 text-slate-700">{t('modal.loading')}</p>
-                    </div>
-                  </div>
-                )}
-                <iframe
-                  src={SERVICE_INTRODUCTION_URL}
-                  className="w-full h-full border-0"
-                  title={t('modal.brochureTitle')}
-                  allowFullScreen
-                  onLoad={() => setIframeLoading(false)}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       <Footer />
     </div>
