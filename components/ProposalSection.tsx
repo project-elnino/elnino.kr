@@ -134,7 +134,7 @@ export default function ProposalSection() {
 
             <div className="grid md:grid-cols-3 gap-8">
               {SERVICES.map(({ key, icon: Icon }) => (
-                <div key={key} className="group bg-white border border-border rounded-xl p-8 hover:border-primary transition-all duration-300 hover:shadow-lg cursor-pointer">
+                <div key={key} className="group bg-white border border-border rounded-xl p-8 hover:border-primary transition-all duration-300 hover:shadow-lg cursor-pointer flex flex-col">
                   <div className="w-12 h-12 bg-primary-light rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary transition-colors">
                     <Icon className="h-6 w-6 text-primary group-hover:text-primary-foreground transition-colors" />
                   </div>
@@ -144,7 +144,7 @@ export default function ProposalSection() {
                   <p className="text-slate-700 leading-relaxed mb-4">
                     {t(`services.${key}.description`)}
                   </p>
-                  <span className="text-primary font-bold text-sm font-heading flex items-center group-hover:translate-x-1 transition-transform">
+                  <span className="mt-auto text-primary font-bold text-sm font-heading flex items-center group-hover:translate-x-1 transition-transform">
                     {t(`services.${key}.cta`)} <ChevronRight className="ml-1 h-4 w-4" />
                   </span>
                 </div>
@@ -211,14 +211,14 @@ export default function ProposalSection() {
             </div>
             <div className="grid md:grid-cols-2 gap-8">
               {[0, 1].map((i) => (
-                <div key={i} className="bg-white p-8 rounded-2xl shadow-sm border border-border">
+                <div key={i} className="bg-white p-8 rounded-2xl shadow-sm border border-border flex flex-col">
                   <div className="flex text-primary mb-4">
                     {[...Array(5)].map((_, j) => <Star key={j} className="h-5 w-5 fill-current" />)}
                   </div>
                   <p className="text-slate-700 italic mb-6 text-lg leading-relaxed">
                     &ldquo;{t(`testimonials.items.${i}.text`)}&rdquo;
                   </p>
-                  <div className="flex items-center">
+                  <div className="flex items-center mt-auto">
                     <div className="h-10 w-10 bg-border rounded-full flex items-center justify-center text-foreground font-bold font-heading">
                       {t(`testimonials.items.${i}.name`).charAt(0)}
                     </div>
