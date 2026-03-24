@@ -12,14 +12,14 @@ export default function ServiceIntroPage() {
     <div className="min-h-screen bg-background text-foreground">
       <div className="site-topbar"><Topbar /></div>
 
+      <button className="si-download-btn" onClick={() => window.print()}>
+        <Download size={14} />
+        {t('serviceIntro.pdfDownload')}
+      </button>
       <div className="si">
 
         {/* PAGE 1: COVER */}
-        <div className="page cover" style={{ position: 'relative' }}>
-          <button className="si-download-btn" onClick={() => window.print()}>
-            <Download size={14} />
-            {t('serviceIntro.pdfDownload')}
-          </button>
+        <div className="page cover">
           <div className="cover-inner">
             <div className="cover-nav">
               <div className="cover-wordmark">Knoc</div>
@@ -142,22 +142,22 @@ export default function ServiceIntroPage() {
             <div className="topbar"><span className="left">Knoc by Elnino</span><span>{t('serviceIntro.topbar')}</span></div>
             <div className="sec-num">{t('serviceIntro.features.num')}</div>
             <div className="sec-title">{t('serviceIntro.features.title')}</div>
-            <div className="screen-row" style={{ gap: 14, marginBottom: 10, alignItems: 'start' }}>
+            <div className="screen-row" style={{ gap: 14, marginBottom: 10, alignItems: 'end' }}>
               <div className="device-pc" style={{ flex: 1 }}>
                 <div className="browser-bar">
                   <span className="dot" /><span className="dot" /><span className="dot" />
                   <span className="url-bar">cloud.elnino.kr</span>
                 </div>
-                <div className="screen-body" style={{ minHeight: 0, padding: 0, display: 'block', lineHeight: 0, maxHeight: 200, overflow: 'hidden' }}>
+                <div className="screen-body" style={{ minHeight: 0, padding: 0, display: 'block', lineHeight: 0 }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src="/images/webclient.png" alt="Knoc Web Client" style={{ width: '100%', display: 'block' }} />
                 </div>
               </div>
               <div className="device-mobile" style={{ width: 130 }}>
                 <div className="mobile-bar"><span className="notch" /></div>
-                <div className="screen-body" style={{ minHeight: 0, padding: 0 }}>
+                <div className="screen-body" style={{ minHeight: 0, padding: 0, display: 'block', lineHeight: 0 }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/images/subtitleroom.jpg" alt="Knoc Mobile" />
+                  <img src="/images/subtitleroom.jpg" alt="Knoc Mobile" style={{ width: '100%', display: 'block' }} />
                 </div>
               </div>
             </div>

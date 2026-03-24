@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
-import { CheckCircle2, Phone, Mail, Clock, Info, Loader2 } from "lucide-react";
+import { CheckCircle2, Mail, Clock, Info, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useTranslation } from "@/lib/i18n";
@@ -122,13 +122,6 @@ export default function ContactForm() {
           <div>
             <h3 className="text-xl font-bold text-foreground font-heading mb-6">{t('contact.info.title')}</h3>
             <div className="space-y-5">
-              <div className="flex items-start">
-                <Phone className="h-5 w-5 text-primary mr-3 mt-1 flex-shrink-0" />
-                <div>
-                  <p className="text-sm font-bold text-foreground font-heading">{t('contact.info.phone')}</p>
-                  <p className="text-slate-700 text-sm">{t('contact.info.phoneValue')}</p>
-                </div>
-              </div>
               <div className="flex items-start">
                 <Mail className="h-5 w-5 text-primary mr-3 mt-1 flex-shrink-0" />
                 <div>

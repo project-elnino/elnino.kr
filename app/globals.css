@@ -181,8 +181,8 @@ html {
   .si .page:last-child { page-break-after: avoid; }
   .si-download-btn, .site-topbar, .site-footer { display: none !important; }
 }
-.si-download-btn { position: absolute; top: 16px; right: 16px; z-index: 10; display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); color: #fff; border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; font-size: 8.5pt; font-weight: 600; font-family: 'Noto Sans KR', sans-serif; cursor: pointer; transition: background 0.2s; }
-.si-download-btn:hover { background: rgba(255,255,255,0.25); }
+.si-download-btn { position: fixed; top: 80px; right: 24px; z-index: 50; display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; background: rgba(15,23,42,0.8); backdrop-filter: blur(8px); color: #fff; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; font-size: 8.5pt; font-weight: 600; font-family: 'Noto Sans KR', sans-serif; cursor: pointer; transition: background 0.2s; }
+.si-download-btn:hover { background: rgba(15,23,42,0.95); }
 @media screen { .si { padding-top: 64px; padding-bottom: 32px; } .si .page { box-shadow: 0 2px 20px rgba(0,0,0,0.08); margin: 16px auto; } }
 .si .page { width: 210mm; min-height: 297mm; height: 297mm; background: var(--paper); position: relative; overflow: hidden; }
 .si .cover { background: var(--ink); color: var(--paper); }
@@ -190,7 +190,7 @@ html {
 .si .cover-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: auto; }
 .si .cover-wordmark { font-family: var(--en); font-size: 20pt; font-weight: 700; letter-spacing: -0.5px; }
 .si .cover-date { font-size: 8pt; color: rgba(255,255,255,0.4); font-family: var(--en); }
-.si .cover-hero { margin-bottom: auto; max-width: 440px; }
+.si .cover-hero { margin-bottom: auto; max-width: 520px; }
 .si .cover-hero h1 { font-size: 36pt; font-weight: 900; line-height: 1.25; letter-spacing: -0.5px; margin-bottom: 20px; }
 .si .cover-hero h1 em { font-style: normal; color: #60a5fa; }
 .si .cover-hero p { font-size: 11pt; font-weight: 300; line-height: 1.7; color: rgba(255,255,255,0.55); }
@@ -235,8 +235,8 @@ html {
 .si .stat-strip-num { display: block; font-family: var(--en); font-size: 14pt; font-weight: 700; color: var(--ink); line-height: 1.2; margin-bottom: 2px; }
 .si .stat-strip-label { font-size: 7pt; color: var(--faint); }
 .si .callout { padding: 16px 20px; border-radius: 6px; margin: 14px 0; }
-.si .callout.blue { background: var(--brand-wash); border-left: 3px solid var(--brand); }
-.si .callout.green { background: var(--accent-wash); border-left: 3px solid var(--accent); }
+.si .callout.blue { background: var(--brand-wash); }
+.si .callout.green { background: var(--accent-wash); }
 .si .callout strong { display: block; font-size: 10pt; color: var(--ink); margin-bottom: 3px; }
 .si .callout p { font-size: 8.5pt; color: var(--mid); line-height: 1.6; }
 .si .kpi-row { display: flex; gap: 8px; margin: 18px 0 6px; }

@@ -3,7 +3,8 @@
 import { useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight, Check, Globe, Zap, MessageCircle, ChevronRight, Star } from "lucide-react"
+import { ArrowRight, Check, Globe, Zap, MessageCircle, ChevronRight, Star, MonitorPlay, QrCode, Smartphone, Monitor, AudioLines } from "lucide-react"
+import * as Tabs from "@radix-ui/react-tabs"
 import { motion } from "framer-motion"
 import Topbar from "@/components/Topbar"
 import Footer from "@/components/Footer"
@@ -18,11 +19,19 @@ const SERVICES = [
 const FEATURES = ['autoDetect', 'speed', 'languages', 'pricing'] as const;
 
 const STATS = [
-  { value: '99%', key: 'accuracy' },
+  { value: '95%', key: 'accuracy' },
   { value: '101', key: 'languages' },
   { value: '1,000+', key: 'concurrent' },
   { value: '24/7', key: 'uptime' },
 ] as const;
+
+const HOW_TO_USE_TABS = [
+  { key: 'smallOffline', icon: Smartphone },
+  { key: 'largeOffline', icon: AudioLines },
+  { key: 'online', icon: Monitor },
+] as const;
+
+const STEP_ICONS = [Globe, MonitorPlay, QrCode] as const;
 
 const CLIENT_LOGOS = [
   { src: '/logos/konkuk.webp', alt: '건국대학교' },
@@ -153,6 +162,93 @@ export default function ProposalSection() {
           </div>
         </section>
 
+        {/* How to Use Section */}
+        <section className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              className="max-w-3xl mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.5, ease: 'easeOut' }}
+            >
+              <div className="w-12 h-1 bg-primary rounded-full mb-4" />
+              <h2 className="text-3xl font-extrabold text-foreground sm:text-4xl mb-4">
+                {t('howToUse.title')}
+              </h2>
+              <p className="text-lg text-slate-700">
+                {t('howToUse.description')}
+              </p>
+            </motion.div>
+
+            <Tabs.Root defaultValue="smallOffline">
+              <Tabs.List className="flex gap-2 mb-6">
+                {HOW_TO_USE_TABS.map(({ key, icon: TabIcon }) => (
+                  <Tabs.Trigger
+                    key={key}
+                    value={key}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold font-heading transition-all border border-border text-muted-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-primary hover:border-primary/50"
+                  >
+                    <TabIcon className="h-4 w-4" />
+                    {t(`howToUse.tabs.${key}.label`)}
+                  </Tabs.Trigger>
+                ))}
+              </Tabs.List>
+
+              {HOW_TO_USE_TABS.map(({ key, icon: GuideIcon }) => (
+                <Tabs.Content key={key} value={key}>
+                  <div className="flex items-start gap-5 p-6 rounded-xl bg-background border border-border mb-10">
+                    <div className="w-12 h-12 bg-primary-light rounded-lg flex items-center justify-center flex-shrink-0">
+                      <GuideIcon className="h-6 w-6 text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-foreground mb-1">
+                        {t(`howToUse.tabs.${key}.guideTitle`)}
+                      </h4>
+                      <p className="text-sm text-slate-700 leading-relaxed mb-3">
+                        {t(`howToUse.tabs.${key}.guideDesc`)}
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {t(`howToUse.tabs.${key}.examples`).split(',').map((ex, i) => (
+                          <span key={i} className="px-3 py-1 text-xs font-medium bg-white border border-border rounded-full text-slate-600">
+                            {ex}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </Tabs.Content>
+              ))}
+            </Tabs.Root>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {STEP_ICONS.map((Icon, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-50px' }}
+                  transition={{ duration: 0.5, delay: index * 0.15, ease: 'easeOut' }}
+                  className="bg-background border border-border rounded-xl p-8"
+                >
+                  <div className="w-12 h-12 bg-primary-light rounded-lg flex items-center justify-center mb-6">
+                    <Icon className="h-6 w-6 text-primary" />
+                  </div>
+                  <span className="text-xs font-bold text-primary font-heading uppercase tracking-wider">
+                    Step {index + 1}
+                  </span>
+                  <h3 className="text-xl font-bold text-foreground mb-3 mt-1">
+                    {t(`howToUse.steps.${index}.title`)}
+                  </h3>
+                  <p className="text-slate-700 leading-relaxed">
+                    {t(`howToUse.steps.${index}.description`)}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Why Choose Section */}
         <section id="about" className="py-16 bg-background">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -201,7 +297,7 @@ export default function ProposalSection() {
         </section>
 
         {/* Testimonials Section */}
-        <section className="py-16 bg-background">
+        <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mb-16">
               <div className="w-12 h-1 bg-primary rounded-full mb-4" />

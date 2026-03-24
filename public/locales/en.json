@@ -28,7 +28,7 @@
     },
     "boost": {
       "title": "Word & Context Boosting Model",
-      "description": "AI models specialized for specific industries boost keywords and context simultaneously. We guarantee up to 99% accuracy in specialized fields such as medicine, law, IT, and finance.",
+      "description": "AI models specialized for specific industries boost keywords and context simultaneously. We guarantee up to 95% accuracy in specialized fields such as medicine, law, IT, and finance.",
       "cta": "Enhanced accuracy compared to competitors"
     },
     "scale": {
@@ -36,6 +36,35 @@
       "description": "Stable performance in all environments, from 5-person small meetings to conferences with over 1,000 participants.",
       "cta": "Up to 1,000 concurrent users"
     }
+  },
+  "howToUse": {
+    "title": "How to Use",
+    "description": "Audio capture method varies by environment. Accurate audio capture is key to translation quality.",
+    "tabs": {
+      "smallOffline": {
+        "label": "Small Offline",
+        "guideTitle": "Use Your Phone as a Mic",
+        "guideDesc": "If the speaker can hold a phone nearby, no extra audio equipment is needed.",
+        "examples": "Classroom,Small meeting room,Seminar room,Outdoor field trip"
+      },
+      "largeOffline": {
+        "label": "Large Offline",
+        "guideTitle": "Mixer or Audio Equipment Required",
+        "guideDesc": "In large spaces where sound disperses, you must connect a mixer or audio equipment to your device.",
+        "examples": "Auditorium,Conference hall,Event venue,Large lecture hall"
+      },
+      "online": {
+        "label": "Online",
+        "guideTitle": "Screen Share or System Audio",
+        "guideDesc": "Configure screen sharing or system audio in your meeting tool so Knoc can capture the audio.",
+        "examples": "Zoom,Google Meet,Microsoft Teams"
+      }
+    },
+    "steps": [
+      { "title": "Open Web Client", "description": "Open the Knoc web client. No installation needed — just a Chrome browser." },
+      { "title": "Enter Room Name & Start", "description": "Enter a room name and hit start — your translation room is created instantly." },
+      { "title": "Share QR/Link", "description": "Share the generated QR code or link with participants. Once you start speaking, they see real-time subtitles in their own language." }
+    ]
   },
   "why": {
     "title": "Why Knoc?",
@@ -192,7 +221,7 @@
       },
       {
         "question": "How accurate is the translation?",
-        "answer": "We guarantee over 95% accuracy in general conversation and up to 99% accuracy in specialized fields with boosting models applied."
+        "answer": "We guarantee over 95% accuracy in general conversation and up to 95% accuracy in specialized fields with boosting models applied."
       },
       {
         "question": "How many people can use it simultaneously?",
@@ -215,8 +244,6 @@
     "description": "If you have any questions about our service, please contact us.",
     "info": {
       "title": "Contact Information",
-      "phone": "Phone",
-      "phoneValue": "+82-10-3323-0349",
       "email": "Email",
       "hours": "Business Hours",
       "hoursValue": "Weekdays 09:00 - 18:00",
@@ -278,7 +305,7 @@
       "description": "Recognizes the speaker's voice and provides subtitles in each participant's language. No installation, no preparation needed.",
       "kpiLanguages": "101",
       "kpiLanguagesLabel": "Supported Languages",
-      "kpiAccuracy": "99%+",
+      "kpiAccuracy": "95%+",
       "kpiAccuracyLabel": "Translation Accuracy",
       "kpiConcurrent": "1K+",
       "kpiConcurrentLabel": "Concurrent Users"
@@ -325,7 +352,7 @@
       "screenshotAlt": "Knoc Subtitle Screen",
       "kpiLanguages": "101",
       "kpiLanguagesLabel": "Supported Languages",
-      "kpiAccuracy": "99%+",
+      "kpiAccuracy": "95%+",
       "kpiAccuracyLabel": "Translation Accuracy",
       "kpiConcurrent": "1,000+",
       "kpiConcurrentLabel": "Concurrent Users"
@@ -647,7 +674,7 @@
           "description": "We offer a 30-day money-back guarantee on all purchases. The following conditions apply.",
           "items": [
             "If you are not satisfied with the service for any reason, you may request a full refund within 30 days of the original purchase date.",
-            "To request a refund, please contact us at contact@elnino.kr or +82-10-3323-0349 with your order details.",
+            "To request a refund, please contact us at contact@elnino.kr with your order details.",
             "Refund requests are processed through Paddle, our Merchant of Record. Paddle may also process refund requests made directly to Paddle within 14 days of the transaction date or the last subscription renewal date.",
             "After the 30-day money-back guarantee period has elapsed, refunds are not available except as described in the Exceptions section below."
           ]
@@ -694,8 +721,7 @@
           "title": "Contact",
           "content": "Inquiries regarding refunds and payments can be submitted through the contact information below.",
           "contactInfo": {
-            "email": "contact@elnino.kr",
-            "phone": "+82-10-3323-0349"
+            "email": "contact@elnino.kr"
           },
           "notice": "We will respond within 3 business days after receiving your inquiry. Refund requests may also be submitted directly to Paddle.com. If a refund or payment dispute is not resolved, you may file a mediation request with the Korea Consumer Agency (www.kca.go.kr, 1372) or the Electronic Commerce Mediation Committee (www.ecmc.or.kr)."
         }
