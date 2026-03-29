@@ -162,6 +162,37 @@ html {
   animation-play-state: paused;
 }
 
+/* Keyword rotation animation */
+@keyframes keyword-rotate {
+  0%, 18% { opacity: 1; transform: translateY(0); }
+  22%, 28% { opacity: 0; transform: translateY(-20px); }
+  32%, 100% { opacity: 0; transform: translateY(20px); }
+}
+
+.keyword-rotate-wrapper {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.1em;
+}
+
+.keyword-rotate-wrapper span {
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.keyword-rotate-wrapper span.active {
+  position: relative;
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.4s ease;
+}
+
 /* === Service Intro (A4 brochure) === */
 .si {
   --ink: #1b1f2b; --ink-soft: #3d4250; --mid: #6e7489; --faint: #a5aab8;

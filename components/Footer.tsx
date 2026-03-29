@@ -51,6 +51,11 @@ export default function Footer() {
                   {t('nav.dashboard')}
                 </Link>
               </li>
+              <li>
+                <Link href="/download" className="text-slate-700 hover:text-primary text-sm transition-colors">
+                  {t('footer.overlay')}
+                </Link>
+              </li>
             </ul>
           </div>
 

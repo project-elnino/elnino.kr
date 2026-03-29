@@ -74,8 +74,8 @@ export default function Topbar() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 bg-background/95 backdrop-blur-sm border-b border-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <header className="fixed top-4 left-1/2 -translate-x-1/2 z-40 w-[calc(100%-2rem)] max-w-7xl bg-white/80 backdrop-blur-md border border-border/50 shadow-lg shadow-black/5 rounded-xl">
+      <div className="px-5 sm:px-6">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0 flex items-center cursor-pointer gap-2">
@@ -117,6 +117,16 @@ export default function Topbar() {
             >
               {t('nav.contact')}
             </Link>
+            <Link
+              href="/download"
+              className={`text-sm font-medium transition-colors ${
+                isActive('/download')
+                  ? 'text-primary'
+                  : 'text-slate-700 hover:text-foreground'
+              }`}
+            >
+              {t('nav.overlay')}
+            </Link>
           </nav>
 
           {/* Right Actions */}
@@ -152,8 +162,8 @@ export default function Topbar() {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white border-t border-border">
-          <nav className="px-4 py-4 space-y-3">
+        <div className="md:hidden bg-white/95 backdrop-blur-md border-t border-border/50 rounded-b-2xl mt-1">
+          <nav className="px-5 py-4 space-y-3">
             <Link
               href="/pricing"
               className={`block py-2 font-medium ${
@@ -180,6 +190,15 @@ export default function Topbar() {
               onClick={() => setIsMenuOpen(false)}
             >
               {t('nav.contact')}
+            </Link>
+            <Link
+              href="/download"
+              className={`block py-2 font-medium ${
+                isActive('/download') ? 'text-primary' : 'text-slate-700'
+              }`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {t('nav.overlay')}
             </Link>
             <div className="pt-4 border-t border-border space-y-3">
               <Link

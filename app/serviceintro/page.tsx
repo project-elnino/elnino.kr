@@ -31,7 +31,7 @@ export default function ServiceIntroPage() {
               <p>{t('serviceIntro.cover.description')}</p>
             </div>
             <div className="cover-foot">
-              <div className="cover-foot-left">elnino.kr<br />cloud.elnino.kr<br />contact@elnino.kr</div>
+              <div className="cover-foot-left">elnino.kr<br />cloud.elnino.kr<br />contact@elnino.kr<br /><span style={{opacity: 0.5, fontSize: '6.5pt'}}>{t('serviceIntro.overlayNote')}</span></div>
               <dl className="cover-kpi">
                 <div><dt>{t('serviceIntro.cover.kpiLanguages')}</dt><dd>{t('serviceIntro.cover.kpiLanguagesLabel')}</dd></div>
                 <div><dt>{t('serviceIntro.cover.kpiAccuracy')}</dt><dd>{t('serviceIntro.cover.kpiAccuracyLabel')}</dd></div>

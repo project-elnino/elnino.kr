@@ -5,18 +5,112 @@
     "faq": "FAQ",
     "contact": "Contact",
     "dashboard": "Dashboard",
+    "download": "Download",
+    "overlay": "Overlay App",
     "start": "Get Started"
   },
   "hero": {
     "badge": "AI Real-time Translation Service",
-    "title": "Breaking Language",
-    "titleHighlight": "Barriers",
+    "title": "Break Language Barriers",
+    "titleHighlight": "",
     "description": "Experience perfect translation in any environment, from small meetings to large conferences, with our industry-specific custom models.",
     "cta": "Request Quote",
-    "brochure": "Service Brochure"
+    "brochure": "Service Brochure",
+    "overlay": "Overlay Download",
+    "keyword": {
+      "meeting": "in Meetings",
+      "conference": "at Conferences",
+      "lecture": "in Lectures",
+      "seminar": "at Seminars"
+    },
+    "keywordPosition": "after"
   },
   "clients": {
     "title": "Trusted by Various Organizations"
+  },
+  "strengths": {
+    "title": "Why Knoc?",
+    "description": "We combine industry-specific translation models with intuitive usability to deliver seamless real-time communication.",
+    "blocks": {
+      "technology": {
+        "label": "Technology",
+        "title": "Accurate & Fast Translation",
+        "description": "Industry-specific AI models with context-based translation deliver interpreter-level quality."
+      },
+      "coverage": {
+        "label": "Coverage",
+        "title": "Any Language, Any Scale",
+        "description": "Supporting 101 languages, from 5-person meetings to 1,000+ attendee conferences."
+      },
+      "accessibility": {
+        "label": "Accessibility",
+        "title": "Easy for Everyone, Priced Right",
+        "description": "Start instantly with just a Chrome browser, at a price that makes sense."
+      }
+    },
+    "items": {
+      "easy": {
+        "title": "Easy to Use",
+        "description": "Use it directly in Chrome browser without any installation or language settings. Available on all devices including mobile and laptop."
+      },
+      "boost": {
+        "title": "Word & Context Boosting Model",
+        "description": "AI models specialized for specific industries boost keywords and context simultaneously. We guarantee up to 95% accuracy in specialized fields such as medicine, law, IT, and finance."
+      },
+      "scale": {
+        "title": "Various Scale Support",
+        "description": "Stable performance in all environments, from 5-person small meetings to conferences with over 1,000 participants."
+      },
+      "autoDetect": {
+        "title": "No Language Survey Required",
+        "description": "Speaker's language is automatically detected, participants receive translations in their preferred language"
+      },
+      "speed": {
+        "title": "Instant Complete Translation",
+        "description": "Context-based translation in one pass right after speech, providing stable subtitles without corrections"
+      },
+      "languages": {
+        "title": "101 Languages Supported",
+        "description": "Broad support including major languages worldwide and minority languages"
+      },
+      "pricing": {
+        "title": "Reasonable Pricing",
+        "description": "Maximize cost efficiency with reasonable pricing plans"
+      }
+    },
+    "stats": {
+      "accuracy": "Translation Accuracy",
+      "languages": "Supported Languages",
+      "concurrent": "Max Concurrent Users",
+      "uptime": "Service Operation"
+    }
+  },
+  "useCases": {
+    "label": "Use Cases",
+    "title": "Use It Anywhere",
+    "description": "From small meetings to large events, Knoc connects communication in any environment.",
+    "items": {
+      "meeting": {
+        "title": "Meetings",
+        "description": "Use your phone as a microphone for real-time translation in small meetings.",
+        "tags": "Meeting room,Team meeting,Video call"
+      },
+      "conference": {
+        "title": "Conferences",
+        "description": "Connect mixer and audio equipment for stable subtitles at large-scale events.",
+        "tags": "Auditorium,Event venue,Conference hall"
+      },
+      "lecture": {
+        "title": "Lectures",
+        "description": "Translate instructor speech in real-time to support multinational students.",
+        "tags": "Classroom,Lecture hall,Seminar room"
+      },
+      "seminar": {
+        "title": "Online",
+        "description": "Use with Zoom, Google Meet, and other online meeting tools for remote communication.",
+        "tags": "Zoom,Google Meet,Teams"
+      }
+    }
   },
   "services": {
     "title": "What Makes Knoc Different",
@@ -125,10 +219,27 @@
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
     "refund": "Refund Policy",
+    "overlay": "Overlay App",
     "contactInfo": "Contact",
     "location": "Suwon, South Korea",
     "paddleMor": "Our order process is conducted by our online reseller Paddle.com. Paddle.com is the Merchant of Record for all our orders. Paddle provides all customer service inquiries and handles returns.",
     "copyright": "© 2026 Elnino. All rights reserved."
+  },
+  "download": {
+    "title": "Knoc Overlay",
+    "description": "A lightweight desktop app that keeps subtitles always visible on top of your screen while you work.",
+    "features": [
+      "Always-on-top subtitle overlay",
+      "View subtitles over other programs while working",
+      "Adjustable font size and color inversion",
+      "View subtitles without a Chrome browser"
+    ],
+    "cta": "Download for Windows",
+    "recommended": "Your OS",
+    "ctaBtn": "Download",
+    "ctaWindows": "Windows Download",
+    "ctaMac": "macOS Download",
+    "note": "You can view subtitles with just a Chrome browser. The overlay app is optional."
   },
   "pricing": {
     "badge": "Transparent Pricing",
@@ -229,7 +340,7 @@
       },
       {
         "question": "Do I need to install a separate app?",
-        "answer": "No, you can use it immediately with just a Chrome browser. Available on all devices including mobile, tablet, and laptop."
+        "answer": "You can use it right away with just a Chrome browser. However, if you'd like to keep subtitles visible while working on other tasks, you can install our lightweight overlay app."
       }
     ],
     "ctaBanner": {
@@ -297,6 +408,7 @@
   },
   "serviceIntro": {
     "pdfDownload": "PDF Download",
+    "overlayNote": "※ A desktop overlay app is available for viewing subtitles while working on other tasks.",
     "topbar": "Service Brochure",
     "cover": {
       "title": "Real-time",
@@ -609,7 +721,9 @@
             "Custom (Subscription): A monthly subscription providing agreed-upon usage hours and features. Additional usage hours purchased during the subscription period expire at the end of the subscription.",
             "Usage hours from Pay As You Go and subscription plans cannot be combined or transferred between each other.",
             "All payments are processed through Paddle.com, which acts as the Merchant of Record for all orders. Paddle handles all payment processing, customer service inquiries related to payments, and refund processing.",
-            "All purchases are backed by a 30-day money-back guarantee. Please refer to the Refund Policy for full details on refund eligibility and procedures."
+            "All purchases are backed by a 30-day money-back guarantee. Please refer to the Refund Policy for full details on refund eligibility and procedures.",
+            "Custom (Subscription) plans are available in 1-month, 3-month, 6-month, and 12-month terms. The contract period is determined through consultation.",
+            "Custom (Subscription) plan conditions (number of concurrent rooms, participants per room, usage hours, etc.) can only be changed at subscription renewal. Conditions cannot be modified during the subscription period."
           ]
         },
         {
