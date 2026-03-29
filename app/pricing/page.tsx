@@ -36,11 +36,11 @@ export default function PricingPage() {
   const { t } = useTranslation()
 
   return (
-    <div className="min-h-screen flex flex-col bg-background text-foreground">
+    <div className="min-h-screen flex flex-col bg-white text-foreground">
       <Topbar />
 
       {/* Hero */}
-      <section className="relative bg-background pt-32 pb-12 overflow-hidden">
+      <section className="relative bg-white pt-36 pb-12 overflow-hidden">
         <div className="absolute top-[-10%] left-[-5%] w-[400px] h-[400px] rounded-full bg-cyan-400/10 blur-[100px] pointer-events-none" />
         <div className="absolute top-[10%] right-[-8%] w-[350px] h-[350px] rounded-full bg-blue-400/10 blur-[100px] pointer-events-none" />
         <div className="absolute bottom-[-20%] left-[40%] w-[500px] h-[500px] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
@@ -55,7 +55,7 @@ export default function PricingPage() {
       </section>
 
       {/* Pricing Cards */}
-      <section className="bg-background py-12 flex-grow">
+      <section className="bg-white py-12 flex-grow">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto mb-12">
             {PLANS.map((plan, i) => (
@@ -216,7 +216,7 @@ export default function PricingPage() {
                   <div className="mt-auto">
                     <Link
                       href={plan.ctaLink}
-                      className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-semibold text-sm transition-all font-heading bg-background text-foreground border border-border hover:bg-white hover:border-primary/30"
+                      className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-semibold text-sm transition-all font-heading bg-white text-foreground border border-border hover:bg-white hover:border-primary/30"
                     >
                       {plan.isCustom ? t('pricing.ctaContact') : t('pricing.cta')}
                       <ArrowRight className="w-3.5 h-3.5" />
@@ -242,7 +242,7 @@ export default function PricingPage() {
               <div className="absolute -bottom-32 -left-32 w-80 h-80 bg-primary/10 rounded-full filter blur-3xl" />
             </div>
             <div className="relative z-10">
-              <div className="inline-block px-4 py-1.5 rounded-full bg-white/10 text-primary-light font-medium text-sm mb-6">
+              <div className="inline-block text-primary-light font-medium text-sm mb-6">
                 {t('pricing.ctaBanner.badge')}
               </div>
               <h3 className="text-2xl md:text-3xl font-bold mb-4">{t('pricing.ctaBanner.title')}</h3>

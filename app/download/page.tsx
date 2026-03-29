@@ -27,10 +27,10 @@ export default function DownloadPage() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-white text-foreground">
       <Topbar />
 
-      <main className="pt-32 pb-20">
+      <main className="pt-36 pb-20">
         <div className="max-w-xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <motion.div
@@ -58,11 +58,11 @@ export default function DownloadPage() {
             >
               {os === 'windows' ? (
                 <div className="text-center mb-2">
-                  <span className="text-xs font-semibold text-primary bg-primary-light px-3 py-1 rounded-full">
+                  <span className="text-xs font-semibold text-primary">
                     {t('download.recommended')}
                   </span>
                 </div>
-              ) : <div className="h-7" />}
+              ) : <div className="h-5" />}
               <div className={`bg-white border rounded-xl p-6 flex flex-col flex-1 ${os === 'windows' ? 'border-primary shadow-md' : 'border-border'}`}>
                 <div className="flex flex-col items-center text-center gap-2 mb-4">
                   <Image src="/icons/windows.svg" alt="Windows" width={32} height={32} />
@@ -92,11 +92,11 @@ export default function DownloadPage() {
             >
               {os === 'mac' ? (
                 <div className="text-center mb-2">
-                  <span className="text-xs font-semibold text-primary bg-primary-light px-3 py-1 rounded-full">
+                  <span className="text-xs font-semibold text-primary">
                     {t('download.recommended')}
                   </span>
                 </div>
-              ) : <div className="h-7" />}
+              ) : <div className="h-5" />}
               <div className={`bg-white border rounded-xl p-6 flex flex-col flex-1 ${os === 'mac' ? 'border-primary shadow-md' : 'border-border'}`}>
                 <div className="flex flex-col items-center text-center gap-2 mb-4">
                   <Image src="/icons/apple.svg" alt="macOS" width={32} height={32} />

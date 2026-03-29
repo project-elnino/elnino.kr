@@ -33,19 +33,42 @@
     "description": "We combine industry-specific translation models with intuitive usability to deliver seamless real-time communication.",
     "blocks": {
       "technology": {
-        "label": "Technology",
-        "title": "Accurate & Fast Translation",
-        "description": "Industry-specific AI models with context-based translation deliver interpreter-level quality."
+        "title": "Translation Optimized for Your Industry",
+        "description": "Industry-specific AI models correct keywords, context, and speech recognition errors to deliver interpreter-level quality.",
+        "boost": {
+          "title": "Word & Context Boosting Model",
+          "description": "Comprehensively analyzes fields, sub-fields, and context across industries such as medicine, law, IT, and finance to boost keywords. Speech recognition errors are automatically corrected based on this analysis to deliver more accurate translations."
+        },
+        "speed": {
+          "title": "Instant Complete Translation",
+          "description": "Unlike other services where subtitles keep flickering with corrections, Knoc remembers context like an interpreter and outputs complete sentences in meaningful units at once. We provide readable and stable subtitles."
+        },
+        "autoDetect": {
+          "title": "Automatic Language Detection",
+          "description": "The speaker's language is automatically detected. Participants can receive translations in their preferred language without any language survey."
+        }
       },
       "coverage": {
-        "label": "Coverage",
-        "title": "Any Language, Any Scale",
-        "description": "Supporting 101 languages, from 5-person meetings to 1,000+ attendee conferences."
+        "title": "Scalability for Global Communication",
+        "description": "Supporting 101 languages, operating stably from 5-person meetings to events with over 1,000 attendees.",
+        "languages": {
+          "title": "101 Languages Supported",
+          "description": "Supports 101 languages from major languages like Korean, English, Japanese, and Chinese to minority languages. Automatically detects and translates without separate language settings."
+        },
+        "scale": {
+          "title": "Flexible Scale Expansion",
+          "description": "Supports from 5-person small meetings to conferences with over 1,000 participants per room. With contract agreements, over 100 simultaneous sessions can be operated, with stable performance guaranteed in all environments."
+        }
       },
       "accessibility": {
-        "label": "Accessibility",
-        "title": "Easy for Everyone, Priced Right",
-        "description": "Start instantly with just a Chrome browser, at a price that makes sense."
+        "title": "Anyone Can Start Easily",
+        "description": "Start immediately with just a Chrome browser without any installation. Accessible from all devices including mobile, tablet, and laptop, offered at reasonable pricing. If you'd like to view subtitles while working on other tasks, you can also install a lightweight overlay app.",
+        "stats": [
+          { "value": "95%", "label": "Specialized Translation Accuracy" },
+          { "value": "101", "label": "Supported Languages" },
+          { "value": "1,000+", "label": "Max Concurrent Users per Room" },
+          { "value": "24/7", "label": "Service Operation" }
+        ]
       }
     },
     "items": {
@@ -84,6 +107,10 @@
       "concurrent": "Max Concurrent Users",
       "uptime": "Service Operation"
     }
+  },
+  "faqLink": {
+    "text": "Have any questions?",
+    "cta": "View FAQ"
   },
   "useCases": {
     "label": "Use Cases",

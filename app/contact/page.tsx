@@ -9,7 +9,7 @@ export default function ContactPage() {
   const { t } = useTranslation()
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-white text-foreground">
       <Topbar />
 
       <main className="flex-1">
@@ -18,7 +18,7 @@ export default function ContactPage() {
           <div className="absolute top-[-10%] left-[-5%] w-[400px] h-[400px] rounded-full bg-cyan-400/10 blur-[100px] pointer-events-none" />
           <div className="absolute top-[10%] right-[-8%] w-[350px] h-[350px] rounded-full bg-blue-400/10 blur-[100px] pointer-events-none" />
           <div className="absolute bottom-[-20%] left-[40%] w-[500px] h-[500px] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-12 relative">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 pb-12 relative">
             <div className="text-center">
               <h1 className="text-4xl sm:text-5xl font-extrabold text-foreground font-heading tracking-tight mb-4">
                 {t('contact.title')}

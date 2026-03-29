@@ -34,7 +34,7 @@ export default function PrivacyPolicyPage() {
       <Topbar />
 
       <main className="flex-1">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 pb-20">
           {/* Header */}
           <div className="mb-12">
             <Link href="/" className="inline-flex items-center text-slate-500 hover:text-foreground mb-8 text-sm transition-colors">

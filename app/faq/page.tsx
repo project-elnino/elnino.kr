@@ -56,11 +56,11 @@ export default function AboutPage() {
   }))
 
   return (
-    <div className="min-h-screen flex flex-col bg-background text-foreground">
+    <div className="min-h-screen flex flex-col bg-white text-foreground">
       <Topbar />
 
       {/* Hero Section */}
-      <section className="relative bg-background pt-32 pb-16 overflow-hidden">
+      <section className="relative bg-white pt-36 pb-16 overflow-hidden">
         <div className="absolute top-[-10%] left-[-5%] w-[400px] h-[400px] rounded-full bg-cyan-400/10 blur-[100px] pointer-events-none" />
         <div className="absolute top-[10%] right-[-8%] w-[350px] h-[350px] rounded-full bg-blue-400/10 blur-[100px] pointer-events-none" />
         <div className="absolute bottom-[-20%] left-[40%] w-[500px] h-[500px] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
@@ -75,7 +75,7 @@ export default function AboutPage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="bg-background py-12 flex-grow">
+      <section className="bg-white py-12 flex-grow">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white rounded-2xl border border-border p-6 sm:p-8">
             {faqs.map((faq, index) => (

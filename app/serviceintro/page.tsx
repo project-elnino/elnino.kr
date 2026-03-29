@@ -9,7 +9,7 @@ export default function ServiceIntroPage() {
   const { t } = useTranslation()
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-white text-foreground">
       <div className="site-topbar"><Topbar /></div>
 
       <button className="si-download-btn" onClick={() => window.print()}>

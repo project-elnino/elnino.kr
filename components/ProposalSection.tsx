@@ -323,8 +323,8 @@ export default function ProposalSection() {
               <Link href="/contact" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-xl font-semibold hover:bg-primary-dark transition-all font-heading text-lg">
                 {t('cta.button')} <ArrowRight className="w-5 h-5" />
               </Link>
-              <Link href="/faq" className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors font-heading text-sm">
-                {t('faqLink.cta')} <ArrowRight className="w-4 h-4" />
+              <Link href="/faq" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold border border-slate-700 text-white hover:bg-slate-800 transition-all font-heading text-lg">
+                {t('faqLink.cta')}
               </Link>
             </div>
           </div>
