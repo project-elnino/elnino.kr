@@ -44,14 +44,19 @@ export default function PricingPage() {
         <div className="absolute top-[-10%] left-[-5%] w-[400px] h-[400px] rounded-full bg-cyan-400/10 blur-[100px] pointer-events-none" />
         <div className="absolute top-[10%] right-[-8%] w-[350px] h-[350px] rounded-full bg-blue-400/10 blur-[100px] pointer-events-none" />
         <div className="absolute bottom-[-20%] left-[40%] w-[500px] h-[500px] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+        <motion.div
+          className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative"
+          initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }}
+          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          transition={{ duration: 0.6 }}
+        >
           <h1 className="text-4xl sm:text-5xl font-extrabold text-foreground tracking-tight mb-4">
             {t('pricing.title')}
           </h1>
           <p className="text-lg text-slate-700 max-w-2xl mx-auto">
             {t('pricing.description')}
           </p>
-        </div>
+        </motion.div>
       </section>
 
       {/* Pricing Cards */}
@@ -61,10 +66,10 @@ export default function PricingPage() {
             {PLANS.map((plan, i) => (
               <motion.div
                 key={plan.key}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
-                className="relative bg-white rounded-2xl flex flex-col border border-border transition-shadow duration-300 hover:shadow-lg"
+                initial={{ opacity: 0, y: 20, filter: 'blur(4px)', scale: 0.97 }}
+                animate={{ opacity: 1, y: 0, filter: 'blur(0px)', scale: 1 }}
+                transition={{ duration: 0.5, delay: i * 0.12 }}
+                className="relative bg-white rounded-2xl flex flex-col border border-border transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-primary/20"
               >
                 <div className="p-6 flex flex-col flex-grow">
                   {/* Plan name & description */}
@@ -216,10 +221,10 @@ export default function PricingPage() {
                   <div className="mt-auto">
                     <Link
                       href={plan.ctaLink}
-                      className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-semibold text-sm transition-all font-heading bg-white text-foreground border border-border hover:bg-white hover:border-primary/30"
+                      className="group w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-semibold text-sm transition-all font-heading bg-white text-foreground border border-border hover:bg-white hover:border-primary/30 hover:shadow-sm"
                     >
                       {plan.isCustom ? t('pricing.ctaContact') : t('pricing.cta')}
-                      <ArrowRight className="w-3.5 h-3.5" />
+                      <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
                     </Link>
                     <p className="text-xs text-center text-muted-foreground mt-2">
                       {t(`pricing.plans.${plan.key}.recommend`)}
@@ -232,9 +237,9 @@ export default function PricingPage() {
 
           {/* CTA Banner */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
+            initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 0.6, delay: 0.4 }}
             className="bg-slate-900 rounded-2xl p-8 sm:p-12 text-center text-white relative overflow-hidden"
           >
             <div className="absolute inset-0 overflow-hidden">
@@ -251,10 +256,10 @@ export default function PricingPage() {
               </p>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold hover:bg-primary-dark transition-all font-heading"
+                className="group inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold hover:bg-primary-dark hover:scale-[1.02] transition-all font-heading"
               >
                 {t('pricing.ctaBanner.button')}
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
               </Link>
             </div>
           </motion.div>

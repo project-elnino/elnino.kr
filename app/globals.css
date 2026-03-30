@@ -128,6 +128,30 @@
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading), sans-serif;
+    text-wrap: balance;
+  }
+  p, li, dd, td {
+    text-wrap: pretty;
+  }
+}
+
+/* ── Multilingual Typography ── */
+:lang(ko) {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+:lang(ko) h1, :lang(ko) h2, :lang(ko) h3 {
+  word-break: keep-all;
+}
+
+:lang(ja) {
+  letter-spacing: 0.015em;
+}
+
+@supports (word-break: auto-phrase) {
+  :lang(ja) h1, :lang(ja) h2, :lang(ja) h3 {
+    word-break: auto-phrase;
   }
 }
 
@@ -352,3 +376,16 @@ html {
 .si .contact-pairs dd { color: var(--ink); margin-bottom: 10px; }
 .si .legal { margin-top: auto; font-size: 7pt; color: var(--faint); text-align: center; padding-top: 20px; line-height: 1.7; }
 .si .spacer-sm { height: 14px; }
+
+/* ── Modern UI Utilities ── */
+
+/* 3D Perspective Card */
+.perspective-container {
+  perspective: 800px;
+}
+
+.perspective-card {
+  transition: transform 0.15s ease-out, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}

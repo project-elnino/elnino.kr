@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
-import { CheckCircle2, Mail, Clock, Info, Loader2 } from "lucide-react";
+import { CheckCircle2, Mail, Clock, Info, Loader2, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useTranslation } from "@/lib/i18n";
@@ -152,7 +152,7 @@ export default function ContactForm() {
 
         {/* Right Column: The Form */}
         <div className="lg:col-span-2">
-          <form onSubmit={handleSubmit} className="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-border">
+          <form onSubmit={handleSubmit} className="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-border hover:shadow-md transition-shadow duration-300">
             {/* Row 1: Name, Email */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
               <div>
@@ -165,7 +165,7 @@ export default function ContactForm() {
                   id="name"
                   value={form.name}
                   onChange={handleChange}
-                  className="w-full bg-background border-b-2 border-border py-3 px-4 focus:outline-none focus:border-primary transition-colors text-foreground placeholder-slate-400"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3.5 px-4 focus:outline-none focus:border-primary focus:ring-3 focus:ring-primary/15 focus:bg-white transition-all duration-200 text-foreground placeholder-slate-400"
                   placeholder={t('contact.placeholders.name')}
                 />
               </div>
@@ -179,7 +179,7 @@ export default function ContactForm() {
                   id="email"
                   value={form.email}
                   onChange={handleChange}
-                  className="w-full bg-background border-b-2 border-border py-3 px-4 focus:outline-none focus:border-primary transition-colors text-foreground placeholder-slate-400"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3.5 px-4 focus:outline-none focus:border-primary focus:ring-3 focus:ring-primary/15 focus:bg-white transition-all duration-200 text-foreground placeholder-slate-400"
                   placeholder={t('contact.placeholders.email')}
                 />
               </div>
@@ -197,7 +197,7 @@ export default function ContactForm() {
                   id="phone"
                   value={form.phone}
                   onChange={handleChange}
-                  className="w-full bg-background border-b-2 border-border py-3 px-4 focus:outline-none focus:border-primary transition-colors text-foreground placeholder-slate-400"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3.5 px-4 focus:outline-none focus:border-primary focus:ring-3 focus:ring-primary/15 focus:bg-white transition-all duration-200 text-foreground placeholder-slate-400"
                   placeholder={t('contact.placeholders.phone')}
                 />
               </div>
@@ -211,7 +211,7 @@ export default function ContactForm() {
                   id="company"
                   value={form.company}
                   onChange={handleChange}
-                  className="w-full bg-background border-b-2 border-border py-3 px-4 focus:outline-none focus:border-primary transition-colors text-foreground placeholder-slate-400"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3.5 px-4 focus:outline-none focus:border-primary focus:ring-3 focus:ring-primary/15 focus:bg-white transition-all duration-200 text-foreground placeholder-slate-400"
                   placeholder={t('contact.placeholders.company')}
                 />
               </div>
@@ -228,7 +228,7 @@ export default function ContactForm() {
                 rows={7}
                 value={form.message}
                 onChange={handleChange}
-                className="w-full bg-background border-b-2 border-border py-3 px-4 focus:outline-none focus:border-primary transition-colors text-foreground placeholder-slate-400 resize-none"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3.5 px-4 focus:outline-none focus:border-primary focus:ring-3 focus:ring-primary/15 focus:bg-white transition-all duration-200 text-foreground placeholder-slate-400 resize-none"
                 placeholder={t('contact.form.messagePlaceholder')}
               />
             </div>
@@ -239,10 +239,10 @@ export default function ContactForm() {
                 type="submit"
                 disabled={isSubmitting}
                 className={cn(
-                  "w-full flex justify-center py-6 px-4 border border-transparent rounded-md shadow-sm text-lg font-bold font-heading transition-colors",
+                  "group w-full flex justify-center items-center gap-2 py-6 px-4 border border-transparent rounded-xl shadow-sm text-lg font-bold font-heading transition-all duration-200",
                   isSubmitting
                     ? "bg-slate-400 cursor-not-allowed text-white"
-                    : "bg-primary hover:bg-primary-dark text-white"
+                    : "bg-primary hover:bg-primary-dark hover:scale-[1.01] hover:shadow-md text-white"
                 )}
               >
                 {isSubmitting ? (
@@ -251,7 +251,10 @@ export default function ContactForm() {
                     {t('contact.form.submitting')}
                   </span>
                 ) : (
-                  t('contact.form.submit')
+                  <>
+                    {t('contact.form.submit')}
+                    <ArrowRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
+                  </>
                 )}
               </Button>
             </div>

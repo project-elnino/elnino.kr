@@ -61,11 +61,14 @@ export function I18nProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const savedLocale = localStorage.getItem('locale') as Locale | null;
+    let resolvedLocale: Locale;
     if (savedLocale && ['ko', 'en', 'ja'].includes(savedLocale)) {
-      setLocaleState(savedLocale);
+      resolvedLocale = savedLocale;
     } else {
-      setLocaleState(detectBrowserLocale());
+      resolvedLocale = detectBrowserLocale();
     }
+    setLocaleState(resolvedLocale);
+    document.documentElement.lang = resolvedLocale;
     setIsMounted(true);
   }, []);
 
@@ -73,6 +76,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     setLocaleState(newLocale);
     if (typeof window !== 'undefined') {
       localStorage.setItem('locale', newLocale);
+      document.documentElement.lang = newLocale;
     }
   };
 

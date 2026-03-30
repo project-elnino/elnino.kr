@@ -15,6 +15,7 @@
     "titleHighlight": "",
     "description": "Experience perfect translation in any environment, from small meetings to large conferences, with our industry-specific custom models.",
     "cta": "Request Quote",
+    "ctaSub": "10 minutes free trial included on sign up",
     "brochure": "Service Brochure",
     "overlay": "Overlay Download",
     "keyword": {
@@ -57,12 +58,16 @@
         },
         "scale": {
           "title": "Flexible Scale Expansion",
-          "description": "Supports from 5-person small meetings to conferences with over 1,000 participants per room. With contract agreements, over 100 simultaneous sessions can be operated, with stable performance guaranteed in all environments."
+          "description": "Supports from 5-person small meetings to conferences with over 1,000 participants per room. With contract agreements, over 100 simultaneous sessions can be operated, extending interpretation to parallel sessions and poster presentations."
+        },
+        "display": {
+          "title": "Venue-Adaptive Display Modes",
+          "description": "Supports both subtitle mode (landscape) and conference-dedicated screen (portrait). Freely arrange displays to fit any venue, from classrooms to large auditoriums."
         }
       },
       "accessibility": {
         "title": "Anyone Can Start Easily",
-        "description": "Start immediately with just a Chrome browser without any installation. Accessible from all devices including mobile, tablet, and laptop, offered at reasonable pricing. If you'd like to view subtitles while working on other tasks, you can also install a lightweight overlay app.",
+        "description": "Start immediately with just a Chrome browser without any installation. Accessible from all devices including mobile, tablet, and laptop, offered at reasonable pricing. When you need to run another app in fullscreen (e.g., a presentation), you can install a lightweight overlay app to keep subtitles always on top.",
         "stats": [
           { "value": "95%", "label": "Specialized Translation Accuracy" },
           { "value": "101", "label": "Supported Languages" },
@@ -254,10 +259,10 @@
   },
   "download": {
     "title": "Knoc Overlay",
-    "description": "A lightweight desktop app that keeps subtitles always visible on top of your screen while you work.",
+    "description": "A lightweight desktop app that keeps subtitles always on top, even when running other programs in fullscreen.",
     "features": [
       "Always-on-top subtitle overlay",
-      "View subtitles over other programs while working",
+      "Subtitles always on top, even over fullscreen apps",
       "Adjustable font size and color inversion",
       "View subtitles without a Chrome browser"
     ],
@@ -293,7 +298,7 @@
     "plans": {
       "payg": {
         "name": "Pay As You Go",
-        "description": "Lightweight pay-as-you-go",
+        "description": "Lightweight pay-as-you-go · 10 min free trial",
         "recommend": "Small meetings, quick tests"
       },
       "custom": {
@@ -328,46 +333,30 @@
     "badge": "FAQ",
     "title": "Frequently Asked Questions",
     "description": "Check out answers to common questions about our service",
-    "items": [
+    "categories": [
       {
-        "question": "What is the difference between pay-as-you-go and contract?",
-        "answer": "Pay As You Go is a prepaid credit system where you purchase credit packs before use. Custom plans are monthly subscriptions set up through consultation, suitable for large events or regular use."
+        "name": "Pricing & Billing",
+        "items": [
+          { "question": "What is the difference between Pay As You Go and Custom?", "answer": "Pay As You Go is a prepaid credit system where you purchase credit packs before use. There is no minimum usage time, making it ideal for small meetings or tests. Custom plans are monthly subscriptions set up through consultation, suitable for large events or regular use." },
+          { "question": "Which plan should I choose?", "answer": "We recommend Pay As You Go for small meetings or simple tests, and Custom plans for institutions or companies with regular use." },
+          { "question": "How does a Custom contract work?", "answer": "Custom plans are available in 1-month, 3-month, 6-month, and 12-month terms. Contract details (concurrent rooms, participants per room, usage hours, etc.) can only be changed at subscription renewal and cannot be modified during the subscription period. For short-term event support, a 1-month subscription is used as the basis." }
+        ]
       },
       {
-        "question": "Is there a minimum usage time?",
-        "answer": "There is no minimum usage time for Pay As You Go. Custom plan terms are negotiable."
+        "name": "Service Features",
+        "items": [
+          { "question": "What is automatic language recognition and switching?", "answer": "The system automatically recognizes whatever language the speaker uses, and participants can select their preferred language in the subtitle room to see translations in their own language. Multilingual communication is possible without prior language surveys." },
+          { "question": "What is the industry-specific boosting model?", "answer": "It is an AI model optimized for more accurate translation of specialized terminology in fields such as medicine, law, IT, and finance. Available with all plans." },
+          { "question": "What languages are supported?", "answer": "We support 101 languages including major languages like English, Chinese, Japanese, and Spanish. All languages support bidirectional translation and are continuously updated." },
+          { "question": "How accurate is the translation?", "answer": "We guarantee over 95% accuracy in general conversation and up to 95% accuracy in specialized fields with boosting models applied." }
+        ]
       },
       {
-        "question": "What are the payment methods?",
-        "answer": "Pay As You Go uses prepaid credit packs. Custom plans are billed as monthly subscriptions."
-      },
-      {
-        "question": "Which plan should I choose?",
-        "answer": "We recommend Pay As You Go for small meetings or simple tests, and Custom plans for institutions or companies with regular use."
-      },
-      {
-        "question": "What is automatic language recognition and switching?",
-        "answer": "The system automatically recognizes whatever language the speaker uses, and participants can select their preferred language in the subtitle room to see translations in their own language. Multilingual communication is possible without prior language surveys."
-      },
-      {
-        "question": "What is the industry-specific boosting model?",
-        "answer": "It is an AI model optimized for more accurate translation of specialized terminology in fields such as medicine, law, IT, and finance. Available with all plans."
-      },
-      {
-        "question": "What languages are supported?",
-        "answer": "We support 101 languages including major languages like English, Chinese, Japanese, and Spanish. All languages support bidirectional translation and are continuously updated."
-      },
-      {
-        "question": "How accurate is the translation?",
-        "answer": "We guarantee over 95% accuracy in general conversation and up to 95% accuracy in specialized fields with boosting models applied."
-      },
-      {
-        "question": "How many people can use it simultaneously?",
-        "answer": "Pay As You Go allows up to 30 participants per room with 1 simultaneous room. Custom plans have participant limits and simultaneous rooms configured based on consultation."
-      },
-      {
-        "question": "Do I need to install a separate app?",
-        "answer": "You can use it right away with just a Chrome browser. However, if you'd like to keep subtitles visible while working on other tasks, you can install our lightweight overlay app."
+        "name": "Usage",
+        "items": [
+          { "question": "How many people can use it simultaneously?", "answer": "Pay As You Go allows up to 30 participants per room with 1 simultaneous room. Custom plans have participant limits and simultaneous rooms configured based on consultation." },
+          { "question": "Do I need to install a separate app?", "answer": "You can use it right away with just a Chrome browser. However, when you need to run another app in fullscreen (e.g., a presentation), you can install our lightweight overlay app to keep subtitles always on top." }
+        ]
       }
     ],
     "ctaBanner": {
@@ -435,7 +424,7 @@
   },
   "serviceIntro": {
     "pdfDownload": "PDF Download",
-    "overlayNote": "※ A desktop overlay app is available for viewing subtitles while working on other tasks.",
+    "overlayNote": "※ When running another program in fullscreen, a desktop overlay app can keep subtitles always on top.",
     "topbar": "Service Brochure",
     "cover": {
       "title": "Real-time",
@@ -446,7 +435,7 @@
       "kpiLanguagesLabel": "Supported Languages",
       "kpiAccuracy": "95%+",
       "kpiAccuracyLabel": "Translation Accuracy",
-      "kpiConcurrent": "1K+",
+      "kpiConcurrent": "1,000+",
       "kpiConcurrentLabel": "Concurrent Users"
     },
     "whyNow": {
@@ -502,7 +491,8 @@
       "tiles": [
         { "title": "Easy to Use", "items": ["Runs instantly in Chrome without app installation", "All devices: mobile, tablet, laptop", "Automatic speaker language detection"] },
         { "title": "Industry-Specific AI", "items": ["Custom models for medical, legal, IT, finance, government", "Simultaneous keyword + context boosting", "Enhanced specialized translation accuracy with boosting"] },
-        { "title": "Massive Scalability", "items": ["From 5-person meetings to 1,000+ conferences", "Stable operation with 1,000+ concurrent users", "24/7 uninterrupted service"] },
+        { "title": "Massive Scalability", "items": ["From 5-person meetings to 1,000+ conferences", "100+ concurrent sessions in parallel", "Extendable to parallel sessions and poster presentations"] },
+        { "title": "Venue-Adaptive Display", "items": ["Subtitle mode (landscape) and conference screen (portrait)", "Flexible placement from classrooms to large auditoriums", "24/7 uninterrupted service"] },
         { "title": "Data Security", "items": ["Data Zero Retention", "GDPR Compliant", "No data stored after session ends"] }
       ]
     },
@@ -587,7 +577,7 @@
       "contactEmail": "contact@elnino.kr",
       "contactWeb": "elnino.kr",
       "contactDashboard": "cloud.elnino.kr/dashboard",
-      "contactHours": "Daily 09:00–24:00"
+      "contactHours": "Weekdays 09:00 - 18:00"
     }
   },
   "policy": {
@@ -689,8 +679,7 @@
           "contactInfo": {
             "name": "Privacy Officer",
             "email": "contact@elnino.kr"
-          },
-          "notice": "For reports or consultations regarding personal information breaches, you may contact the Personal Information Infringement Report Center (privacy.kisa.or.kr), the Supreme Prosecutors' Office Cyber Investigation Division (spo.go.kr), or the National Police Agency Cyber Bureau (cyberbureau.police.go.kr)."
+          }
         }
       ]
     },
@@ -748,7 +737,7 @@
             "Custom (Subscription): A monthly subscription providing agreed-upon usage hours and features. Additional usage hours purchased during the subscription period expire at the end of the subscription.",
             "Usage hours from Pay As You Go and subscription plans cannot be combined or transferred between each other.",
             "All payments are processed through Paddle.com, which acts as the Merchant of Record for all orders. Paddle handles all payment processing, customer service inquiries related to payments, and refund processing.",
-            "All purchases are backed by a 30-day money-back guarantee. Please refer to the Refund Policy for full details on refund eligibility and procedures.",
+            "All payments are non-refundable. Please refer to the Refund Policy for details.",
             "Custom (Subscription) plans are available in 1-month, 3-month, 6-month, and 12-month terms. The contract period is determined through consultation.",
             "Custom (Subscription) plan conditions (number of concurrent rooms, participants per room, usage hours, etc.) can only be changed at subscription renewal. Conditions cannot be modified during the subscription period."
           ]
@@ -790,7 +779,7 @@
           "items": [
             "Members may request termination (withdrawal) at any time through service settings or customer support.",
             "The Company may terminate the agreement after prior notice if a member violates these Terms, and may terminate immediately in urgent cases.",
-            "Upon termination, remaining credits or subscription period are subject to the Refund Policy. Refund requests within the 30-day money-back guarantee period will be honored."
+            "Upon termination, remaining credits or unused subscription period are not refundable."
           ]
         },
         {
@@ -804,37 +793,27 @@
     },
     "refund": {
       "title": "Refund Policy",
-      "effectiveNotice": "This Refund Policy is effective from March 14, 2026.",
+      "effectiveNotice": "This Refund Policy is effective from March 30, 2026.",
       "sections": [
         {
           "title": "General Principles",
           "content": "Payments and refunds for the AI real-time translation service \"Knoc\" provided by Elnino (hereinafter 'the Company') are subject to the conditions below. All payments are processed through Paddle.com, which acts as the Merchant of Record for all orders. Members are advised to fully review the service details, plan terms, and this Refund Policy before making any payment."
         },
         {
-          "title": "30-Day Money-Back Guarantee",
-          "description": "We offer a 30-day money-back guarantee on all purchases. The following conditions apply.",
-          "items": [
-            "If you are not satisfied with the service for any reason, you may request a full refund within 30 days of the original purchase date.",
-            "To request a refund, please contact us at contact@elnino.kr with your order details.",
-            "Refund requests are processed through Paddle, our Merchant of Record. Paddle may also process refund requests made directly to Paddle within 14 days of the transaction date or the last subscription renewal date.",
-            "After the 30-day money-back guarantee period has elapsed, refunds are not available except as described in the Exceptions section below."
-          ]
-        },
-        {
           "title": "Right of Withdrawal",
-          "description": "In accordance with the Act on Consumer Protection in Electronic Commerce (for Korean consumers), withdrawal is additionally permitted under the following conditions.",
+          "description": "In accordance with the Act on Consumer Protection in Electronic Commerce (for Korean consumers), withdrawal is permitted under the following conditions.",
           "items": [
             "If the service has not been used at all after purchasing credits (Pay As You Go), a withdrawal request may be made within 7 days of payment for a full refund.",
             "If the service has not been used at all after purchasing a subscription (Custom), a withdrawal request may be made within 7 days of payment for a full refund.",
-            "These rights are in addition to, and do not limit, the 30-day money-back guarantee described above."
+            "If credits have been partially used or the subscription service has already been utilized, the right of withdrawal is restricted."
           ]
         },
         {
           "title": "Pay As You Go",
           "description": "The payment and refund terms for the Pay As You Go plan are as follows.",
           "items": [
-            "Credits are purchased on a prepaid basis. Refund requests within the 30-day money-back guarantee period will be honored.",
-            "Credits are deducted based on service usage time. After the 30-day guarantee period, unused credits are not eligible for refund.",
+            "Credits are purchased on a prepaid basis and are non-refundable once purchased.",
+            "Credits are deducted based on service usage time. Unused credits are not eligible for refund.",
             "Pay As You Go credits and Custom subscription usage hours cannot be combined or transferred between each other."
           ]
         },
@@ -842,10 +821,9 @@
           "title": "Custom (Subscription)",
           "description": "The payment and refund terms for the subscription plan are as follows.",
           "items": [
-            "Refund requests within the 30-day money-back guarantee period from the initial purchase or latest renewal will be honored.",
-            "After the 30-day guarantee period, monthly subscription fees are non-refundable.",
-            "Additional usage hours purchased during the subscription period expire at the end of the subscription.",
-            "Upon cancellation, the service remains available until the end of the current billing cycle.",
+            "Monthly subscription fees are non-refundable once paid.",
+            "Additional usage hours purchased during the subscription period expire at the end of the subscription and are non-refundable.",
+            "Upon cancellation, no prorated refund is provided for the remaining subscription period. The service remains available until the end of the current billing cycle.",
             "Custom subscription usage hours and Pay As You Go credits do not interfere with or combine with each other."
           ]
         },
@@ -864,7 +842,7 @@
           "contactInfo": {
             "email": "contact@elnino.kr"
           },
-          "notice": "We will respond within 3 business days after receiving your inquiry. Refund requests may also be submitted directly to Paddle.com. If a refund or payment dispute is not resolved, you may file a mediation request with the Korea Consumer Agency (www.kca.go.kr, 1372) or the Electronic Commerce Mediation Committee (www.ecmc.or.kr)."
+          "notice": "We will respond within 3 business days after receiving your inquiry. If a refund or payment dispute is not resolved, you may file a mediation request with the Korea Consumer Agency (www.kca.go.kr, 1372) or the Electronic Commerce Mediation Committee (www.ecmc.or.kr)."
         }
       ]
     }

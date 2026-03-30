@@ -32,27 +32,27 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3">
               <li>
-                <Link href="https://cloud.elnino.kr/webclient" className="text-slate-700 hover:text-primary text-sm transition-colors">
+                <Link href="https://cloud.elnino.kr/webclient" className="text-slate-700 hover:text-primary text-sm transition-all duration-200 hover:translate-x-0.5 inline-block">
                   {t('footer.realtime')}
                 </Link>
               </li>
               <li>
-                <Link href="/pricing" className="text-slate-700 hover:text-primary text-sm transition-colors">
+                <Link href="/pricing" className="text-slate-700 hover:text-primary text-sm transition-all duration-200 hover:translate-x-0.5 inline-block">
                   {t('nav.pricing')}
                 </Link>
               </li>
               <li>
-                <Link href="/faq" className="text-slate-700 hover:text-primary text-sm transition-colors">
+                <Link href="/faq" className="text-slate-700 hover:text-primary text-sm transition-all duration-200 hover:translate-x-0.5 inline-block">
                   {t('nav.faq')}
                 </Link>
               </li>
               <li>
-                <Link href="https://cloud.elnino.kr/dashboard" className="text-slate-700 hover:text-primary text-sm transition-colors">
+                <Link href="https://cloud.elnino.kr/dashboard" className="text-slate-700 hover:text-primary text-sm transition-all duration-200 hover:translate-x-0.5 inline-block">
                   {t('nav.dashboard')}
                 </Link>
               </li>
               <li>
-                <Link href="/download" className="text-slate-700 hover:text-primary text-sm transition-colors">
+                <Link href="/download" className="text-slate-700 hover:text-primary text-sm transition-all duration-200 hover:translate-x-0.5 inline-block">
                   {t('footer.overlay')}
                 </Link>
               </li>
@@ -66,22 +66,22 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3">
               <li>
-                <Link href="/contact" className="text-slate-700 hover:text-primary text-sm transition-colors">
+                <Link href="/contact" className="text-slate-700 hover:text-primary text-sm transition-all duration-200 hover:translate-x-0.5 inline-block">
                   {t('footer.contactUs')}
                 </Link>
               </li>
               <li>
-                <Link href="/policy/privacy" className="text-slate-700 hover:text-primary text-sm transition-colors">
+                <Link href="/policy/privacy" className="text-slate-700 hover:text-primary text-sm transition-all duration-200 hover:translate-x-0.5 inline-block">
                   {t('footer.privacy')}
                 </Link>
               </li>
               <li>
-                <Link href="/policy/terms" className="text-slate-700 hover:text-primary text-sm transition-colors">
+                <Link href="/policy/terms" className="text-slate-700 hover:text-primary text-sm transition-all duration-200 hover:translate-x-0.5 inline-block">
                   {t('footer.terms')}
                 </Link>
               </li>
               <li>
-                <Link href="/policy/refund" className="text-slate-700 hover:text-primary text-sm transition-colors">
+                <Link href="/policy/refund" className="text-slate-700 hover:text-primary text-sm transition-all duration-200 hover:translate-x-0.5 inline-block">
                   {t('footer.refund')}
                 </Link>
               </li>

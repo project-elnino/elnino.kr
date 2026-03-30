@@ -13,10 +13,9 @@ export default function RefundPolicyPage() {
 
   const sections: { type: 'content' | 'descItems' | 'contact'; itemCount?: number }[] = [
     { type: 'content' },
+    { type: 'descItems', itemCount: 3 },
+    { type: 'descItems', itemCount: 3 },
     { type: 'descItems', itemCount: 4 },
-    { type: 'descItems', itemCount: 3 },
-    { type: 'descItems', itemCount: 3 },
-    { type: 'descItems', itemCount: 5 },
     { type: 'descItems', itemCount: 3 },
     { type: 'contact' },
   ]
@@ -116,11 +115,8 @@ export default function RefundPolicyPage() {
                         <p className="text-slate-600 text-[15px] leading-7 mb-4">
                           {t(`policy.refund.sections.${idx}.content`)}
                         </p>
-                        <p className="text-sm text-slate-600 mb-2">
-                          E-mail: <a href={`mailto:${t(`policy.refund.sections.${idx}.contactInfo.email`)}`} className="text-primary hover:underline">{t(`policy.refund.sections.${idx}.contactInfo.email`)}</a>
-                        </p>
                         <p className="text-sm text-slate-600 mb-4">
-                          Tel: <a href={`tel:${t(`policy.refund.sections.${idx}.contactInfo.phone`)}`} className="text-primary hover:underline">{t(`policy.refund.sections.${idx}.contactInfo.phone`)}</a>
+                          E-mail: <a href={`mailto:${t(`policy.refund.sections.${idx}.contactInfo.email`)}`} className="text-primary hover:underline">{t(`policy.refund.sections.${idx}.contactInfo.email`)}</a>
                         </p>
                         <p className="text-slate-400 text-xs leading-5">
                           {t(`policy.refund.sections.${idx}.notice`)}

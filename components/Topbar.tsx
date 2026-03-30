@@ -5,6 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { ExternalLink, Menu, X, ChevronDown, Globe } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation, Locale } from "@/lib/i18n";
 
 export default function Topbar() {
@@ -154,72 +155,82 @@ export default function Topbar() {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-slate-700"
             >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              <AnimatePresence mode="wait">
+                {isMenuOpen ? (
+                  <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                    <X className="h-6 w-6" />
+                  </motion.div>
+                ) : (
+                  <motion.div key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                    <Menu className="h-6 w-6" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </button>
           </div>
         </div>
       </div>
 
       {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="md:hidden bg-white/95 backdrop-blur-md border-t border-border/50 rounded-b-2xl mt-1">
-          <nav className="px-5 py-4 space-y-3">
-            <Link
-              href="/pricing"
-              className={`block py-2 font-medium ${
-                isActive('/pricing') ? 'text-primary' : 'text-slate-700'
-              }`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {t('nav.pricing')}
-            </Link>
-            <Link
-              href="/faq"
-              className={`block py-2 font-medium ${
-                isActive('/faq') ? 'text-primary' : 'text-slate-700'
-              }`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {t('nav.faq')}
-            </Link>
-            <Link
-              href="/contact"
-              className={`block py-2 font-medium ${
-                isActive('/contact') ? 'text-primary' : 'text-slate-700'
-              }`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {t('nav.contact')}
-            </Link>
-            <Link
-              href="/download"
-              className={`block py-2 font-medium ${
-                isActive('/download') ? 'text-primary' : 'text-slate-700'
-              }`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {t('nav.overlay')}
-            </Link>
-            <div className="pt-4 border-t border-border space-y-3">
-              <Link
-                href="https://cloud.elnino.kr/webclient"
-                className="block w-full text-center px-4 py-2.5 text-sm font-medium rounded-lg text-primary-foreground bg-primary hover:bg-primary-dark transition-colors font-heading"
-                onClick={() => setIsMenuOpen(false)}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            className="md:hidden bg-white/95 backdrop-blur-md border-t border-border/50 rounded-b-2xl mt-1 overflow-hidden"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+          >
+            <nav className="px-5 py-4 space-y-3">
+              {[
+                { href: '/pricing', label: t('nav.pricing') },
+                { href: '/faq', label: t('nav.faq') },
+                { href: '/contact', label: t('nav.contact') },
+                { href: '/download', label: t('nav.overlay') },
+              ].map((item, index) => (
+                <motion.div
+                  key={item.href}
+                  initial={{ opacity: 0, x: -12 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.05 + index * 0.06, duration: 0.3 }}
+                >
+                  <Link
+                    href={item.href}
+                    className={`block py-2 font-medium ${
+                      isActive(item.href) ? 'text-primary' : 'text-slate-700'
+                    }`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                </motion.div>
+              ))}
+              <motion.div
+                className="pt-4 border-t border-border space-y-3"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.3 }}
               >
-                {t('nav.start')}
-              </Link>
-              <Link
-                href="https://cloud.elnino.kr/dashboard"
-                className="flex items-center justify-center gap-1 w-full px-4 py-2.5 text-sm font-medium rounded-lg border border-border text-slate-700 bg-white hover:bg-background transition-colors font-heading"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {t('nav.dashboard')}
-                <ExternalLink className="w-4 h-4 opacity-50" />
-              </Link>
-            </div>
-          </nav>
-        </div>
-      )}
+                <Link
+                  href="https://cloud.elnino.kr/webclient"
+                  className="block w-full text-center px-4 py-2.5 text-sm font-medium rounded-lg text-primary-foreground bg-primary hover:bg-primary-dark transition-colors font-heading"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {t('nav.start')}
+                </Link>
+                <Link
+                  href="https://cloud.elnino.kr/dashboard"
+                  className="flex items-center justify-center gap-1 w-full px-4 py-2.5 text-sm font-medium rounded-lg border border-border text-slate-700 bg-white hover:bg-background transition-colors font-heading"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {t('nav.dashboard')}
+                  <ExternalLink className="w-4 h-4 opacity-50" />
+                </Link>
+              </motion.div>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

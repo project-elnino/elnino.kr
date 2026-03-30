@@ -13,18 +13,13 @@ interface FAQItem {
   answer: string;
 }
 
-function FAQAccordion({ item, index }: { item: FAQItem; index: number }) {
+function FAQAccordion({ item }: { item: FAQItem }) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <motion.div
-      className="border-b border-border last:border-b-0"
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.05 }}
-    >
+    <div className="border-b border-border last:border-b-0">
       <button
-        className="w-full py-5 flex items-center justify-between text-left group"
+        className="w-full py-5 flex items-center justify-between text-left group hover:bg-slate-50/50 -mx-2 px-2 rounded-lg transition-colors duration-200"
         onClick={() => setIsOpen(!isOpen)}
       >
         <span className="font-medium text-foreground pr-4 group-hover:text-primary transition-colors">{item.question}</span>
@@ -42,18 +37,32 @@ function FAQAccordion({ item, index }: { item: FAQItem; index: number }) {
           <p className="text-slate-700 leading-relaxed bg-slate-50 rounded-xl p-4">{item.answer}</p>
         </div>
       </motion.div>
-    </motion.div>
+    </div>
   )
 }
 
-export default function AboutPage() {
+interface FAQCategory {
+  name: string;
+  items: FAQItem[];
+}
+
+export default function FAQPage() {
   const { t } = useTranslation()
 
-  // FAQ 항목들을 번역에서 가져오기
-  const faqs: FAQItem[] = Array.from({ length: 10 }, (_, i) => ({
-    question: t(`faq.items.${i}.question`),
-    answer: t(`faq.items.${i}.answer`),
-  }))
+  // 카테고리별 FAQ 가져오기
+  const categories: FAQCategory[] = [0, 1, 2].map((catIdx) => {
+    const name = t(`faq.categories.${catIdx}.name`)
+    const items: FAQItem[] = []
+    for (let i = 0; i < 10; i++) {
+      const q = t(`faq.categories.${catIdx}.items.${i}.question`)
+      if (q === `faq.categories.${catIdx}.items.${i}.question`) break
+      items.push({
+        question: q,
+        answer: t(`faq.categories.${catIdx}.items.${i}.answer`),
+      })
+    }
+    return { name, items }
+  }).filter(cat => cat.items.length > 0)
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-foreground">
@@ -64,30 +73,47 @@ export default function AboutPage() {
         <div className="absolute top-[-10%] left-[-5%] w-[400px] h-[400px] rounded-full bg-cyan-400/10 blur-[100px] pointer-events-none" />
         <div className="absolute top-[10%] right-[-8%] w-[350px] h-[350px] rounded-full bg-blue-400/10 blur-[100px] pointer-events-none" />
         <div className="absolute bottom-[-20%] left-[40%] w-[500px] h-[500px] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <motion.div
+          className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative"
+          initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }}
+          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          transition={{ duration: 0.6 }}
+        >
           <div className="text-center">
             <h1 className="text-4xl sm:text-5xl font-extrabold text-foreground font-heading mb-4">{t('faq.title')}</h1>
             <p className="text-lg text-slate-700 max-w-2xl mx-auto">
               {t('faq.description')}
             </p>
           </div>
-        </div>
+        </motion.div>
       </section>
 
-      {/* FAQ Section */}
+      {/* FAQ Section — Categorized */}
       <section className="bg-white py-12 flex-grow">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-2xl border border-border p-6 sm:p-8">
-            {faqs.map((faq, index) => (
-              <FAQAccordion key={index} item={faq} index={index} />
+          <div className="space-y-10">
+            {categories.map((category, catIdx) => (
+              <motion.div
+                key={catIdx}
+                initial={{ opacity: 0, y: 20, filter: 'blur(4px)' }}
+                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                transition={{ duration: 0.5, delay: catIdx * 0.12 }}
+              >
+                <h2 className="text-lg font-bold text-foreground font-heading mb-4">{category.name}</h2>
+                <div className="bg-white rounded-2xl border border-border p-6 sm:p-8">
+                  {category.items.map((item, idx) => (
+                    <FAQAccordion key={idx} item={item} />
+                  ))}
+                </div>
+              </motion.div>
             ))}
           </div>
 
           {/* CTA Banner */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
+            initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 0.6, delay: 0.6 }}
             className="mt-16 bg-[#0F172A] rounded-2xl p-8 sm:p-12 text-center text-white relative overflow-hidden"
           >
             <div className="absolute inset-0 overflow-hidden">
@@ -101,10 +127,10 @@ export default function AboutPage() {
               </p>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-lg font-semibold hover:bg-primary-dark transition-all font-heading"
+                className="group inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-lg font-semibold hover:bg-primary-dark hover:scale-[1.02] transition-all font-heading"
               >
                 {t('faq.ctaBanner.button')}
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
               </Link>
             </div>
           </motion.div>

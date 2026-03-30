@@ -139,13 +139,10 @@ export default function PrivacyPolicyPage() {
                 <p className="text-slate-600 text-[15px] leading-7 mb-4">
                   {t('policy.privacy.sections.7.description')}
                 </p>
-                <div className="text-sm text-slate-600 space-y-1 mb-4">
+                <div className="text-sm text-slate-600 space-y-1">
                   <p><span className="font-medium text-foreground">{t('policy.privacy.sections.7.contactInfo.name')}</span></p>
                   <p>E-mail: <a href={`mailto:${t('policy.privacy.sections.7.contactInfo.email')}`} className="text-primary hover:underline">{t('policy.privacy.sections.7.contactInfo.email')}</a></p>
                 </div>
-                <p className="text-slate-400 text-xs leading-5">
-                  {t('policy.privacy.sections.7.notice')}
-                </p>
               </section>
 
               {/* Back */}
