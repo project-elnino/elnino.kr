@@ -100,7 +100,7 @@ export default function FAQPage() {
                 transition={{ duration: 0.5, delay: catIdx * 0.12 }}
               >
                 <h2 className="text-lg font-bold text-foreground font-heading mb-4">{category.name}</h2>
-                <div className="bg-white rounded-2xl border border-border p-6 sm:p-8">
+                <div className="bg-white rounded-2xl border border-border px-6 sm:px-8 py-2">
                   {category.items.map((item, idx) => (
                     <FAQAccordion key={idx} item={item} />
                   ))}
