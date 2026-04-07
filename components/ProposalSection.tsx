@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight, Globe, Zap, Smartphone, Monitor, AudioLines, Languages, Timer, ScanSearch, LayoutPanelTop, QrCode, ShieldCheck, MessagesSquare, Volume2, VolumeX } from "lucide-react"
+import { ArrowRight, Zap, Smartphone, Monitor, AudioLines, Languages, Timer, ScanSearch, QrCode, ShieldCheck, Volume2, VolumeX } from "lucide-react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import Topbar from "@/components/Topbar"
 import Footer from "@/components/Footer"
@@ -49,24 +49,6 @@ function FeatureCard({ icon: Icon, title, description }: {
       <h4 className="text-lg font-bold text-foreground mb-2">{title}</h4>
       <p className="text-[15px] text-slate-500 leading-relaxed flex-1">{description}</p>
     </motion.div>
-  )
-}
-
-function BrowserChrome({ url, children }: { url: string; children: React.ReactNode }) {
-  return (
-    <div className="rounded-2xl overflow-hidden border border-border/50 shadow-2xl shadow-black/10 bg-card">
-      <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100/80 border-b border-border/50">
-        <div className="flex gap-1">
-          <div className="w-2 h-2 rounded-full bg-red-400/60" />
-          <div className="w-2 h-2 rounded-full bg-yellow-400/60" />
-          <div className="w-2 h-2 rounded-full bg-green-400/60" />
-        </div>
-        <div className="flex-1 ml-2">
-          <div className="bg-background/80 rounded px-2 py-0.5 text-[10px] text-slate-400 max-w-[200px]">{url}</div>
-        </div>
-      </div>
-      {children}
-    </div>
   )
 }
 

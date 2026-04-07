@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { Zap, ScanSearch, Globe, LayoutPanelTop, Lock, ShieldCheck, Cloud, Monitor, Smartphone, Laptop, Timer, MessagesSquare } from 'lucide-react'
+import { Zap, ScanSearch, Lock, ShieldCheck, Cloud, Monitor, Smartphone, Laptop, Timer, MessagesSquare } from 'lucide-react'
 import Image from 'next/image'
 import { useTranslation } from '@/lib/i18n'
 
@@ -64,18 +64,6 @@ export default function ServiceIntroPage() {
         </li>
       ))}
     </ul>
-  )
-
-  const BrowserChrome = ({ url, children, style }: { url: string; children: React.ReactNode; style?: React.CSSProperties }) => (
-    <div style={{ borderRadius: 12, overflow: 'hidden', border: '1px solid #dfe1e8', boxShadow: '0 8px 30px rgba(0,0,0,0.08)', background: '#fff', ...style }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '8px 12px', background: '#f4f5f8', borderBottom: '1px solid #dfe1e8' }}>
-        <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#ff5f57' }} />
-        <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#febc2e' }} />
-        <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#28c840' }} />
-        <span style={{ marginLeft: 8, fontSize: 10, color: '#a5aab8' }}>{url}</span>
-      </div>
-      {children}
-    </div>
   )
 
   return (
