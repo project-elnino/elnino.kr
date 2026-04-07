@@ -39,7 +39,7 @@ export default function RefundPolicyPage() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-white text-foreground">
+    <div className="min-h-screen bg-background text-foreground">
       <Topbar />
 
       <main className="flex-1">

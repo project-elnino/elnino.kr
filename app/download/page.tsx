@@ -50,7 +50,7 @@ export default function DownloadPage() {
   const secondary = OS_CONFIG[secondaryOS]
 
   return (
-    <div className="min-h-screen bg-white text-foreground">
+    <div className="min-h-screen bg-background text-foreground">
       <Topbar />
 
       <main className="pt-36 pb-20">

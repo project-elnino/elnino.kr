@@ -36,7 +36,7 @@ export default function PricingPage() {
   const { t } = useTranslation()
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-foreground">
+    <div className="min-h-screen flex flex-col bg-background text-foreground">
       <Topbar />
 
       {/* Hero */}
@@ -240,18 +240,18 @@ export default function PricingPage() {
             initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="bg-slate-900 rounded-2xl p-8 sm:p-12 text-center text-white relative overflow-hidden"
+            className="bg-gradient-to-br from-primary/5 via-blue-50/80 to-white rounded-2xl p-8 sm:p-12 text-center relative overflow-hidden border border-border"
           >
             <div className="absolute inset-0 overflow-hidden">
-              <div className="absolute -top-32 -right-32 w-80 h-80 bg-primary/20 rounded-full filter blur-3xl" />
-              <div className="absolute -bottom-32 -left-32 w-80 h-80 bg-primary/10 rounded-full filter blur-3xl" />
+              <div className="absolute -top-32 -right-32 w-80 h-80 bg-primary/8 rounded-full filter blur-3xl" />
+              <div className="absolute -bottom-32 -left-32 w-80 h-80 bg-primary/5 rounded-full filter blur-3xl" />
             </div>
             <div className="relative z-10">
-              <div className="inline-block text-primary-light font-medium text-sm mb-6">
+              <div className="inline-block text-primary font-medium text-sm mb-6">
                 {t('pricing.ctaBanner.badge')}
               </div>
-              <h3 className="text-2xl md:text-3xl font-bold mb-4">{t('pricing.ctaBanner.title')}</h3>
-              <p className="text-slate-400 mb-8 max-w-xl mx-auto leading-relaxed">
+              <h3 className="text-2xl md:text-3xl font-bold mb-4 text-foreground font-heading">{t('pricing.ctaBanner.title')}</h3>
+              <p className="text-slate-500 mb-8 max-w-xl mx-auto leading-relaxed">
                 {t('pricing.ctaBanner.description')}
               </p>
               <Link

@@ -75,7 +75,7 @@ export default function Topbar() {
   };
 
   return (
-    <header className="fixed top-4 left-1/2 -translate-x-1/2 z-40 w-[calc(100%-2rem)] max-w-7xl bg-white/80 backdrop-blur-md border border-border/50 shadow-lg shadow-black/5 rounded-xl">
+    <header className="fixed top-4 left-1/2 -translate-x-1/2 z-40 w-[calc(100%-2rem)] max-w-7xl bg-background/80 backdrop-blur-md border border-border/50 shadow-lg shadow-black/5 rounded-xl">
       <div className="px-5 sm:px-6">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}

@@ -152,7 +152,7 @@ export default function ContactForm() {
 
         {/* Right Column: The Form */}
         <div className="lg:col-span-2">
-          <form onSubmit={handleSubmit} className="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-border hover:shadow-md transition-shadow duration-300">
+          <form onSubmit={handleSubmit} className="bg-card p-8 md:p-10 rounded-2xl shadow-sm border border-border hover:shadow-md transition-shadow duration-300">
             {/* Row 1: Name, Email */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
               <div>

@@ -65,7 +65,7 @@ export default function FAQPage() {
   }).filter(cat => cat.items.length > 0)
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-foreground">
+    <div className="min-h-screen flex flex-col bg-background text-foreground">
       <Topbar />
 
       {/* Hero Section */}
@@ -114,20 +114,20 @@ export default function FAQPage() {
             initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="mt-16 bg-[#0F172A] rounded-2xl p-8 sm:p-12 text-center text-white relative overflow-hidden"
+            className="mt-16 bg-gradient-to-br from-primary/5 via-blue-50/80 to-white rounded-2xl p-8 sm:p-12 text-center relative overflow-hidden border border-border"
           >
             <div className="absolute inset-0 overflow-hidden">
-              <div className="absolute -top-32 -right-32 w-80 h-80 bg-primary/20 rounded-full filter blur-3xl" />
-              <div className="absolute -bottom-32 -left-32 w-80 h-80 bg-primary/10 rounded-full filter blur-3xl" />
+              <div className="absolute -top-32 -right-32 w-80 h-80 bg-primary/8 rounded-full filter blur-3xl" />
+              <div className="absolute -bottom-32 -left-32 w-80 h-80 bg-primary/5 rounded-full filter blur-3xl" />
             </div>
             <div className="relative z-10">
-              <h3 className="text-2xl md:text-3xl font-bold mb-4 font-heading">{t('faq.ctaBanner.title')}</h3>
-              <p className="text-slate-400 mb-8 max-w-xl mx-auto leading-relaxed">
+              <h3 className="text-2xl md:text-3xl font-bold mb-4 font-heading text-foreground">{t('faq.ctaBanner.title')}</h3>
+              <p className="text-slate-500 mb-8 max-w-xl mx-auto leading-relaxed">
                 {t('faq.ctaBanner.description')}
               </p>
               <Link
                 href="/contact"
-                className="group inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-lg font-semibold hover:bg-primary-dark hover:scale-[1.02] transition-all font-heading"
+                className="group inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold hover:bg-primary-dark hover:scale-[1.02] transition-all font-heading"
               >
                 {t('faq.ctaBanner.button')}
                 <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
