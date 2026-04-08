@@ -1,40 +1,11 @@
 'use client'
 
-import { useState, useEffect, useCallback, useRef } from 'react'
 import { Zap, ScanSearch, Lock, ShieldCheck, Cloud, Monitor, Smartphone, Laptop, Timer, MessagesSquare } from 'lucide-react'
 import Image from 'next/image'
 import { useTranslation } from '@/lib/i18n'
 
-const TOTAL_SLIDES = 12
-
 export default function ServiceIntroPage() {
   const { t } = useTranslation()
-  const [current, setCurrent] = useState(0)
-  const trackRef = useRef<HTMLDivElement>(null)
-
-  const go = useCallback((i: number) => {
-    setCurrent(Math.max(0, Math.min(TOTAL_SLIDES - 1, i)))
-  }, [])
-
-  useEffect(() => {
-    let wheelLock = false
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); go(current + 1) }
-      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); go(current - 1) }
-    }
-    const onWheel = (e: WheelEvent) => {
-      e.preventDefault()
-      if (wheelLock) return
-      if (Math.abs(e.deltaY) > 30) {
-        wheelLock = true
-        go(current + (e.deltaY > 0 ? 1 : -1))
-        setTimeout(() => { wheelLock = false }, 600)
-      }
-    }
-    window.addEventListener('keydown', onKey)
-    window.addEventListener('wheel', onWheel, { passive: false })
-    return () => { window.removeEventListener('keydown', onKey); window.removeEventListener('wheel', onWheel) }
-  }, [current, go])
 
   /* ── helpers ── */
   const inner = (children: React.ReactNode, style?: React.CSSProperties) => (
@@ -68,16 +39,9 @@ export default function ServiceIntroPage() {
 
   return (
     <>
-      {/* Nav dots */}
-      <nav className="deck-nav">
-        {Array.from({ length: TOTAL_SLIDES }).map((_, i) => (
-          <button key={i} className={`deck-nav__dot${i === current ? ' deck-nav__dot--active' : ''}`} onClick={() => go(i)} />
-        ))}
-      </nav>
-
       {/* Deck */}
       <div className="deck-viewport">
-      <div ref={trackRef} className="deck-track" style={{ transform: `translateX(-${current * 100}vw)` }}>
+      <div className="deck-track">
 
         {/* ── 1  COVER ── */}
         <section className="slide slide--cover">
@@ -170,15 +134,15 @@ export default function ServiceIntroPage() {
                 {title(t('serviceIntro.howItWorks.title'), 20)}
                 {subtitle(t('serviceIntro.howItWorks.subtitle'))}
               </div>
-              <div style={{ display: 'flex', gap: 16 }}>
-                <div style={{ flex: 1 }}>
+              <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+                <div style={{ flex: '1 1 300px', minWidth: 0 }}>
                   <div style={{ borderRadius: 10, overflow: 'hidden', border: '1px solid #dfe1e8', boxShadow: '0 4px 20px rgba(0,0,0,0.06)', marginBottom: 10 }}>
                     <Image src="/images/webclient.png" alt="웹 클라이언트 방 설정" width={700} height={440} style={{ width: '100%', height: 'auto', display: 'block' }} />
                   </div>
                   <div style={{ fontSize: 12, fontWeight: 700, color: '#1b1f2b', marginBottom: 2 }}>{t('serviceIntro.howItWorks.steps.0.title')}</div>
                   <div style={{ fontSize: 11, color: '#6e7489', lineHeight: 1.5 }}>{t('serviceIntro.howItWorks.steps.0.desc')}</div>
                 </div>
-                <div style={{ flex: 1 }}>
+                <div style={{ flex: '1 1 300px', minWidth: 0 }}>
                   <div style={{ borderRadius: 10, overflow: 'hidden', border: '1px solid #dfe1e8', boxShadow: '0 4px 20px rgba(0,0,0,0.06)', marginBottom: 10 }}>
                     <Image src="/images/webclient-qr-open.png" alt="QR 코드 공유" width={560} height={350} style={{ width: '100%', height: 'auto', display: 'block' }} />
                   </div>
@@ -207,11 +171,11 @@ export default function ServiceIntroPage() {
                   ))}
                 </div>
               </div>
-              <div style={{ display: 'flex', gap: 14, alignItems: 'flex-end' }}>
-                <div style={{ flex: '0 0 32.5%', borderRadius: 10, overflow: 'hidden', border: '1px solid #dfe1e8', boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
+              <div style={{ display: 'flex', gap: 14, alignItems: 'flex-end', flexWrap: 'wrap' }}>
+                <div style={{ flex: '1 1 200px', maxWidth: 320, borderRadius: 10, overflow: 'hidden', border: '1px solid #dfe1e8', boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
                   <Image src="/images/overlay-lang-select.png" alt="오버레이 언어 선택" width={400} height={600} style={{ width: '100%', height: 'auto', display: 'block' }} />
                 </div>
-                <div style={{ flex: 1, borderRadius: 10, overflow: 'hidden', border: '1px solid #dfe1e8', boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
+                <div style={{ flex: '2 1 300px', borderRadius: 10, overflow: 'hidden', border: '1px solid #dfe1e8', boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
                   <Image src="/images/overlay-with-real-video.png" alt="실제 영상 위 자막" width={960} height={540} style={{ width: '100%', height: 'auto', display: 'block' }} />
                 </div>
               </div>
@@ -222,14 +186,14 @@ export default function ServiceIntroPage() {
         {/* ── 6  FOR PARTICIPANTS — 참가자 접속 ── */}
         <section className="slide slide--muted">
           {inner(
-            <div style={{ display: 'flex', gap: 60, alignItems: 'center' }}>
-              <div style={{ flex: 1 }}>
+            <div style={{ display: 'flex', gap: 40, alignItems: 'center', flexWrap: 'wrap' }}>
+              <div style={{ flex: '1 1 280px', minWidth: 0 }}>
                 {label(t('serviceIntro.participant.label'))}
                 {title(t('serviceIntro.participant.title'))}
                 {subtitle(t('serviceIntro.participant.subtitle'))}
                 {checkList([0, 1, 2, 3].map(i => t(`serviceIntro.participant.points.${i}`)))}
               </div>
-              <div style={{ flex: 1, display: 'flex', gap: 8, alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ flex: '1 1 320px', minWidth: 0, display: 'flex', gap: 8, alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap' }}>
                 {[
                   { src: '/images/subtitleroom-name-input.png', alt: '방 이름 입력', label: '방 이름 입력' },
                   { src: '/images/subtitleroom-langselect.png', alt: '언어 선택', label: '언어 선택' },
@@ -257,13 +221,13 @@ export default function ServiceIntroPage() {
         {/* ── 7  DASHBOARD ── */}
         <section className="slide">
           {inner(
-            <div style={{ display: 'flex', gap: 40, alignItems: 'center' }}>
-              <div style={{ flex: '0 0 30%' }}>
+            <div style={{ display: 'flex', gap: 40, alignItems: 'center', flexWrap: 'wrap' }}>
+              <div style={{ flex: '1 1 250px', minWidth: 0 }}>
                 {label('DASHBOARD')}
                 {title(t('dashboard.title'), 20)}
                 <p style={{ fontSize: 12, color: '#6e7489', lineHeight: 1.7, marginTop: 10 }}>{t('dashboard.description')}</p>
               </div>
-              <div style={{ flex: 1, borderRadius: 10, overflow: 'hidden', border: '1px solid #dfe1e8', boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
+              <div style={{ flex: '2 1 400px', minWidth: 0, borderRadius: 10, overflow: 'hidden', border: '1px solid #dfe1e8', boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
                 <Image src="/images/dashboard.png" alt="Knoc Dashboard" width={960} height={540} style={{ width: '100%', height: 'auto', display: 'block' }} />
               </div>
             </div>
@@ -276,7 +240,7 @@ export default function ServiceIntroPage() {
             <>
               {label(t('serviceIntro.useCases.label'))}
               {title(t('serviceIntro.useCases.title'), 40)}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
+              <div className="slide__cards slide__cards--2" style={{ gap: 24 }}>
                 {/* Enterprise */}
                 <div style={{ padding: 28, borderRadius: 12, background: '#eff4ff' }}>
                   <h3 style={{ fontSize: 16, fontWeight: 700, color: '#2563eb', marginBottom: 16 }}>{t('serviceIntro.useCases.enterprise.label')}</h3>
@@ -317,7 +281,7 @@ export default function ServiceIntroPage() {
               {title(t('serviceIntro.caseStudy.title'), 8)}
               <p style={{ fontSize: 13, color: '#6e7489', marginBottom: 28 }}>{t('serviceIntro.caseStudy.context')}</p>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 24 }}>
+              <div className="slide__cards slide__cards--2" style={{ gap: 20, marginBottom: 24 }}>
                 {[0, 1].map(i => (
                   <div key={i} className="slide__quote">
                     <p style={{ fontSize: 13, color: '#3d4250', lineHeight: 1.7, fontStyle: 'italic', margin: 0 }}>
@@ -350,7 +314,7 @@ export default function ServiceIntroPage() {
             <>
               {label(t('serviceIntro.security.label'))}
               {title(t('serviceIntro.security.title'), 40)}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48 }}>
+              <div className="slide__cards slide__cards--2" style={{ gap: 48 }}>
                 {/* Security */}
                 <div>
                   <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1b1f2b', marginBottom: 20 }}>{t('serviceIntro.security.securityTitle')}</h3>
@@ -475,7 +439,7 @@ export default function ServiceIntroPage() {
                 <p style={{ fontSize: 11, color: '#6e7489', margin: '4px 0 0' }}>{t('serviceIntro.getStarted.calloutDesc')}</p>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24, marginBottom: 28 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 24, marginBottom: 28 }}>
                 {(['EMAIL', 'WEB', 'DASHBOARD', 'HOURS'] as const).map((k) => {
                   const keys: Record<string, string> = { EMAIL: 'contactEmail', WEB: 'contactWeb', DASHBOARD: 'contactDashboard', HOURS: 'contactHours' }
                   return (

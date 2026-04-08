@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight, Zap, Smartphone, Monitor, AudioLines, Languages, Timer, ScanSearch, QrCode, ShieldCheck, Volume2, VolumeX } from "lucide-react"
+import { ArrowRight, Zap, Smartphone, Monitor, AudioLines, Languages, Timer, ScanSearch, QrCode, ShieldCheck, Volume2, VolumeX, Maximize } from "lucide-react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import Topbar from "@/components/Topbar"
 import Footer from "@/components/Footer"
@@ -85,6 +85,12 @@ export default function ProposalSection() {
       return !prev
     })
   }, [])
+  const openFullscreen = useCallback(() => {
+    if (videoRef.current) {
+      if (videoRef.current.requestFullscreen) videoRef.current.requestFullscreen()
+      else if ('webkitEnterFullscreen' in videoRef.current) (videoRef.current as HTMLVideoElement & { webkitEnterFullscreen: () => void }).webkitEnterFullscreen()
+    }
+  }, [])
   const { scrollY } = useScroll()
   const blobY1 = useTransform(scrollY, [0, 500], [0, -80])
   const blobY2 = useTransform(scrollY, [0, 500], [0, -50])
@@ -155,13 +161,22 @@ export default function ProposalSection() {
                     <source src="/images/musk-test.mp4" type="video/mp4" />
                     <source src="/images/musk-test.mov" type="video/quicktime" />
                   </video>
-                  <button
-                    onClick={toggleMute}
-                    className="absolute bottom-[7%] right-[11%] z-20 p-2.5 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur-sm transition-all cursor-pointer"
-                    aria-label={videoMuted ? 'Unmute' : 'Mute'}
-                  >
-                    {videoMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
-                  </button>
+                  <div className="absolute bottom-[7%] right-[11%] z-20 flex items-center gap-1.5">
+                    <button
+                      onClick={toggleMute}
+                      className="p-1.5 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur-sm transition-all cursor-pointer"
+                      aria-label={videoMuted ? 'Unmute' : 'Mute'}
+                    >
+                      {videoMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
+                    </button>
+                    <button
+                      onClick={openFullscreen}
+                      className="p-1.5 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur-sm transition-all cursor-pointer"
+                      aria-label="Fullscreen"
+                    >
+                      <Maximize className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
                 </div>
               </motion.div>
             </div>
@@ -302,6 +317,32 @@ export default function ProposalSection() {
           </div>
         </section>
 
+        {/* ── Dashboard — left text + right screenshot ── */}
+        <section className="py-24">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-[2fr_3fr] gap-12 items-center">
+              <motion.div initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }} whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }} viewport={{ once: true }} transition={{ duration: 0.6, ease: 'easeOut' }}>
+                <h2 className="text-4xl lg:text-5xl font-extrabold text-foreground mb-4 leading-tight whitespace-pre-line">{t('dashboard.title')}</h2>
+                <p className="text-slate-500 leading-relaxed text-base lg:text-lg">{t('dashboard.description')}</p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease: 'easeOut' }}
+                style={{ perspective: '1200px' }}
+              >
+                <div style={{ transform: 'rotateY(-6deg) rotateX(3deg)' }}>
+                  <div className="rounded-2xl overflow-hidden border border-border/50 shadow-2xl shadow-black/10">
+                    <Image src="/images/dashboard.png" alt="Knoc Dashboard" width={2664} height={1582} className="w-full h-auto" />
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
         {/* ── Use Cases — audio capture guide ── */}
         <section className="py-24">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -361,32 +402,6 @@ export default function ProposalSection() {
                 </div>
               </div>
             </motion.div>
-          </div>
-        </section>
-
-        {/* ── Dashboard — left text + right screenshot ── */}
-        <section className="py-24">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-[2fr_3fr] gap-12 items-center">
-              <motion.div initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }} whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }} viewport={{ once: true }} transition={{ duration: 0.6, ease: 'easeOut' }}>
-                <h2 className="text-4xl lg:text-5xl font-extrabold text-foreground mb-4 leading-tight whitespace-pre-line">{t('dashboard.title')}</h2>
-                <p className="text-slate-500 leading-relaxed text-base lg:text-lg">{t('dashboard.description')}</p>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, ease: 'easeOut' }}
-                style={{ perspective: '1200px' }}
-              >
-                <div style={{ transform: 'rotateY(-6deg) rotateX(3deg)' }}>
-                  <div className="rounded-2xl overflow-hidden border border-border/50 shadow-2xl shadow-black/10">
-                    <Image src="/images/dashboard.png" alt="Knoc Dashboard" width={2664} height={1582} className="w-full h-auto" />
-                  </div>
-                </div>
-              </motion.div>
-            </div>
           </div>
         </section>
 

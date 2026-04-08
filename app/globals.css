@@ -220,22 +220,16 @@ html {
 /* === Service Intro (Slide Deck) === */
 
 .deck-viewport {
-  position: fixed;
-  inset: 0;
-  overflow: hidden;
-  z-index: 10;
+  position: static;
+  overflow: visible;
 }
 
 .deck-track {
-  display: flex;
-  height: 100%;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform;
+  display: block;
 }
 
 .slide {
-  flex: 0 0 100vw;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -246,6 +240,10 @@ html {
   position: relative;
   font-family: 'Noto Sans KR', -apple-system, sans-serif;
   box-sizing: border-box;
+}
+
+.slide + .slide {
+  border-top: 1px solid #dfe1e8;
 }
 
 .slide--cover {
@@ -763,14 +761,7 @@ html {
 }
 
 .deck-nav {
-  position: fixed;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 50;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+  display: none;
 }
 
 .deck-nav__dot {
@@ -916,6 +907,46 @@ html {
 
   .mockup-phone {
     width: 140px;
+  }
+}
+
+/* ── Mobile: service intro adjustments ── */
+@media (max-width: 768px) {
+  .slide {
+    height: auto !important;
+    min-height: auto;
+    padding: 40px 20px !important;
+  }
+
+  .slide__cards--2,
+  .slide__cards--3 {
+    grid-template-columns: 1fr !important;
+  }
+
+  .slide__card {
+    padding: 20px !important;
+  }
+
+  .slide__plans {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+
+  .slide__plan {
+    width: 100% !important;
+  }
+
+  .slide__steps {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+
+  .slide__arrow {
+    display: none !important;
+  }
+
+  .mockup-phone {
+    width: 100px !important;
   }
 }
 
