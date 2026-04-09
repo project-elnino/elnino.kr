@@ -1,9 +1,9 @@
 'use client'
 
-import { useEffect, useState, useRef, useCallback } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight, Zap, Smartphone, Monitor, AudioLines, Languages, Timer, ScanSearch, QrCode, ShieldCheck, Volume2, VolumeX, Maximize } from "lucide-react"
+import { ArrowRight, Zap, Smartphone, Monitor, AudioLines, Languages, Timer, ScanSearch, QrCode, ShieldCheck } from "lucide-react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import Topbar from "@/components/Topbar"
 import Footer from "@/components/Footer"
@@ -77,20 +77,6 @@ export default function ProposalSection() {
   const { t } = useTranslation()
   const [currentKeyword, setCurrentKeyword] = useState(0)
   const [activeUseCase, setActiveUseCase] = useState(0)
-  const [videoMuted, setVideoMuted] = useState(true)
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const toggleMute = useCallback(() => {
-    setVideoMuted(prev => {
-      if (videoRef.current) videoRef.current.muted = !prev
-      return !prev
-    })
-  }, [])
-  const openFullscreen = useCallback(() => {
-    if (videoRef.current) {
-      if (videoRef.current.requestFullscreen) videoRef.current.requestFullscreen()
-      else if ('webkitEnterFullscreen' in videoRef.current) (videoRef.current as HTMLVideoElement & { webkitEnterFullscreen: () => void }).webkitEnterFullscreen()
-    }
-  }, [])
   const { scrollY } = useScroll()
   const blobY1 = useTransform(scrollY, [0, 500], [0, -80])
   const blobY2 = useTransform(scrollY, [0, 500], [0, -50])
@@ -106,6 +92,7 @@ export default function ProposalSection() {
     const interval = setInterval(() => setCurrentKeyword(prev => (prev + 1) % HERO_KEYWORDS.length), 2500)
     return () => clearInterval(interval)
   }, [])
+
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -147,36 +134,15 @@ export default function ProposalSection() {
                 animate={{ opacity: 1, x: 0, scale: 1, filter: 'blur(0px)' }}
                 transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
                 className="hidden lg:block"
-                style={{ perspective: '1200px' }}
               >
-                <div className="relative shadow-2xl shadow-black/10" style={{ transform: 'rotateY(-8deg) rotateX(4deg) scale(1.25)', clipPath: 'inset(11% 9% 5% 9% round 16px)' }}>
-                  <video
-                    ref={videoRef}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="w-full h-auto block"
-                  >
-                    <source src="/images/musk-test.mp4" type="video/mp4" />
-                    <source src="/images/musk-test.mov" type="video/quicktime" />
-                  </video>
-                  <div className="absolute bottom-[7%] right-[11%] z-20 flex items-center gap-1.5">
-                    <button
-                      onClick={toggleMute}
-                      className="p-1.5 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur-sm transition-all cursor-pointer"
-                      aria-label={videoMuted ? 'Unmute' : 'Mute'}
-                    >
-                      {videoMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
-                    </button>
-                    <button
-                      onClick={openFullscreen}
-                      className="p-1.5 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur-sm transition-all cursor-pointer"
-                      aria-label="Fullscreen"
-                    >
-                      <Maximize className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-black/10 aspect-video">
+                  <iframe
+                    src="https://www.youtube.com/embed/96_w6KmshdY?start=55&autoplay=1&mute=1&loop=1&playlist=96_w6KmshdY&rel=0&modestbranding=1"
+                    title="엘니뇨 서비스 소개"
+                    allow="autoplay; encrypted-media"
+                    allowFullScreen
+                    className="absolute inset-0 w-full h-full border-0"
+                  />
                 </div>
               </motion.div>
             </div>
