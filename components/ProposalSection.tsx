@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, Zap, Smartphone, Monitor, AudioLines, Languages, Timer, ScanSearch, QrCode, ShieldCheck } from "lucide-react"
